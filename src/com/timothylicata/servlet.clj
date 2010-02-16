@@ -5,19 +5,32 @@
 
 (defn print-home-page
   []
-  (let [user-service (UserServiceFactory/getUserService)
-        user (.getCurrentUser user-service)]
-    (html
-      [:h1 "Hello " (if user (.getNickname user) "Sir")]
-      [:p (link-to (.createLoginURL user-service "/") "sign in")]
-      [:p (link-to (.createLogoutURL user-service "/") "sign out")])))
+  (html
+    [:html
+     [:head
+      [:title "Tim's Online World"]]
+;;    (include-css "/css/main.css")]
+;;    (include-js "/js/combined.js")]
+     [:body
+      [:div#page
+       [:div#header [:h1 (link-to "http://www.timothylicata.com" "Tim's Online World")]]
+       [:div#nav
+        [:ul
+         [:li (link-to "about.html" "About")]]]
+       [:div#body
+        [:p "Index prease"]]
+       [:div#footer
+        [:p "Powered by "
+         (link-to "http://code.google.com/appengine/" "Google App Engine") ", "
+         (link-to "http://clojure.org" "Clojure") " and  "
+         (link-to "http://github.com/weavejester/compojure" "Compojure")]]]]]))
 
 (defroutes tl
-	(GET "/favicon.ico"
-		(serve-file "favicon.ico"))
-	(GET "/"
+  (GET "/"
     (print-home-page))
-	(ANY "*"
-		(page-not-found)))
+  (GET "/*"
+    (or (serve-file (:* params)) :next))
+  (ANY "*"
+    (page-not-found)))
 
 (defservice tl)
