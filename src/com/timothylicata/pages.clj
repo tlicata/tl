@@ -2,7 +2,7 @@
 	(:use compojure.html))
 
 (defn header []
-  [:div#header [:h1 (link-to "http://www.timothylicata.com" "Tim's Online World")]])
+  [:div#header [:h1 (link-to "/" "Tim's Online World")]])
 
 (defn nav []
   [:div#nav
