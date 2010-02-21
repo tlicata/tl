@@ -5,7 +5,9 @@
 
 (defroutes tl
   (GET "/"
-    (print-home-page))
+    (home-page))
+  (GET "/about.html"
+    (about))
   (GET "/*"
     (or (serve-file (:* params)) :next))
   (ANY "*"
