@@ -1,6 +1,35 @@
+body {
+  background-color: #000;
+	color: #B4E3D7;
+	max-width: 1000px;
+	margin: auto;
+}
+a:link {
+  color: #FFBC52;
+}
+a:visited {
+  color: #FFD593;
+}
+
+#header a, #footer a, #nav a {
+  color: #0856B3;
+}
 #footer {
-  font-size: .7em;
+  font-size: .8em;
 }
 #nav li {
   display: inline;
 }
+
+
+/*
+ http://colorschemedesigner.com/#3C42fK9.wk2D-
+ Primary Color:
+  0856B3		1D5597		04428C		5093E4		87B1E4
+	Secondary Color A:
+		5209B9		531E9C		3F0590		8F51E6		B089E6
+		Secondary Color B:
+			FFE700		D7C622		C7B400		FFEE52		FFF593
+			Complementary Color:
+				FF9C00		D79122		C77A00		FFBC52		FFD593i
+*/
