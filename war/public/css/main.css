@@ -1,24 +1,35 @@
 body {
-  background-color: #000;
-	color: #B4E3D7;
+	background-color: #5093E4;
 	max-width: 1000px;
 	margin: auto;
 }
 a:link {
-  color: #FFBC52;
+  color: #5209B9;
 }
 a:visited {
-  color: #FFD593;
+  color: #8F51E6;
+}
+
+h1, h2, h3 {
+	color: #0856B3;
 }
 
 #header a, #footer a, #nav a {
-  color: #0856B3;
+  color: #FFF;
 }
 #footer {
-  font-size: .8em;
+  font-size: .9em;
 }
 #nav li {
   display: inline;
+}
+
+.blurb {
+	background-color: #FFF;
+	border: 7px solid #0856B3;
+	margin-bottom: 20px;
+	-moz-border-radius:20px;
+	padding: 20px;
 }
 
 

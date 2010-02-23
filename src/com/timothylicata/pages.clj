@@ -28,7 +28,9 @@
      [:body
       (header)
       (nav)
-      [:div#body [:p "Index prease"]]
+      [:div#body
+       [:div.blurb
+        [:p "Index prease"]]]
       (footer)]]))
 
 (defn about
@@ -42,14 +44,16 @@
       (header)
       (nav)
       [:div#body
-       [:h3 "Manifesto"]
-       [:p "Manifestos are cool.  Everyone knows that.  According to "
-        (link-to "http://en.wikipedia.org/wiki/Manifesto" "Wikipedia") ","]
-       [:blockquote "A manifesto is a public declaration of principles and intentions, often political in nature. However, manifestos relating to religious belief are generally referred to as a creed. Manifestos may also be life stance-related."]
-       [:p "I think I'm after the 'Life Stance' part.  I don't have a concrete one yet but I like the idea so I'm hoping having this here will force me to write one."]
-       [:h3 "FAQ"]
-       [:div.question
-        [:p "Do you want to make more money?"]]
-       [:div.answer
-        [:p "Sure, we all do."]]]
+       [:div.blurb
+        [:h3 "Manifesto"]
+        [:p "Manifestos are cool.  Everyone knows that.  According to "
+         (link-to "http://en.wikipedia.org/wiki/Manifesto" "Wikipedia") ","]
+        [:blockquote "A manifesto is a public declaration of principles and intentions, often political in nature. However, manifestos relating to religious belief are generally referred to as a creed. Manifestos may also be life stance-related."]
+        [:p "I think I'm after the 'Life Stance' part.  I don't have a concrete one yet but I like the idea so I'm hoping having this here will force me to write one."]]
+       [:div.blurb
+        [:h3 "FAQ"]
+        [:div.question
+         [:p "Do you want to make more money?"]]
+        [:div.answer
+         [:p "Sure, we all do."]]]]
       (footer)]]))
