@@ -22,6 +22,7 @@ h1, h2, h3 {
 }
 #nav li {
   display: inline;
+	padding-right: 10px;
 }
 
 .blurb {
