@@ -8,6 +8,10 @@
     (home-page))
   (GET "/about.html"
     (about))
+  (GET "/contact.html"
+    (contact))
+  (GET "/work.html"
+    (work))
   (GET "/*"
     (or (serve-file (:* params)) :next))
   (ANY "*"
