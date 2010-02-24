@@ -24,7 +24,8 @@
     [:html
      [:head
       [:title "Tim's Online World"]
-      (include-css "/css/main.css")]
+      (include-css "/css/main.css")
+      (include-css "http://yui.yahooapis.com/2.8.0r4/build/fonts/fonts-min.css")]
      [:body
       (header)
       (nav)
@@ -39,7 +40,8 @@
     [:html
      [:head
       [:title "About Tim"]
-      (include-css "/css/main.css")]
+      (include-css "/css/main.css")
+      (include-css "http://yui.yahooapis.com/2.8.0r4/build/fonts/fonts-min.css")]
      [:body
       (header)
       (nav)
@@ -63,7 +65,8 @@
   (html
     [:html
      [:title "Contact Tim"]
-     (include-css "/css/main.css")]
+     (include-css "/css/main.css")
+     (include-css "http://yui.yahooapis.com/2.8.0r4/build/fonts/fonts-min.css")]
     [:body
      (header)
      (nav)
@@ -79,7 +82,8 @@
     [:html
      [:head
       [:title "Tim's Work"]
-      (include-css "/css/main.css")]
+      (include-css "/css/main.css")
+      (include-css "http://yui.yahooapis.com/2.8.0r4/build/fonts/fonts-min.css")]
      [:body
       (header)
       (nav)

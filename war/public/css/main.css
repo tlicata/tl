@@ -17,9 +17,6 @@ h1, h2, h3 {
 #header a, #footer a, #nav a {
   color: #FFF;
 }
-#footer {
-  font-size: .9em;
-}
 #nav li {
   display: inline;
 	padding-right: 10px;
