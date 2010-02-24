@@ -1,5 +1,7 @@
 body {
-	background-color: #5093E4;
+	background-color: #000;
+	background-image: url("/img/3.png");
+	background-repeat: repeat;
 	max-width: 1000px;
 	margin: auto;
 }
