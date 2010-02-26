@@ -1,35 +1,30 @@
 body {
-	background-color: #5093E4;
+	background-color: #000;
 	max-width: 1000px;
 	margin: auto;
-}
-a:link {
-  color: #5209B9;
-}
-a:visited {
-  color: #8F51E6;
-}
-
-h1, h2, h3 {
-	color: #0856B3;
-}
-
-#header a, #footer a, #nav a {
-  color: #FFF;
 }
 #nav li {
   display: inline;
 	padding-right: 10px;
 }
-
 .blurb {
-	background-color: #FFF;
 	border: 7px solid #0856B3;
 	margin-bottom: 20px;
 	-moz-border-radius:20px;
 	padding: 20px;
 }
 
+
+/* Fonts */
+h1, h2, h3 {
+	color: #0856B3;
+}
+body, #header a, #footer p, #nav a {
+  color: #FFF;
+}
+#footer a {
+	color: #0856B3;
+}
 
 /*
  http://colorschemedesigner.com/#3C42fK9.wk2D-
