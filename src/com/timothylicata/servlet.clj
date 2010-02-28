@@ -1,20 +1,21 @@
 (ns com.timothylicata.servlet
-	(:gen-class :extends javax.servlet.http.HttpServlet)
-	(:use compojure.http)
+  (:gen-class :extends javax.servlet.http.HttpServlet)
+  (:use appengine.users)
+  (:use compojure.http)
   (:use com.timothylicata.pages))
 
 (defroutes tl
   (GET "/"
-    (home-page))
+    (home-page request))
   (GET "/about.html"
-    (about))
+    (about request))
   (GET "/contact.html"
-    (contact))
+    (contact request))
   (GET "/work.html"
-    (work))
+    (work request))
   (GET "/*"
     (or (serve-file (:* params)) :next))
   (ANY "*"
     (page-not-found)))
 
-(defservice tl)
+(defservice (wrap-with-user-info tl))

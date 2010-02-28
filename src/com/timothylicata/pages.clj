@@ -1,17 +1,29 @@
 (ns com.timothylicata.pages
 	(:use compojure.html))
 
-(defn header []
+(defn header
+  [request]
   [:div#header [:h1 (link-to "/" "Tim's Online World")]])
 
-(defn nav []
-  [:div#nav
-   [:ul
-    [:li (link-to "about.html" "About")]
-    [:li (link-to "contact.html" "Contact")]
-    [:li (link-to "work.html" "Work")]]])
+(defn nav
+  [request]
+  (let [user-info (:appengine/user-info request)
+        user-service (:user-service user-info)
+        admin (and
+                (:user user-info)
+                (. user-service isUserAdmin))]
+    [:div#nav
+     (if admin
+       [:ul
+        [:li (link-to "about.html" "About")]
+        [:li (link-to "contact.html" "Contact")]
+        [:li (link-to "work.html" "Work")]
+        [:li (link-to (. user-service createLogoutURL (:uri request)) "Log Out")]]
+       [:ul
+        [:li (link-to "contact.html" "Contact")]
+        [:li (link-to (. user-service createLoginURL (:uri request)) "Log In")]])]))
 
-(defn footer []
+(defn footer [request]
   [:div#footer
    [:p "Powered by "
     (link-to "http://code.google.com/appengine/" "Google App Engine") ", "
@@ -19,7 +31,7 @@
     (link-to "http://github.com/weavejester/compojure" "Compojure")]])
 
 (defn home-page
-  []
+  [request]
   (html
     [:html
      [:head
@@ -27,15 +39,27 @@
       (include-css "/css/main.css")
       (include-css "http://yui.yahooapis.com/2.8.0r4/build/fonts/fonts-min.css")]
      [:body
-      (header)
-      (nav)
+      (header request)
+      (nav request)
       [:div#body
        [:div.blurb
-        [:p "Index prease"]]]
-      (footer)]]))
+        [:ul
+         [:li "server-port: " (:server-port request)]
+         [:li "server-name: " (:server-name request)]
+         [:li "remote-addr: " (:remote-addr request)]
+         [:li "uri: " (:uri request)]
+         [:li "query-string: " (:query-string request)]
+         [:li "scheme: " (:scheme request)]
+         [:li "request-method: " (:request-method request)]
+         [:li "headers: " (:headers request)]
+         [:li "content-type: " (:content-type request)]
+         [:li "character-encoding: " (:character-encoding request)]
+         [:li "body: " (:body request)]
+         [:li "appengine/user-info: " (:appengine/user-info request)]]]]
+      (footer request)]]))
 
 (defn about
-  []
+  [request]
   (html
     [:html
      [:head
@@ -43,8 +67,8 @@
       (include-css "/css/main.css")
       (include-css "http://yui.yahooapis.com/2.8.0r4/build/fonts/fonts-min.css")]
      [:body
-      (header)
-      (nav)
+      (header request)
+      (nav request)
       [:div#body
        [:div.blurb
         [:h3 "Manifesto"]
@@ -71,26 +95,26 @@
          [:p "Do you want to make more money?"]]
         [:div.answer
          [:p "Sure, we all do."]]]]
-      (footer)]]))
+      (footer request)]]))
 
 (defn contact
-  []
+  [request]
   (html
     [:html
      [:title "Contact Tim"]
      (include-css "/css/main.css")
      (include-css "http://yui.yahooapis.com/2.8.0r4/build/fonts/fonts-min.css")]
     [:body
-     (header)
-     (nav)
+     (header request)
+     (nav request)
      [:div
       [:div.blurb
        [:h3 "Email"]
        [:p "The best way to get ahold of me is through email.  tim [at] [this domain]."]]]
-     (footer)]))
+     (footer request)]))
 
 (defn work
-  []
+  [request]
   (html
     [:html
      [:head
@@ -98,8 +122,8 @@
       (include-css "/css/main.css")
       (include-css "http://yui.yahooapis.com/2.8.0r4/build/fonts/fonts-min.css")]
      [:body
-      (header)
-      (nav)
+      (header request)
+      (nav request)
       [:div
        [:div.blurb
         [:h3 "HotPads.com"]
@@ -112,4 +136,4 @@
         [:p "One of the reasons I built this site was to give myself a programming playground.  This site is hosted on Google App Engine.  It is written in Clojure, which is a really cool functional language that runs on the JVM.  Luckily, someone wrote a very nice web application library for Clojure called Compojure.  On the client side I plan on refining my HTML/CSS/JS.  My JavaScript library of choice is JQuery.  And sometimes I add a Flash or Flex app."]]
        [:div.blurb
         [:h3 "Resume"]]]
-      (footer)]]))
+      (footer request)]]))
