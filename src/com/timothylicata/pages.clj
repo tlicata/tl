@@ -1,6 +1,11 @@
 (ns com.timothylicata.pages
 	(:use compojure.html))
 
+(defn css
+  []
+  (let [global-styles (list "/css/main.css" "http://yui.yahooapis.com/2.8.0r4/build/fonts/fonts-min.css")]
+    (apply include-css global-styles)))
+
 (defn header
   [request]
   [:div#header [:h1 (link-to "/" "Tim's Online World")]])
@@ -34,10 +39,7 @@
   [request]
   (html
     [:html
-     [:head
-      [:title "Tim's Online World"]
-      (include-css "/css/main.css")
-      (include-css "http://yui.yahooapis.com/2.8.0r4/build/fonts/fonts-min.css")]
+     [:head [:title "Tim's Online World"] (css)]
      [:body
       (header request)
       (nav request)
@@ -62,10 +64,7 @@
   [request]
   (html
     [:html
-     [:head
-      [:title "About Tim"]
-      (include-css "/css/main.css")
-      (include-css "http://yui.yahooapis.com/2.8.0r4/build/fonts/fonts-min.css")]
+     [:head [:title "About Tim"] (css)]
      [:body
       (header request)
       (nav request)
@@ -101,26 +100,21 @@
   [request]
   (html
     [:html
-     [:title "Contact Tim"]
-     (include-css "/css/main.css")
-     (include-css "http://yui.yahooapis.com/2.8.0r4/build/fonts/fonts-min.css")]
-    [:body
-     (header request)
-     (nav request)
-     [:div
-      [:div.blurb
-       [:h3 "Email"]
-       [:p "The best way to get ahold of me is through email.  tim [at] [this domain]."]]]
-     (footer request)]))
+     [:head [:title "Contact Tim"] (css)]
+     [:body
+      (header request)
+      (nav request)
+      [:div
+       [:div.blurb
+        [:h3 "Email"]
+        [:p "The best way to get ahold of me is through email.  tim [at] [this domain]."]]]
+      (footer request)]]))
 
 (defn work
   [request]
   (html
     [:html
-     [:head
-      [:title "Tim's Work"]
-      (include-css "/css/main.css")
-      (include-css "http://yui.yahooapis.com/2.8.0r4/build/fonts/fonts-min.css")]
+     [:head [:title "Tim's Work"] (css)]
      [:body
       (header request)
       (nav request)
