@@ -20,7 +20,7 @@
 	</target>
 
 	<target name="copyjars" depends="init">
-		<copy file="${appengine-clj.dir}/appengine-clj.jar" todir="${lib.dir}" />
+		<copy file="${appengine-clj.dir}/appengine.jar" todir="${lib.dir}" />
 		<copy file="${sdk.dir}/lib/user/appengine-api-1.0-sdk-1.2.6.jar" todir="${lib.dir}" />
 		<copy file="${compojure.dir}/compojure.jar" todir="${lib.dir}" />
 		<copy todir="${lib.dir}">
