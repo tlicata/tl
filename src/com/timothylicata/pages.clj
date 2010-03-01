@@ -23,7 +23,7 @@
         [:li (link-to "about.html" "About")]
         [:li (link-to "contact.html" "Contact")]
         [:li (link-to "work.html" "Work")]
-        [:li (link-to (. user-service createLogoutURL (:uri request)) "Log Out")]]
+        [:li (link-to (. user-service createLogoutURL "/") "Log Out")]]
        [:ul
         [:li (link-to "contact.html" "Contact")]
         [:li (link-to (. user-service createLoginURL (:uri request)) "Log In")]])]))
