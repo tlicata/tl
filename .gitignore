@@ -1,2 +1,3 @@
 *.class
 *.jar
+war/WEB-INF/appengine-generated/*

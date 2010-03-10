@@ -2,6 +2,7 @@
   (:gen-class :extends javax.servlet.http.HttpServlet)
   (:use appengine.users)
   (:use compojure.http)
+  (:use com.timothylicata.blog)
   (:use com.timothylicata.pages))
 
 (defroutes tl
@@ -18,4 +19,14 @@
   (ANY "*"
     (page-not-found)))
 
-(defservice (wrap-with-user-info tl))
+(defroutes blog-routes
+  (GET "/post/:id"      (post-page (:id params)))
+  (GET "/tag/:tag"      (tag-page (:tag params)))
+  (GET "/add-post"      (add-post-page))
+  (GET "/edit-post/:id" (edit-post-page (:id params))))
+
+(defroutes all-routes
+  blog-routes
+  tl)
+
+(defservice (wrap-with-user-info all-routes))
