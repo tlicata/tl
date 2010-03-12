@@ -10,6 +10,13 @@ html {
 #nav {
   margin-bottom: 20px;
 }
+#nav ul {
+	display: inline;
+}
+#nav ul.admin {
+	position: relative;
+	float: right;;
+}
 #nav li {
   display: inline;
 	padding-right: 10px;

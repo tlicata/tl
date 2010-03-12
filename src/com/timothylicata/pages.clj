@@ -8,29 +8,28 @@
     "/css/main.css")]
     (apply include-css global-styles)))
 
-(defn nav
-  [request]
+
+(defn nav-links []
+  [:ul
+   [:li (link-to "about.html" "About")]
+   [:li (link-to "contact.html" "Contact")]
+   [:li (link-to "work.html" "Work")]])
+(defn admin-links [request]
   (let [user-info (:appengine/user-info request)
         user-service (:user-service user-info)
-        admin (and
-                (:user user-info)
-                (. user-service isUserAdmin))]
-    [:div#nav
-     (if admin
-       [:ul
-        [:li (link-to "about.html" "About")]
-        [:li (link-to "contact.html" "Contact")]
-        [:li (link-to "work.html" "Work")]
-        [:li (link-to (. user-service createLogoutURL "/") "Log Out")]]
-       [:ul
-        [:li (link-to "contact.html" "Contact")]
-        [:li (link-to (. user-service createLoginURL (:uri request)) "Log In")]])]))
+        admin (and (:user user-info) (. user-service isUserAdmin))]
+    (if admin
+      [:ul.admin
+       [:li (link-to "/admin" "Admin")]
+       [:li (link-to (. user-service createLogoutURL "/") "Log Out")]]
+      [:ul.admin
+       [:li (link-to (. user-service createLoginURL "/") "Log In")]])))
 
 (defn header
   [request]
   [:div#hd
    [:h1 (link-to "/" "Tim's Online World")]
-   (nav request)])
+   [:div#nav (nav-links) (admin-links request)]])
 
 (defn sidebar [request]
   [:div#sidebar
