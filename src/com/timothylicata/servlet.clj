@@ -2,14 +2,13 @@
   (:gen-class :extends javax.servlet.http.HttpServlet)
   (:use appengine.users)
   (:use compojure.http)
-  (:use com.timothylicata.blog)
   (:use com.timothylicata.pages))
 
 (defroutes tl
   (GET "/"
     (home-page request))
   (GET "/about.html"
-    (about request))
+    (about-page request))
   (GET "/contact.html"
     (contact request))
   (GET "/work.html"
@@ -19,14 +18,18 @@
   (ANY "*"
     (page-not-found)))
 
-(defroutes blog-routes
-  (GET "/post/:id"      (post-page (:id params)))
-  (GET "/tag/:tag"      (tag-page (:tag params)))
-  (GET "/add-post"      (add-post-page))
-  (GET "/edit-post/:id" (edit-post-page (:id params))))
+(defroutes admin-routes
+  (GET "/admin.html" (admin-page request)))
+
+;(defroutes blog-form-routes
+;  (POST "/do-add-post" (apply do-add-post
+;                              (map params [:title :category :tags :markdown])))
+;  (POST "/do-edit-post/:old-id" (apply do-edit-post
+;                                       (map params [:id :title :category :tag :markdown]))))
 
 (defroutes all-routes
-  blog-routes
+  admin-routes
+  ;blog-form-routes
   tl)
 
 (defservice (wrap-with-user-info all-routes))
