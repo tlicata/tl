@@ -15,7 +15,7 @@ html {
 }
 #nav ul.admin {
 	position: relative;
-	float: right;;
+	float: right;
 }
 #nav li {
   display: inline;
@@ -38,6 +38,33 @@ html {
 }
 .blurb ul {
   margin-left: 1em;
+}
+
+/* Forms */
+label
+{
+  display: block;
+}
+textarea {
+	width: 100%;
+}
+
+/* Tables */
+table {
+  width: 100%;
+}
+td, th {
+  padding: 5px 10px 5px 10px;
+}
+th {
+  color: #FF9C00;
+  font-weight: bold;
+}
+tr {
+  background-color: #222;
+}
+tr.odd {
+	background-color: #111;
 }
 
 /* Fonts */
