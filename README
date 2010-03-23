@@ -1,5 +1,5 @@
 # timothy-licata-app
-My personal site written in Clojure.
+An attempt at a personal site written in Clojure.
 
 ## Usage
 Build with Leiningen.  Deploy to Google App Engine.
