@@ -1,6 +1,5 @@
-(ns com.timothylicata.pages.work
-  (:use compojure.html)
-  (:use com.timothylicata.pages.global))
+(ns tl.pages.work
+  (:use tl.pages.global))
 
 (defn work
   [request]

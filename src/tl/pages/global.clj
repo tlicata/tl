@@ -1,5 +1,6 @@
-(ns com.timothylicata.pages.global
-  (:use compojure.html))
+(ns tl.pages.global
+  (:use [hiccup :only [html]]
+     [hiccup.page-helpers :only [include-css link-to]]))
 
 (defn css
   []
@@ -15,15 +16,16 @@
    [:li (link-to "work.html" "Work")]])
 
 (defn admin-links [request]
-  (let [user-info (:appengine/user-info request)
-        user-service (:user-service user-info)
-        admin (and (:user user-info) (. user-service isUserAdmin))]
+  ;(let [user-info (:appengine/user-info request)
+  ;      user-service (:user-service user-info)
+  ;      admin (and (:user user-info) (. user-service isUserAdmin))]
+  (let [admin true]
     (if admin
       [:ul.admin
-       [:li (link-to "/admin.html" "Admin")]
-       [:li (link-to (. user-service createLogoutURL "/") "Log Out")]]
-      [:ul.admin
-       [:li (link-to (. user-service createLoginURL "/") "Log In")]])))
+       [:li (link-to "/admin.html" "Admin")]])))
+;       [:li (link-to (. user-service createLogoutURL "/") "Log Out")]]
+;      [:ul.admin
+;       [:li (link-to (. user-service createLoginURL "/") "Log In")]])))
 
 (defn header
   [request]

@@ -1,6 +1,7 @@
-(ns com.timothylicata.pages.about
-  (:use compojure.html)
-  (:use com.timothylicata.pages.global))
+(ns tl.pages.about
+  (:use [hiccup :only [html]]
+     [hiccup.page-helpers :only [link-to]]
+     [tl.pages.global]))
 
 (defn about-page
   [request]

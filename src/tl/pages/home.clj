@@ -1,6 +1,5 @@
-(ns com.timothylicata.pages.home
-  (:use compojure.html)
-  (:use com.timothylicata.pages.global))
+(ns tl.pages.home
+  (:use tl.pages.global))
 
 (defn home-page
   [request]

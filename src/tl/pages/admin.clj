@@ -1,8 +1,8 @@
-(ns com.timothylicata.pages.admin
-  (:use compojure.html)
-  (:use com.timothylicata.blog)
-  (:use com.timothylicata.util)
-  (:use com.timothylicata.pages.global))
+(ns tl.pages.admin
+  (:use hiccup.form-helpers)
+  (:use tl.blog)
+  (:use tl.util)
+  (:use tl.pages.global))
 
 (defn row? [html-tree]
   (and (coll? html-tree) (= (keyword :tr) (first html-tree))))

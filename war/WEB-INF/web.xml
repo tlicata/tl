@@ -7,7 +7,7 @@
   <display-name>Tim's Online World</display-name>
   <servlet>
     <servlet-name>tl</servlet-name>
-    <servlet-class>com.timothylicata.servlet</servlet-class>
+    <servlet-class>tl.servlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>tl</servlet-name>

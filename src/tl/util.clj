@@ -1,6 +1,6 @@
-(ns com.timothylicata.util
+(ns tl.util
   (:import [java.text DateFormat])
-  (:use compojure.html))
+  (:use [hiccup.form-helpers :only [label submit-button]]))
 
 (defn die [& xs]
   (throw (Exception. (apply str xs))))

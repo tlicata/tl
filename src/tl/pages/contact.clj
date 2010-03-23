@@ -1,6 +1,5 @@
-(ns com.timothylicata.pages.contact
-  (:use compojure.html)
-  (:use com.timothylicata.pages.global))
+(ns tl.pages.contact
+  (:use tl.pages.global))
 
 (defn contact
   [request]
