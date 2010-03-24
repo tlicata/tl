@@ -1,8 +1,11 @@
 (ns tl.pages.admin
   (:use hiccup.form-helpers)
-  (:use tl.blog)
   (:use tl.util)
   (:use tl.pages.global))
+
+
+; Dummy Data Store Functions
+(defn find-all [] nil)
 
 (defn row? [html-tree]
   (and (coll? html-tree) (= (keyword :tr) (first html-tree))))

@@ -7,13 +7,8 @@
                  [ring "0.2.0-RC2"]
                  [com.google.appengine/appengine-tools-sdk "1.3.0"]]
   :namespaces [tl.core
+               tl.pages
                tl.servlet
-               tl.util
-               tl.pages.about
-               tl.pages.admin
-               tl.pages.contact
-               tl.pages.global
-               tl.pages.home
-               tl.pages.work]
+               tl.util]
   :compile-path "war/WEB-INF/classes/"
   :library-path "war/WEB-INF/lib/")
