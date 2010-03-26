@@ -3,7 +3,7 @@
   (:use [compojure.core :only [defroutes GET ANY]])
   (:use [ring.util.servlet :only [defservice]])
   (:use [ring.util.response :only [file-response]])
-  (:use tl.pages.about tl.pages.admin tl.pages.contact tl.pages.home tl.pages.work))
+  (:use tl.pages))
 
 (defroutes tl
   (GET "/" [] (home-page {}))
@@ -12,6 +12,6 @@
   (GET "/contact.html" [] (contact {}))
   (GET "/work.html" [] (work {}))
   (GET "/*" {params :params} (file-response (str "public/" (:* params))))
-  (ANY "*" [] {:status 404 :body "<h1>Page not found</h1>"}))
+  (ANY "*" [] {:status 404 :body "<h1>404</h1>"}))
 
 (defservice tl)
