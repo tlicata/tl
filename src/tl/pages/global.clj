@@ -11,9 +11,9 @@
 
 (defn nav-links []
   [:ul
-   [:li (link-to "about.html" "About")]
-   [:li (link-to "contact.html" "Contact")]
-   [:li (link-to "work.html" "Work")]])
+   [:li (link-to "/about.html" "About")]
+   [:li (link-to "/contact.html" "Contact")]
+   [:li (link-to "/work.html" "Work")]])
 
 (defn admin-links [request]
   ;(let [user-info (:appengine/user-info request)
