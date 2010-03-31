@@ -7,4 +7,5 @@
   'tl.pages.contact
   'tl.pages.global
   'tl.pages.home
+  'tl.pages.topic
   'tl.pages.work)

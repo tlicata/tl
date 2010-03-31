@@ -11,6 +11,8 @@
   (GET "/admin.html" [] (admin-page {}))
   (GET "/contact.html" [] (contact {}))
   (GET "/work.html" [] (work {}))
+  (GET "/:topic/" {params :params} (topic (params :topic)))
+  (GET "/:topic/:name/" {params :params} (topic (params :topic) (params :name)))
   (GET "/*" {params :params} (file-response (str "public/" (:* params))))
   (ANY "*" [] {:status 404 :body "<h1>404</h1>"}))
 
