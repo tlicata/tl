@@ -1,11 +1,6 @@
 (ns tl.pages.admin
   (:use hiccup.form-helpers)
-  (:use tl.util)
-  (:use tl.pages.global))
-
-
-; Dummy Data Store Functions
-(defn find-all [] nil)
+  (:use tl.db tl.pages.global tl.util))
 
 (defn row? [html-tree]
   (and (coll? html-tree) (= (keyword :tr) (first html-tree))))
@@ -29,7 +24,7 @@
     [:table (map make-odd indexed-coll)]))
 
 (defn table-header-columns []
-  (let [titles ["title" "date" "category" "tags"]]
+  (let [titles ["title" "date" "tags"]]
     (map (fn [title] [:th title]) titles)))
 
 (defn table-header []
@@ -42,7 +37,6 @@
               [:tr
                [:td (:title post)]
                [:td (pretty-date (:date post))]
-               [:td (:category post)]
                [:td (:tags post)]]) posts)))
 
 (defn table-rows
@@ -59,9 +53,9 @@
 (defn create-post []
   [:div.blurb
    [:h1 "Create a Post"]
-   (form-to [:post "/do-add-post"]
+   (form-to [:post "/admin/add-post"]
+            (form-row text-field "title" "Title")
             (form-row text-area "markdown" "Post")
-            (form-row text-field "category" "Category")
             (form-row text-field "tags" "Tags")
             (submit-row "Submit"))])
 

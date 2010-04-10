@@ -22,7 +22,7 @@
   (let [admin true]
     (if admin
       [:ul.admin
-       [:li (link-to "/admin.html" "Admin")]])))
+       [:li (link-to "/admin/" "Admin")]])))
 ;       [:li (link-to (. user-service createLogoutURL "/") "Log Out")]]
 ;      [:ul.admin
 ;       [:li (link-to (. user-service createLoginURL "/") "Log In")]])))

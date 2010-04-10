@@ -8,9 +8,9 @@
              [:div.blurb
               [:h1 topic]
               [:p "topic only"]]}))
-  ([topic entry]
+  ([topic article]
    (page {} {:title topic
              :body
              [:div.blurb
               [:h1 topic]
-              [:p entry]]})))
+              [:p article]]})))

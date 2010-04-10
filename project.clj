@@ -4,9 +4,10 @@
                  [hiccup "0.4.0-SNAPSHOT"]
                  [org.clojure/clojure "1.1.0"]
                  [org.clojure/clojure-contrib "1.1.0"]
-                 [ring "0.2.0-RC2"]
-                 [com.google.appengine/appengine-tools-sdk "1.3.0"]]
+                 [ring "0.2.0"]
+                 [com.google.appengine/appengine-api-1.0-sdk "1.3.1"]]
   :namespaces [tl.core
+               tl.db
                tl.pages
                tl.servlet
                tl.util]
