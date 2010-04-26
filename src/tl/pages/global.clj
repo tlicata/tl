@@ -6,14 +6,14 @@
   []
   (let [global-styles (list
     "http://yui.yahooapis.com/2.8.0r4/build/reset-fonts-grids/reset-fonts-grids.css"
-    "/css/main.css")]
+    "/public/css/main.css")]
     (apply include-css global-styles)))
 
 (defn nav-links []
   [:ul
-   [:li (link-to "/about.html" "About")]
-   [:li (link-to "/contact.html" "Contact")]
-   [:li (link-to "/work.html" "Work")]])
+   [:li (link-to "/programming.html" "Programmer")]
+   [:li (link-to "/golf.html" "Golfer")]
+   [:li (link-to "/youtubes.html" "Rock 'N' Roll Enthusiast")]])
 
 (defn admin-links [request]
   ;(let [user-info (:appengine/user-info request)
@@ -30,7 +30,7 @@
 (defn header
   [request]
   [:div#hd
-   [:h1 (link-to "/" "Tim's Online World")]
+   [:h1 (link-to "/" "Timothy Licata")]
    [:div#nav (nav-links) (admin-links request)]])
 
 (defn sidebar [request]

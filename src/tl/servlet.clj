@@ -8,12 +8,9 @@
 
 (defroutes tl
   (GET "/" [] (home-page {}))
-  (GET "/about.html" [] (about-page {}))
-  (GET "/contact.html" [] (contact {}))
-  (GET "/work.html" [] (work {}))
-  (GET "/:topic/" {params :params} (topic (params :topic)))
-  (GET "/:topic/:article/" {params :params} (topic (params :topic) (params :article)))
-  (GET "/*" {params :params} (file-response (str "public/" (:* params))))
+  (GET "/golf.html" [] (golf {}))
+  (GET "/programming.html" [] (programming {}))
+  (GET "/youtubes.html" [] (youtubes {}))
   (ANY "*" [] {:status 404 :body "<h1>404</h1>"}))
 
 (defroutes admin
