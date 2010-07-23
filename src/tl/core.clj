@@ -1,10 +1,10 @@
 (ns tl.core
-  (:use ring.adapter.jetty))
+  (:use compojure.core
+	hiccup.core
+	ring.adapter.jetty))
 
-(defn handler [req]
-  {:status 200
-   :headers {"Content-Type" "text/html"}
-   :body "Hello world from Ring"})
+(defroutes greeter
+  (GET "/" []
+       (html [:h1 "Hello World"])))
 
-(defn boot []
-  (run-jetty #'handler {:port 8080}))
+(run-jetty greeter {:port 8080})
