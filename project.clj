@@ -6,10 +6,6 @@
                  [org.clojure/clojure-contrib "1.1.0"]
                  [ring "0.2.0"]
                  [com.google.appengine/appengine-api-1.0-sdk "1.3.1"]]
-  :namespaces [tl.core
-               tl.db
-               tl.pages
-               tl.servlet
-               tl.util]
+  :dev-dependencies [[swank-clojure "1.2.1"]]
   :compile-path "war/WEB-INF/classes/"
   :library-path "war/WEB-INF/lib/")
