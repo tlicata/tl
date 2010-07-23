@@ -7,4 +7,4 @@
   (GET "/" []
        (html [:h1 "Hello World"])))
 
-(run-jetty greeter {:port 8080})
+(run-jetty (var greeter) {:port 8080})
