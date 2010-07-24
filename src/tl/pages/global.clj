@@ -1,12 +1,12 @@
 (ns tl.pages.global
-  (:use [hiccup :only [html]]
-     [hiccup.page-helpers :only [include-css link-to]]))
+  (:use [hiccup.core :only [html]]
+	[hiccup.page-helpers :only [include-css link-to]]))
 
 (defn css
   []
   (let [global-styles (list
     "http://yui.yahooapis.com/2.8.0r4/build/reset-fonts-grids/reset-fonts-grids.css"
-    "/public/css/main.css")]
+    "css/main.css")]
     (apply include-css global-styles)))
 
 (defn nav-links []

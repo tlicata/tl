@@ -1,6 +1,6 @@
 (defproject tl "0.1.0-SNAPSHOT"
   :description "My personal site written in Clojure"
-  :dependencies [[org.clojars.making/compojure "0.4.0-SNAPSHOT"]
+  :dependencies [[compojure "0.4.1"]
                  [hiccup "0.2.6"]
                  [org.clojure/clojure "1.1.0"]
                  [org.clojure/clojure-contrib "1.1.0"]

@@ -1,10 +1,12 @@
 (ns tl.core
   (:use compojure.core
-	hiccup.core
-	ring.adapter.jetty))
+	ring.adapter.jetty
+	tl.pages.home)
+  (:require [compojure.route :as route]))
 
-(defroutes greeter
-  (GET "/" []
-       (html [:h1 "Hello World"])))
+(defroutes tl
+  (GET "/" [] (home-page {}))
+  (route/files "/" {:root "war/public"})
+  (ANY "*" [] {:status 404 :body "<h1>404</h1>"}))
 
-(run-jetty (var greeter) {:port 8080})
+(run-jetty (var tl) {:port 8080})
