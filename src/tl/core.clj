@@ -13,6 +13,6 @@
   (GET "/programming.html" [] (programming {}))
   (GET "/youtubes.html" [] (youtubes {}))
   (route/files "/" {:root "war/public"})
-  (ANY "*" [] {:status 404 :body "<h1>404</h1>"}))
+  (route/not-found "Not Found"))
 
 (run-jetty (var tl) {:port 8080})
