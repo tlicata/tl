@@ -9,7 +9,8 @@
 
 (defroutes tl
   (GET "/" [] (home-page {}))
-  (GET "/golf.html" [] (golf {}))
+  (GET "/golf.html" [] (golf))
+  (POST "/golf.html" [name] (golf-post name))
   (GET "/programming.html" [] (programming {}))
   (GET "/youtubes.html" [] (youtubes {}))
   (route/files "/" {:root "war/public"})

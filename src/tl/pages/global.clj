@@ -27,6 +27,9 @@
 ;      [:ul.admin
 ;       [:li (link-to (. user-service createLoginURL "/") "Log In")]])))
 
+(defn blurb [content & more]
+  (apply conj [:div.blurb] content more))
+
 (defn header
   [request]
   [:div#hd
