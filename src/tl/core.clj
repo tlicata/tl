@@ -1,6 +1,7 @@
 (ns tl.core
-  (:use compojure.core
-	ring.adapter.jetty
+  (:gen-class :extends javax.servlet.http.HttpServlet)
+  (:use [compojure.core :only [defroutes GET POST]]
+	[ring.util.servlet :only [defservice]]
 	tl.pages.golf
 	tl.pages.home
 	tl.pages.programming
@@ -13,7 +14,19 @@
   (POST "/golf.html" [name] (golf-post name))
   (GET "/programming.html" [] (programming {}))
   (GET "/youtubes.html" [] (youtubes {}))
-  (route/files "/" {:root "war/public"})
+  (route/files "/" {:root "war"})
   (route/not-found "Not Found"))
 
-(run-jetty (var tl) {:port 8080})
+(defservice tl)
+
+
+
+
+
+
+
+
+
+
+
+
