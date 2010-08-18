@@ -1,25 +1,32 @@
 (ns tl.servlet
   (:gen-class :extends javax.servlet.http.HttpServlet)
-  (:use [compojure.core :only [defroutes ANY GET POST]])
-  (:use [ring.util.servlet :only [defservice]])
-  (:use [ring.util.response :only [file-response]])
-  (:use [tl.db :only [do-add-post do-edit-post]])
-  (:use tl.pages))
+  (:use [compojure.core :only [defroutes GET POST]]
+	[ring.util.servlet :only [defservice]]
+	tl.pages.golf
+	tl.pages.home
+	tl.pages.programming
+	tl.pages.youtubes)
+  (:require [compojure.route :as route]))
 
 (defroutes tl
   (GET "/" [] (home-page {}))
-  (GET "/golf.html" [] (golf {}))
+  (GET "/golf.html" [] (golf))
+  (POST "/golf.html" [name] (golf-post name))
   (GET "/programming.html" [] (programming {}))
   (GET "/youtubes.html" [] (youtubes {}))
-  (ANY "*" [] {:status 404 :body "<h1>404</h1>"}))
+  (route/files "/" {:root "war"})
+  (route/not-found "Not Found"))
 
-(defroutes admin
-  (GET "/admin/" [] (admin-page {}))
-  (POST "/admin/add-post" request (do-add-post (:params request)))
-  (POST "/admin/edit-post" request (do-edit-post (:params request))))
+(defservice tl)
 
-(defroutes all
-  admin
-  tl)
 
-(defservice all)
+
+
+
+
+
+
+
+
+
+

@@ -9,6 +9,6 @@
   :dev-dependencies [[swank-clojure "1.2.1"]]
   :compile-path "war/WEB-INF/classes/"
   :library-path "war/WEB-INF/lib/"
-  :aot [tl.core])
+  :aot [tl.servlet])
 
 
