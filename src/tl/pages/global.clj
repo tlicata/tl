@@ -1,6 +1,9 @@
 (ns tl.pages.global
   (:use [hiccup.core :only [html]]
-	[hiccup.page-helpers :only [include-css link-to]]))
+	[hiccup.page-helpers :only [include-css include-js link-to]]))
+
+(def ajax-api "http://www.google.com/jsapi?key=ABQIAAAAleydYZEjUE7f9RhdHI8NtBS6-BlYLfNinRJgsDPbRk1Y0-Rs-hR5dAJbQkD-YuuQBRVFZP5E1evO4Q")
+(def jquery "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js")
 
 (defn css
   []
@@ -8,6 +11,11 @@
     "http://yui.yahooapis.com/2.8.0r4/build/reset-fonts-grids/reset-fonts-grids.css"
     "public/css/main.css")]
     (apply include-css global-styles)))
+
+(defn js
+  [& js-list]
+  (let [global-js [ajax-api jquery]]
+	(apply include-js (apply conj global-js js-list))))
 
 (defn nav-links []
   [:ul
@@ -58,7 +66,7 @@
   [request info]
   (html
     [:html
-     [:head [:title (:title info)] (css)]
+     [:head [:title (:title info)] (css) (js (:js info))]
      [:body
       [:div#doc2.yui-t5
        (header request)
