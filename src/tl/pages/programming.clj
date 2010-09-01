@@ -8,6 +8,7 @@
   (page
     request
     {:title "Programming"
+	 :js "/public/js/polymaps.min.js"
      :body
       [:div
        (blurb
