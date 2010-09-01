@@ -13,9 +13,9 @@
     (apply include-css global-styles)))
 
 (defn js
-  [& js-list]
+  [js-list]
   (let [global-js [ajax-api jquery]]
-	(apply include-js (apply conj global-js js-list))))
+	(apply include-js (concat global-js js-list))))
 
 (defn nav-links []
   [:ul
