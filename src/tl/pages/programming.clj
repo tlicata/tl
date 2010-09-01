@@ -1,13 +1,18 @@
 (ns tl.pages.programming
-  (:use tl.pages.global))
+  (:use
+   [hiccup.page-helpers :only [include-css link-to]]
+   [tl.pages.global :only [blurb page]]))
 
 (defn programming
   [request]
   (page
     request
-    {:title "Defraggin' my Hard Drive for Thrills"
+    {:title "Programming"
      :body
       [:div
-       [:div.blurb
-        [:h1 "Programming"]
-        [:p "Javascript Clojure ActionScript"]]]}))
+       (blurb
+        [:h1 "Polymaps"]
+		[:p
+		 "Some experimentation with "
+		 (link-to "http://polymaps.org/" "Polymaps")
+		 "."])]}))
