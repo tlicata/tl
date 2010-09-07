@@ -3,6 +3,11 @@ html {
 	padding: 20px;
 }
 
+/* Specific Layouts */
+#polymaps-container {
+height: 400px;
+}
+
 /* Layout and Spacing */
 #hd h1 {
   margin-bottom: 7px;
