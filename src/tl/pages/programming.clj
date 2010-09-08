@@ -13,8 +13,4 @@
       [:div
        (blurb
         [:h1 "Polymaps"]
-		[:p
-		 "Some experimentation with "
-		 (link-to "http://polymaps.org/" "Polymaps")
-		 "."]
 		[:div#polymaps-container])]}))
