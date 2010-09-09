@@ -15,6 +15,7 @@
   (GET "/programming.html" [] (programming {}))
   (GET "/youtubes.html" [] (youtubes {}))
   (route/files "/" {:root "./war/public"})
+  (route/files "/" {:root "./public"})
   (route/not-found "Not Found"))
 
 (defservice tl)
