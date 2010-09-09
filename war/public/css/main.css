@@ -16,7 +16,7 @@ html {
 .blurb {
 	border: .4em solid #0856B3;
 	margin-bottom: 20px;
-	padding: 15px 15px 10px 15px;
+	padding: 15px;
 	-moz-border-radius: 1em;
 	-webkit-border-radius: 1em;
 }
