@@ -17,15 +17,3 @@
   (route/not-found "Not Found"))
 
 (defservice tl)
-
-
-
-
-
-
-
-
-
-
-
-
