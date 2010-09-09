@@ -9,8 +9,6 @@
     request
     {:title "Programming"
 	 :js ["/js/polymaps.min.js" "/js/poly.js"]
-     :body
-      [:div
-       (blurb
-        [:h1 "Polymaps"]
-		[:div#polymaps-container])]}))
+     :blurbs [(blurb
+			  [:h1 "Polymaps"]
+			  [:div#polymaps-container])]}))

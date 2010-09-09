@@ -49,9 +49,12 @@
   [request info]
   (html
     [:html
-     [:head [:title (:title info)] (css) (js (:js info))]
+     [:head
+	  [:title (str "Tim's Online World - " (:title info))]
+	  (css)
+	  (js (:js info))]
      [:body
       [:div#doc4
        (header request)
-	   [:div#yui-main [:div.yui-b (:body info)]]
+	   (apply conj [:div#doc4] (:blurbs info))
        (footer request)]]]))
