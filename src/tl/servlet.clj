@@ -3,13 +3,12 @@
   (:use [compojure.core :only [defroutes GET POST]]
 	[ring.util.servlet :only [defservice]]
 	tl.pages.golf
-	tl.pages.home
 	tl.pages.programming
 	tl.pages.youtubes)
   (:require [compojure.route :as route]))
 
 (defroutes tl
-  (GET "/" [] (home-page {}))
+  (GET "/" [] (programming {}))
   (GET "/golf.html" [] (golf))
   (POST "/golf.html" [name] (golf-post name))
   (GET "/programming.html" [] (programming {}))
