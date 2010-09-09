@@ -40,9 +40,10 @@
 (defn footer [request]
   [:div#ft
    [:p "Powered by "
-    (link-to "http://code.google.com/appengine/" "Google App Engine") ", "
-    (link-to "http://clojure.org" "Clojure") " and  "
-    (link-to "http://github.com/weavejester/compojure" "Compojure")]])
+    (link-to "http://code.google.com/appengine/" "Google App Engine")
+	" and "
+    (link-to "http://clojure.org" "Clojure")]])
+
 
 (defn page
   [request info]
