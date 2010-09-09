@@ -68,9 +68,7 @@
     [:html
      [:head [:title (:title info)] (css) (js (:js info))]
      [:body
-      [:div#doc2.yui-t5
+      [:div#doc4
        (header request)
-       [:div#bd
-        [:div#yui-main [:div.yui-b (:body info)]]
-        [:div.yui-b (sidebar request)]]
+	   [:div#yui-main [:div.yui-b (:body info)]]
        (footer request)]]]))
