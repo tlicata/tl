@@ -8,7 +8,7 @@
   (page
     request
     {:title "Programming"
-	 :js ["/public/js/polymaps.min.js" "/public/js/poly.js"]
+	 :js ["/js/polymaps.min.js" "/js/poly.js"]
      :body
       [:div
        (blurb

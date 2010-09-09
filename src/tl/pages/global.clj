@@ -9,7 +9,7 @@
   []
   (let [global-styles (list
     "http://yui.yahooapis.com/2.8.0r4/build/reset-fonts-grids/reset-fonts-grids.css"
-    "public/css/main.css")]
+    "/css/main.css")]
     (apply include-css global-styles)))
 
 (defn js
