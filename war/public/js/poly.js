@@ -13,7 +13,6 @@ tl.polymaps = (function () {
 		.center({lat: 42.938, lon: -78.986})
 		.zoom(8)
 		.zoomRange([2, 9])
-		.add(po.hash())
 		.add(po.interact());
 
 		map.add(po.image()
