@@ -17,12 +17,6 @@
   (let [global-js [ajax-api jquery]]
 	(apply include-js (concat global-js js-list))))
 
-(defn nav-links []
-  [:ul
-   [:li (link-to "/programming.html" "Programmer")]
-   [:li (link-to "/golf.html" "Golfer")]
-   [:li (link-to "/youtubes.html" "Rock 'N' Roll Enthusiast")]])
-
 (defn admin-links [request]
   ;(let [user-info (:appengine/user-info request)
   ;      user-service (:user-service user-info)
@@ -41,19 +35,7 @@
 (defn header
   [request]
   [:div#hd
-   [:h1 (link-to "/" "Timothy Licata")]
-   [:div#nav (nav-links) (admin-links request)]])
-
-(defn sidebar [request]
-  [:div#sidebar
-   [:div.blurb
-    [:h1 "A few of my favorite things."]
-    [:ul
-     [:li "Paul Graham link or two"]
-     [:li "JavaScript link or two"]
-     [:li "Clojure link or two"]
-     [:li "HotPads.com"]
-     [:li "TheSixtyOne.com"]]]])
+   [:h1 (link-to "/" "Timothy Licata")]]) 
 
 (defn footer [request]
   [:div#ft
