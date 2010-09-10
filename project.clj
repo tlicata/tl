@@ -5,7 +5,7 @@
                  [hiccup "0.2.6"]
                  [org.clojure/clojure "1.2.0"]
                  [org.clojure/clojure-contrib "1.2.0"]
-                 [ring "0.2.0"]]
+                 [ring "0.3.0-RC2"]]
   :dev-dependencies [[swank-clojure "1.2.1"]]
   :compile-path "war/WEB-INF/classes/"
   :library-path "war/WEB-INF/lib/"
