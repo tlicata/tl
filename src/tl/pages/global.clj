@@ -32,18 +32,16 @@
 (defn blurb [content & more]
   (apply conj [:div.blurb] content more))
 
-(defn header
-  [request]
+(defn header []
   [:div#hd
-   [:h1 (link-to "/" "Timothy Licata")]]) 
-
-(defn footer [request]
+   (link-to "/googlemaps.html" "Google Maps")
+   (link-to "/polymaps.html" "Polymaps")])
+(defn footer []
   [:div#ft
-   [:p "Powered by "
-    (link-to "http://code.google.com/appengine/" "Google App Engine")
-	" and "
-    (link-to "http://clojure.org" "Clojure")]])
-
+   [:ul
+	[:li (link-to "http://clojure.org" "Clojure")]
+	[:li (link-to "http://code.google.com/appengine/" "Google App Engine")]
+	[:li (link-to "http://www.crockford.com/javascript/" "Javascript")]]])
 
 (defn page
   [request info]
@@ -55,6 +53,6 @@
 	  (js (:js info))]
      [:body
       [:div#doc4
-       (header request)
+	   (header)
 	   (apply conj [:div#doc4] (:blurbs info))
-       (footer request)]]]))
+	   (footer)]]]))

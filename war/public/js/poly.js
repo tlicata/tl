@@ -1,15 +1,10 @@
-if (!tl) {
-	var tl = {};
-}
+(function () {
 
-tl.polymaps = (function () {
+	var init = function () {
+		var po = org.polymaps;
 
-	var po = org.polymaps;
-
-	var insertMap = function () {
-		var container = $("#polymaps-container")[0];
 		var map = po.map()
-		.container(container.appendChild(po.svg("svg")))
+		.container(document.getElementById("pmap").appendChild(po.svg("svg")))
 		.center({lat: 42.938, lon: -78.986})
 		.zoom(8)
 		.zoomRange([2, 11])
@@ -19,8 +14,6 @@ tl.polymaps = (function () {
 				.url("http://s3.amazonaws.com/com.modestmaps.bluemarble/{Z}-r{Y}-c{X}.jpg"));
 	};
 
-	$(document).ready(function () {
-		insertMap();
-	});
+	$(document).ready(init);
 
 })();

@@ -3,13 +3,10 @@
    [hiccup.page-helpers :only [include-css link-to]]
    [tl.pages.global :only [blurb page]]))
 
-(defn programming
-  [request]
-  (page
-    request
-    {:title "Programming"
-	 :js ["/js/polymaps.min.js" "/js/poly.js"]
-     :blurbs [(blurb [:div#polymaps-container])]}))
+(defn polymaps []
+  (page [] {:title "Polymaps"
+			:js ["/js/poly.js" "/js/polymaps.min.js"]
+			:blurbs [(blurb [:div#pmap])]}))
 
 (defn google []
   (page [] {:title "Google Maps"

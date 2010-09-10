@@ -4,13 +4,26 @@ html {
 }
 
 /* Specific Layouts */
-#polymaps-container, #gmap {
+#gmap, #pmap {
 	height: 400px;
 }
 
 /* Layout and Spacing */
 #hd {
 	margin-bottom: 10px;
+}
+#hd a {
+	margin-right: 20px;
+}
+#ft {
+	text-align: center;
+}
+#ft ul {
+	display: inline;
+}
+#ft li {
+	display: inline;
+	margin-right: 10px;
 }
 
 .blurb {
@@ -21,13 +34,8 @@ html {
 	-webkit-border-radius: 1em;
 }
 
-.blurb ul {
-  margin-left: 1em;
-}
-
 /* Forms */
-label
-{
+label {
   display: block;
 }
 textarea {
@@ -53,16 +61,16 @@ tr.odd {
 }
 
 /* Fonts */
-#hd h1 {
-  font-size: 197%;
+#hd {
+	font-size: 123.1%;
 }
-h1, h2, h3 {
-	color: #0856B3;
+#ft {
+	font-size: 100%;
 }
-body, #hd a, #ft p, #nav a {
+body, #hd a, #ft a {
   color: #FFF;
 }
-#ft a {
+h1, h2, h3 {
 	color: #0856B3;
 }
 

@@ -9,11 +9,9 @@
   (:require [compojure.route :as route]))
 
 (defroutes tl
-  (GET "/" [] (programming {}))
-  (GET "/golf.html" [] (golf))
-  (POST "/golf.html" [name] (golf-post name))
-  (GET "/programming.html" [] (programming {}))
-  (GET "/youtubes.html" [] (youtubes {}))
+  (GET "/" [] (google))
+  (GET "/googlemaps.html" [] (google))
+  (GET "/polymaps.html" [] (polymaps))
   (route/files "/" {:root "./war/public"})
   (route/files "/" {:root "./public"})
   (route/not-found "Not Found"))
