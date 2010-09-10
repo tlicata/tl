@@ -1,11 +1,9 @@
 (ns tl.servlet
   (:gen-class :extends javax.servlet.http.HttpServlet)
   (:use
-   [compojure.core :only [defroutes GET POST]]
-	[ring.util.servlet :only [defservice]]
-	tl.pages.golf
-	tl.pages.programming
-	tl.pages.youtubes)
+   [compojure.core :only [defroutes GET]]
+   [ring.util.servlet :only [defservice]]
+   [tl.pages.programming :only [google polymaps]])
   (:require [compojure.route :as route]))
 
 (defroutes tl
