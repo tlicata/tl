@@ -4,7 +4,7 @@ html {
 }
 
 /* Specific Layouts */
-#polymaps-container {
+#polymaps-container, #gmap {
 	height: 400px;
 }
 

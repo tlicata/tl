@@ -10,3 +10,8 @@
     {:title "Programming"
 	 :js ["/js/polymaps.min.js" "/js/poly.js"]
      :blurbs [(blurb [:div#polymaps-container])]}))
+
+(defn google []
+  (page [] {:title "Google Maps"
+			:js ["/js/gmap.js" "http://maps.google.com/maps/api/js?sensor=false"]
+			:blurbs [(blurb [:div#gmap])]}))
