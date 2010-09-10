@@ -54,5 +54,5 @@
      [:body
       [:div#doc4
 	   (header)
-	   (apply conj [:div#doc4] (:blurbs info))
+	   (apply conj [:div] (:blurbs info))
 	   (footer)]]]))
