@@ -21,9 +21,6 @@ html {
 	-webkit-border-radius: 1em;
 }
 
-.blurb h1, .blurb p, .blurb ul {
-  margin-bottom: 5px;
-}
 .blurb ul {
   margin-left: 1em;
 }
