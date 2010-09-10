@@ -7,7 +7,7 @@
 			center: latlng,
 			mapTypeId: google.maps.MapTypeId.ROADMAP
 		};
-		var map = new google.maps.Map(document.getElementById("gmap"), options);
+		var map = new google.maps.Map(document.getElementById("map"), options);
 	}
 
 	$(document).ready(init);
