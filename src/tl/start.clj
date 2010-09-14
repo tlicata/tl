@@ -1,6 +1,6 @@
 (ns tl.start
   (:use
    [ring.adapter.jetty :only [run-jetty]]
-   [tl.servlet :only [tl]]))
+   [tl.servlet :only [all-routes]]))
 
-(run-jetty (var tl) {:port 8080})
+(run-jetty (var all-routes) {:port 8080})
