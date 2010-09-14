@@ -1,7 +1,8 @@
 (ns tl.servlet
   (:gen-class :extends javax.servlet.http.HttpServlet)
   (:use
-   [compojure.core :only [defroutes GET]]
+   [compojure.core :only [defroutes GET wrap!]]
+   [ring.middleware.file-info :only [wrap-file-info]]
    [ring.util.response :only [redirect]]
    [ring.util.servlet :only [defservice]]
    [tl.pages.programming :only [map-page]])
@@ -21,6 +22,8 @@
 
 (defroutes error-routes
   (route/not-found "Not Found"))
+
+(wrap! static-routes wrap-file-info)
 
 (defroutes all-routes
   tl-routes
