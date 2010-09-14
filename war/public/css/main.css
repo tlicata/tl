@@ -3,17 +3,23 @@ html {
 	padding: 20px;
 }
 
-/* Specific Layouts */
-#gmap, #pmap {
-	height: 400px;
-}
-
 /* Layout and Spacing */
 #hd {
 	margin-bottom: 10px;
+	position: relative;
 }
-#hd a {
+#hd ul, #hd li {
+	display: inline;
+}
+#hd ul#right-links {
+	position: absolute;
+	right: 0;
+}
+#hd #left-links li {
 	margin-right: 20px;
+}
+#hd #right-links li {
+	margin-left: 20px;
 }
 #ft {
 	text-align: center;

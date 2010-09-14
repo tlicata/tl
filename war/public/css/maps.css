@@ -1,11 +1,17 @@
-#map {
+/* Full Screen */
+#doc3 #map {
 	height: 100%;
 	width: 100%;
 }
-
-#hd {
+#doc3 #hd {
 	margin-bottom: 0.2em;
 }
-#hd a {
+#doc3 #hd a {
 	margin-right: 0.5em;
+}
+
+/* In page */
+.blurb #map {
+	height: 400px;
+	width: 100%;
 }
