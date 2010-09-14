@@ -1,5 +1,5 @@
 /* Full Screen */
-#doc3 #map {
+#doc3 .map {
 	height: 100%;
 	width: 100%;
 }
@@ -11,7 +11,7 @@
 }
 
 /* In page */
-.blurb #map {
+.blurb .map {
 	height: 400px;
 	width: 100%;
 }

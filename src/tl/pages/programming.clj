@@ -8,11 +8,11 @@
 
 (def map-blurbs {:polymaps {:css ["/css/poly.css" map-css]
 							:js ["/js/poly.js" "/js/polymaps.min.js"]
-							:html [[:div#map]]
+							:html [[:div#pmap.map]]
 							:title "Polymaps"}
 				 :google {:css ["/css/gmap.css" map-css]
 						  :js ["/js/gmap.js" "http://maps.google.com/maps/api/js?sensor=false"]
-						  :html [[:div#map]]
+						  :html [[:div#gmap.map]]
 						  :title "Google Maps"}})
 
 (defmulti map-page get-kind)

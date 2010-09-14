@@ -4,7 +4,7 @@
 		var po = org.polymaps;
 
 		var map = po.map()
-		.container(document.getElementById("map").appendChild(po.svg("svg")))
+		.container(document.getElementById("pmap").appendChild(po.svg("svg")))
 		.center({lat: 42.938, lon: -78.986})
 		.zoom(8)
 		.zoomRange([2, 11])
