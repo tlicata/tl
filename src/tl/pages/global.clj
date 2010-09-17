@@ -29,16 +29,11 @@
    (apply css (:css info))
    (apply js (:js info))])
 
-(defn header [{kind :kind fullscreen :fullscreen}]
+(defn header [info]
   [:div#hd
    [:ul#left-links
-	[:li (link-to "google" "Google Maps")]
-	[:li (link-to "polymaps" "Polymaps")]]
-   (when kind
-	 [:ul#right-links
-	  (if fullscreen
-		[:li (link-to (str "/maps/" kind) "Un-Fullscreen")]
-		[:li (link-to (str "/maps/fullscreen/" kind) "Fullscreen")])])])
+	[:li (link-to "/" "Home")]
+	[:li (link-to "/maps/" "Maps")]]])
 
 (defn footer []
   [:div#ft
