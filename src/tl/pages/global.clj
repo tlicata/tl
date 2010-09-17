@@ -51,7 +51,8 @@
   (html [:html (head info)
 		 [:body [:div#doc4
 				 (header info)
-				 (apply conj [:div#bd] (map blurb (:html info)))
+				 (if (:html info)
+				   (apply conj [:div#bd] (map blurb (:html info))))
 				 (footer)]]]))
 
 (defn page-full-screen [info]
