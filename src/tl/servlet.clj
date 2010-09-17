@@ -5,7 +5,7 @@
    [ring.middleware.file-info :only [wrap-file-info]]
    [ring.util.response :only [redirect]]
    [ring.util.servlet :only [defservice]]
-   [tl.pages.programming :only [map-page]])
+   [tl.pages.maps :only [map-page]])
   (:require [compojure.route :as route]))
 
 (defroutes tl-routes

@@ -1,4 +1,4 @@
-(ns tl.pages.programming
+(ns tl.pages.maps
   (:use [tl.pages.global :only [reduce-blurbs page page-full-screen]]))
 
 (def map-css "/css/maps.css")
