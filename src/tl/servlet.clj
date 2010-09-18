@@ -15,8 +15,7 @@
 
 (defroutes map-routes
   (GET "/maps/" request (map-page request))
-  (GET "/maps/:kind" request (map-page request))
-  (GET "/maps/fullscreen/:kind" request (map-page request)))
+  (GET "/maps/:kind" request (map-page request)))
 
 (defroutes static-routes
   (route/files "/" {:root "./war/public"})

@@ -1,9 +1,10 @@
 (ns tl.pages.maps
-  (:use [tl.pages.global :only [reduce-blurbs page page-full-screen]]))
+  (:use [clojure.contrib.string :only [as-str capitalize]]
+		[hiccup.page-helpers :only [link-to]]
+		[tl.pages.global :only [page-full-screen]]))
 
 (def map-css "/css/maps.css")
 
-(defn full-screen? [{uri :uri}] (not (= (. uri indexOf "fullscreen") -1)))
 (defn get-kind [request] (get (:route-params request) "kind"))
 
 (def map-blurbs {:polymaps {:css ["/css/poly.css" map-css]
@@ -15,17 +16,21 @@
 						  :html [[:div#gmap.map]]
 						  :title "Google Maps"}})
 
+(def summary-blurb {:html
+					[[:div
+					  [:h1 "Maps"]
+					  [:p "A playground for different popular maps.  So far, I've got:"]
+					  [:ul (map
+							(fn [key]
+							  (let [str-key (as-str key)]
+								[:li (link-to str-key (capitalize str-key))]))
+							(keys map-blurbs))]]]})
+
 (defmulti map-page get-kind)
 (defmethod map-page :default [request]
 		   (let [kind (get-kind request)
-				 fullscreen (full-screen? request)
-				 extra {:request request
-						:kind kind
-						:fullscreen fullscreen}
+				 extra {:request request :kind kind :fullscreen true}
 				 blurb (merge extra ((keyword kind) map-blurbs))]
-			 (if fullscreen
-			   (page-full-screen blurb)
-			   (page blurb))))
-(defmethod map-page nil [request]
-		   (when-not (full-screen? request)
-			 (page (reduce-blurbs (vals map-blurbs)))))
+			 (page-full-screen blurb)))
+
+(defmethod map-page nil [request] (page summary-blurb))
