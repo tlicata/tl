@@ -5,11 +5,13 @@
    [ring.middleware.file-info :only [wrap-file-info]]
    [ring.util.response :only [redirect]]
    [ring.util.servlet :only [defservice]]
-   [tl.pages.maps :only [map-page]])
+   [tl.pages
+	[home :only [home-page]]
+	[maps :only [map-page]]])
   (:require [compojure.route :as route]))
 
 (defroutes tl-routes
-  (GET "/" [] (redirect "/maps/")))
+  (GET "/" request (home-page request)))
 
 (defroutes map-routes
   (GET "/maps/" request (map-page request))
