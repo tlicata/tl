@@ -16,21 +16,28 @@
 						  :html [[:div#gmap.map]]
 						  :title "Google Maps"}})
 
+(defn map-links []
+  (map (fn [key]
+		 (let [str-key (as-str key)]
+		   (link-to str-key (capitalize str-key))))
+	   (keys map-blurbs)))
+
+(defn map-links-list []
+  (merge [:ul] (map #(merge [:li] %) (map-links))))
+
+(defn map-nav []
+  (merge [:ul#nav-secondary] (rest (map-links-list))))
+
 (def summary-blurb {:html
 					[[:div
 					  [:h1 "Maps"]
 					  [:p "A playground for different popular maps.  So far, I've got:"]
-					  [:ul (map
-							(fn [key]
-							  (let [str-key (as-str key)]
-								[:li (link-to str-key (capitalize str-key))]))
-							(keys map-blurbs))]]]})
+					  (map-links-list)]]})
 
 (defmulti map-page get-kind)
 (defmethod map-page :default [request]
 		   (let [kind (get-kind request)
-				 extra {:request request :kind kind :fullscreen true}
+				 extra {:request request :kind kind :fullscreen true :nav (map-nav)}
 				 blurb (merge extra ((keyword kind) map-blurbs))]
 			 (page-full-screen blurb)))
-
 (defmethod map-page nil [request] (page summary-blurb))

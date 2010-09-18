@@ -29,11 +29,14 @@
    (apply css (:css info))
    (apply js (:js info))])
 
-(defn header [info]
-  [:div#hd
-   [:ul#left-links
-	[:li (link-to "/" "Home")]
-	[:li (link-to "/maps/" "Maps")]]])
+(defn header [{secondary :nav}]
+  (let [primary [:ul#nav-primary
+				 [:li (link-to "/" "Home")]
+				 [:li (link-to "/maps/" "Maps")]]
+		hd (merge [:div#hd] primary)]
+	(if secondary
+	  (merge hd secondary)
+	  hd)))
 
 (defn footer []
   [:div#ft

@@ -5,30 +5,21 @@ html {
 
 /* Layout and Spacing */
 #hd {
-	margin-bottom: 10px;
-	position: relative;
+	margin-bottom: 0.4em;
 }
-#hd ul, #hd li {
+#hd ul, #hd li, #ft ul, #ft li {
 	display: inline;
 }
-#hd ul#right-links {
-	position: absolute;
-	right: 0;
+#hd ul, #hd a  {
+	margin-right: 1em;
 }
-#hd #left-links li {
-	margin-right: 20px;
-}
-#hd #right-links li {
-	margin-left: 20px;
+#hd ul#nav-secondary a {
+	color: #D79122;
 }
 #ft {
 	text-align: center;
 }
-#ft ul {
-	display: inline;
-}
 #ft li {
-	display: inline;
 	margin-right: 10px;
 }
 
