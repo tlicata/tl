@@ -1,7 +1,7 @@
 (ns tl.pages.maps
   (:use [clojure.contrib.string :only [as-str capitalize]]
 		[hiccup.page-helpers :only [link-to]]
-		[tl.pages.global :only [page-full-screen]]))
+		[tl.pages.global :only [page page-full-screen]]))
 
 (def map-css "/css/maps.css")
 
