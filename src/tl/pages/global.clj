@@ -41,7 +41,7 @@
 (defn footer []
   [:div#ft
    [:ul
-	[:li (link-to "http://clojure.org" "Clojure")]
+	[:li (link-to "http://clojure.org/state" "Clojure")]
 	[:li (link-to "http://www.crockford.com/javascript/" "Javascript")]
 	[:li (link-to "http://code.google.com/appengine/" "App Engine")]]])
 
