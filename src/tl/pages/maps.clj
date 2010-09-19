@@ -31,7 +31,7 @@
 (def summary-blurb {:html
 					[[:div
 					  [:h1 "Maps"]
-					  [:p "A playground for different popular maps.  So far, I've got:"]
+					  [:p "A playground for different browser-based maps."]
 					  (map-links-list)]]})
 
 (defmulti map-page get-kind)
