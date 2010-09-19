@@ -42,8 +42,8 @@
   [:div#ft
    [:ul
 	[:li (link-to "http://clojure.org" "Clojure")]
-	[:li (link-to "http://code.google.com/appengine/" "Google App Engine")]
-	[:li (link-to "http://www.crockford.com/javascript/" "Javascript")]]])
+	[:li (link-to "http://www.crockford.com/javascript/" "Javascript")]
+	[:li (link-to "http://code.google.com/appengine/" "App Engine")]]])
 
 (defn page [info]
   (html [:html (head info)
