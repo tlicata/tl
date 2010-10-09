@@ -5,7 +5,7 @@
 (def welcome-blurb [:p (str-join "  -  " ["Tim Licata"
 										  "Programmer"
 										  "Golfer"
-										  "Cool Guy"
+										  "Pingponger"
 										  "Lockport, NY & Washingon, DC"])])
 
 (defn home-page [request]
