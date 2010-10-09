@@ -17,10 +17,7 @@
 						  :title "Google Maps"}})
 
 (defn map-links []
-  (map (fn [key]
-		 (let [str-key (as-str key)]
-		   (link-to str-key (capitalize str-key))))
-	   (keys map-blurbs)))
+  (map #(link-to (as-str (key %)) (:title (val %))) map-blurbs))
 
 (defn map-links-list []
   (merge [:ul] (map #(merge [:li] %) (map-links))))
