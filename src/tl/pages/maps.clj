@@ -25,11 +25,12 @@
 (defn map-nav []
   (merge [:ul#nav-secondary] (rest (map-links-list))))
 
-(def summary-blurb {:html
-					[[:div
-					  [:h1 "Maps"]
-					  [:p "A playground for different browser-based maps."]
-					  (map-links-list)]]})
+(defn summary-blurb []
+  {:html
+   [[:div
+	 [:h1 "Maps"]
+	 [:p "A playground for different browser-based maps."]
+	 (map-links-list)]]})
 
 (defmulti map-page get-kind)
 (defmethod map-page :default [request]
@@ -37,4 +38,4 @@
 				 extra {:request request :kind kind :fullscreen true :nav (map-nav)}
 				 blurb (merge extra ((keyword kind) map-blurbs))]
 			 (page-full-screen blurb)))
-(defmethod map-page nil [request] (page summary-blurb))
+(defmethod map-page nil [request] (page (summary-blurb)))
