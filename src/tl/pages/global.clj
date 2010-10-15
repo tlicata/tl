@@ -4,6 +4,7 @@
 
 (def ajax-api "http://www.google.com/jsapi?key=ABQIAAAAleydYZEjUE7f9RhdHI8NtBS6-BlYLfNinRJgsDPbRk1Y0-Rs-hR5dAJbQkD-YuuQBRVFZP5E1evO4Q")
 (def jquery "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js")
+(def swfobject "http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js")
 (def grid "http://yui.yahooapis.com/2.8.0r4/build/reset-fonts-grids/reset-fonts-grids.css")
 
 (defn css [& more]
