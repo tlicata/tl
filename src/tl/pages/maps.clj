@@ -1,7 +1,7 @@
 (ns tl.pages.maps
   (:use [clojure.contrib.string :only [as-str capitalize]]
 		[hiccup.page-helpers :only [link-to]]
-		[tl.pages.global :only [page page-full-screen]]))
+		[tl.pages.global :only [page page-full-screen swfobject]]))
 
 (def map-css "/css/maps.css")
 
@@ -12,9 +12,14 @@
 							:html [[:div#pmap.map]]
 							:title "Polymaps"}
 				 :google {:css ["/css/gmap.css" map-css]
-						  :js ["/js/gmap.js" "http://maps.google.com/maps/api/js?sensor=false"]
+						  :js ["/js/gmap.js"
+							   "http://maps.google.com/maps/api/js?sensor=false"]
 						  :html [[:div#gmap.map]]
-						  :title "Google Maps"}})
+						  :title "Google Maps"}
+				 :hotpads {:css [map-css]
+						   :js ["/js/hotpads.js" swfobject]
+						   :html [[:div#mapDiv.map]]
+						   :title "Hotpads"}})
 
 (defn map-links []
   (map #(link-to (as-str (key %)) (:title (val %))) map-blurbs))
