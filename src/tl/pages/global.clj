@@ -2,17 +2,16 @@
   (:use [hiccup.core :only [html]]
 		[hiccup.page-helpers :only [include-css include-js link-to]]))
 
-(def ajax-api "http://www.google.com/jsapi?key=ABQIAAAAleydYZEjUE7f9RhdHI8NtBS6-BlYLfNinRJgsDPbRk1Y0-Rs-hR5dAJbQkD-YuuQBRVFZP5E1evO4Q")
-(def jquery "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js")
-(def swfobject "http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js")
-(def grid "http://yui.yahooapis.com/2.8.0r4/build/reset-fonts-grids/reset-fonts-grids.css")
+(def jquery "/js/lib/jquery.min.js")
+(def swfobject "/js/lib/swfobject.js")
+(def grid "/js/lib/reset-fonts-grids.css")
 
 (defn css [& more]
   (let [global [grid "/css/main.css"]]
 	(apply include-css (concat global more))))
 
 (defn js [& more]
-  (let [global [ajax-api jquery]]
+  (let [global [jquery]]
 	(apply include-js (concat global more))))
 
 (defn blurb [html] (conj [:div.blurb] html))
