@@ -32,7 +32,8 @@
 (defn header [{secondary :nav}]
   (let [primary [:ul#nav-primary
 				 [:li (link-to "/" "Home")]
-				 [:li (link-to "/maps/" "Maps")]]
+				 [:li (link-to "/maps/" "Maps")]
+				 [:li (link-to "/contact/" "Contact")]]
 		hd (merge [:div#hd] primary)]
 	(if secondary
 	  (merge hd secondary)

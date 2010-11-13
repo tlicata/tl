@@ -11,3 +11,7 @@
 (defn home-page [request]
   (page {:title "Home"
 		 :html [welcome-blurb]}))
+
+(defn contact-page [request]
+  (page {:title "Contact"
+		 :html [[:div [:p "You can write to me at tim at this domain name."]]]}))

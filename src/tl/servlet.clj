@@ -6,12 +6,13 @@
    [ring.util.response :only [redirect]]
    [ring.util.servlet :only [defservice]]
    [tl.pages
-	[home :only [home-page]]
+	[home :only [home-page contact-page]]
 	[maps :only [map-page]]])
   (:require [compojure.route :as route]))
 
 (defroutes tl-routes
-  (GET "/" request (home-page request)))
+  (GET "/" request (home-page request))
+  (GET "/contact/" request (contact-page request)))
 
 (defroutes map-routes
   (GET "/maps/" request (map-page request))
