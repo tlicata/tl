@@ -43,4 +43,4 @@
 				 extra {:request request :kind kind :fullscreen true :nav (map-nav)}
 				 blurb (merge extra ((keyword kind) map-blurbs))]
 			 (page-full-screen blurb)))
-(defmethod map-page nil [request] (page (summary-blurb)))
+(defmethod map-page nil [request] (page (assoc (summary-blurb) :request request)))

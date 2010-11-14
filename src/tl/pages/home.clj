@@ -10,8 +10,10 @@
 
 (defn home-page [request]
   (page {:title "Home"
-		 :html [welcome-blurb]}))
+		 :html [welcome-blurb]
+		 :request request}))
 
 (defn contact-page [request]
   (page {:title "Contact"
-		 :html [[:div [:p "You can write to me at tim at this domain name."]]]}))
+		 :html [[:div [:p "You can write to me at tim at this domain name."]]]
+		 :request request}))

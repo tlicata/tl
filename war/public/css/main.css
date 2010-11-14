@@ -10,7 +10,7 @@ html {
 #hd ul, #hd li, #ft ul, #ft li {
 	display: inline;
 }
-#hd ul, #hd a  {
+#hd ul, #hd li  {
 	margin-right: 1em;
 }
 #hd ul#nav-secondary a {

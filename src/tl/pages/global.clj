@@ -29,11 +29,21 @@
    (apply css (:css info))
    (apply js (:js info))])
 
-(defn header [{secondary :nav}]
-  (let [primary [:ul#nav-primary
-				 [:li (link-to "/" "Home")]
-				 [:li (link-to "/maps/" "Maps")]
-				 [:li (link-to "/contact/" "Contact")]]
+(defn header-data []
+  [{:uri "/" :text "Home"}
+   {:uri "/maps/" :text "Maps"}
+   {:uri "/contact/" :text "Contact"}])
+
+(defn header-links [request]
+  [:ul#nav-primary
+   (map (fn [{uri :uri text :text}]
+		  (if (= uri (:uri request))
+			[:li.current text]
+			[:li (link-to uri text)]))
+		(header-data))])
+
+(defn header [{secondary :nav request :request}]
+  (let [primary (header-links request)
 		hd (merge [:div#hd] primary)]
 	(if secondary
 	  (merge hd secondary)
