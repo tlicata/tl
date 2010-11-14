@@ -13,6 +13,9 @@ html {
 #hd ul, #hd li  {
 	margin-right: 1em;
 }
+#hd li.current {
+	color: #333;
+}
 #hd ul#nav-secondary a {
 	color: #5093E4;
 }
