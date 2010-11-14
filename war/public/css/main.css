@@ -22,8 +22,12 @@ html {
 #ft {
 	text-align: center;
 }
-#ft li {
-	margin-right: 10px;
+ {
+	
+}
+#ft p, #ft li {
+	display: inline;
+	margin-right: 5px;
 }
 
 .blurb {

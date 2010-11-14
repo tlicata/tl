@@ -51,11 +51,12 @@
 
 (defn footer []
   [:div#ft
+   [:p "Powered by"]
    [:ul
-	[:li (link-to "http://clojure.org/state" "Clojure")]
+	[:li (link-to "http://clojure.org/state" "Clojure") ","]
 	[:li (link-to "http://www.crockford.com/javascript/"
-				  "Javascript")]
-	[:li (link-to "http://thesixtyone.com" "T61")]]])
+				  "Javascript") ","]
+	[:li "and " (link-to "http://thesixtyone.com" "T61") "."]]])
 
 (defn page [info]
   (html [:html (head info)
