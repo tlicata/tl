@@ -8,7 +8,7 @@
 (defn get-kind [request] (get (:route-params request) "kind"))
 
 (def map-blurbs {:polymaps {:css ["/css/poly.css" map-css]
-							:js ["/js/poly.js" "/js/polymaps.min.js"]
+							:js ["/js/poly.js" "/js/lib/polymaps.min.js"]
 							:html [[:div#pmap.map]]
 							:title "Polymaps"}
 				 :google {:css ["/css/gmap.css" map-css]
