@@ -1,5 +1,6 @@
 (ns tl.pages.global
-  (:use [hiccup.core :only [html]]
+  (:use [clojure.set :only [union]]
+		[hiccup.core :only [html]]
 		[hiccup.page-helpers :only [include-css include-js link-to]]))
 
 (def jquery "/js/lib/jquery.min.js")
@@ -16,8 +17,8 @@
 
 (defn blurb [html] (conj [:div.blurb] html))
 
-(defn reduce-blurbs [blurbs]
-  (reduce #(merge-with concat %1 %2) blurbs))
+(defn reduce-blurbs [& blurbs]
+  (reduce #(merge-with union %1 %2) blurbs))
 
 (defn blurbify [{html :html}]
   (let [blurbs (map blurb html)]
