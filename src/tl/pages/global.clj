@@ -5,7 +5,7 @@
 
 (def jquery "/js/lib/jquery.min.js")
 (def swfobject "/js/lib/swfobject.js")
-(def grid "/js/lib/reset-fonts-grids.css")
+(def grid "/css/lib/reset-fonts-grids.css")
 
 (defn css [& more]
   (let [global [grid "/css/main.css"]]
