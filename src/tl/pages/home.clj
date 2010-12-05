@@ -1,5 +1,7 @@
 (ns tl.pages.home
-  (:use [clojure.contrib.str-utils :only [str-join]]
+  (:use [appengine-magic.services.user :only [logout-url]]
+		[clojure.contrib.str-utils :only [str-join]]
+		[hiccup.page-helpers :only [link-to]]
 		[tl.pages.global :only [page]]))
 
 (def welcome-blurb [:p (str-join "  -  " ["Tim Licata"
@@ -16,3 +18,9 @@
   (page {:title "Contact"
 		 :html [[:div [:p "You can write to me at tim at this domain name."]]]
 		 :request request}))
+
+(defn admin-page [request]
+  (page {:title "Admin"
+		 :html [[:div
+				 [:p "You're an admin baby"]
+				 (link-to (logout-url) "Log out")]]}))
