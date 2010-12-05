@@ -44,7 +44,7 @@
 	 [:p "Configure your housing search"]]]})
 
 (defmulti map-page get-kind)
-(defmethod map-page nil [request] (page (assoc (reduce-blurbs (summary-blurb) (config-blurb)) :request request)))
+(defmethod map-page nil [request] (page (assoc (reduce-blurbs (summary-blurb)) :request request)))
 (defmethod map-page :default [request]
 		   (let [kind (get-kind request)
 				 extra {:request request :kind kind :fullscreen true :nav (map-nav)}
