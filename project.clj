@@ -7,6 +7,6 @@
                  [ring "0.3.0-RC2"]]
   :dev-dependencies [[appengine-magic "0.4.0-SNAPSHOT"]
 					 [swank-clojure "1.2.1"]]
-  :aot [tl.servlet])
+  :aot [tl.app_servlet])
 
 

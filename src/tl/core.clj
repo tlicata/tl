@@ -1,5 +1,5 @@
-(ns tl.servlet
-  (:gen-class :extends javax.servlet.http.HttpServlet)
+(ns tl.core
+  (:require [appengine-magic.core :as ae])
   (:use
    [compojure.core :only [defroutes GET wrap!]]
    [ring.middleware.file-info :only [wrap-file-info]]
@@ -34,5 +34,4 @@
   admin-routes
   error-routes)
 
-(defservice all-routes)
 (ae/def-appengine-app tl #'all-routes)
