@@ -1,5 +1,5 @@
 (ns tl.pages.home
-  (:use [appengine-magic.services.user :only [logout-url]]
+  (:use [appengine-magic.services.user :only [login-url logout-url user-logged-in?]]
 		[clojure.contrib.str-utils :only [str-join]]
 		[hiccup.page-helpers :only [link-to]]
 		[tl.pages.global :only [page]]))
@@ -24,3 +24,10 @@
 		 :html [[:div
 				 [:p "You're an admin baby"]
 				 (link-to (logout-url) "Log out")]]}))
+
+(defn login-page [request]
+  (page {:title "Login"
+		 :html [[:div [:p (if (user-logged-in?)
+							(link-to (logout-url) "Log out")
+							(link-to (login-url) "Log in"))]]]
+		 :request request}))

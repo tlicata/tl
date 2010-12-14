@@ -6,7 +6,7 @@
    [ring.util.response :only [redirect]]
    [ring.util.servlet :only [defservice]]
    [tl.pages
-	[home :only [admin-page home-page contact-page]]
+	[home :only [admin-page home-page contact-page login-page]]
 	[maps :only [map-page]]])
   (:require [appengine-magic.core :as ae]
 			[compojure.route :as route]
@@ -14,7 +14,8 @@
 
 (defroutes tl-routes
   (GET "/" request (home-page request))
-  (GET "/contact/" request (contact-page request)))
+  (GET "/contact/" request (contact-page request))
+  (GET "/login/" request (login-page request)))
 
 (defroutes map-routes
   (GET "/maps/" request (map-page request))
