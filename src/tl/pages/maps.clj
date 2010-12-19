@@ -15,7 +15,7 @@
 						  :js #{"/js/gmap.js"
 							   "http://maps.google.com/maps/api/js?sensor=false"}
 						  :html [[:div#gmap.map]]
-						  :title ["Google Maps"]}
+						  :title ["Google"]}
 				 :hotpads {:css #{map-css}
 						   :js #{"/js/hotpads.js" swfobject}
 						   :html [[:div#mapDiv.map]]
