@@ -31,7 +31,8 @@
   (merge [:ul#nav-secondary] (rest (map-links-list))))
 
 (defn summary-blurb []
-  {:html
+  {:title ["Maps"]
+   :html
    [[:div
 	 [:h1 "Maps"]
 	 [:p "A playground for different browser-based maps."]
@@ -47,6 +48,10 @@
 (defmethod map-page nil [request] (page (assoc (reduce-blurbs (summary-blurb)) :request request)))
 (defmethod map-page :default [request]
 		   (let [kind (get-kind request)
-				 extra {:request request :kind kind :fullscreen true :nav (map-nav)}
-				 blurb (merge extra ((keyword kind) map-blurbs))]
+				 extra {:fullscreen true
+						:kind kind
+						:nav (map-nav)
+						:request request
+						:title (:title (summary-blurb))}
+				 blurb (merge-with concat extra ((keyword kind) map-blurbs))]
 			 (page-full-screen blurb)))

@@ -1,5 +1,6 @@
 (ns tl.pages.global
-  (:use [clojure.set :only [union]]
+  (:use [clojure.contrib.str-utils :only [str-join]]
+		[clojure.set :only [union]]
 		[hiccup.core :only [html]]
 		[hiccup.page-helpers :only [include-css include-js link-to]]))
 
@@ -26,7 +27,7 @@
 
 (defn head [info]
   [:head
-   [:title (str "Tim's Online World - " (:title info))]
+   [:title (str-join " - " (concat ["Tim's Online World"] (:title info)))]
    (apply css (:css info))
    (apply js (:js info))])
 
