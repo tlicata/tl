@@ -1,10 +1,6 @@
 (ns tl.core
-  (:require [appengine-magic.core :as ae])
   (:use
    [compojure.core :only [defroutes GET wrap!]]
-   [ring.middleware.file-info :only [wrap-file-info]]
-   [ring.util.response :only [redirect]]
-   [ring.util.servlet :only [defservice]]
    [tl.pages
 	[home :only [admin-page home-page contact-page login-page]]
 	[maps :only [map-page]]])
