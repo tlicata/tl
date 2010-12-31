@@ -9,19 +9,23 @@
 			[tl.middleware :as mw]))
 
 (defroutes tl-routes
-  (GET "/" request (home-page request))
-  (GET "/contact/" request (contact-page request))
-  (GET "/login/" request (login-page request)))
+  (GET "/" [] (home-page))
+  (GET "/contact/" []  (contact-page))
+  (GET "/login/" [] (login-page)))
 
 (defroutes map-routes
-  (GET "/maps/" request (map-page request))
-  (GET "/maps/:kind" request (map-page request)))
+  (GET "/maps/" [] (map-page))
+  (GET "/maps/:kind" [kind] (map-page kind)))
 
 (defroutes admin-routes
-  (GET "/admin/" request (admin-page request)))
+  (GET "/admin/" [] (admin-page)))
 
 (defroutes error-routes
   (route/not-found "Not Found"))
+
+(defroutes layout-routes
+  tl-routes
+  admin-routes)
 
 (wrap! admin-routes mw/wrap-admin)
 
@@ -30,5 +34,7 @@
   map-routes
   admin-routes
   error-routes)
+
+(wrap! all-routes mw/wrap-layout)
 
 (ae/def-appengine-app tl #'all-routes)

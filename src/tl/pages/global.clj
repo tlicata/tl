@@ -2,7 +2,7 @@
   (:use [clojure.contrib.str-utils :only [str-join]]
 		[clojure.set :only [union]]
 		[hiccup.core :only [html]]
-		[hiccup.page-helpers :only [include-css include-js link-to]]))
+		[hiccup.page-helpers :only [doctype include-css include-js link-to]]))
 
 (def jquery "/js/lib/jquery.min.js")
 (def swfobject "/js/lib/swfobject.js")
@@ -25,31 +25,27 @@
   (let [blurbs (map blurb html)]
 	(apply conj [:div#bd] blurbs)))
 
-(defn head [info]
+(defn head [title css-arg js-arg]
   [:head
-   [:title (str-join " - " (concat ["Tim's Online World"] (:title info)))]
-   (apply css (:css info))
-   (apply js (:js info))])
+   [:title (str-join " - " (cons "Tim's Online World" title))]
+   (apply css css-arg)
+   (apply js js-arg)])
 
 (defn header-data []
   [{:uri "/" :text "Home"}
    {:uri "/maps/" :text "Maps"}
    {:uri "/contact/" :text "Contact"}])
 
-(defn header-links [request]
+(defn header-links []
   [:ul#nav-primary
    (map (fn [{uri :uri text :text}]
-		  (if (= uri (:uri request))
-			[:li.current text]
-			[:li (link-to uri text)]))
+		  [:li (link-to uri text)])
 		(header-data))])
 
-(defn header [{secondary :nav request :request}]
-  (let [primary (header-links request)
+(defn header []
+  (let [primary (header-links)
 		hd (merge [:div#hd] primary)]
-	(if secondary
-	  (merge hd secondary)
-	  hd)))
+	hd))
 
 (defn footer []
   [:div#ft
@@ -60,16 +56,13 @@
 				  "Javascript") ","]
 	[:li "and " (link-to "http://thesixtyone.com" "T61") "."]]])
 
-(defn page [info]
-  (html [:html (head info)
-		 [:body [:div#doc4
-				 (header info)
-				 (if (:html info)
-				   (apply conj [:div#bd] (map blurb (:html info))))
-				 (footer)]]]))
-
-(defn page-full-screen [info]
-  (html [:html (head info)
-		 [:body [:div#doc3
-				 (header info)
-				 (conj [:div#bd] (first (:html info)))]]]))
+(defn wrap-in-layout [title css js body]
+  (html
+   (doctype :xhtml-strict)
+   [:html
+	(head title css js)
+	[:body
+	 [:div#doc4
+	  (header)
+	  (vec (concat [:div#bd] (map blurb body)))
+	  (footer)]]]))
