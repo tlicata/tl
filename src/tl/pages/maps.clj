@@ -38,5 +38,5 @@
 (defn map-page
   ([] (summary-blurb))
   ([kind]
-	 (let [kind-blurb ((keyword kind) map-blurbs)]
+	 (if-let [kind-blurb ((keyword kind) map-blurbs)]
 	   (reduce-blurbs (summary-blurb) kind-blurb))))
