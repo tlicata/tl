@@ -37,8 +37,8 @@ html {
 	-moz-border-radius: 1em;
 	-webkit-border-radius: 1em;
 }
-.blurb p , .blurb h1, .blurb ul {
-	padding-bottom: 0.5em;
+.blurb p , .blurb h1, .blurb ul, .blurb div {
+	margin-bottom: 0.5em;
 }
 
 /* Forms */
