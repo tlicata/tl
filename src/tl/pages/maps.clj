@@ -16,7 +16,7 @@
 						  :title ["Google"]}
 				 :hotpads {:css #{map-css}
 						   :js #{"/js/hotpads.js" swfobject}
-						   :body [[:div#mapDiv.map]]
+						   :body [[:div#hmap.map [:div#mapDiv]]]
 						   :title ["Hotpads"]}})
 
 (defn map-links []
