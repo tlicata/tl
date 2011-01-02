@@ -5,11 +5,7 @@
 
 (def map-css "/css/maps.css")
 
-(def map-blurbs {:polymaps {:css #{"/css/poly.css" map-css}
-							:js #{"/js/poly.js" "/js/lib/polymaps.min.js"}
-							:body [[:div#pmap.map]]
-							:title ["Polymaps"]}
-				 :google {:css #{"/css/gmap.css" map-css}
+(def map-blurbs {:google {:css #{"/css/gmap.css" map-css}
 						  :js #{"/js/gmap.js"
 							   "http://maps.google.com/maps/api/js?sensor=false"}
 						  :body [[:div#gmap.map]]
@@ -17,7 +13,11 @@
 				 :hotpads {:css #{map-css}
 						   :js #{"/js/hotpads.js" swfobject}
 						   :body [[:div#hmap.map [:div#mapDiv]]]
-						   :title ["Hotpads"]}})
+						   :title ["Hotpads"]}
+				 :polymaps {:css #{"/css/poly.css" map-css}
+							:js #{"/js/poly.js" "/js/lib/polymaps.min.js"}
+							:body [[:div#pmap.map]]
+							:title ["Polymaps"]}})
 
 (defn map-links []
   (map #(link-to (as-str (key %)) (first (:title (val %)))) map-blurbs))
