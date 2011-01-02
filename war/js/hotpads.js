@@ -1,6 +1,8 @@
 (function () {
 
-	this.mapper_location = "http://filenet.hotpads.com/mapping/mapper/mapper_embed3.swf";
+	var
+	mapper_api = "http://hotpads.com"
+	mapper_location = "http://filenet.hotpads.com/mapping/mapper/mapper_lasso23.swf";
 
 	var insertMap = function(varsXml, flashProxyId, dev, noPermalink) {
 		
@@ -27,6 +29,8 @@
 		var varsXml = "<mapXml>";
 		varsXml += "<MapConfig>";
 		varsXml += "<lat>42.938</lat><lon>-78.986</lon>";
+		varsXml += "<defaultLocation>" + mapper_api + "</defaultLocation>";
+		varsXml += "<appdata>" + mapper_api + "/appdata" + "</appdata>";
 		varsXml += "<menus></menus>";
 		varsXml += "</MapConfig>";
 
