@@ -10,9 +10,7 @@
 
 (defn home-page []
   {:title ["Home"]
-   :body [welcome-blurb]
-   :css ["yeah.css"]
-   :js ["some.js"]})
+   :body [welcome-blurb]})
 
 (defn contact-page []
   {:title ["Contact"]
