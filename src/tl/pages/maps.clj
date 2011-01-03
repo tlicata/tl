@@ -23,10 +23,7 @@
   (map #(link-to (as-str (key %)) (first (:title (val %)))) map-blurbs))
 
 (defn map-links-list []
-  (merge [:ul] (map #(merge [:li] %) (map-links))))
-
-(defn map-nav []
-  (merge [:ul#nav-secondary] (rest (map-links-list))))
+  (vec (concat [:ul] (map #(merge [:li] %) (map-links)))))
 
 (defn summary-blurb []
   {:title ["Maps"]

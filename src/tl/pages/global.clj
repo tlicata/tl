@@ -26,10 +26,11 @@
 	(apply conj [:div#bd] blurbs)))
 
 (defn head [title css-arg js-arg]
-  [:head
-   [:title (str-join " - " (cons "Tim's Online World" title))]
-   (apply css css-arg)
-   (apply js js-arg)])
+  (vec
+   (concat
+	[:head [:title (str-join " - " (cons "Tim's Online World" title))]]
+	(vec (apply css css-arg))
+	(vec (apply js js-arg)))))
 
 (defn header-data []
   [{:uri "/" :text "Home"}
@@ -37,10 +38,12 @@
    {:uri "/contact/" :text "Contact"}])
 
 (defn header-links []
-  [:ul#nav-primary
-   (map (fn [{uri :uri text :text}]
-		  [:li (link-to uri text)])
-		(header-data))])
+  (vec
+   (concat
+	[:ul#nav-primary]
+	(map (fn [{uri :uri text :text}]
+		   [:li (link-to uri text)])
+		 (header-data)))))
 
 (defn header []
   (let [primary (header-links)
