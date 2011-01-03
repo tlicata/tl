@@ -22,3 +22,9 @@
 										(:body response))]
 		(assoc response :body body)))))
 
+(defn wrap-html
+  [handler]
+  (fn [request]
+	(when-let [response (handler request)]
+	  (let [body (global/convert-to-html (:body response))]
+		(assoc response :body body)))))

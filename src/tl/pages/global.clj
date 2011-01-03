@@ -60,12 +60,13 @@
 	[:li "and " (link-to "http://thesixtyone.com" "T61") "."]]])
 
 (defn wrap-in-layout [title css js body]
-  (html
-   (doctype :xhtml-strict)
-   [:html
-	(head title css js)
-	[:body
-	 [:div#doc4
-	  (header)
-	  (vec (concat [:div#bd] (map blurb body)))
-	  (footer)]]]))
+  [:html
+   (head title css js)
+   [:body
+	[:div#doc4
+	 (header)
+	 (vec (concat [:div#bd] (map blurb body)))
+	 (footer)]]])
+
+(defn convert-to-html [body]
+  (html (doctype :xhtml-strict) body))

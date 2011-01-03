@@ -35,6 +35,8 @@
   admin-routes
   error-routes)
 
-(wrap! all-routes mw/wrap-layout)
+(wrap! all-routes
+	   mw/wrap-layout
+	   mw/wrap-html)
 
 (ae/def-appengine-app tl #'all-routes)
