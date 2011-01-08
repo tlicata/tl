@@ -37,6 +37,7 @@
 
 (wrap! all-routes
 	   mw/wrap-layout
+	   mw/wrap-current-link
 	   mw/wrap-html)
 
 (ae/def-appengine-app tl #'all-routes)
