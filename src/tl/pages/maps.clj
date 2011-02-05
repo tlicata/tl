@@ -10,10 +10,6 @@
 							   "http://maps.google.com/maps/api/js?sensor=false"}
 						  :body [[:div#gmap.map]]
 						  :title ["Google"]}
-				 :hotpads {:css #{map-css}
-						   :js #{"/js/hotpads.js" swfobject}
-						   :body [[:div#hmap.map [:div#mapDiv]]]
-						   :title ["Hotpads"]}
 				 :polymaps {:css #{"/css/poly.css" map-css}
 							:js #{"/js/poly.js" "/js/lib/polymaps.min.js"}
 							:body [[:div#pmap.map]]
