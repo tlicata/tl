@@ -5,23 +5,23 @@
 
 (def map-css "/css/maps.css")
 
-(def map-blurbs {:google {:css #{"/css/gmap.css" map-css}
-						  :js #{"/js/gmap.js"
-							   "http://maps.google.com/maps/api/js?sensor=false"}
-						  :body [[:div#gmap.map]]
-						  :title ["Google"]}
-				 :polymaps {:css #{"/css/poly.css" map-css}
-							:js #{"/js/poly.js" "/js/lib/polymaps.min.js"}
-							:body [[:div#pmap.map]]
-							:title ["Polymaps"]}})
+(def maps {:google {:css #{"/css/gmap.css" map-css}
+					:js #{"/js/gmap.js"
+						  "http://maps.google.com/maps/api/js?sensor=false"}
+					:body [[:div#gmap.map]]
+					:title ["Google"]}
+		   :polymaps {:css #{"/css/poly.css" map-css}
+					  :js #{"/js/poly.js" "/js/lib/polymaps.min.js"}
+					  :body [[:div#pmap.map]]
+					  :title ["Polymaps"]}})
 
 (defn map-links []
-  (map #(link-to (as-str (key %)) (first (:title (val %)))) map-blurbs))
+  (map #(link-to (as-str (key %)) (first (:title (val %)))) maps))
 
 (defn map-links-list []
   (vec (concat [:ul] (map #(merge [:li] %) (map-links)))))
 
-(defn summary-blurb []
+(defn summary []
   {:title ["Maps"]
    :body [[:div
 		   [:h1 "Maps"]
@@ -29,7 +29,7 @@
 		   (map-links-list)]]})
 
 (defn map-page
-  ([] (summary-blurb))
+  ([] (summary))
   ([kind]
-	 (if-let [kind-blurb ((keyword kind) map-blurbs)]
-	   (reduce-blurbs (summary-blurb) kind-blurb))))
+	 (if-let [map-type ((keyword kind) maps)]
+	   (reduce-blurbs (summary) map-type))))
