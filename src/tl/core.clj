@@ -1,6 +1,6 @@
 (ns tl.core
   (:use
-   [compojure.core :only [defroutes GET wrap!]]
+   [compojure.core :only [defroutes GET]]
    [tl.pages
 	[home :only [admin-page home-page contact-page login-page]]
 	[maps :only [map-page]]])
@@ -27,17 +27,17 @@
   tl-routes
   admin-routes)
 
-(wrap! admin-routes mw/wrap-admin)
-
 (defroutes all-routes
   tl-routes
   map-routes
-  admin-routes
+  (-> #'admin-routes
+	  mw/wrap-admin)
   error-routes)
 
-(wrap! all-routes
-	   mw/wrap-layout
-	   mw/wrap-current-link
-	   mw/wrap-html)
+(def all
+	 (-> #'all-routes
+		 mw/wrap-layout
+		 mw/wrap-current-link
+		 mw/wrap-html))
 
-(ae/def-appengine-app tl #'all-routes)
+(ae/def-appengine-app tl #'all)
