@@ -17,11 +17,13 @@
   [handler]
   (fn [request]
 	(when-let [response (handler request)]
-	  (let [body (global/wrap-in-layout (:title response)
-										(:css response)
-										(:js response)
-										(:body response))]
-		(assoc response :body body)))))
+	  (if (vector? (:body response))
+		(let [body (global/wrap-in-layout (:title response)
+										  (:css response)
+										  (:js response)
+										  (:body response))]
+		  (assoc response :body body))
+		response))))
 
 (defn wrap-html
   [handler]
