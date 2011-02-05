@@ -5,7 +5,7 @@
 
 		var map = po.map()
 		.container(document.getElementById("pmap").appendChild(po.svg("svg")))
-		.center({lat: 42.938, lon: -78.986})
+		.center({lat: 37.760401, lon: -122.427521})
 		.zoom(8)
 		.zoomRange([2, 11])
 		.add(po.interact());
