@@ -1,7 +1,8 @@
 (ns tl.pages.home
   (:use [clojure.contrib.str-utils :only [str-join]]
 		[hiccup.page-helpers :only [link-to]])
-  (:require [appengine-magic.services.user :as us]))
+  (:require [appengine-magic.services.user :as us]
+			[com.reasonr.scriptjure :as script]))
 
 (def welcome-blurb [:p (str-join "  -  " ["Tim Licata"
 										  "Programmer"
@@ -44,8 +45,13 @@
 					videos)
 			   :ul))))
 
-(defn youtubes []
-  {:title ["Hello Youtubes"]
-   :body [(youtube-list)]})
+(defn youtube-ids []
+  (vec (map :id videos)))
 
-		
+
+(defn youtubes []
+  {:js #{"/js/youtubes.js"}
+   :title ["Hello Youtubes"]
+   :body [(youtube-list)
+		  [:script (script/js (set! tl.youtubes.videos
+									(script/clj (youtube-ids))))]]})
