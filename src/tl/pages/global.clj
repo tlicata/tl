@@ -16,7 +16,11 @@
   (let [global [jquery]]
 	(apply include-js (concat global more))))
 
-(defn blurb [html] (conj [:div.blurb] html))
+(defn blurb [html]
+  "Wrap in an blurb div. Unless it's a script tag"
+  (if (= :script (first html))
+	html
+	(conj [:div.blurb] html)))
 
 (defn reduce-blurbs [& blurbs]
   (reduce #(merge-with union %1 %2) blurbs))
