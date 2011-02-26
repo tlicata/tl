@@ -2,7 +2,7 @@
   (:use
    [compojure.core :only [defroutes GET]]
    [tl.pages
-	[home :only [admin-page home-page contact-page login-page]]
+	[home :only [admin-page home-page contact-page login-page youtubes]]
 	[maps :only [map-page]]])
   (:require [appengine-magic.core :as ae]
 			[compojure.route :as route]
@@ -11,7 +11,8 @@
 (defroutes tl-routes
   (GET "/" [] (home-page))
   (GET "/contact/" []  (contact-page))
-  (GET "/login/" [] (login-page)))
+  (GET "/login/" [] (login-page))
+  (GET "/youtubes/" [] (youtubes)))
 
 (defroutes map-routes
   (GET "/maps/" [] (map-page))
