@@ -1,7 +1,7 @@
 (ns tl.pages.home
-  (:use [appengine-magic.services.user :only [login-url logout-url user-logged-in?]]
-		[clojure.contrib.str-utils :only [str-join]]
-		[hiccup.page-helpers :only [link-to]]))
+  (:use [clojure.contrib.str-utils :only [str-join]]
+		[hiccup.page-helpers :only [link-to]])
+  (:require [appengine-magic.services.user :as us]))
 
 (def welcome-blurb [:p (str-join "  -  " ["Tim Licata"
 										  "Programmer"
@@ -20,10 +20,11 @@
   {:title ["Admin"]
    :body [[:div
 		   [:p "You're an admin baby"]
-		   (link-to (logout-url) "Log out")]]})
+		   (link-to (us/logout-url) "Log out")]]})
 
 (defn login-page []
   {:title ["Login"]
-   :body [[:div [:p (if (user-logged-in?)
-					  (link-to (logout-url) "Log out")
-					  (link-to (login-url) "Log in"))]]]})
+   :body [[:div [:p (if (us/user-logged-in?)
+					  (link-to (us/logout-url) "Log out")
+					  (link-to (us/login-url) "Log in"))]]]})
+
