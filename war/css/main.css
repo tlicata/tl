@@ -4,9 +4,6 @@ html {
 }
 
 /* Layout and Spacing */
-#hd {
-	margin-bottom: 0.7em;
-}
 #hd ul, #hd li, #ft ul, #ft li {
 	display: inline;
 }
@@ -20,6 +17,7 @@ html {
 	color: #5093E4;
 }
 #ft {
+	margin-top: .5em;
 	text-align: center;
 }
 #ft p, #ft li {
@@ -29,7 +27,7 @@ html {
 
 .blurb {
 	border: .4em solid #0856B3;
-	margin-bottom: 20px;
+	margin-top: 1em;
 	padding: 0.7em 0.9em 0.2em 0.9em;
 	-moz-border-radius: 1em;
 	-webkit-border-radius: 1em;
