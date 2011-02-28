@@ -36,6 +36,20 @@ html {
 	margin-bottom: 0.5em;
 }
 
+#youtubes {
+	position: relative;
+}
+#youtubes .left {
+	width: 50%;
+}
+#youtubes .right {
+	height: 100%;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 50%;
+}
+
 /* Forms */
 label {
   display: block;

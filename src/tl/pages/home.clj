@@ -1,6 +1,7 @@
 (ns tl.pages.home
   (:use [clojure.contrib.str-utils :only [str-join]]
-		[hiccup.page-helpers :only [link-to]])
+		[hiccup.page-helpers :only [link-to]]
+		[tl.pages.global :only [swfobject]])
   (:require [appengine-magic.services.user :as us]
 			[com.reasonr.scriptjure :as script]))
 
@@ -36,10 +37,10 @@
 			 {:title "Tragically Hip - Fully Completely" :id "pEGyKECUh80"}
 			 {:title "Ratatat - Mi Viejo + Mirando [Live]" :id "oM3MdixTdfA"}
 			 {:title "Handsome Jack - 5-1-08 Camera 1 (and only)" :id "4tc_GxVtcPE"}])
+(def embed-url "http://www.youtube.com/v/")
 
 (defn youtube-list []
-  (let [link "http://www.youtube.com/watch?v="
-		embed "http://www.youtube.com/v/"]
+  (let [link "http://www.youtube.com/watch?v="]
 	(vec (conj (map (fn [v]
 					  [:li (link-to (str link (:id v)) (:title v))])
 					videos)
@@ -48,10 +49,11 @@
 (defn youtube-ids []
   (vec (map :id videos)))
 
-
 (defn youtubes []
-  {:js #{"/js/youtubes.js"}
+  {:js #{"/js/youtubes.js" swfobject}
    :title ["Hello Youtubes"]
-   :body [(youtube-list)
-		  [:script (script/js (set! tl.youtubes.videos
-									(script/clj (youtube-ids))))]]})
+   :body [[:div#youtubes
+		   [:div.left (youtube-list)]
+		   [:div.right [:div#swf-div]]]
+		  [:script (script/js (tl.youtubes.init (script/clj (youtube-ids))
+												 (script/clj embed-url)))]]})
