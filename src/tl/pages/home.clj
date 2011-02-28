@@ -30,13 +30,21 @@
 					  (link-to (us/logout-url) "Log out")
 					  (link-to (us/login-url) "Log in"))]]]})
 
-(def videos [{:title "Geico - Hurt you" :id "mwWfU18boOI"}
+(def videos [{:title "Ronald Jenkees - Laid Back Organ Jam (for my peeps)" :id "zuJW7H08HrQ"}
+			 {:title "Ronald Jenkees - All of my Love" :id "j-ryKQx4DdQ"}
+			 {:title "Geico - Hurt you" :id "mwWfU18boOI"}
 			 {:title "Sounds - Hurt you" :id "Krh5s8p48J4"}
 			 {:title "Tragically Hip - New Orleans is Sinking (w/ Ahead by a Century)" :id "AZwm_OKh6bw"}
-			 {:title "Jethro Tull - Locomotive Breath" :id "gdz_G1VGJ4c"}
 			 {:title "Tragically Hip - Fully Completely" :id "pEGyKECUh80"}
-			 {:title "Ratatat - Mi Viejo + Mirando [Live]" :id "oM3MdixTdfA"}
-			 {:title "Handsome Jack - 5-1-08 Camera 1 (and only)" :id "4tc_GxVtcPE"}])
+			 {:title "Tragically Hip - 38 Years Old" :id "rsj9fXH2Psw"}
+			 {:title "Ratatat - Seventeen Years" :id "z6GbC2F5RfU"}
+			 {:title "Ratatat - Mi Viejo + Mirando" :id "oM3MdixTdfA"}
+			 {:title "Kid Cudi ft. Ratatat - Pursuit of Happiness" :id "NzT8fHpAU3w"}
+			 {:title "Handsome Jack - 5-1-08 Camera 1 (and only)" :id "4tc_GxVtcPE"}
+			 {:title "Handsome Jack - last 1/2 of Love Machine" :id "5QFnWu0WRnY"}
+			 {:title "Neil Young - Heart of Gold" :id "Eh44QPT1mPE"}
+			 {:title "Neil Young & Pearl Jam" :id "PTTsyk-pyd8"}])
+
 (def embed-url "http://www.youtube.com/v/")
 
 (defn youtube-list []
