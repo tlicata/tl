@@ -9,8 +9,8 @@
 				   "/login/"
 				   "/maps/"
 				   "/maps/google"
-				   "/maps/hotpads"
-				   "/maps/polymaps"])
+				   "/maps/polymaps"
+				   "/youtubes/"])
 
 (def invalid-routes ["/garbage"
 					 "/garbage/"
