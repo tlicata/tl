@@ -10,7 +10,7 @@ html {
 #hd ul, #hd li  {
 	margin-right: 1em;
 }
-#hd .current {
+.current {
 	color: #FF9C00;
 }
 #hd ul#nav-secondary a {
