@@ -46,22 +46,21 @@
 			 {:title "Neil Young & Pearl Jam" :id "PTTsyk-pyd8"}])
 
 (def embed-url "http://www.youtube.com/v/")
+(def link-url "http://www.youtube.com/watch?v=")
 
 (defn youtube-list []
-  (let [link "http://www.youtube.com/watch?v="]
-	(vec (conj (map (fn [v]
-					  [:li (link-to (str link (:id v)) (:title v))])
-					videos)
-			   :ul))))
+  (vec (conj (map (fn [v]
+					[:li (link-to (:id v) (:title v))])
+				  videos)
+			 :ul)))
 
-(defn youtube-ids []
-  (vec (map :id videos)))
-
-(defn youtubes []
+(defn youtubes [ & [video]]
   {:js #{"/js/youtubes.js" swfobject}
    :title ["Hello Youtubes"]
    :body [[:div#youtubes
 		   [:div.left (youtube-list)]
 		   [:div.right [:div#swf-div]]]
-		  [:script (script/js (tl.youtubes.init (script/clj (youtube-ids))
-												 (script/clj embed-url)))]]})
+		  [:script
+		   (script/js (tl.youtubes.play (script/clj (str embed-url video))
+										(script/clj 1)
+										(script/clj 1)))]]})

@@ -12,7 +12,8 @@
   (GET "/" [] (home-page))
   (GET "/contact/" []  (contact-page))
   (GET "/login/" [] (login-page))
-  (GET "/youtubes/" [] (youtubes)))
+  (GET "/youtubes/" [] (youtubes))
+  (GET "/youtubes/:video" [video] (youtubes video)))
 
 (defroutes map-routes
   (GET "/maps/" [] (map-page))
