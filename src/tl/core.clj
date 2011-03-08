@@ -24,10 +24,6 @@
 (defroutes error-routes
   (route/not-found "Not Found"))
 
-(defroutes layout-routes
-  tl-routes
-  admin-routes)
-
 (defroutes all-routes
   tl-routes
   map-routes
