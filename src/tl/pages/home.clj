@@ -32,8 +32,6 @@
 
 (def videos [{:title "Ronald Jenkees - Laid Back Organ Jam (for my peeps)" :id "zuJW7H08HrQ"}
 			 {:title "Ronald Jenkees - All of my Love" :id "j-ryKQx4DdQ"}
-			 {:title "Geico - Hurt you" :id "mwWfU18boOI"}
-			 {:title "Sounds - Hurt you" :id "Krh5s8p48J4"}
 			 {:title "Tragically Hip - New Orleans is Sinking (w/ Ahead by a Century)" :id "AZwm_OKh6bw"}
 			 {:title "Tragically Hip - Fully Completely" :id "pEGyKECUh80"}
 			 {:title "Tragically Hip - 38 Years Old" :id "rsj9fXH2Psw"}
@@ -43,7 +41,10 @@
 			 {:title "Handsome Jack - 5-1-08 Camera 1 (and only)" :id "4tc_GxVtcPE"}
 			 {:title "Handsome Jack - last 1/2 of Love Machine" :id "5QFnWu0WRnY"}
 			 {:title "Neil Young - Heart of Gold" :id "Eh44QPT1mPE"}
-			 {:title "Neil Young & Pearl Jam" :id "PTTsyk-pyd8"}])
+			 {:title "Neil Young & Pearl Jam" :id "PTTsyk-pyd8"}
+			 {:title "Rush - Subdivisions" :id "DNoMCh6okuo"}
+			 {:title "Rush - Tom Sawyer (featuring South Park)" :id "JFGVDWc_5Q8"}
+			 {:title "Rush - Workin Man" :id "EYRYGr9vynw"}])
 
 (def embed-url "http://www.youtube.com/v/")
 (def link-url "http://www.youtube.com/watch?v=")
