@@ -38,7 +38,11 @@
 		link? (fn [loc]
 				(and (zip/branch? loc)
 					 (= (zip/node (zip/down loc)) :a)
-					 (= (zip/node (zip/right (zip/down loc))) {:href uri})))
+					 (let [link (zip/node (zip/right (zip/down loc)))
+						   rel (merge-with str {:href (re-find #".*\/" uri)} link)]
+					   (or
+						(= link {:href uri})
+						(= rel {:href uri})))))
 		text (fn [loc]
 			   [:span.current (-> loc zip/down zip/right zip/right zip/node)])]
 	(loop [loc zip]

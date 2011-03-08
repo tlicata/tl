@@ -4,22 +4,20 @@ html {
 }
 
 /* Layout and Spacing */
-#hd {
-	margin-bottom: 0.7em;
-}
 #hd ul, #hd li, #ft ul, #ft li {
 	display: inline;
 }
 #hd ul, #hd li  {
 	margin-right: 1em;
 }
-#hd .current {
+.current {
 	color: #FF9C00;
 }
 #hd ul#nav-secondary a {
 	color: #5093E4;
 }
 #ft {
+	margin-top: .5em;
 	text-align: center;
 }
 #ft p, #ft li {
@@ -29,13 +27,27 @@ html {
 
 .blurb {
 	border: .4em solid #0856B3;
-	margin-bottom: 20px;
+	margin-top: 1em;
 	padding: 0.7em 0.9em 0.2em 0.9em;
 	-moz-border-radius: 1em;
 	-webkit-border-radius: 1em;
 }
 .blurb p , .blurb h1, .blurb ul, .blurb div {
 	margin-bottom: 0.5em;
+}
+
+#youtubes {
+	position: relative;
+}
+#youtubes .left {
+	width: 50%;
+}
+#youtubes .right {
+	height: 100%;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 50%;
 }
 
 /* Forms */
