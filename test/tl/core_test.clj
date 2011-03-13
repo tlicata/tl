@@ -10,7 +10,8 @@
 				   "/maps/"
 				   "/maps/google"
 				   "/maps/polymaps"
-				   "/youtubes/"])
+				   "/youtubes/"
+				   "/youtubes/id"])
 
 (def invalid-routes ["/garbage"
 					 "/garbage/"
