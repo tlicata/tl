@@ -18,7 +18,9 @@
 
 (defn blurb [html]
   "Wrap in an blurb div. Unless it's a script tag"
-  (if (= :script (first html))
+  (if (or
+	   (= nil html)
+	   (= :script (first html)))
 	html
 	(conj [:div.blurb] html)))
 
