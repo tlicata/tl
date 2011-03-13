@@ -61,7 +61,8 @@
    :body [[:div#youtubes
 		   [:div.left (youtube-list)]
 		   [:div.right [:div#swf-div]]]
-		  [:script
-		   (script/js (tl.youtubes.play (script/clj (str embed-url video))
-										(script/clj 1)
-										(script/clj 1)))]]})
+		  (when video
+			[:script
+			 (script/js (tl.youtubes.play (script/clj (str embed-url video))
+										  (script/clj 1)
+										  (script/clj 1)))])]})
