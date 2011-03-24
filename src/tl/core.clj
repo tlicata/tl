@@ -3,7 +3,8 @@
    [compojure.core :only [defroutes GET]]
    [tl.pages
 	[home :only [admin-page home-page contact-page login-page youtubes]]
-	[maps :only [map-page]]])
+	[maps :only [map-page]]]
+   [ring.middleware.params :only [wrap-params]])
   (:require [appengine-magic.core :as ae]
 			[compojure.route :as route]
 			[tl.middleware :as mw]))
@@ -34,6 +35,7 @@
 
 (def all
 	 (-> #'all-routes
+		 wrap-params
 		 mw/wrap-layout
 		 mw/wrap-current-link
 		 mw/wrap-html))
