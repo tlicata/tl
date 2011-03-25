@@ -1,8 +1,11 @@
 (ns tl.pages.home
   (:use [clojure.contrib.str-utils :only [str-join]]
+		[clojure.contrib.json :only [read-json]]
 		[hiccup.page-helpers :only [link-to]]
+		[ring.util.codec :only [url-encode]]
 		[tl.pages.global :only [swfobject]])
   (:require [appengine-magic.services.user :as us]
+			[appengine-magic.services.url-fetch :as url]
 			[com.reasonr.scriptjure :as script]))
 
 (def welcome-blurb [:p (str-join "  -  " ["Tim Licata"
@@ -58,12 +61,45 @@
 				  videos)
 			 :ul)))
 
-(defn youtubes [ & [video]]
+(def youtube-search-url "http://gdata.youtube.com/feeds/api/videos")
+
+(defn youtube-search-fetch [query]
+  (let [url (str youtube-search-url "?q=" (url-encode query) "&alt=json")]
+	(read-json (String. (:content (url/fetch url :deadline 5000))))))
+
+(defn youtube-search-parse [response]
+  (let [entries (:entry (:feed response))]
+	(map (fn [entry]
+		   {:author (:$t (:name (first (:author entry))))
+			:content (:$t (:content entry))
+			:id (re-find #"[^/]*$" (:$t (:id entry)))
+			:title (:$t (:title entry))
+			:viewed (:viewCount (:yt$statistics entry))})
+		 entries)))
+
+(defn youtube-search-render [results]
+  (vec
+   (cons :div.search-results
+		 (map (fn [entry]
+				[:div.entry
+				 (link-to (:id entry) (:title entry))
+				 [:span.viewed (str (:viewed entry) " views")]])
+			  results))))
+
+(defn youtubes [video query]
   {:js #{"/js/youtubes.js" swfobject}
    :title ["Hello Youtubes"]
    :body [[:div#youtubes
 		   [:div.left (youtube-list)]
 		   [:div.right [:div#swf-div]]]
+		  [:div#youtubes-search
+		   [:form {:method "get"}
+			[:input {:type "text" :name "query"}]
+			[:input {:type "submit" :value "Search YouTube"}]]
+		   (when query
+			 (youtube-search-render
+			  (youtube-search-parse
+			   (youtube-search-fetch query))))]
 		  (when video
 			[:script
 			 (script/js (tl.youtubes.play (script/clj (str embed-url video))

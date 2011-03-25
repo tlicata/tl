@@ -13,8 +13,8 @@
   (GET "/" [] (home-page))
   (GET "/contact/" []  (contact-page))
   (GET "/login/" [] (login-page))
-  (GET "/youtubes/" [] (youtubes))
-  (GET "/youtubes/:video" [video] (youtubes video)))
+  (GET "/youtubes/" [query] (youtubes nil query))
+  (GET "/youtubes/:video" [video query] (youtubes video query)))
 
 (defroutes map-routes
   (GET "/maps/" [] (map-page))
