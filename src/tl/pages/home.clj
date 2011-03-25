@@ -45,7 +45,9 @@
 			 {:title "Rush - Subdivisions" :id "DNoMCh6okuo"}
 			 {:title "Rush - Tom Sawyer (featuring South Park)" :id "JFGVDWc_5Q8"}
 			 {:title "Rush - Workin Man" :id "EYRYGr9vynw"}
-			 {:title "MIKE V SKATES LOCKPORT" :id "xxBdPUokZHo"}])
+			 {:title "Mike V - Skates Lockport" :id "xxBdPUokZHo"}
+			 {:title "Cake - Short Skirt, Long Jacket" :id "cBYEVnQkMU8"}
+			 {:title "Cake - The Distance" :id "qKax7euEM5Q"}])
 
 (def embed-url "http://www.youtube.com/v/")
 (def link-url "http://www.youtube.com/watch?v=")
