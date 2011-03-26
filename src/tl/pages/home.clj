@@ -70,7 +70,7 @@
 (defn youtube-search-parse [response]
   (let [bytes (:content response)
 		chars (if bytes (String. bytes) "{}")
-		tree (try (read-json chars) (catch Error _ {}))
+		tree (try (read-json chars) (catch Exception _ {}))
 		entries (:entry (:feed tree))]
 	(map (fn [entry]
 		   {:author (:$t (:name (first (:author entry))))
