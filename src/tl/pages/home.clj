@@ -65,10 +65,13 @@
 
 (defn youtube-search-fetch [query]
   (let [url (str youtube-search-url "?q=" (url-encode query) "&alt=json")]
-	(read-json (String. (:content (url/fetch url :deadline 5000))))))
+	(try (url/fetch url) (catch Error _ nil))))
 
 (defn youtube-search-parse [response]
-  (let [entries (:entry (:feed response))]
+  (let [bytes (:content response)
+		chars (if bytes (String. bytes) "{}")
+		tree (try (read-json chars) (catch Error _ {}))
+		entries (:entry (:feed tree))]
 	(map (fn [entry]
 		   {:author (:$t (:name (first (:author entry))))
 			:content (:$t (:content entry))
@@ -78,13 +81,14 @@
 		 entries)))
 
 (defn youtube-search-render [results]
-  (vec
-   (cons :div.search-results
-		 (map (fn [entry]
-				[:div.entry
-				 (link-to (:id entry) (:title entry))
-				 [:span.viewed (str (:viewed entry) " views")]])
-			  results))))
+  (if (empty? results)
+	[:p "Go fish."]
+	(vec (cons :div.search-results
+			   (map (fn [entry]
+					  [:div.entry
+					   (link-to (:id entry) (:title entry))
+					   [:span.viewed (str (:viewed entry) " views")]])
+					results)))))
 
 (defn youtubes [video query]
   {:js #{"/js/youtubes.js" swfobject}
