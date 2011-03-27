@@ -33,8 +33,9 @@
 					  (link-to (us/logout-url) "Log out")
 					  (link-to (us/login-url) "Log in"))]]]})
 
-(def videos [{:title "Ronald Jenkees - Laid Back Organ Jam (for my peeps)" :id "zuJW7H08HrQ"}
+(def videos [{:title "Ronald Jenkees - Stay Crunchy" :id "lg8LfoyDFUM"}
 			 {:title "Ronald Jenkees - All of my Love" :id "j-ryKQx4DdQ"}
+			 {:title "Ronald Jenkees - Laid Back Organ Jam (for my peeps)" :id "zuJW7H08HrQ"}
 			 {:title "Tragically Hip - New Orleans is Sinking (w/ Ahead by a Century)" :id "AZwm_OKh6bw"}
 			 {:title "Tragically Hip - Fully Completely" :id "pEGyKECUh80"}
 			 {:title "Tragically Hip - 38 Years Old" :id "rsj9fXH2Psw"}
