@@ -54,6 +54,7 @@
 
 (def embed-url "http://www.youtube.com/v/")
 (def link-url "http://www.youtube.com/watch?v=")
+(def search-url "http://gdata.youtube.com/feeds/api/videos")
 
 (defn youtube-list []
   (vec (conj (map (fn [v]
@@ -61,10 +62,8 @@
 				  videos)
 			 :ul)))
 
-(def youtube-search-url "http://gdata.youtube.com/feeds/api/videos")
-
 (defn youtube-search-fetch [query]
-  (let [url (str youtube-search-url "?q=" (url-encode query) "&alt=json")]
+  (let [url (str search-url "?q=" (url-encode query) "&alt=json")]
 	(try (url/fetch url) (catch Error _ nil))))
 
 (defn youtube-search-parse [response]
