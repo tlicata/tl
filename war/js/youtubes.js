@@ -12,7 +12,7 @@ tl.youtubes = (function () {
 
 	var play = function (video, autoplay, loopMode) {
 		$(function () {
-			swfobject.embedSWF(video, "swf-div", "100%", "290px", "9", null,
+			swfobject.embedSWF(video, "swf", "100%", "290px", "9", null,
 							   {autoplay: autoplay, loop: loopMode});
 		});
 	};

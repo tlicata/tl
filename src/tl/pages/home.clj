@@ -94,7 +94,7 @@
    :title ["Hello Youtubes"]
    :body [[:div#youtubes
 		   [:div.left (youtube-list)]
-		   [:div.right [:div#swf-div]]]
+		   [:div.right [:div#swf]]]
 		  [:div#youtubes-search
 		   [:form {:method "get"}
 			[:input {:type "text" :name "query"}]
