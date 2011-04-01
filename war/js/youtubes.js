@@ -17,7 +17,7 @@ tl.youtubes = (function () {
 		});
 	};
 
-	var search = function (query) {
+	var search = (function () {
 
 		var clean = function (json) {
 			var entry = json && json.feed && json.feed.entry;
@@ -36,7 +36,7 @@ tl.youtubes = (function () {
 			return videos;
 		};
 
-		var toHtml = function (videos) {
+		var html = function (videos) {
 			var outer = document.createElement("div"), i;
 			outer.setAttribute("id", resultsDivId);
 			for (i in videos) {
@@ -52,34 +52,40 @@ tl.youtubes = (function () {
 			return outer;
 		};
 
-		var clearOldResults = function () {
+		var remove = function () {
 			var resultsDiv = $("#" + resultsDivId);
 			if (resultsDiv) {
 				resultsDiv.remove();
 			}
 		};
 
-		var onSuccess = function (data) {
-			clearOldResults();
-			searchDiv.append(toHtml(clean(data)));
+		var render = function (vids) {
+			remove();
+			searchDiv.append(html(vids));
 		};
 
-		var onError = function () {
-			clearOldResults();
+		var renderError = function () {
+			remove();
 			var p = document.createElement("p");
 			p.innerHTML = "Something went wrong";
 			searchDiv.append(p);
 		};
 
-		$.ajax({
-			data: {alt: "json", q: query},
-			dataType: "jsonp",
-			error: onError,
-			success: onSuccess,
-			timeout: 5000,
-			url: searchUrl
-		});
-	};
+		var success = function (json) {
+			render(clean(json));
+		};
+
+		return function (query) {
+			$.ajax({
+				data: {alt: "json", q: query},
+				dataType: "jsonp",
+				error: renderError,
+				success: success,
+				timeout: 5000,
+				url: searchUrl
+			});
+		};
+	}());
 
 	var bind = function () {
 		searchDiv.find("form").submit(function () {
@@ -94,6 +100,7 @@ tl.youtubes = (function () {
 	});
 
 	return {
-		play: play
+		play: play,
+		search: search
 	};
 }());
