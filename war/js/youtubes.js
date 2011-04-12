@@ -1,4 +1,4 @@
-var $, swfobject, tl;
+var swfobject, tl;
 
 if (!tl) {
 	tl = {};
