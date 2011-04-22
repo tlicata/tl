@@ -28,6 +28,7 @@ tl.youtubes = (function () {
 					var vid = entry[idx];
 					videos.push({
 						id: vid.id && vid.id.$t && vid.id.$t.substr(-11),
+						thumb: vid.media$group.media$thumbnail[1].url,
 						title: vid.title && vid.title.$t,
 						viewed: vid.yt$statistics && vid.yt$statistics.viewCount
 					});
@@ -39,10 +40,12 @@ tl.youtubes = (function () {
 		var html = function (videos) {
 			var outer = $("<div/>").attr("id", resultsDivId);
 			$.each(videos, function (idx, vid) {
-				outer.append($("<a/>")
-							 .attr("href", vid.id)
-							 .css("display", "block")
-							 .html(vid.title));
+				outer.append($("<div/>").append(
+					$("<img/>")
+						.attr("src", vid.thumb),
+					$("<a/>")
+						.attr("href", vid.id)
+						.html(vid.title)));
 			});
 			return outer;
 		};
