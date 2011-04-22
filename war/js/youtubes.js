@@ -37,18 +37,13 @@ tl.youtubes = (function () {
 		};
 
 		var html = function (videos) {
-			var outer = document.createElement("div"), i;
-			outer.setAttribute("id", resultsDivId);
-			for (i in videos) {
-				if (videos.hasOwnProperty(i)) {
-					var v = videos[i];
-					var link = document.createElement("a");
-					link.setAttribute("href", v.id);
-					link.style.display = "block";
-					$(link).html(v.title);
-					outer.appendChild(link);
-				}
-			}
+			var outer = $("<div/>").attr("id", resultsDivId);
+			$.each(videos, function (idx, vid) {
+				outer.append($("<a/>")
+							 .attr("href", vid.id)
+							 .css("display", "block")
+							 .html(vid.title));
+			});
 			return outer;
 		};
 
