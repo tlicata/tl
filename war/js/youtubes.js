@@ -87,16 +87,12 @@ tl.youtubes = (function () {
 		};
 	}());
 
-	var bind = function () {
+	$(document).ready(function () {
+		searchDiv = $("#youtubes-search");
 		searchDiv.find("form").submit(function () {
 			search(searchDiv.find(":text").val());
 			return false;
 		});
-	};
-
-	$(document).ready(function () {
-		searchDiv = $("#youtubes-search");
-		bind();
 	});
 
 	return {
