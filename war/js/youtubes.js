@@ -6,6 +6,8 @@ if (!tl) {
 
 tl.youtubes = (function () {
 
+	var decode = decodeURIComponent;
+	var encode = encodeURIComponent;
 	var resultsDivId = "search-results";
 	var searchDiv = null;
 	var searchUrl = "http://gdata.youtube.com/feeds/api/videos";
@@ -37,15 +39,16 @@ tl.youtubes = (function () {
 			return videos;
 		};
 
-		var html = function (videos) {
+		var html = function (videos, query) {
 			var outer = $("<div/>").attr("id", resultsDivId);
 			$.each(videos, function (idx, vid) {
 				outer.append($("<div/>").append(
 					$("<img/>")
 						.attr("src", vid.thumb),
 					$("<a/>")
-						.attr("href", vid.id)
-						.html(vid.title)));
+						.attr("href", vid.id.concat("#", encode(query)))
+						.html(vid.title)
+				));
 			});
 			return outer;
 		};
@@ -57,9 +60,9 @@ tl.youtubes = (function () {
 			}
 		};
 
-		var render = function (vids) {
+		var render = function (vids, query) {
 			remove();
-			searchDiv.append(html(vids));
+			searchDiv.append(html(vids, query));
 		};
 
 		var renderError = function () {
@@ -69,8 +72,8 @@ tl.youtubes = (function () {
 			searchDiv.append(p);
 		};
 
-		var success = function (json) {
-			render(clean(json));
+		var success = function (json, query) {
+			render(clean(json), query);
 		};
 
 		return function (query) {
@@ -78,7 +81,9 @@ tl.youtubes = (function () {
 				data: {alt: "json", q: query},
 				dataType: "jsonp",
 				error: renderError,
-				success: success,
+				success: function (json) {
+					success(json, query);
+				},
 				timeout: 5000,
 				url: searchUrl
 			});
@@ -91,6 +96,10 @@ tl.youtubes = (function () {
 			search(searchDiv.find(":text").val());
 			return false;
 		});
+		if (window.location.hash) {
+			var noHash = window.location.hash.substr(1);
+			search(decode(noHash));
+		}
 	});
 
 	return {
