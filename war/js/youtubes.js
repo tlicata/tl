@@ -46,7 +46,7 @@ tl.youtubes = (function () {
 					$("<img/>")
 						.attr("src", vid.thumb),
 					$("<a/>")
-						.attr("href", vid.id.concat("#", encode(query)))
+						.attr("href", vid.id.concat("#", query))
 						.html(vid.title)
 				));
 			});
@@ -73,6 +73,7 @@ tl.youtubes = (function () {
 		};
 
 		var success = function (json, query) {
+			window.location.hash = query;
 			render(clean(json), query);
 		};
 
@@ -82,7 +83,7 @@ tl.youtubes = (function () {
 				dataType: "jsonp",
 				error: renderError,
 				success: function (json) {
-					success(json, query);
+					success(json, encode(query));
 				},
 				timeout: 5000,
 				url: searchUrl
