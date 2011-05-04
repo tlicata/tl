@@ -1,7 +1,7 @@
 (ns tl.pages.maps
   (:use [clojure.contrib.string :only [as-str]]
 		[hiccup.page-helpers :only [link-to]]
-		[tl.pages.global :only [reduce-blurbs swfobject]]))
+		[tl.pages.global :only [jquery-ui reduce-blurbs swfobject]]))
 
 (def map-css "/css/maps.css")
 
@@ -13,7 +13,11 @@
 		   :polymaps {:css #{"/css/poly.css" map-css}
 					  :js #{"/js/poly.js" "/js/lib/polymaps.min.js"}
 					  :body [[:div#pmap.map]]
-					  :title ["Polymaps"]}})
+					  :title ["Polymaps"]}
+		   :timcity {:css #{map-css}
+					 :js #{jquery-ui "/js/bin/timcity.js"}
+					 :body [[:div#timcity.map]]
+					 :title ["Tim City"]}})
 
 (defn map-links []
   (map #(link-to (as-str (key %)) (first (:title (val %)))) maps))
