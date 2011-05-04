@@ -32,6 +32,7 @@ input {
 	border: .4em solid #0856B3;
 	margin-top: 1em;
 	padding: 1em;
+	overflow: hidden;
 	-moz-border-radius: 1em;
 	-webkit-border-radius: 1em;
 }
