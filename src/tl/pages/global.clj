@@ -5,6 +5,7 @@
 		[hiccup.page-helpers :only [doctype include-css include-js link-to]]))
 
 (def jquery "/js/lib/jquery.min.js")
+(def jquery-ui "/js/lib/jquery-ui-1.8.12.custom.min.js")
 (def swfobject "/js/lib/swfobject.js")
 (def grid "/css/lib/reset-fonts-grids.css")
 
