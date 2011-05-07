@@ -1,28 +1,23 @@
-container = null
+drawSquare = (ctx, x, y, width) ->
+    ctx.fillRect(x, y, width, width)
 
-fill = () ->
-    w = h = 1500
-    i = 50
-
-    latty = (lon) ->
-        make = (lat) ->
-            container.append $("<div/>").css
-                backgroundColor: "#369"
-                border: "solid"
-                height: i + "px"
-                left: lon
-                position: "absolute"
-                top: lat
-                width: i + "px"
-        (make y for y in [0..h] by i)
-    (latty x for x in [0..w] by i)
+drawGrid = (ctx, xOff = 0, yOff = 0, rows = 50, cols = 50, square = 25) ->
+    ctx.clearRect(0, 0, rows*square, cols*square)
+    for y in [0..rows]
+        for x in [0..cols]
+            drawSquare(ctx, xOff+(x*square), yOff+(y*square), square-1)
 
 init = () ->
-    container = $("#timcity").css
-        position: "relative"
-    .draggable()
+    canvas = $("<canvas/>").get(0)
+    canvas.height = 400;
+    canvas.width = 1000;
 
-    fill()
+    ctx = canvas.getContext("2d") if canvas.getContext
+    if ctx
+        ctx.fillStyle = "rgb(200,0,0)"
+        drawGrid(ctx)
+
+    $("#timcity").css("position", "relative").append(canvas);
 
 $(init)
 
