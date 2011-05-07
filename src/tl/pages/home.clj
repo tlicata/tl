@@ -41,7 +41,7 @@
 			 {:title "Tragically Hip - 38 Years Old" :id "rsj9fXH2Psw"}
 			 {:title "Ratatat - Seventeen Years" :id "z6GbC2F5RfU"}
 			 {:title "Ratatat - Mi Viejo + Mirando" :id "oM3MdixTdfA"}
-			 {:title "Kid Cudi ft. Ratatat - Pursuit of Happiness" :id "NzT8fHpAU3w"}
+			 {:title "Kid Cudi ft. Ratatat - Pursuit of Happiness" :id "Sd-StlEkSvw"}
 			 {:title "Handsome Jack - 5-1-08 Camera 1 (and only)" :id "4tc_GxVtcPE"}
 			 {:title "Handsome Jack - last 1/2 of Love Machine" :id "5QFnWu0WRnY"}
 			 {:title "Neil Young - Heart of Gold" :id "Eh44QPT1mPE"}
@@ -51,7 +51,9 @@
 			 {:title "Rush - Workin Man" :id "EYRYGr9vynw"}
 			 {:title "Mike V - Skates Lockport" :id "xxBdPUokZHo"}
 			 {:title "Cake - Short Skirt, Long Jacket" :id "cBYEVnQkMU8"}
-			 {:title "Cake - The Distance" :id "qKax7euEM5Q"}])
+			 {:title "Cake - The Distance" :id "qKax7euEM5Q"}
+			 {:title "Sublime - Jailhouse" :id "1hVoo75XYqc"}
+			 {:title "Mumford & Sons - The Cave" :id "YKe33jxDMkQ"}])
 
 (def embed-url "http://www.youtube.com/v/")
 (def link-url "http://www.youtube.com/watch?v=")
