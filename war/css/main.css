@@ -50,32 +50,6 @@ html {
 	width: 50%;
 }
 
-/* Forms */
-label {
-  display: block;
-}
-textarea {
-	width: 100%;
-}
-
-/* Tables */
-table {
-  width: 100%;
-}
-td, th {
-  padding: 5px 10px 5px 10px;
-}
-th {
-  color: #FF9C00;
-  font-weight: bold;
-}
-tr {
-  background-color: #222;
-}
-tr.odd {
-	background-color: #111;
-}
-
 /* Fonts */
 #hd {
 	font-size: 138.5%;
