@@ -40,15 +40,6 @@ tl.youtubes = (function () {
 		};
 
 		var html = function (videos, query) {
-
-			var zebra = function (arr) {
-				arr.each(function (idx, elem) {
-					if (idx % 2 == 0) {
-						$(elem).css("background", "#111");
-					}
-				});
-			};
-
 			var outer = $("<div/>").attr("id", resultsDivId);
 			$.each(videos, function (idx, vid) {
 				outer.append($("<div/>").append(
@@ -59,9 +50,6 @@ tl.youtubes = (function () {
 						.html(vid.title)
 				));
 			});
-
-			zebra(outer.children());
-
 			return outer;
 		};
 
