@@ -47,6 +47,25 @@ html {
 	width: 50%;
 }
 
+#youtubes-search #search-results div {
+	position: relative;
+}
+#youtubes-search #search-results img {
+	height: 6em;
+	margin-right: 1em;
+	width: 9em;
+}
+#youtubes-search #search-results a {
+	position: absolute;
+	top: 1.5em;
+}
+#youtubes-search #search-results .views {
+	color: #333;
+	position: absolute;
+	top: 3em;
+}
+
+
 /* Fonts */
 #hd {
 	font-size: 138.5%;

@@ -47,7 +47,10 @@ tl.youtubes = (function () {
 						.attr("src", vid.thumb),
 					$("<a/>")
 						.attr("href", vid.id.concat("#", query))
-						.html(vid.title)
+						.html(vid.title),
+					$("<span/>")
+						.addClass("views")
+						.html(vid.viewed.concat(" views"))
 				));
 			});
 			return outer;
