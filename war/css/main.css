@@ -33,6 +33,11 @@ html {
 	-webkit-border-radius: 1em;
 }
 
+input {
+	background: #000;
+	padding: .2em;
+}
+
 #youtubes {
 	position: relative;
 }
@@ -76,7 +81,7 @@ html {
 #ft {
 	font-size: 100%;
 }
-body, #hd a, #ft a {
+body, input, #hd a, #ft a {
   color: #FFF;
 }
 h1, h2, h3 {
