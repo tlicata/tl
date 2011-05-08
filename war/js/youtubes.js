@@ -4,6 +4,20 @@ if (!tl) {
 	tl = {};
 }
 
+tl.util = {
+	addCommas: function (num) {
+		num += "";
+		var arr = num.split(".");
+		var whole = arr[0];
+		var fract = arr.length > 1 ? "." + arr[1] : "";
+		var rgx = /(\d+)(\d{3})/;
+		while (rgx.test(whole)) {
+			whole = whole.replace(rgx, '$1' + ',' + '$2');
+		}
+		return whole + fract;
+	}
+};
+
 tl.youtubes = (function () {
 
 	var decode = decodeURIComponent;
@@ -50,7 +64,7 @@ tl.youtubes = (function () {
 						.html(vid.title),
 					$("<span/>")
 						.addClass("views")
-						.html(vid.viewed.concat(" views"))
+						.html(tl.util.addCommas(vid.viewed).concat(" views"))
 				));
 			});
 			return outer;
