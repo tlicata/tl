@@ -62,8 +62,9 @@ input {
 	position: relative;
 }
 #youtubes-search #search-results img {
+	border: solid;
 	height: 5em;
-	margin: 1em 1em 0 0;
+	margin: .5em 1em .5em 0;
 	width: 8em;
 }
 #youtubes-search #search-results a {
