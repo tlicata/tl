@@ -23,7 +23,7 @@
 
 (defn summary []
   {:title ["Maps"]
-   :body [[:div
+   :body [[:div#maps
 		   [:h1 "Maps"]
 		   [:p "A playground for different browser-based maps."]
 		   (map-links-list)]]})

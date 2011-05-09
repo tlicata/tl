@@ -39,6 +39,9 @@ input {
 	color: #FF9C00;
 }
 
+/* Maps */
+#maps p {
+	margin: .5em 0 .5em 0;
 }
 
 /* Youtubes */
