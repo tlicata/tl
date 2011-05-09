@@ -58,6 +58,9 @@ input {
 	top: 0;
 	width: 50%;
 }
+#youtubes-search #search-results {
+	margin-top: 1em;
+}
 #youtubes-search #search-results div {
 	position: relative;
 }
