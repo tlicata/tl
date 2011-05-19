@@ -41,6 +41,7 @@
 (defn header-data []
   [{:uri "/" :text "Home"}
    {:uri "/maps/" :text "Maps"}
+   {:uri "/photos/" :text "Photos"}
    {:uri "/youtubes/" :text "Youtubes"}
    {:uri "/contact/" :text "Contact"}])
 

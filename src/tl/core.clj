@@ -2,7 +2,7 @@
   (:use
    [compojure.core :only [defroutes GET]]
    [tl.pages
-	[home :only [admin-page home-page contact-page login-page youtubes]]
+	[home :only [admin-page home-page contact-page login-page photos youtubes]]
 	[maps :only [map-page]]]
    [ring.middleware.lint :only [wrap-lint]]
    [ring.middleware.params :only [wrap-params]])
@@ -14,6 +14,7 @@
   (GET "/" [] (home-page))
   (GET "/contact/" []  (contact-page))
   (GET "/login/" [] (login-page))
+  (GET "/photos/" [] (photos))
   (GET "/youtubes/" [query] (youtubes nil query))
   (GET "/youtubes/:video" [video query] (youtubes video query)))
 

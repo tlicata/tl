@@ -33,6 +33,33 @@
 					  (link-to (us/logout-url) "Log out")
 					  (link-to (us/login-url) "Log in"))]]]})
 
+(def pics-base "http://dl.dropbox.com/u/2163446/photos/")
+(def pics ["bay-to-breakers.jpg"
+		   "botanical-capitol.jpg"
+		   "cot-stiched-up.jpg"
+		   "dart-thru-dart.jpg"
+		   "dora-upside-down.jpg"
+		   "end-of-era.jpg"
+		   "georgetown-floods.jpg"
+		   "google-io-robots.jpg"
+		   "google-io-sergey.jpg"
+		   "hotpads-podium.jpg"
+		   "janelle-view.jpg"
+		   "longwood-gardens.jpg"
+		   "omalley-roof.jpg"
+		   "plane-coming-in.jpg"
+		   "rosslyn-apt.jpg"
+		   "rosslyn-construction.jpg"
+		   "sf-pacific-coast.jpg"
+		   "starcraft-victory.jpg"
+		   "tim-bill-mirror.jpg"
+		   "whiteboard-daze-left.jpg"])
+		   
+(defn photos []
+  {:title ["Photos"]
+   :body [(map (fn [url] [:img {:style "display:block;margin:auto;"
+								:src (str pics-base url)}]) pics)]})
+
 (def videos [{:title "Ronald Jenkees - Stay Crunchy" :id "lg8LfoyDFUM"}
 			 {:title "Ronald Jenkees - All of my Love" :id "j-ryKQx4DdQ"}
 			 {:title "Ronald Jenkees - Laid Back Organ Jam (for my peeps)" :id "zuJW7H08HrQ"}
