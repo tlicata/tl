@@ -55,7 +55,6 @@
 			 {:title "Sublime - Jailhouse" :id "1hVoo75XYqc"}
 			 {:title "Mumford & Sons - The Cave" :id "YKe33jxDMkQ"}])
 
-(def embed-url "http://www.youtube.com/v/")
 (def link-url "http://www.youtube.com/watch?v=")
 (def search-url "http://gdata.youtube.com/feeds/api/videos")
 
@@ -108,6 +107,6 @@
 			   (youtube-search-fetch query))))]
 		  (when video
 			[:script
-			 (script/js (tl.youtubes.play (script/clj (str embed-url video))
+			 (script/js (tl.youtubes.play (script/clj video)
 										  (script/clj 1)
 										  (script/clj 1)))])]})

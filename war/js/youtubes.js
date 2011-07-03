@@ -24,11 +24,15 @@ tl.youtubes = (function () {
 	var encode = encodeURIComponent;
 	var resultsDivId = "search-results";
 	var searchDiv = null;
-	var searchUrl = "http://gdata.youtube.com/feeds/api/videos";
+	var api = {
+		play: "http://www.youtube.com/v/",
+		search: "http://gdata.youtube.com/feeds/api/videos"
+	};
 
 	var play = function (video, autoplay, loopMode) {
 		$(function () {
-			swfobject.embedSWF(video, "swf", "100%", "290px", "9", null,
+			var url = api.play.concat(video);
+			swfobject.embedSWF(url, "swf", "100%", "290px", "9", null,
 							   {autoplay: autoplay, loop: loopMode});
 		});
 	};
@@ -115,7 +119,7 @@ tl.youtubes = (function () {
 					success(json, encode(query));
 				},
 				timeout: 5000,
-				url: searchUrl
+				url: api.search
 			});
 		};
 	}());
