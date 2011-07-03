@@ -29,6 +29,23 @@ tl.youtubes = (function () {
 		search: "http://gdata.youtube.com/feeds/api/videos"
 	};
 
+	var clean = function (json) {
+		var entry = json && json.feed && json.feed.entry;
+		var videos = [];
+		var idx = null;
+		for (idx in entry) {
+			if (entry.hasOwnProperty(idx)) {
+				var vid = entry[idx];
+				videos.push({
+					id: vid.id && vid.id.$t && vid.id.$t.substr(-11),
+					thumb: vid.media$group.media$thumbnail[1].url,
+					title: vid.title && vid.title.$t,
+					viewed: vid.yt$statistics && vid.yt$statistics.viewCount
+				});
+			}
+		}
+		return videos;
+	};
 	var play = function (video, autoplay, loopMode) {
 		$(function () {
 			var url = api.play.concat(video);
@@ -38,24 +55,6 @@ tl.youtubes = (function () {
 	};
 
 	var search = (function () {
-
-		var clean = function (json) {
-			var entry = json && json.feed && json.feed.entry;
-			var videos = [];
-			var idx = null;
-			for (idx in entry) {
-				if (entry.hasOwnProperty(idx)) {
-					var vid = entry[idx];
-					videos.push({
-						id: vid.id && vid.id.$t && vid.id.$t.substr(-11),
-						thumb: vid.media$group.media$thumbnail[1].url,
-						title: vid.title && vid.title.$t,
-						viewed: vid.yt$statistics && vid.yt$statistics.viewCount
-					});
-				}
-			}
-			return videos;
-		};
 
 		var html = function (videos, query) {
 
