@@ -46,6 +46,24 @@ tl.youtubes = (function () {
 		}
 		return videos;
 	};
+
+	var jsonToHtml = function (videos) {
+		var html = [];
+		$.each(videos, function (idx, vid) {
+			html.push($("<div/>").append(
+				$("<img/>")
+					.attr("src", vid.thumb),
+				$("<a/>")
+					.attr("href", vid.id.concat(window.location.hash))
+					.html(vid.title),
+				$("<span/>")
+					.addClass("views")
+					.html(tl.util.addCommas(vid.viewed).concat(" views"))
+			));
+		});
+		return html;
+	};
+
 	var play = function (video, autoplay, loopMode) {
 		$(function () {
 			var url = api.play.concat(video);
@@ -67,19 +85,7 @@ tl.youtubes = (function () {
 			};
 
 			var outer = $("<div/>").attr("id", resultsDivId);
-			$.each(videos, function (idx, vid) {
-				outer.append($("<div/>").append(
-					$("<img/>")
-						.attr("src", vid.thumb),
-					$("<a/>")
-						.attr("href", vid.id.concat("#", query))
-						.html(vid.title),
-					$("<span/>")
-						.addClass("views")
-						.html(tl.util.addCommas(vid.viewed).concat(" views"))
-				));
-			});
-
+			outer.append.apply(outer, jsonToHtml(videos));
 			zebra(outer.children());
 
 			return outer;
@@ -92,9 +98,9 @@ tl.youtubes = (function () {
 			}
 		};
 
-		var render = function (vids, query) {
+		var render = function (vids) {
 			remove();
-			searchDiv.append(html(vids, query));
+			searchDiv.append(html(vids));
 		};
 
 		var renderError = function () {
@@ -106,7 +112,7 @@ tl.youtubes = (function () {
 
 		var success = function (json, query) {
 			window.location.hash = query;
-			render(clean(json), query);
+			render(clean(json));
 		};
 
 		return function (query) {
