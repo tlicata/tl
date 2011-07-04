@@ -22,6 +22,7 @@ tl.youtubes = (function () {
 
 	var decode = decodeURIComponent;
 	var encode = encodeURIComponent;
+	var relatedDivId = "related-videos";
 	var resultsDivId = "search-results";
 	var searchDiv = null;
 	var api = {
@@ -65,10 +66,28 @@ tl.youtubes = (function () {
 	};
 
 	var play = function (video, autoplay, loopMode) {
+
+		var loadRelated = function (id) {
+			$.ajax({
+				data: {alt: "json"},
+				dataType: "jsonp",
+				error: function () {},
+				success: function (json) {
+					var container = $("#"+relatedDivId);
+					var markup = jsonToHtml(clean(json));
+					container.append.apply(container, markup);
+				},
+				timeout: 5000,
+				url: api.search.concat("/", id, "/related")
+			});
+		};
+
 		$(function () {
 			var url = api.play.concat(video);
 			swfobject.embedSWF(url, "swf", "100%", "290px", "9", null,
 							   {autoplay: autoplay, loop: loopMode});
+
+			loadRelated(video);
 		});
 	};
 

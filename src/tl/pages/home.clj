@@ -96,7 +96,9 @@
    :title ["Hello Youtubes"]
    :body [[:div#youtubes
 		   [:div.left (youtube-list)]
-		   [:div.right [:div#swf (when video "Playing videos requires JavaScript and Flash.  Either you are missing one of those technologies or my site is broken.  Bummer either way.")]]]
+		   [:div.right
+			[:div#swf (when video "Playing videos requires JavaScript and Flash.  Either you are missing one of those technologies or my site is broken.  Bummer either way.")]
+			[:div#related-videos]]]
 		  [:div#youtubes-search
 		   [:form {:method "get"}
 			[:input {:type "text" :name "query"}]
