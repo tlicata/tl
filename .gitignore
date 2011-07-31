@@ -1,3 +1,4 @@
 *.class
 *.jar
 war/WEB-INF/appengine-generated/*
+war/js/bin/*
