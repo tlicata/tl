@@ -21,4 +21,4 @@
 									(vals attrs))))))
 
 (defn ^{:export greet} greet [n]
-  ((js* "alert") (str "Hello " n)))
+  (js/alert (str "Hello " n)))
