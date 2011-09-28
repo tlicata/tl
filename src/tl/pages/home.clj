@@ -34,31 +34,59 @@
 					  (link-to (us/login-url) "Log in"))]]]})
 
 (def pics-base "http://dl.dropbox.com/u/2163446/photos/")
-(def pics ["bay-to-breakers.jpg"
-		   "botanical-capitol.jpg"
-		   "cot-stiched-up.jpg"
-		   "dart-thru-dart.jpg"
-		   "dora-upside-down.jpg"
-		   "end-of-era.jpg"
-		   "georgetown-floods.jpg"
-		   "google-io-robots.jpg"
-		   "google-io-sergey.jpg"
-		   "hotpads-podium.jpg"
-		   "janelle-view.jpg"
-		   "longwood-gardens.jpg"
-		   "omalley-roof.jpg"
-		   "plane-coming-in.jpg"
-		   "rosslyn-apt.jpg"
-		   "rosslyn-construction.jpg"
-		   "sf-pacific-coast.jpg"
-		   "starcraft-victory.jpg"
-		   "tim-bill-mirror.jpg"
-		   "whiteboard-daze-left.jpg"])
+(def pics-ext ".jpg")
+(def pics ["janelle-view"
+		   "whiteboard-daze-left"
+		   "omalley-roof"
+		   "end-of-era"
+		   "botanical-capitol"
+		   "hotpads-podium"
+		   "dart-thru-dart"
+		   "dora-upside-down"
+		   "georgetown-floods"
+		   "starcraft-victory"
+		   "rosslyn-apt"
+		   "plane-coming-in"
+		   "rosslyn-construction"
+		   "longwood-gardens"
+		   "google-io-robots"
+		   "google-io-sergey"
+		   "bay-to-breakers"
+		   "sf-pacific-coast"])
+
+(defn in?
+  [coll val]
+  "Returns true if value is present in the given collection, otherwise
+returns false. See also 'contains?'"
+  (some #(= val %) coll))
+
+(defn photos-nav
+  ([]
+	 (photos-nav nil))
+  ([current]
+	 (let
+		 [index (.indexOf pics current)
+		  previous (when (> index 0) (get pics (- index 1)))
+		  next (when (< index (- (count pics) 1)) (get pics (+ index 1)))]
+	   [:div#photos-nav
+		(link-to (first pics) "first")
+		(if (nil? previous) "previous" (link-to previous "previous"))
+		(if (nil? next) "next" (link-to next "next"))
+		(link-to (last pics) "latest")])))
 		   
-(defn photos []
-  {:title ["Photos"]
-   :body [(map (fn [url] [:img {:style "display:block;margin:auto;"
-								:src (str pics-base url)}]) pics)]})
+(defn photos
+  ([]
+	 (photos nil))
+  ([name]
+	 (if (or (nil? name) (in? pics name))
+	   (let [htmlify (fn [name]
+					   (when-not (nil? name)
+						 [:img {:style "display:block;margin:auto;"
+								:src (str pics-base name pics-ext)}]))]
+			 {:title ["Photos"]
+			  :body [[:div
+					  (photos-nav name)
+					  (htmlify name)]]}))))
 
 (def videos [{:title "Ronald Jenkees - Stay Crunchy" :id "lg8LfoyDFUM"}
 			 {:title "Ronald Jenkees - All of my Love" :id "j-ryKQx4DdQ"}

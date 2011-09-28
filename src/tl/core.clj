@@ -15,6 +15,7 @@
   (GET "/contact/" []  (contact-page))
   (GET "/login/" [] (login-page))
   (GET "/photos/" [] (photos))
+  (GET "/photos/:id" [id] (photos id))
   (GET "/youtubes/" [query] (youtubes nil query))
   (GET "/youtubes/:video" [video query] (youtubes video query)))
 
