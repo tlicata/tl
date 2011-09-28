@@ -10,13 +10,16 @@
 				   "/maps/"
 				   "/maps/google"
 				   "/maps/polymaps"
+				   "/photos/"
+				   "/photos/end-of-era"
 				   "/youtubes/"
 				   "/youtubes/id"])
 
 (def invalid-routes ["/garbage"
 					 "/garbage/"
 					 "/maps/garbage"
-					 "/maps/garbage/"])
+					 "/maps/garbage/"
+					 "/photos/garbage"])
 
 (use-fixtures :each (ae-testing/local-services :all))
 
