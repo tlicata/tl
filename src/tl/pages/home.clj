@@ -10,8 +10,8 @@
 
 (def welcome-blurb [:p (str-join "  -  " ["Tim Licata"
 										  "Programmer"
-										  "( Golfer | Pingponger )"
-										  "( Lockport, NY | Washingon, DC )"])])
+										  "( Golfer | Ping Ponger | Shuffler )"
+										  "( Lockport, NY | San Francisco, CA )"])])
 
 (defn home-page []
   {:title ["Home"]
