@@ -108,7 +108,10 @@ returns false. See also 'contains?'"
 			 {:title "Cake - Short Skirt, Long Jacket" :id "cBYEVnQkMU8"}
 			 {:title "Cake - The Distance" :id "qKax7euEM5Q"}
 			 {:title "Sublime - Jailhouse" :id "1hVoo75XYqc"}
-			 {:title "Mumford & Sons - The Cave" :id "YKe33jxDMkQ"}])
+			 {:title "Mumford & Sons - The Cave" :id "YKe33jxDMkQ"}
+			 {:title "John Frusciante - Tiny Dancer" :id "oU4-r50c1ag"}
+			 {:title "John Frusciante - Emily" :id "WCmrKgjRb1c"}
+			 {:title "John Frusciante - Central (The Empyrean)" :id "M9jsRZzjrgI"}])
 
 (def embed-url "http://www.youtube.com/v/")
 (def link-url "http://www.youtube.com/watch?v=")
