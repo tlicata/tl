@@ -60,12 +60,11 @@
 
 (defn footer []
   [:div#ft
-   [:p "Powered by"]
+   [:p "Functions in"]
    [:ul
-	[:li (link-to "http://clojure.org/state" "Clojure") ","]
+	[:li (link-to "http://clojure.org/state" "Clojure") " and"]
 	[:li (link-to "http://www.crockford.com/javascript/"
-				  "Javascript") ","]
-	[:li "and " (link-to "http://thesixtyone.com" "T61") "."]]])
+				  "Javascript")]]])
 
 (defn wrap-in-layout [title css js body]
   [:html
