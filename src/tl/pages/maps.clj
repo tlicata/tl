@@ -9,11 +9,7 @@
 					:js #{"/js/gmap.js"
 						  "http://maps.google.com/maps/api/js?sensor=false"}
 					:body [[:div#gmap.map]]
-					:title ["Google"]}
-		   :polymaps {:css #{"/css/poly.css" map-css}
-					  :js #{"/js/poly.js" "/js/lib/polymaps.min.js"}
-					  :body [[:div#pmap.map]]
-					  :title ["Polymaps"]}})
+					:title ["Google"]}})
 
 (defn map-links []
   (map #(link-to (as-str (key %)) (first (:title (val %)))) maps))
