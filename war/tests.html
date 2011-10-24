@@ -10,15 +10,15 @@
   <title>Tim's Online World of Tests</title>
 
   <script>
-	$(document).ready(function () {
+    $(document).ready(function () {
 
 module("Util");
 
 test("adding commas to a number", function () {
-	equals(tl.util.addCommas("1234"), "1,234");
-	equals(tl.util.addCommas("123456789"), "123,456,789");
-	equals(tl.util.addCommas("12"), "12");
-	equals(tl.util.addCommas("1234.56"), "1,234.56");
+    equals(tl.util.addCommas("1234"), "1,234");
+    equals(tl.util.addCommas("123456789"), "123,456,789");
+    equals(tl.util.addCommas("12"), "12");
+    equals(tl.util.addCommas("1234.56"), "1,234.56");
 });
 
   });

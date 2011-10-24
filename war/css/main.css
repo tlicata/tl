@@ -1,100 +1,100 @@
 /* Global */
 html {
-	background-color: #000;
-	padding: 20px;
+    background-color: #000;
+    padding: 20px;
 }
 input {
-	background: #000;
-	padding: .2em;
+    background: #000;
+    padding: .2em;
 }
 
 /* Headers & Footers */
 #hd ul, #hd li, #ft ul, #ft li {
-	display: inline;
+    display: inline;
 }
 #hd ul, #hd li  {
-	margin-right: 1em;
+    margin-right: 1em;
 }
 #hd ul#nav-secondary a {
-	color: #5093E4;
+    color: #5093E4;
 }
 #ft {
-	margin-top: .5em;
-	text-align: center;
+    margin-top: .5em;
+    text-align: center;
 }
 #ft p, #ft li {
-	display: inline;
-	margin-right: 5px;
+    display: inline;
+    margin-right: 5px;
 }
 
 /* Classes */
 .blurb {
-	border: .4em solid #0856B3;
-	margin-top: 1em;
-	padding: 1em;
-	overflow: hidden;
-	-moz-border-radius: 1em;
-	-webkit-border-radius: 1em;
+    border: .4em solid #0856B3;
+    margin-top: 1em;
+    padding: 1em;
+    overflow: hidden;
+    -moz-border-radius: 1em;
+    -webkit-border-radius: 1em;
 }
 .current {
-	color: #FF9C00;
+    color: #FF9C00;
 }
 
 /* Maps */
 #maps p {
-	margin: .5em 0 .5em 0;
+    margin: .5em 0 .5em 0;
 }
 
 /* Youtubes */
 #youtubes {
-	position: relative;
+    position: relative;
 }
 #youtubes .left {
-	width: 50%;
+    width: 50%;
 }
 #youtubes .right {
-	height: 100%;
-	position: absolute;
-	right: 0;
-	top: 0;
-	width: 50%;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50%;
 }
 #youtubes-search #search-results {
-	margin-top: 1em;
+    margin-top: 1em;
 }
 #youtubes-search #search-results div {
-	position: relative;
+    position: relative;
 }
 #youtubes-search #search-results img {
-	border: solid;
-	height: 5em;
-	margin: .5em 1em .5em 0;
-	width: 8em;
+    border: solid;
+    height: 5em;
+    margin: .5em 1em .5em 0;
+    width: 8em;
 }
 #youtubes-search #search-results a {
-	position: absolute;
-	top: 1.5em;
+    position: absolute;
+    top: 1.5em;
 }
 #youtubes-search #search-results .views {
-	color: #333;
-	position: absolute;
-	top: 3em;
+    color: #333;
+    position: absolute;
+    top: 3em;
 }
 
 
 /* Fonts */
 #hd {
-	font-size: 138.5%;
+    font-size: 138.5%;
 }
 .blurb {
-	font-size: 123.1%;
+    font-size: 123.1%;
 }
 #ft {
-	font-size: 100%;
+    font-size: 100%;
 }
 body, input, #hd a, #ft a {
   color: #FFF;
 }
 h1, h2, h3 {
-	color: #0856B3;
+    color: #0856B3;
 }

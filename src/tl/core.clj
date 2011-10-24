@@ -2,13 +2,13 @@
   (:use
    [compojure.core :only [defroutes GET]]
    [tl.pages
-	[home :only [admin-page home-page contact-page login-page photos youtubes]]
-	[maps :only [map-page]]]
+    [home :only [admin-page home-page contact-page login-page photos youtubes]]
+    [maps :only [map-page]]]
    [ring.middleware.lint :only [wrap-lint]]
    [ring.middleware.params :only [wrap-params]])
   (:require [appengine-magic.core :as ae]
-			[compojure.route :as route]
-			[tl.middleware :as mw]))
+            [compojure.route :as route]
+            [tl.middleware :as mw]))
 
 (defroutes tl-routes
   (GET "/" [] (home-page))
@@ -33,15 +33,15 @@
   tl-routes
   map-routes
   (-> #'admin-routes
-	  mw/wrap-admin)
+      mw/wrap-admin)
   error-routes)
 
 (def all
-	 (-> #'all-routes
-		 wrap-params
-		 mw/wrap-layout
-		 mw/wrap-current-link
-		 mw/wrap-html
-		 wrap-lint))
+     (-> #'all-routes
+         wrap-params
+         mw/wrap-layout
+         mw/wrap-current-link
+         mw/wrap-html
+         wrap-lint))
 
 (ae/def-appengine-app tl #'all)

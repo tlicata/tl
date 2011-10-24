@@ -5,31 +5,31 @@
   (:require [appengine-magic.testing :as ae-testing]))
 
 (def valid-routes ["/"
-				   "/contact/"
-				   "/login/"
-				   "/maps/"
-				   "/maps/google"
-				   "/maps/polymaps"
-				   "/photos/"
-				   "/photos/end-of-era"
-				   "/youtubes/"
-				   "/youtubes/id"])
+                   "/contact/"
+                   "/login/"
+                   "/maps/"
+                   "/maps/google"
+                   "/maps/polymaps"
+                   "/photos/"
+                   "/photos/end-of-era"
+                   "/youtubes/"
+                   "/youtubes/id"])
 
 (def invalid-routes ["/garbage"
-					 "/garbage/"
-					 "/maps/garbage"
-					 "/maps/garbage/"
-					 "/photos/garbage"])
+                     "/garbage/"
+                     "/maps/garbage"
+                     "/maps/garbage/"
+                     "/photos/garbage"])
 
 (use-fixtures :each (ae-testing/local-services :all))
 
 (deftest test-routes
   (doseq [route valid-routes]
-	(let [response (all-routes (request :get route))]
-	  (is (= (:status response) 200) route))))
+    (let [response (all-routes (request :get route))]
+      (is (= (:status response) 200) route))))
 
 (deftest test-invalid-routes
   (doseq [route invalid-routes]
-	(let [response (all-routes (request :get route))]
-	  (is (= (:status response) 404) route))))
-		 
+    (let [response (all-routes (request :get route))]
+      (is (= (:status response) 404) route))))
+         

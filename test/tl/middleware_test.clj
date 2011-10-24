@@ -11,12 +11,12 @@
 
 (deftest test-wrap-current-link
   (let [handler (fn [request] {:body html-uri})
-		wrapped (wrap-current-link handler)
-		response (wrapped (request :get uri))]
-	(is (= (:body response) done))))
+        wrapped (wrap-current-link handler)
+        response (wrapped (request :get uri))]
+    (is (= (:body response) done))))
 
 (deftest test-wrap-current-link-relative
   (let [handler (fn [request] {:body html-rel})
-		wrapped (wrap-current-link handler)
-		response (wrapped (request :get uri))]
-	(is (= (:body response) done))))
+        wrapped (wrap-current-link handler)
+        response (wrapped (request :get uri))]
+    (is (= (:body response) done))))
