@@ -12,4 +12,10 @@
   :aot [tl.app_servlet]
   :keep-non-project-classes true)
 
+(defn compile-clojurescript
+  [task project & args]
+  (task project)
+  (println "Compiling clojurescript")
+  (lancet/exec {:executable "./bin/compile-clojurescript.sh"}))
 
+(hooke/add-hook #'appengine-prepare/appengine-prepare compile-clojurescript)
