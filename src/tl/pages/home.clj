@@ -36,11 +36,11 @@
 (defn cljs []
   {:title ["ClojureScript"]
    :body [[:div
-		   [:p "Greetings"]
-		   [:script (script/js (goog.require "tl.cljs.hello"))]
-		   [:script (script/js (tl.cljs.hello.greet))]]]
+           [:p "Greetings"]
+           [:script (script/js (goog.require "tl.cljs.hello"))]
+           [:script (script/js (tl.cljs.hello.greet))]]]
    :js ["/js/bin/out/goog/base.js"
-		"/js/bin/all.js"]})
+        "/js/bin/all.js"]})
 
 (def pics-base "http://dl.dropbox.com/u/2163446/photos/")
 (def pics-ext ".jpg")

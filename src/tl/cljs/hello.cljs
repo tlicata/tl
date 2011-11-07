@@ -16,9 +16,9 @@
                                     (assoc m k v))
                                   {}
                                   (map
-								    #(vector (name %1) %2)
-								    (keys attrs)
-									(vals attrs))))))
+                                    #(vector (name %1) %2)
+                                    (keys attrs)
+                                    (vals attrs))))))
 
 (defn ^{:export greet} greet [n]
   (js/alert (str "Hello " n)))
