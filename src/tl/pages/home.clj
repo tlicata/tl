@@ -33,6 +33,15 @@
                       (link-to (us/logout-url) "Log out")
                       (link-to (us/login-url) "Log in"))]]]})
 
+(defn cljs []
+  {:title ["ClojureScript"]
+   :body [[:div
+		   [:p "Greetings"]
+		   [:script (script/js (tl.cljs.hello.greet))]]]
+   :js ["/js/bin/out/goog/base.js"
+		"/js/bin/all.js"
+		"/js/bin/out/hello.js"]})
+
 (def pics-base "http://dl.dropbox.com/u/2163446/photos/")
 (def pics-ext ".jpg")
 (def pics ["janelle-view"
