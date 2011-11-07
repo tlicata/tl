@@ -1,3 +1,7 @@
+(require '[robert.hooke :as hooke])
+(require '[lancet :as lancet])
+(require '[leiningen.appengine-prepare :as appengine-prepare])
+
 (defproject tl "0.1.0-SNAPSHOT"
   :description "My personal site written in Clojure"
   :dependencies [[compojure "0.5.3"]
