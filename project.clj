@@ -4,7 +4,7 @@
                  [hiccup "0.2.6"]
                  [org.clojure/clojure "1.2.0"]
                  [org.clojure/clojure-contrib "1.2.0"]
-                 [ring "0.3.0-RC2"]
+                 [ring "1.0.0"]
                  [scriptjure "0.1.21"]]
   :dev-dependencies [[appengine-magic "0.4.0-SNAPSHOT"]
                      [ring-mock "0.1.1"]
