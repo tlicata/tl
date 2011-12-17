@@ -4,10 +4,11 @@
    [tl.pages
     [home :only [admin-page home-page contact-page login-page photos youtubes]]
     [maps :only [map-page]]]
+   [ring.middleware.file :only [wrap-file]]
    [ring.middleware.lint :only [wrap-lint]]
    [ring.middleware.params :only [wrap-params]])
-  (:require [appengine-magic.core :as ae]
-            [compojure.route :as route]
+  (:require [compojure.route :as route]
+            [ring.adapter.jetty :as jetty]
             [tl.middleware :as mw]))
 
 (defroutes tl-routes
@@ -36,12 +37,14 @@
       mw/wrap-admin)
   error-routes)
 
-(def all
+(def app
      (-> #'all-routes
          wrap-params
          mw/wrap-layout
          mw/wrap-current-link
          mw/wrap-html
+         (wrap-file "war")
          wrap-lint))
 
-(ae/def-appengine-app tl #'all)
+(defn -main []
+  (jetty/run-jetty app {:port 5000}))

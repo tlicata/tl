@@ -1,8 +1,8 @@
-# timothy-licata-app
+# tl
 An attempt at a personal site written in Clojure.
 
 ## Usage
-Build with Leiningen.  Deploy to Google App Engine.
+foreman start
 
 ## License
 Copyright (c) 2010 Timothy Licata

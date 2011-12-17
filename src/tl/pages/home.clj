@@ -4,9 +4,7 @@
         [hiccup.page-helpers :only [link-to]]
         [ring.util.codec :only [url-encode]]
         [tl.pages.global :only [swfobject]])
-  (:require [appengine-magic.services.user :as us]
-            [appengine-magic.services.url-fetch :as url]
-            [com.reasonr.scriptjure :as script]))
+  (:require [com.reasonr.scriptjure :as script]))
 
 (def welcome-blurb [:p (str-join "  -  " ["Tim Licata"
                                           "Programmer"
@@ -24,14 +22,13 @@
 (defn admin-page []
   {:title ["Admin"]
    :body [[:div
-           [:p "You're an admin baby"]
-           (link-to (us/logout-url) "Log out")]]})
+           [:p "You lie"]]]})
 
 (defn login-page []
   {:title ["Login"]
-   :body [[:div [:p (if (us/user-logged-in?)
-                      (link-to (us/logout-url) "Log out")
-                      (link-to (us/login-url) "Log in"))]]]})
+   :body [[:div
+           [:p "Do you want to make more money?"]
+           [:p "Sure, we all do"]]]})
 
 (def pics-base "http://dl.dropbox.com/u/2163446/photos/")
 (def pics-ext ".jpg")
@@ -123,9 +120,12 @@ returns false. See also 'contains?'"
                   videos)
              :ul)))
 
+;; Used to use appengine-magic to fetch a url within
+;; the appengine restrictions.  Should replace with
+;; another library like clj-http.
 (defn youtube-search-fetch [query]
   (let [url (str search-url "?q=" (url-encode query) "&alt=json")]
-    (try (url/fetch url) (catch Error _ nil))))
+    {:reponse nil}))
 
 (defn youtube-search-parse [response]
   (let [bytes (:content response)

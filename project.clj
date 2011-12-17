@@ -5,11 +5,10 @@
                  [org.clojure/clojure "1.2.0"]
                  [org.clojure/clojure-contrib "1.2.0"]
                  [ring "1.0.0"]
+                 [ring/ring-jetty-adapter "0.3.9"]
                  [scriptjure "0.1.21"]]
-  :dev-dependencies [[appengine-magic "0.4.0-SNAPSHOT"]
-                     [ring-mock "0.1.1"]
+  :dev-dependencies [[ring-mock "0.1.1"]
                      [swank-clojure "1.2.1"]]
-  :aot [tl.app_servlet]
   :keep-non-project-classes true)
 
 
