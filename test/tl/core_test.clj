@@ -9,7 +9,6 @@
                    "/login/"
                    "/maps/"
                    "/maps/google"
-                   "/maps/polymaps"
                    "/photos/"
                    "/photos/end-of-era"
                    "/youtubes/"
@@ -19,6 +18,7 @@
                      "/garbage/"
                      "/maps/garbage"
                      "/maps/garbage/"
+                     "/maps/polymaps"
                      "/photos/garbage"])
 
 (use-fixtures :each (ae-testing/local-services :all))
