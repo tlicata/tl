@@ -5,6 +5,7 @@
     [home :only [admin-page home-page contact-page login-page photos youtubes]]
     [maps :only [map-page]]]
    [ring.middleware.file :only [wrap-file]]
+   [ring.middleware.file-info :only [wrap-file-info]]
    [ring.middleware.lint :only [wrap-lint]]
    [ring.middleware.params :only [wrap-params]])
   (:require [compojure.route :as route]
@@ -44,6 +45,7 @@
          mw/wrap-current-link
          mw/wrap-html
          (wrap-file "war")
+         wrap-file-info
          wrap-lint))
 
 (defn -main []
