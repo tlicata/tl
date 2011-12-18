@@ -1,8 +1,7 @@
 (ns tl.core-test
   (:use [tl.core] :reload-all)
   (:use [clojure.test])
-  (:use [ring.mock.request])
-  (:require [appengine-magic.testing :as ae-testing]))
+  (:use [ring.mock.request]))
 
 (def valid-routes ["/"
                    "/contact/"
@@ -20,8 +19,6 @@
                      "/maps/garbage/"
                      "/maps/polymaps"
                      "/photos/garbage"])
-
-(use-fixtures :each (ae-testing/local-services :all))
 
 (deftest test-routes
   (doseq [route valid-routes]

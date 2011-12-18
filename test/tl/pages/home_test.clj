@@ -1,10 +1,7 @@
 (ns tl.pages.home-test
   (:use [tl.pages.home])
   (:use [clojure.test])
-  (:use [clojure.zip :as zip])
-  (:require [appengine-magic.testing :as ae-testing]))
-
-(use-fixtures :each (ae-testing/local-services :all))
+  (:use [clojure.zip :as zip]))
 
 (defn has-script-tag? [response]
   (let [zipper (zip/vector-zip (:body response))]
