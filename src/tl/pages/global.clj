@@ -4,6 +4,7 @@
         [hiccup.core :only [html]]
         [hiccup.page-helpers :only [doctype include-css include-js link-to]]))
 
+(def analytics "/js/analytics.js")
 (def jquery "/js/lib/jquery.min.js")
 (def swfobject "/js/lib/swfobject.js")
 (def grid "/css/lib/reset-fonts-grids.css")
@@ -14,7 +15,7 @@
 
 (defn js [& more]
   (let [global [jquery]]
-    (apply include-js (concat global more))))
+    (apply include-js (concat global more [analytics]))))
 
 (defn blurb [html]
   "Wrap in an blurb div. Unless it's a script tag"
