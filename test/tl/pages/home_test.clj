@@ -1,7 +1,7 @@
 (ns tl.pages.home-test
   (:use [tl.pages.home])
   (:use [clojure.test])
-  (:use [clojure.zip :as zip]))
+  (:require [clojure.zip :as zip]))
 
 (defn has-script-tag? [response]
   (let [zipper (zip/vector-zip (:body response))]
@@ -9,7 +9,7 @@
       (if (zip/end? loc)
         false
         (if (and
-             (not (branch? loc))
+             (not (zip/branch? loc))
              (= :script (zip/node loc)))
           true
           (recur (zip/next loc)))))))
