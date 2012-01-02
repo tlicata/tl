@@ -1,6 +1,5 @@
 (ns tl.pages.maps
-  (:use [clojure.contrib.string :only [as-str]]
-        [hiccup.page-helpers :only [link-to]]
+  (:use [hiccup.page-helpers :only [link-to]]
         [tl.pages.global :only [reduce-blurbs swfobject]]))
 
 (def map-css "/css/maps.css")
@@ -12,7 +11,7 @@
                     :title ["Google"]}})
 
 (defn map-links []
-  (map #(link-to (as-str (key %)) (first (:title (val %)))) maps))
+  (map #(link-to (name (key %)) (first (:title (val %)))) maps))
 
 (defn map-links-list []
   (vec (concat [:ul] (map #(merge [:li] %) (map-links)))))

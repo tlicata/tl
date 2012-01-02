@@ -1,15 +1,15 @@
 (ns tl.pages.home
-  (:use [clojure.contrib.str-utils :only [str-join]]
-        [clojure.contrib.json :only [read-json]]
+  (:use [clojure.data.json :only [read-json]]
+        [clojure.string :only [join]]
         [hiccup.page-helpers :only [link-to]]
         [ring.util.codec :only [url-encode]]
         [tl.pages.global :only [swfobject]])
   (:require [com.reasonr.scriptjure :as script]))
 
-(def welcome-blurb [:p (str-join "  -  " ["Tim Licata"
-                                          "Programmer"
-                                          "( Golfer | Ping Ponger | Shuffler )"
-                                          "( Lockport, NY | San Francisco, CA )"])])
+(def welcome-blurb [:p (join "  -  " ["Tim Licata"
+                                      "Programmer"
+                                      "( Golfer | Ping Ponger | Shuffler )"
+                                      "( Lockport, NY | San Francisco, CA )"])])
 
 (defn home-page []
   {:title ["Home"]
