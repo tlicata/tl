@@ -98,6 +98,7 @@ returns false. See also 'contains?'"
              {:title "Handsome Jack - last 1/2 of Love Machine" :id "5QFnWu0WRnY"}
              {:title "Neil Young - Heart of Gold" :id "Eh44QPT1mPE"}
              {:title "Neil Young & Pearl Jam" :id "PTTsyk-pyd8"}
+             {:title "Pearl Jam - Untitled / MFC" :id "Cg22Z6bUklY"}
              {:title "Rush - Subdivisions" :id "DNoMCh6okuo"}
              {:title "Rush - Tom Sawyer (featuring South Park)" :id "JFGVDWc_5Q8"}
              {:title "Rush - Workin Man" :id "EYRYGr9vynw"}
