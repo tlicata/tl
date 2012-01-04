@@ -152,7 +152,7 @@ returns false. See also 'contains?'"
                     results)))))
 
 (defn youtubes [video query]
-  {:js #{"/js/youtubes.js" swfobject}
+  {:js #{"/js/youtubes.js?1" swfobject}
    :title ["Hello Youtubes"]
    :body [[:div#youtubes
            [:div.left (youtube-list)]
