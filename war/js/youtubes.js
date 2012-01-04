@@ -26,9 +26,9 @@ tl.youtubes = (function () {
     var searchDiv = null;
     var searchUrl = "http://gdata.youtube.com/feeds/api/videos";
 
-    var play = function (video, autoplay, loopMode) {
+    var play = function (url, autoplay, loopMode) {
         $(function () {
-            swfobject.embedSWF(video, "swf", "100%", "290px", "9", null,
+            swfobject.embedSWF(url, "swf", "100%", "290px", "9", null,
                                {autoplay: autoplay, loop: loopMode});
         });
     };
