@@ -21,6 +21,15 @@ test("adding commas to a number", function () {
     equals(tl.util.addCommas("1234.56"), "1,234.56");
 });
 
+module("Youtubes");
+
+asyncTest("search youtube", function () {
+    tl.youtubes.search("bumble bee tuna", function (success) {
+        ok(success);
+        start();
+    });
+});
+
   });
   </script>
 </head>

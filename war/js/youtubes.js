@@ -111,13 +111,17 @@ tl.youtubes = (function () {
         };
 
         // search
-        return function (query) {
+        return function (query, callback) {
             $.ajax({
                 data: {alt: "json", q: query},
                 dataType: "jsonp",
-                error: renderError,
+                error: function () {
+                    renderError();
+                    callback ? callback(false) : null;
+                },
                 success: function (json) {
                     success(json, encode(query));
+                    callback ? callback(true) : null;
                 },
                 timeout: 5000,
                 url: searchUrl
