@@ -104,12 +104,6 @@ tl.youtubes = (function () {
             searchDiv.append(p);
         };
 
-        // If search results are returned as expected.
-        var success = function (json, query) {
-            window.location.hash = query;
-            render(clean(json), query);
-        };
-
         // search
         return function (query, callback) {
             $.ajax({
@@ -120,8 +114,15 @@ tl.youtubes = (function () {
                     callback ? callback(false) : null;
                 },
                 success: function (json) {
-                    success(json, encode(query));
-                    callback ? callback(true) : null;
+                    var success = true;
+                    try {
+                        query = encode(query);
+                        window.location.hash = query;
+                        render(clean(json), query);
+                    } catch (e) {
+                        success = false;
+                    }
+                    callback ? callback(success) : null;
                 },
                 timeout: 5000,
                 url: searchUrl
