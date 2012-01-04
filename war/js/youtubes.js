@@ -82,6 +82,7 @@ tl.youtubes = (function () {
             return outer;
         };
 
+        // Delete html of current search results.
         var remove = function () {
             var resultsDiv = $("#" + resultsDivId);
             if (resultsDiv) {
@@ -89,11 +90,13 @@ tl.youtubes = (function () {
             }
         };
 
+        // Draw new search results.
         var render = function (vids, query) {
             remove();
             searchDiv.append(html(vids, query));
         };
 
+        // If an problem occurs while searching.
         var renderError = function () {
             remove();
             var p = document.createElement("p");
@@ -101,11 +104,13 @@ tl.youtubes = (function () {
             searchDiv.append(p);
         };
 
+        // If search results are returned as expected.
         var success = function (json, query) {
             window.location.hash = query;
             render(clean(json), query);
         };
 
+        // search
         return function (query) {
             $.ajax({
                 data: {alt: "json", q: query},
@@ -121,11 +126,15 @@ tl.youtubes = (function () {
     }());
 
     $(document).ready(function () {
+        // Bind event handlers to the search form.
         searchDiv = $("#youtubes-search");
         searchDiv.find("form").submit(function () {
             search(searchDiv.find(":text").val());
             return false;
         });
+
+        // The hash represents a search. If one exists,
+        // then load search results for it.
         if (window.location.hash) {
             var noHash = window.location.hash.substr(1);
             search(decode(noHash));
