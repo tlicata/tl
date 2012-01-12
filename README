@@ -1,8 +1,8 @@
 # tl
-An attempt at a personal site written in Clojure.
+A site written in Clojure.
 
 ## Usage
 foreman start
 
 ## License
-Copyright (c) 2010 Timothy Licata
+Copyright (c) 2012 Timothy Licata
