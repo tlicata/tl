@@ -37,6 +37,20 @@ input {
     margin: .5em 0 .5em 0;
 }
 
+/* Photos */
+#photos img {
+    display: block;
+    margin: auto;
+    max-width: 100%;
+}
+#photos-nav ul {
+    margin-bottom: .5em;
+}
+#photos-nav li {
+    display: inline;
+    margin-right: .5em;
+}
+
 /* Youtubes */
 #youtubes {
     position: relative;

@@ -66,10 +66,11 @@ returns false. See also 'contains?'"
           previous (when (> index 0) (get pics (- index 1)))
           next (when (< index (- (count pics) 1)) (get pics (+ index 1)))]
        [:div#photos-nav
-        (link-to (first pics) "first")
-        (if (nil? previous) "previous" (link-to previous "previous"))
-        (if (nil? next) "next" (link-to next "next"))
-        (link-to (last pics) "latest")])))
+        [:ul
+         [:li (link-to (first pics) "first")]
+         [:li (if (nil? previous) "previous" (link-to previous "previous"))]
+         [:li (if (nil? next) "next" (link-to next "next"))]
+         [:li (link-to (last pics) "latest")]]])))
 
 (defn photos
   ([]
@@ -78,10 +79,9 @@ returns false. See also 'contains?'"
      (if (or (nil? name) (in? pics name))
        (let [htmlify (fn [name]
                        (when-not (nil? name)
-                         [:img {:style "display:block;margin:auto;"
-                                :src (str pics-base name pics-ext)}]))]
+                         [:img {:src (str pics-base name pics-ext)}]))]
              {:title ["Photos"]
-              :body [[:div
+              :body [[:div#photos
                       (photos-nav name)
                       (htmlify name)]]}))))
 
