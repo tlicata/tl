@@ -10,7 +10,7 @@
 (def yui-base "/css/lib/cssbase-min.css")
 (def yui-fonts "/css/lib/cssfonts-min.css")
 (def yui-reset "/css/lib/cssreset-min.css")
-(def main "/css/main.css")
+(def main "/css/main.css?1")
 
 (defn css [& more]
   (let [global [main yui-base yui-fonts yui-reset]]
