@@ -31,6 +31,9 @@ input {
     overflow: hidden;
     padding: 1em;
 }
+.current {
+    color: #999;
+}
 
 /* Maps */
 #maps p {
