@@ -5,7 +5,7 @@
         [hiccup.page-helpers :only [doctype include-css include-js link-to]]))
 
 (def analytics "/js/analytics.js")
-(def jquery "/js/lib/jquery.min.js")
+(def jquery "/js/lib/jquery-1.7.1.js")
 (def swfobject "/js/lib/swfobject.js")
 (def grid "/css/lib/reset-fonts-grids.css")
 
