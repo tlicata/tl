@@ -44,10 +44,8 @@ input {
 #photos img {
     display: block;
     margin: auto;
+    margin-top: .5em;
     max-width: 100%;
-}
-#photos-nav ul {
-    margin-bottom: .5em;
 }
 #photos-nav li {
     display: inline;
