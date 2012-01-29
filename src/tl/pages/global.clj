@@ -7,10 +7,13 @@
 (def analytics "/js/analytics.js")
 (def jquery "/js/lib/jquery-1.7.1.js")
 (def swfobject "/js/lib/swfobject.js")
-(def grid "/css/lib/reset-fonts-grids.css")
+(def yui-base "/css/lib/cssbase-min.css")
+(def yui-fonts "/css/lib/cssfonts-min.css")
+(def yui-reset "/css/lib/cssreset-min.css")
+(def main "/css/main.css")
 
 (defn css [& more]
-  (let [global [grid "/css/main.css"]]
+  (let [global [main yui-base yui-fonts yui-reset]]
     (apply include-css (concat global more))))
 
 (defn js [& more]
