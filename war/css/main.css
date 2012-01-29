@@ -28,6 +28,7 @@ input {
 }
 .blurb {
     background-color: #eee;
+    border-left: thick solid #5093E4;
     overflow: hidden;
     padding: 1em;
 }
