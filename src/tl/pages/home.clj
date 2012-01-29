@@ -70,7 +70,7 @@ returns false. See also 'contains?'"
         (if (nil? previous) "previous" (link-to previous "previous"))
         (if (nil? next) "next" (link-to next "next"))
         (link-to (last pics) "latest")])))
-           
+
 (defn photos
   ([]
      (photos nil))
