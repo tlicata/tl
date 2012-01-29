@@ -1,10 +1,8 @@
 /* Global */
 html {
-    background-color: #000;
     padding: 20px;
 }
 input {
-    background: #000;
     padding: .2em;
 }
 
@@ -19,25 +17,19 @@ input {
     color: #5093E4;
 }
 #ft {
-    margin-top: .5em;
     text-align: center;
 }
 #ft p, #ft li {
     display: inline;
     margin-right: 5px;
 }
-
-/* Classes */
-.blurb {
-    border: .4em solid #0856B3;
+#ft, .blurb {
     margin-top: 1em;
-    padding: 1em;
-    overflow: hidden;
-    -moz-border-radius: 1em;
-    -webkit-border-radius: 1em;
 }
-.current {
-    color: #FF9C00;
+.blurb {
+    background-color: #eee;
+    overflow: hidden;
+    padding: 1em;
 }
 
 /* Maps */
@@ -91,9 +83,6 @@ input {
 }
 #ft {
     font-size: 100%;
-}
-body, input, #hd a, #ft a {
-  color: #FFF;
 }
 h1, h2, h3 {
     color: #0856B3;
