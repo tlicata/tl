@@ -54,16 +54,7 @@ tl.youtubes = (function () {
         };
 
         var html = function (videos, query) {
-
             var outer = $("<div/>").attr("id", resultsDivId);
-            var zebra = function (arr) {
-                arr.each(function (idx, elem) {
-                    if (idx % 2 == 0) {
-                        $(elem).css("background", "#111");
-                    }
-                });
-            };
-
             if (videos.length) {
                 $.each(videos, function (idx, vid) {
                     outer.append($("<div/>").append(
@@ -77,7 +68,6 @@ tl.youtubes = (function () {
                             .html(tl.util.addCommas(vid.viewed).concat(" views"))
                     ));
                 });
-                zebra(outer.children());
             } else {
                 outer.html($("<p/>").text("No results found"));
             }
