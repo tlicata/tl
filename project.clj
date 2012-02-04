@@ -11,8 +11,7 @@
                  [ring "1.0.1"]
                  [ring/ring-jetty-adapter "0.3.9"]
                  [scriptjure "0.1.24"]]
-  :dev-dependencies [[ring-mock "0.1.1"]]
-  :keep-non-project-classes true)
+  :dev-dependencies [[ring-mock "0.1.1"]])
 
 (defn compile-clojurescript
   [task project & args]
