@@ -7,8 +7,7 @@
                  [ring "1.0.1"]
                  [ring/ring-jetty-adapter "0.3.9"]
                  [scriptjure "0.1.24"]]
-  :dev-dependencies [[ring-mock "0.1.1"]
-                     [swank-clojure "1.3.4"]]
+  :dev-dependencies [[ring-mock "0.1.1"]]
   :keep-non-project-classes true)
 
 
