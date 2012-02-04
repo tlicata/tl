@@ -1,17 +1,15 @@
 (ns tl.pages.home
-  (:use [clojure.contrib.str-utils :only [str-join]]
-        [clojure.contrib.json :only [read-json]]
+  (:use [clojure.data.json :only [read-json]]
+        [clojure.string :only [join]]
         [hiccup.page-helpers :only [link-to]]
         [ring.util.codec :only [url-encode]]
         [tl.pages.global :only [swfobject]])
-  (:require [appengine-magic.services.user :as us]
-            [appengine-magic.services.url-fetch :as url]
-            [com.reasonr.scriptjure :as script]))
+  (:require [com.reasonr.scriptjure :as script]))
 
-(def welcome-blurb [:p (str-join "  -  " ["Tim Licata"
-                                          "Programmer"
-                                          "( Golfer | Ping Ponger | Shuffler )"
-                                          "( Lockport, NY | San Francisco, CA )"])])
+(def welcome-blurb [:p (join "  -  " ["Tim Licata"
+                                      "Programmer"
+                                      "( Golfer | Ping Ponger | Shuffler )"
+                                      "( Lockport, NY | San Francisco, CA )"])])
 
 (defn home-page []
   {:title ["Home"]
@@ -24,14 +22,13 @@
 (defn admin-page []
   {:title ["Admin"]
    :body [[:div
-           [:p "You're an admin baby"]
-           (link-to (us/logout-url) "Log out")]]})
+           [:p "You lie"]]]})
 
 (defn login-page []
   {:title ["Login"]
-   :body [[:div [:p (if (us/user-logged-in?)
-                      (link-to (us/logout-url) "Log out")
-                      (link-to (us/login-url) "Log in"))]]]})
+   :body [[:div
+           [:p "Do you want to make more money?"]
+           [:p "Sure, we all do"]]]})
 
 (defn cljs []
   {:title ["ClojureScript"]
@@ -78,11 +75,12 @@ returns false. See also 'contains?'"
           previous (when (> index 0) (get pics (- index 1)))
           next (when (< index (- (count pics) 1)) (get pics (+ index 1)))]
        [:div#photos-nav
-        (link-to (first pics) "first")
-        (if (nil? previous) "previous" (link-to previous "previous"))
-        (if (nil? next) "next" (link-to next "next"))
-        (link-to (last pics) "latest")])))
-           
+        [:ul
+         [:li (link-to (first pics) "first")]
+         [:li (if (nil? previous) "previous" (link-to previous "previous"))]
+         [:li (if (nil? next) "next" (link-to next "next"))]
+         [:li (link-to (last pics) "latest")]]])))
+
 (defn photos
   ([]
      (photos nil))
@@ -90,10 +88,9 @@ returns false. See also 'contains?'"
      (if (or (nil? name) (in? pics name))
        (let [htmlify (fn [name]
                        (when-not (nil? name)
-                         [:img {:style "display:block;margin:auto;"
-                                :src (str pics-base name pics-ext)}]))]
+                         [:img {:src (str pics-base name pics-ext)}]))]
              {:title ["Photos"]
-              :body [[:div
+              :body [[:div#photos
                       (photos-nav name)
                       (htmlify name)]]}))))
 
@@ -110,6 +107,7 @@ returns false. See also 'contains?'"
              {:title "Handsome Jack - last 1/2 of Love Machine" :id "5QFnWu0WRnY"}
              {:title "Neil Young - Heart of Gold" :id "Eh44QPT1mPE"}
              {:title "Neil Young & Pearl Jam" :id "PTTsyk-pyd8"}
+             {:title "Pearl Jam - Untitled / MFC" :id "Cg22Z6bUklY"}
              {:title "Rush - Subdivisions" :id "DNoMCh6okuo"}
              {:title "Rush - Tom Sawyer (featuring South Park)" :id "JFGVDWc_5Q8"}
              {:title "Rush - Workin Man" :id "EYRYGr9vynw"}
@@ -132,9 +130,12 @@ returns false. See also 'contains?'"
                   videos)
              :ul)))
 
+;; Used to use appengine-magic to fetch a url within
+;; the appengine restrictions.  Should replace with
+;; another library like clj-http.
 (defn youtube-search-fetch [query]
   (let [url (str search-url "?q=" (url-encode query) "&alt=json")]
-    (try (url/fetch url) (catch Error _ nil))))
+    {:reponse nil}))
 
 (defn youtube-search-parse [response]
   (let [bytes (:content response)
@@ -160,7 +161,7 @@ returns false. See also 'contains?'"
                     results)))))
 
 (defn youtubes [video query]
-  {:js #{"/js/youtubes.js" swfobject}
+  {:js #{"/js/youtubes.js?1" swfobject}
    :title ["Hello Youtubes"]
    :body [[:div#youtubes
            [:div.left (youtube-list)]

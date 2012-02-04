@@ -1,8 +1,31 @@
-# timothy-licata-app
-An attempt at a personal site written in Clojure.
+# tl
+A site written in Clojure.
 
-## Usage
-Build with Leiningen.  Deploy to Google App Engine.
+## Local Development
+
+Foreman will launch a local verion of the site
+from the command line. This is fine for html/js/css
+development, but has the drawback of needing to
+restart for refreshing jvm changes.
+
+1) install foreman
+sudo apt-get install foreman
+-or?-
+sudo gem install foreman
+2) start foreman
+foreman start
+
+The better way is to get  interactive dev through
+emacs and Swank Clojure.
+
+1) Follow installation instructions here:
+http://github.com/technomancy/swank-clojure
+
+## Deploy
+1) Add heroku repo as git remote.
+git remote add heroku <app-url.git>
+3) Push to heroku.
+git push heroku master
 
 ## License
-Copyright (c) 2010 Timothy Licata
+Copyright (c) 2012 Timothy Licata

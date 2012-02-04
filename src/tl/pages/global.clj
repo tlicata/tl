@@ -1,20 +1,24 @@
 (ns tl.pages.global
-  (:use [clojure.contrib.str-utils :only [str-join]]
+  (:use [clojure.string :only [join]]
         [clojure.set :only [union]]
         [hiccup.core :only [html]]
         [hiccup.page-helpers :only [doctype include-css include-js link-to]]))
 
-(def jquery "/js/lib/jquery.min.js")
+(def analytics "/js/analytics.js")
+(def jquery "/js/lib/jquery-1.7.1.js")
 (def swfobject "/js/lib/swfobject.js")
-(def grid "/css/lib/reset-fonts-grids.css")
+(def yui-base "/css/lib/cssbase-min.css")
+(def yui-fonts "/css/lib/cssfonts-min.css")
+(def yui-reset "/css/lib/cssreset-min.css")
+(def main "/css/main.css?1")
 
 (defn css [& more]
-  (let [global [grid "/css/main.css"]]
+  (let [global [main yui-base yui-fonts yui-reset]]
     (apply include-css (concat global more))))
 
 (defn js [& more]
   (let [global [jquery]]
-    (apply include-js (concat global more))))
+    (apply include-js (concat global more [analytics]))))
 
 (defn blurb [html]
   "Wrap in an blurb div. Unless it's a script tag"
@@ -34,7 +38,7 @@
 (defn head [title css-arg js-arg]
   (vec
    (concat
-    [:head [:title (str-join " - " (cons "Tim's Online World" title))]]
+    [:head [:title (join " - " (cons "Tim's Online World" title))]]
     (vec (apply css css-arg))
     (vec (apply js js-arg)))))
 

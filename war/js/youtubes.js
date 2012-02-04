@@ -26,9 +26,9 @@ tl.youtubes = (function () {
     var searchDiv = null;
     var searchUrl = "http://gdata.youtube.com/feeds/api/videos";
 
-    var play = function (video, autoplay, loopMode) {
+    var play = function (url, autoplay, loopMode) {
         $(function () {
-            swfobject.embedSWF(video, "swf", "100%", "290px", "9", null,
+            swfobject.embedSWF(url, "swf", "100%", "100%", "9", null,
                                {autoplay: autoplay, loop: loopMode});
         });
     };
@@ -54,34 +54,27 @@ tl.youtubes = (function () {
         };
 
         var html = function (videos, query) {
-
-            var zebra = function (arr) {
-                arr.each(function (idx, elem) {
-                    if (idx % 2 == 0) {
-                        $(elem).css("background", "#111");
-                    }
-                });
-            };
-
             var outer = $("<div/>").attr("id", resultsDivId);
-            $.each(videos, function (idx, vid) {
-                outer.append($("<div/>").append(
-                    $("<img/>")
-                        .attr("src", vid.thumb),
-                    $("<a/>")
-                        .attr("href", vid.id.concat("#", query))
-                        .html(vid.title),
-                    $("<span/>")
-                        .addClass("views")
-                        .html(tl.util.addCommas(vid.viewed).concat(" views"))
-                ));
-            });
-
-            zebra(outer.children());
-
+            if (videos.length) {
+                $.each(videos, function (idx, vid) {
+                    outer.append($("<div/>").append(
+                        $("<img/>")
+                            .attr("src", vid.thumb),
+                        $("<a/>")
+                            .attr("href", vid.id.concat("#", query))
+                            .html(vid.title),
+                        $("<span/>")
+                            .addClass("views")
+                            .html(tl.util.addCommas(vid.viewed).concat(" views"))
+                    ));
+                });
+            } else {
+                outer.html($("<p/>").text("No results found"));
+            }
             return outer;
         };
 
+        // Delete html of current search results.
         var remove = function () {
             var resultsDiv = $("#" + resultsDivId);
             if (resultsDiv) {
@@ -89,11 +82,13 @@ tl.youtubes = (function () {
             }
         };
 
+        // Draw new search results.
         var render = function (vids, query) {
             remove();
             searchDiv.append(html(vids, query));
         };
 
+        // If an problem occurs while searching.
         var renderError = function () {
             remove();
             var p = document.createElement("p");
@@ -101,18 +96,25 @@ tl.youtubes = (function () {
             searchDiv.append(p);
         };
 
-        var success = function (json, query) {
-            window.location.hash = query;
-            render(clean(json), query);
-        };
-
-        return function (query) {
+        // search
+        return function (query, callback) {
             $.ajax({
                 data: {alt: "json", q: query},
                 dataType: "jsonp",
-                error: renderError,
+                error: function () {
+                    renderError();
+                    callback ? callback(false) : null;
+                },
                 success: function (json) {
-                    success(json, encode(query));
+                    var success = true;
+                    try {
+                        query = encode(query);
+                        window.location.hash = query;
+                        render(clean(json), query);
+                    } catch (e) {
+                        success = false;
+                    }
+                    callback ? callback(success) : null;
                 },
                 timeout: 5000,
                 url: searchUrl
@@ -121,11 +123,15 @@ tl.youtubes = (function () {
     }());
 
     $(document).ready(function () {
+        // Bind event handlers to the search form.
         searchDiv = $("#youtubes-search");
         searchDiv.find("form").submit(function () {
             search(searchDiv.find(":text").val());
             return false;
         });
+
+        // The hash represents a search. If one exists,
+        // then load search results for it.
         if (window.location.hash) {
             var noHash = window.location.hash.substr(1);
             search(decode(noHash));

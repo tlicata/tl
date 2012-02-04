@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="/css/lib/qunit.css" type="text/css" media="screen" />
   <script type="text/javascript" src="/js/lib/qunit.js"></script>
   <script type="text/javascript" src="/js/lib/jquery.min.js"></script>
-  <script type="text/javascript" src="/js/youtubes.js"></script>
+  <script type="text/javascript" src="/js/youtubes.js?1"></script>
   <title>Tim's Online World of Tests</title>
 
   <script>
@@ -19,6 +19,15 @@ test("adding commas to a number", function () {
     equals(tl.util.addCommas("123456789"), "123,456,789");
     equals(tl.util.addCommas("12"), "12");
     equals(tl.util.addCommas("1234.56"), "1,234.56");
+});
+
+module("Youtubes");
+
+asyncTest("search youtube", function () {
+    tl.youtubes.search("bumble bee tuna", function (success) {
+        ok(success);
+        start();
+    });
 });
 
   });
