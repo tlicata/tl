@@ -15,11 +15,15 @@ sudo gem install foreman
 2) start foreman
 foreman start
 
-The better way is to get  interactive dev through
+The better way is to get interactive dev through
 emacs and Swank Clojure.
 
 1) Follow installation instructions here:
 http://github.com/technomancy/swank-clojure
+2) M-x clojure-jack-in
+4) In core.clj, compile with C-c C-k
+3) At Slime repl, start server
+user> (tl.core/dev-main)
 
 ## Deploy
 1) Add heroku repo as git remote.
