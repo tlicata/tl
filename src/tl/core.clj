@@ -52,3 +52,6 @@
 (defn -main []
   (let [port (Integer/parseInt (System/getenv "PORT"))]
     (jetty/run-jetty app {:port port})))
+
+(defn dev-main []
+  (jetty/run-jetty app {:port 5000}))
