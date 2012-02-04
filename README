@@ -24,6 +24,8 @@ http://github.com/technomancy/swank-clojure
 4) In core.clj, compile with C-c C-k
 3) At Slime repl, start server
 user> (tl.core/dev-main)
+4) Get clojurescript compiling. In new terminal,
+$ lein cljsbuild auto
 
 ## Deploy
 1) Add heroku repo as git remote.
