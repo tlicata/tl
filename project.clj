@@ -9,7 +9,12 @@
                  [scriptjure "0.1.24"]]
   :dev-dependencies [[lein-cljsbuild "0.0.11"]
                      [ring-mock "0.1.1"]]
-  :cljsbuild {:source-path "src-cljs/tl"
-              :compiler {:output-to "war/js/bin/all.js"
-                         :optimizations :advanced}}
+  :cljsbuild [{:source-path "src-cljs"
+               :compiler {:output-to "war/js/bin/all.min.js"
+                          :optimizations :advanced
+                          :pretty-print false}}
+              {:source-path "src-cljs"
+               :compiler {:output-to "war/js/bin/all.js"
+                          :optimizations :simple
+                          :pretty-print true}}]
   :hooks [leiningen.cljsbuild])
