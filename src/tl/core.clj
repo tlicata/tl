@@ -1,8 +1,8 @@
 (ns tl.core
   (:use
-   [compojure.core :only [defroutes GET]]
+   [compojure.core :only [defroutes DELETE GET POST]]
    [tl.pages
-    [ltcc :only [ltcc]]
+    [ltcc :only [ltcc ltcc-add ltcc-remove]]
     [maps :only [map-page]]]
    [ring.middleware.file :only [wrap-file]]
    [ring.middleware.file-info :only [wrap-file-info]]
@@ -17,7 +17,9 @@
   (GET "/" [] (pages/home-page))
   (GET "/contact/" []  (pages/contact-page))
   (GET "/login/" [] (pages/login-page))
+  (DELETE "/ltcc/" [foo] (ltcc-remove foo))
   (GET "/ltcc/" []  (ltcc))
+  (POST "/ltcc/" [foo bar] (ltcc-add foo bar))
   (GET "/photos/" [] (pages/photos))
   (GET "/photos/:id" [id] (pages/photos id))
   (GET "/youtubes/" [query] (pages/youtubes nil query))
