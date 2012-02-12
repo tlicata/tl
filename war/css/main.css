@@ -36,6 +36,11 @@ input {
     color: #999;
 }
 
+/* Ltcc */
+#ltcc td {
+    padding: .1em .4em .1em .4em;
+}
+
 /* Maps */
 #maps p {
     margin: .5em 0 .5em 0;

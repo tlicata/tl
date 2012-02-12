@@ -39,7 +39,7 @@
         rows (map get-row-by-key keys)]
     {:title ["Ltcc"]
      :body [[:div (get-form-for-add)]
-            [:div (vec (concat [:table] rows))]]
+            [:div#ltcc (vec (concat [:table] rows))]]
      :js ["/js/bin/all.js"]}))
 
 (defn ltcc-add [foo bar]
