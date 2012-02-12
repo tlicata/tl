@@ -1,9 +1,9 @@
 (ns tl.pages.ltcc
-  (:use [hiccup.page-helpers :only [link-to]])
+  (:use [hiccup.core :only [escape-html]]
+        [hiccup.page-helpers :only [link-to]])
   (:require [com.reasonr.scriptjure :as script]
             [clj-redis.client :as redis]
-            [hiccup.form-helpers :as form]
-            [ring.util.codec :as codec]))
+            [hiccup.form-helpers :as form]))
 
 (def db-url (System/getenv "REDISTOGO_URL"))
 (def db (redis/init (when db-url {:url db-url})))
@@ -28,8 +28,8 @@
                 (form/submit-button "delete")))
 
 (defn get-row-by-key [key]
-  (let [safe (codec/url-encode key)
-        value (codec/url-encode (retrieve key))
+  (let [safe (escape-html key)
+        value (escape-html (retrieve key))
         delete (get-form-for-delete key)]
     [:tr [:td safe] [:td value] [:td delete]]))
 
