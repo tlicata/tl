@@ -1,6 +1,7 @@
 (ns tl.pages.ltcc
   (:use [hiccup.core :only [escape-html]]
-        [hiccup.page-helpers :only [link-to]])
+        [hiccup.page-helpers :only [link-to]]
+        [ring.util.response :only [redirect]])
   (:require [com.reasonr.scriptjure :as script]
             [clj-redis.client :as redis]
             [hiccup.form-helpers :as form]))
@@ -44,9 +45,9 @@
 (defn ltcc-add [foo bar]
   (do
     (add foo bar)
-    (ltcc)))
+    (redirect "/ltcc/")))
 
 (defn ltcc-remove [foo]
   (do
     (delete [foo])
-    (ltcc)))
+    (redirect "/ltcc/")))
