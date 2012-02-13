@@ -18,9 +18,7 @@
   (GET "/" [] (pages/home-page))
   (GET "/contact/" []  (pages/contact-page))
   (GET "/login/" [] (pages/login-page))
-  (DELETE "/ltcc/" [foo] (ltcc-remove foo))
   (GET "/ltcc/" []  (ltcc))
-  (POST "/ltcc/" [foo bar] (ltcc-add foo bar))
   (GET "/photos/" [] (pages/photos))
   (GET "/photos/:id" [id] (pages/photos id))
   (GET "/youtubes/" [query] (pages/youtubes nil query))
@@ -31,7 +29,9 @@
   (GET "/maps/:kind" [kind] (map-page kind)))
 
 (defroutes admin-routes
-  (GET "/admin/" [] (pages/admin-page)))
+  (GET "/admin/" [] (pages/admin-page))
+  (DELETE "/ltcc/" [foo] (ltcc-remove foo))
+  (POST "/ltcc/" [foo bar] (ltcc-add foo bar)))
 
 (defroutes error-routes
   (route/not-found "Not Found"))
