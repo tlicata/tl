@@ -10,6 +10,7 @@
                  [scriptjure "0.1.24"]]
   :dev-dependencies [[lein-cljsbuild "0.0.11"]
                      [ring-mock "0.1.1"]]
+  :aot [tl.core]
   :cljsbuild [{:source-path "src-cljs"
                :compiler {:output-to "war/js/bin/all.min.js"
                           :optimizations :advanced
