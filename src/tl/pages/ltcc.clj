@@ -13,10 +13,10 @@
   (redis/set db key val))
 (defn delete [key]
   (redis/del db key))
-(defn keys []
-  (redis/keys db))
 (defn retrieve [key]
   (redis/get db key))
+(defn get-all-keys []
+  (redis/keys db))
 
 (defn get-form-for-add []
   (form/form-to [:post ""]
@@ -35,7 +35,7 @@
     [:tr [:td safe] [:td value] [:td delete]]))
 
 (defn ltcc []
-  (let [keys (keys)
+  (let [keys (get-all-keys)
         rows (map get-row-by-key keys)]
     {:title ["Ltcc"]
      :body [[:div (get-form-for-add)]
