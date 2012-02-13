@@ -7,7 +7,8 @@
    [ring.middleware.file :only [wrap-file]]
    [ring.middleware.file-info :only [wrap-file-info]]
    [ring.middleware.lint :only [wrap-lint]]
-   [ring.middleware.params :only [wrap-params]])
+   [ring.middleware.params :only [wrap-params]]
+   [ring.middleware.session :only [wrap-session]])
   (:require [compojure.route :as route]
             [ring.adapter.jetty :as jetty]
             [tl.pages.home :as pages]
@@ -45,6 +46,7 @@
 (def app
      (-> #'all-routes
          wrap-params
+         wrap-session
          mw/wrap-layout
          mw/wrap-current-link
          mw/wrap-html
