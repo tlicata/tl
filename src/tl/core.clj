@@ -59,4 +59,5 @@
     (jetty/run-jetty app {:port port})))
 
 (defn dev-main []
-  (jetty/run-jetty app {:port 8080}))
+  (future
+    (jetty/run-jetty app {:port 8080})))
