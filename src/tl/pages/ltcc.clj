@@ -10,13 +10,17 @@
 (def db (redis/init (when db-url {:url db-url})))
 
 (defn add [key val]
-  (redis/set db key val))
+  (try (redis/set db key val)
+       (catch Exception e nil)))
 (defn delete [key]
-  (redis/del db key))
+  (try (redis/del db key)
+       (catch Exception e nil)))
 (defn retrieve [key]
-  (redis/get db key))
+  (try (redis/get db key)
+       (catch Exception e "unreachable")))
 (defn get-all-keys []
-  (redis/keys db))
+  (try (redis/keys db)
+       (catch Exception e ["database"])))
 
 (defn get-form-for-add []
   (form/form-to [:post ""]
