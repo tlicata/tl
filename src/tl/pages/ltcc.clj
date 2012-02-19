@@ -38,7 +38,7 @@
         delete (get-form-for-delete key)]
     [:tr [:td safe] [:td value] [:td delete]]))
 
-(defn ltcc []
+(defn ltcc-home []
   (let [keys (get-all-keys)
         rows (map get-row-by-key keys)]
     {:title ["Ltcc"]
