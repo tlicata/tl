@@ -29,7 +29,7 @@
   (GET "/maps/:kind" [kind] (map-page kind)))
 
 (defroutes admin-routes
-  (GET "/admin/" [] (pages/admin-page))
+  (GET "/admin/" request (pages/admin-page request))
   (DELETE "/ltcc/" [foo] (ltcc/ltcc-remove foo))
   (POST "/ltcc/" [foo bar] (ltcc/ltcc-add foo bar)))
 

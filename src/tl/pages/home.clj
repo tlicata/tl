@@ -1,6 +1,7 @@
 (ns tl.pages.home
   (:use [clojure.data.json :only [read-json]]
         [clojure.string :only [join]]
+        [clojure.pprint :only [pprint]]
         [hiccup.page-helpers :only [link-to]]
         [ring.util.codec :only [url-encode]]
         [tl.pages.global :only [swfobject]])
@@ -19,10 +20,16 @@
   {:title ["Contact"]
    :body [[:div [:p "You can write to me at tim at this domain name."]]]})
 
-(defn admin-page []
-  {:title ["Admin"]
-   :body [[:div
-           [:p "You lie"]]]})
+(defn admin-page [request]
+  (let [auth (:basic-authentication request)
+        headers (:headers request)
+        session (:session request)
+        counter (:counter session 0)]
+    {:title ["Admin"]
+     :body [[:div [:p (with-out-str (pprint session))]]
+            [:div [:p (with-out-str (pprint auth))]]
+            [:div [:p (with-out-str (pprint headers))]]]
+     :session (assoc session :counter (inc counter))}))
 
 (defn login-page []
   {:title ["Login"]
