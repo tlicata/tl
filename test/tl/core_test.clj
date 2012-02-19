@@ -6,6 +6,7 @@
 (def valid-routes ["/"
                    "/contact/"
                    "/login/"
+                   "/ltcc/"
                    "/maps/"
                    "/maps/google"
                    "/photos/"
@@ -28,5 +29,11 @@
 (deftest test-invalid-routes
   (doseq [route invalid-routes]
     (let [response (all-routes (request :get route))]
-      (is (= (:status response) 404) route))))
-         
+      (is (= (:status response) 401) route))))
+
+(deftest test-auth
+  (let [responses [(app (request :get "/admin/"))
+                   (app (request :post "/ltcc/"))
+                   (app (request :delete "/ltcc/"))]]
+        (doseq [response responses]
+          (is (= (:status response) 401)))))
