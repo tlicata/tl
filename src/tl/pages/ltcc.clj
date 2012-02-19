@@ -9,6 +9,10 @@
 (def db-url (System/getenv "REDISTOGO_URL"))
 (def db (redis/init (when db-url {:url db-url})))
 
+(defn authenticated? [name pass]
+  (when (and (= name "tim") (= pass "word"))
+    {:user name}))
+
 (defn add [key val]
   (try (redis/set db key val)
        (catch Exception e nil)))
