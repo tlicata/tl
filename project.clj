@@ -3,6 +3,7 @@
   :dependencies [[clj-redis "0.0.12"]
                  [compojure "1.0.0"]
                  [hiccup "0.3.8"]
+                 [noir "1.2.2"]
                  [org.clojure/clojure "1.3.0"]
                  [org.clojure/data.json "0.1.1"]
                  [ring "1.0.1"]

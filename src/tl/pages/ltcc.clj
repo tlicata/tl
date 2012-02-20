@@ -1,7 +1,9 @@
 (ns tl.pages.ltcc
   (:use [hiccup.core :only [escape-html]]
         [hiccup.page-helpers :only [link-to]]
-        [ring.util.response :only [redirect]])
+        [noir.core :only [defpage]]
+        [ring.util.response :only [redirect]]
+        [tl.pages.global :only [pagify]])
   (:require [com.reasonr.scriptjure :as script]
             [clj-redis.client :as redis]
             [hiccup.form-helpers :as form]))
@@ -38,20 +40,21 @@
         delete (get-form-for-delete key)]
     [:tr [:td safe] [:td value] [:td delete]]))
 
-(defn ltcc-home []
+(defpage "/ltcc/" []
   (let [keys (get-all-keys)
         rows (map get-row-by-key keys)]
-    {:title ["Ltcc"]
-     :body [[:div (get-form-for-add)]
-            [:div#ltcc (vec (concat [:table] rows))]]
-     :js ["/js/bin/all.js"]}))
+    (pagify
+     {:title ["Ltcc"]
+      :body [[:div (get-form-for-add)]
+             [:div#ltcc (vec (concat [:table] rows))]]
+      :js ["/js/bin/all.js"]})))
 
-(defn ltcc-add [foo bar]
+(defpage [:post "/ltcc/"] {:keys [foo bar]}
   (do
     (add foo bar)
     (redirect "/ltcc/")))
 
-(defn ltcc-remove [foo]
+(defpage [:delete "/ltcc/"] {:keys [foo]}
   (do
     (delete [foo])
     (redirect "/ltcc/")))

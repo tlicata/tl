@@ -81,3 +81,11 @@
 
 (defn convert-to-html [body]
   (html (doctype :xhtml-strict) body))
+
+(defn pagify [obj]
+  (when-not (nil? obj)
+    (let [layout (wrap-in-layout (:title obj)
+                                 (:css obj)
+                                 (:js obj)
+                                 (:body obj))]
+      (assoc obj :body (convert-to-html layout)))))

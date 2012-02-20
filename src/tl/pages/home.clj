@@ -2,9 +2,10 @@
   (:use [clojure.data.json :only [read-json]]
         [clojure.string :only [join]]
         [clojure.pprint :only [pprint]]
+        [noir.core :only [defpage]]
         [hiccup.page-helpers :only [link-to]]
         [ring.util.codec :only [url-encode]]
-        [tl.pages.global :only [swfobject]])
+        [tl.pages.global :only [pagify swfobject]])
   (:require [com.reasonr.scriptjure :as script]))
 
 (def welcome-blurb [:p (join "  -  " ["Tim Licata"
@@ -12,37 +13,29 @@
                                       "( Golfer | Ping Ponger | Shuffler )"
                                       "( Lockport, NY | San Francisco, CA )"])])
 
-(defn home-page []
-  {:title ["Home"]
-   :body [welcome-blurb]})
+(defpage "/" []
+  (pagify {:title ["Home"]
+           :body [welcome-blurb]}))
 
-(defn contact-page []
-  {:title ["Contact"]
-   :body [[:div [:p "You can write to me at tim at this domain name."]]]})
+(defpage "/contact/" []
+  (pagify
+   {:title ["Contact"]
+    :body [[:div [:p "You can write to me at tim at this domain name."]]]}))
 
-(defn admin-page [request]
-  (let [auth (:basic-authentication request)
-        headers (:headers request)
+(defpage "/admin/" request
+  (let [headers (:headers request)
         session (:session request)
         counter (:counter session 0)]
-    {:title ["Admin"]
-     :body [[:div [:p (with-out-str (pprint session))]]
-            [:div [:p (with-out-str (pprint auth))]]
-            [:div [:p (with-out-str (pprint headers))]]]
-     :session (assoc session :counter (inc counter))}))
+    (pagify {:title ["Admin"]
+             :body [[:div [:p (with-out-str (pprint session))]]
+                    [:div [:p (with-out-str (pprint headers))]]]
+             :session (assoc session :counter (inc counter))})))
 
-(defn login-page []
-  {:title ["Login"]
-   :body [[:div
-           [:p "Do you want to make more money?"]
-           [:p "Sure, we all do"]]]})
-
-(defn cljs []
-  {:title ["ClojureScript"]
-   :body [[:div
-           [:p "Greetings"]
-           [:script (script/js (tl.greet))]]]
-   :js ["/js/bin/all.js"]})
+(defpage "/login/" []
+  (pagify {:title ["Login"]
+           :body [[:div
+                   [:p "Do you want to make more money?"]
+                   [:p "Sure, we all do"]]]}))
 
 (def pics-base "http://dl.dropbox.com/u/2163446/photos/")
 (def pics-ext ".jpg")
@@ -86,18 +79,18 @@ returns false. See also 'contains?'"
          [:li (if (nil? next) "next" (link-to next "next"))]
          [:li (link-to (last pics) "latest")]]])))
 
-(defn photos
-  ([]
-     (photos nil))
-  ([name]
-     (if (or (nil? name) (in? pics name))
-       (let [htmlify (fn [name]
-                       (when-not (nil? name)
-                         [:img {:src (str pics-base name pics-ext)}]))]
-             {:title ["Photos"]
-              :body [[:div#photos
-                      (photos-nav name)
-                      (htmlify name)]]}))))
+(defn photos [name]
+  (if (or (nil? name) (in? pics name))
+    (let [htmlify (fn [name]
+                    (when-not (nil? name)
+                      [:img {:src (str pics-base name pics-ext)}]))]
+      {:title ["Photos"]
+       :body [[:div#photos
+               (photos-nav name)
+               (htmlify name)]]})))
+
+(defpage "/photos/" [] (fn [_] (pagify (photos nil))))
+(defpage "/photos/:name" {name :name} (fn [_] (pagify (photos name))))
 
 (def videos [{:title "Ronald Jenkees - Stay Crunchy" :id "lg8LfoyDFUM"}
              {:title "Ronald Jenkees - All of my Love" :id "j-ryKQx4DdQ"}
@@ -184,3 +177,8 @@ returns false. See also 'contains?'"
              (script/js (tl.youtubes.play (script/clj (str embed-url video))
                                           (script/clj 1)
                                           (script/clj 1)))])]})
+
+(defpage "/youtubes/" {query :query} (pagify (youtubes nil query)))
+(defpage "/youtubes/:video" {:keys [video query]}
+  (pagify (youtubes video query)))
+
