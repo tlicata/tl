@@ -1,6 +1,7 @@
 (ns tl.core-test
   (:use [tl.core] :reload-all)
   (:use [clojure.test])
+  (:use [noir.util.test])
   (:use [ring.mock.request]))
 
 (def valid-routes ["/"
@@ -21,19 +22,22 @@
                      "/maps/polymaps"
                      "/photos/garbage"])
 
+(def admin-routes ["/admin/"
+                   [:post "/ltcc/"]
+                   [:delete "/ltcc/"]])
+
+(defn is-status [route status]
+  (-> (send-request route)
+      (has-status status)))
+
 (deftest test-routes
   (doseq [route valid-routes]
-    (let [response (all-routes (request :get route))]
-      (is (= (:status response) 200) route))))
+    (is-status route 200)))
 
 (deftest test-invalid-routes
   (doseq [route invalid-routes]
-    (let [response (all-routes (request :get route))]
-      (is (= (:status response) 401) route))))
+    (is-status route 404)))
 
 (deftest test-auth
-  (let [responses [(app (request :get "/admin/"))
-                   (app (request :post "/ltcc/"))
-                   (app (request :delete "/ltcc/"))]]
-        (doseq [response responses]
-          (is (= (:status response) 401)))))
+  (doseq [route admin-routes]
+    (is-status route 404)))
