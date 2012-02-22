@@ -25,12 +25,12 @@
        (catch Exception e ["database"])))
 
 (defn get-form-for-add []
-  (form/form-to [:post ""]
+  (form/form-to [:post "/admin/ltcc/"]
                 (form/text-field :foo)
                 (form/text-field :bar)
                 (form/submit-button "submit")))
 (defn get-form-for-delete [key]
-  (form/form-to [:delete ""]
+  (form/form-to [:delete "/admin/ltcc/"]
                 (form/hidden-field :foo key)
                 (form/submit-button "delete")))
 
@@ -49,12 +49,12 @@
              [:div#ltcc (vec (concat [:table] rows))]]
       :js ["/js/bin/all.js"]})))
 
-(defpage [:post "/ltcc/"] {:keys [foo bar]}
+(defpage [:post "/admin/ltcc/"] {:keys [foo bar]}
   (do
     (add foo bar)
     (redirect "/ltcc/")))
 
-(defpage [:delete "/ltcc/"] {:keys [foo]}
+(defpage [:delete "/admin/ltcc/"] {:keys [foo]}
   (do
     (delete [foo])
     (redirect "/ltcc/")))

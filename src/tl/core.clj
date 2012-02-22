@@ -1,7 +1,12 @@
 (ns tl.core
-  (:use [noir.core :only [defpage]])
+  (:use [noir.core :only [defpage pre-route]])
   (:require [noir.server :as server]
+            [noir.session :as session]
             [tl.middleware :as mw]))
+
+(pre-route "/admin/*" {} (when-not (session/get :admin)
+                          {:status 401
+                           :body "Not Authorized"}))
 
 (server/load-views "src/tl/pages/")
 

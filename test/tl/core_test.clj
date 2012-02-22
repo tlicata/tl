@@ -23,8 +23,7 @@
                      "/photos/garbage"])
 
 (def admin-routes ["/admin/"
-                   [:post "/ltcc/"]
-                   [:delete "/ltcc/"]])
+                   "/admin/ltcc/"])
 
 (defn is-status [route status]
   (-> (send-request route)
@@ -40,4 +39,4 @@
 
 (deftest test-auth
   (doseq [route admin-routes]
-    (is-status route 404)))
+    (is-status route 401)))
