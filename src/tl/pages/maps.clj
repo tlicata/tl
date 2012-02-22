@@ -1,6 +1,7 @@
 (ns tl.pages.maps
   (:use [hiccup.page-helpers :only [link-to]]
-        [tl.pages.global :only [reduce-blurbs swfobject]]))
+        [noir.core :only [defpage]]
+        [tl.pages.global :only [reduce-blurbs pagify swfobject]]))
 
 (def map-css "/css/maps.css")
 
@@ -29,8 +30,7 @@
            [:p "A playground for different browser-based maps."]
            (map-links-list)]]})
 
-(defn map-page
-  ([] (summary))
-  ([kind]
-     (if-let [map-type ((keyword kind) maps)]
-       (reduce-blurbs (summary) map-type))))
+(defpage "/maps/" [] (fn [_] (pagify (summary))))
+(defpage "/maps/:kind" {kind :kind}
+  (if-let [map-type ((keyword kind) maps)]
+    (pagify (reduce-blurbs (summary) map-type))))

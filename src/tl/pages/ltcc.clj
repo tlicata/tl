@@ -1,17 +1,15 @@
 (ns tl.pages.ltcc
   (:use [hiccup.core :only [escape-html]]
         [hiccup.page-helpers :only [link-to]]
-        [ring.util.response :only [redirect]])
+        [noir.core :only [defpage]]
+        [ring.util.response :only [redirect]]
+        [tl.pages.global :only [pagify]])
   (:require [com.reasonr.scriptjure :as script]
             [clj-redis.client :as redis]
             [hiccup.form-helpers :as form]))
 
 (def db-url (System/getenv "REDISTOGO_URL"))
 (def db (redis/init (when db-url {:url db-url})))
-
-(defn authenticated? [name pass]
-  (when (and (= name "tim") (= pass "word"))
-    {:user name}))
 
 (defn add [key val]
   (try (redis/set db key val)
@@ -27,12 +25,12 @@
        (catch Exception e ["database"])))
 
 (defn get-form-for-add []
-  (form/form-to [:post ""]
+  (form/form-to [:post "/admin/ltcc/"]
                 (form/text-field :foo)
                 (form/text-field :bar)
                 (form/submit-button "submit")))
 (defn get-form-for-delete [key]
-  (form/form-to [:delete ""]
+  (form/form-to [:delete "/admin/ltcc/"]
                 (form/hidden-field :foo key)
                 (form/submit-button "delete")))
 
@@ -42,20 +40,21 @@
         delete (get-form-for-delete key)]
     [:tr [:td safe] [:td value] [:td delete]]))
 
-(defn ltcc-home []
+(defpage "/ltcc/" []
   (let [keys (get-all-keys)
         rows (map get-row-by-key keys)]
-    {:title ["Ltcc"]
-     :body [[:div (get-form-for-add)]
-            [:div#ltcc (vec (concat [:table] rows))]]
-     :js ["/js/bin/all.js"]}))
+    (pagify
+     {:title ["Ltcc"]
+      :body [[:div (get-form-for-add)]
+             [:div#ltcc (vec (concat [:table] rows))]]
+      :js ["/js/bin/all.js"]})))
 
-(defn ltcc-add [foo bar]
+(defpage [:post "/admin/ltcc/"] {:keys [foo bar]}
   (do
     (add foo bar)
     (redirect "/ltcc/")))
 
-(defn ltcc-remove [foo]
+(defpage [:delete "/admin/ltcc/"] {:keys [foo]}
   (do
     (delete [foo])
     (redirect "/ltcc/")))

@@ -1,63 +1,18 @@
 (ns tl.core
-  (:use
-   [compojure.core :only [defroutes DELETE GET POST]]
-   [tl.pages.maps :only [map-page]]
-   [ring.middleware.file :only [wrap-file]]
-   [ring.middleware.file-info :only [wrap-file-info]]
-   [ring.middleware.lint :only [wrap-lint]]
-   [ring.middleware.params :only [wrap-params]]
-   [ring.middleware.session :only [wrap-session]])
-  (:require [compojure.route :as route]
-            [remvee.ring.middleware.basic-authentication :as auth]
-            [ring.adapter.jetty :as jetty]
-            [tl.pages.home :as pages]
-            [tl.pages.ltcc :as ltcc]
+  (:use [noir.core :only [defpage pre-route]])
+  (:require [noir.server :as server]
+            [noir.session :as session]
             [tl.middleware :as mw]))
 
-(defroutes tl-routes
-  (GET "/" [] (pages/home-page))
-  (GET "/contact/" []  (pages/contact-page))
-  (GET "/login/" [] (pages/login-page))
-  (GET "/ltcc/" []  (ltcc/ltcc-home))
-  (GET "/photos/" [] (pages/photos))
-  (GET "/photos/:id" [id] (pages/photos id))
-  (GET "/youtubes/" [query] (pages/youtubes nil query))
-  (GET "/youtubes/:video" [video query] (pages/youtubes video query)))
+(pre-route "/admin/*" {} (when-not (session/get :admin)
+                          {:status 401
+                           :body "Not Authorized"}))
 
-(defroutes map-routes
-  (GET "/maps/" [] (map-page))
-  (GET "/maps/:kind" [kind] (map-page kind)))
-
-(defroutes admin-routes
-  (GET "/admin/" request (pages/admin-page request))
-  (DELETE "/ltcc/" [foo] (ltcc/ltcc-remove foo))
-  (POST "/ltcc/" [foo bar] (ltcc/ltcc-add foo bar)))
-
-(defroutes error-routes
-  (route/not-found "Not Found"))
-
-(defroutes all-routes
-  tl-routes
-  map-routes
-  (-> #'admin-routes
-      (wrap-session)
-      (auth/wrap-basic-authentication ltcc/authenticated?))
-  error-routes)
-
-(def app
-     (-> #'all-routes
-         wrap-params
-         mw/wrap-layout
-         mw/wrap-current-link
-         mw/wrap-html
-         (wrap-file "war")
-         wrap-file-info
-         wrap-lint))
+(server/load-views "src/tl/pages/")
 
 (defn -main []
   (let [port (Integer/parseInt (System/getenv "PORT"))]
-    (jetty/run-jetty app {:port port})))
+    (server/start port)))
 
 (defn dev-main []
-  (future
-    (jetty/run-jetty app {:port 8080})))
+  (server/start 8080))
