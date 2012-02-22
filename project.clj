@@ -13,11 +13,11 @@
                      [ring-mock "0.1.1"]]
   :aot [tl.core]
   :cljsbuild [{:source-path "src-cljs"
-               :compiler {:output-to "war/js/bin/all.min.js"
+               :compiler {:output-to "resources/public/js/bin/all.min.js"
                           :optimizations :advanced
                           :pretty-print false}}
               {:source-path "src-cljs"
-               :compiler {:output-to "war/js/bin/all.js"
+               :compiler {:output-to "resources/public/js/bin/all.js"
                           :optimizations :simple
                           :pretty-print true}}]
   :hooks [leiningen.cljsbuild])
