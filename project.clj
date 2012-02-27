@@ -9,7 +9,7 @@
                  [ring "1.0.1"]
                  [ring/ring-jetty-adapter "0.3.9"]
                  [scriptjure "0.1.24"]]
-  :dev-dependencies [[lein-cljsbuild "0.1.0"]
+  :dev-dependencies [[lein-cljsbuild "0.1.1"]
                      [ring-mock "0.1.1"]]
   :aot [tl.core]
   :cljsbuild
