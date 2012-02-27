@@ -30,7 +30,7 @@ Environment & Leiningen 1.7
 
 lein-cljsbuild is a dev-dependency that needs to be present on
 the dyno to compile the clojurescript.  By default dev-dependencies
-are not downloaded, so a an environment variables needs to be set
+are not downloaded, so a an environment variable needs to be set
 to do that.
 
     heroku config:add LEIN_DEV=y
