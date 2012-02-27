@@ -53,15 +53,22 @@ restart for refreshing jvm changes.
 The better way is to get interactive dev going
 through emacs and Swank Clojure.
 
-First, follow the installation instructions: http://github.com/technomancy/swank-clojure
+First, follow the installation instructions: http://github.com/technomancy/swank-clojure.
+Then, in Emacs, open core.clj,
+
     M-x clojure-jack-in
-    In core.clj, compile with C-c C-k
+    C-c C-k
+
 At Slime repl, start server
+
    user> (tl.core/dev-main)
+
 Get clojurescript compiling. In new terminal,
+
     $ lein cljsbuild auto
 
 For either method, redis must be started seperately.
+
     ./path/to/redis-2.4.7/src/redis-server
 
 ## Deploy
