@@ -47,7 +47,7 @@
      {:title ["Ltcc"]
       :body [[:div (get-form-for-add)]
              [:div#ltcc (vec (concat [:table] rows))]]
-      :js ["/js/bin/all.js"]})))
+      :js ["/js/bin/all.min.js"]})))
 
 (defpage [:post "/admin/ltcc/"] {:keys [foo bar]}
   (do
