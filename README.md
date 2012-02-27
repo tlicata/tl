@@ -23,13 +23,14 @@ A site written in Clojure.
     make
     make install
 
-* Custom Build Pack & Leiningen 1.7
+* Environment & Leiningen 1.7
 
 lein-cljsbuild is a dev-dependency that needs to be present on
 the dyno to compile the clojurescript.  By default dev-dependencies
-are not downloaded, so a custom build pack is the way to do that.
+are not downloaded, so a an environment variables needs to be set
+to do that.
 
-    heroku config:add BUILDPACK_URL=http://github.com/birdman/heroku-buildpack-clojure.git
+    heroku config:add LEIN_DEV=y
 
 In order for config vars to work, have to install labs plugin
 and enable user_env_compile.
