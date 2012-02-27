@@ -39,7 +39,7 @@ In order for config vars to work, have to install labs plugin
 and enable user_env_compile.
 
     heroku plugins:install http://github.com/heroku/heroku-labs.git
-    heroku labs:enable user_env_compile -a afternoon-stone-3377
+    heroku labs:enable user_env_compile -a <app-name>
 
 ### Starting Server
 
