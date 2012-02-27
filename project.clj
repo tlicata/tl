@@ -18,8 +18,7 @@
                         :optimizations :advanced,
                         :pretty-print false}}
             {:source-path "src-cljs",
-             :compiler
-             {:output-to "resources/public/js/bin/all.js",
-              :optimizations :simple,
-              :pretty-print true}}]}
+             :compiler {:output-to "resources/public/js/bin/all.js",
+                        :optimizations :simple,
+                        :pretty-print true}}]}
   :hooks [leiningen.cljsbuild])
