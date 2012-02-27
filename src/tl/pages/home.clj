@@ -17,11 +17,6 @@
   (pagify {:title ["Home"]
            :body [welcome-blurb]}))
 
-(defpage "/contact/" []
-  (pagify
-   {:title ["Contact"]
-    :body [[:div [:p "You can write to me at tim at this domain name."]]]}))
-
 (defpage "/admin/" request
   (let [headers (:headers request)
         session (:session request)
