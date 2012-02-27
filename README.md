@@ -74,6 +74,7 @@ For either method, redis must be started seperately.
 ## Deploy
 
 Add heroku repo as git remote and push.
+
     git remote add heroku <app-url.git>
     git push heroku <your-branch>:master
 
