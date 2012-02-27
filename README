@@ -29,7 +29,7 @@ lein-cljsbuild is a dev-dependency that needs to be present on
 the dyno to compile the clojurescript.  By default dev-dependencies
 are not downloaded, so a custom build pack is the way to do that.
 
-    heroku config:add BUILDPACK_URL=http://github.com/birdman/heroku-buildback-clojure.git#dev-deps
+    heroku config:add BUILDPACK_URL=http://github.com/birdman/heroku-buildpack-clojure.git
 
 In order for config vars to work, have to install labs plugin
 and enable user_env_compile.
