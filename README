@@ -23,12 +23,19 @@ A site written in Clojure.
     make
     make install
 
-* Leiningen 1.7
-Version 1.7 allows for the :plugins feature in project.clj that I want
-to use with cljs-build. However, Heroku requires (at the time of writing)
-a custom build-pack for 1.7. I did:
+* Custom Build Pack & Leiningen 1.7
 
-heroku config:add BUILDPACK_URL=http://github.com/heroku/heroku-buildpack-clojure.git
+lein-cljsbuild is a dev-dependency that needs to be present on
+the dyno to compile the clojurescript.  By default dev-dependencies
+are not downloaded, so a custom build pack is the way to do that.
+
+    heroku config:add BUILDPACK_URL=http://github.com/birdman/heroku-buildback-clojure.git#dev-deps
+
+In order for config vars to work, have to install labs plugin
+and enable user_env_compile.
+
+    heroku plugins:install http://github.com/heroku/heroku-labs.git
+    heroku labs:enable user_env_compile -a afternoon-stone-3377
 
 ### Starting Server
 
