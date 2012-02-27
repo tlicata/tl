@@ -17,4 +17,5 @@
              :compiler {:output-to "resources/public/js/bin/all.min.js",
                         :optimizations :advanced,
                         :pretty-print false}}]}
-  :hooks [leiningen.cljsbuild])
+  :hooks [leiningen.cljsbuild]
+  :warn-on-reflection true)
