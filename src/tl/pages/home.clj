@@ -120,7 +120,7 @@ returns false. See also 'contains?'"
 (defn youtube-list []
   (vec (conj (map (fn [v]
                     [:li (link-to (:id v) (:title v))])
-                  videos)
+                  [])
              :ul)))
 
 ;; Used to use appengine-magic to fetch a url within
