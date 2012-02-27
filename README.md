@@ -61,7 +61,7 @@ Then, in Emacs, open core.clj,
 
 At Slime repl, start server
 
-   user> (tl.core/dev-main)
+    user> (tl.core/dev-main)
 
 Get clojurescript compiling. In new terminal,
 
