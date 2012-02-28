@@ -18,4 +18,4 @@
                         :optimizations :advanced,
                         :pretty-print false}}]}
   :hooks [leiningen.cljsbuild]
-  :warn-on-reflection true)
+  :warn-on-reflection false)
