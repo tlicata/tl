@@ -34,6 +34,7 @@ are not downloaded, so a an environment variable needs to be set
 to do that.
 
     heroku config:add LEIN_DEV=y
+    heroku config:add LEIN_BUILD_TASK=compile
 
 In order for config vars to work, have to install labs plugin
 and enable user_env_compile.
