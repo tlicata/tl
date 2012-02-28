@@ -87,41 +87,9 @@ returns false. See also 'contains?'"
 (defpage "/photos/" [] (fn [_] (pagify (photos nil))))
 (defpage "/photos/:name" {name :name} (fn [_] (pagify (photos name))))
 
-(def videos [{:title "Ronald Jenkees - Stay Crunchy" :id "lg8LfoyDFUM"}
-             {:title "Ronald Jenkees - All of my Love" :id "j-ryKQx4DdQ"}
-             {:title "Ronald Jenkees - Laid Back Organ Jam (for my peeps)" :id "zuJW7H08HrQ"}
-             {:title "Tragically Hip - New Orleans is Sinking (w/ Ahead by a Century)" :id "AZwm_OKh6bw"}
-             {:title "Tragically Hip - Fully Completely" :id "pEGyKECUh80"}
-             {:title "Tragically Hip - 38 Years Old" :id "rsj9fXH2Psw"}
-             {:title "Ratatat - Seventeen Years" :id "z6GbC2F5RfU"}
-             {:title "Ratatat - Mi Viejo + Mirando" :id "oM3MdixTdfA"}
-             {:title "Kid Cudi ft. Ratatat - Pursuit of Happiness" :id "Sd-StlEkSvw"}
-             {:title "Handsome Jack - 5-1-08 Camera 1 (and only)" :id "4tc_GxVtcPE"}
-             {:title "Handsome Jack - last 1/2 of Love Machine" :id "5QFnWu0WRnY"}
-             {:title "Neil Young - Heart of Gold" :id "Eh44QPT1mPE"}
-             {:title "Neil Young & Pearl Jam" :id "PTTsyk-pyd8"}
-             {:title "Pearl Jam - Untitled / MFC" :id "Cg22Z6bUklY"}
-             {:title "Rush - Subdivisions" :id "DNoMCh6okuo"}
-             {:title "Rush - Tom Sawyer (featuring South Park)" :id "JFGVDWc_5Q8"}
-             {:title "Rush - Workin Man" :id "EYRYGr9vynw"}
-             {:title "Mike V - Skates Lockport" :id "xxBdPUokZHo"}
-             {:title "Cake - Short Skirt, Long Jacket" :id "cBYEVnQkMU8"}
-             {:title "Cake - The Distance" :id "qKax7euEM5Q"}
-             {:title "Sublime - Jailhouse" :id "1hVoo75XYqc"}
-             {:title "Mumford & Sons - The Cave" :id "YKe33jxDMkQ"}
-             {:title "John Frusciante - Tiny Dancer" :id "oU4-r50c1ag"}
-             {:title "John Frusciante - Emily" :id "WCmrKgjRb1c"}
-             {:title "John Frusciante - Central (The Empyrean)" :id "M9jsRZzjrgI"}])
-
 (def embed-url "http://www.youtube.com/v/")
 (def link-url "http://www.youtube.com/watch?v=")
 (def search-url "http://gdata.youtube.com/feeds/api/videos")
-
-(defn youtube-list []
-  (vec (conj (map (fn [v]
-                    [:li (link-to (:id v) (:title v))])
-                  [])
-             :ul)))
 
 ;; Used to use appengine-magic to fetch a url within
 ;; the appengine restrictions.  Should replace with
@@ -157,8 +125,7 @@ returns false. See also 'contains?'"
   {:js #{"/js/youtubes.js?1" swfobject}
    :title ["Hello Youtubes"]
    :body [[:div#youtubes
-           [:div.left (youtube-list)]
-           [:div.right [:div#swf (when video "Playing videos requires JavaScript and Flash.  Either you are missing one of those technologies or my site is broken.  Bummer either way.")]]]
+           [:div#swf (when video "Playing videos requires JavaScript and Flash.  Either you are missing one of those technologies or my site is broken.  Bummer either way.")]]
           [:div#youtubes-search
            [:form {:method "get"}
             [:input {:type "text" :name "query"}]

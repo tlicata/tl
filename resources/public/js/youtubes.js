@@ -28,7 +28,7 @@ tl.youtubes = (function () {
 
     var play = function (url, autoplay, loopMode) {
         $(function () {
-            swfobject.embedSWF(url, "swf", "100%", "100%", "9", null,
+            swfobject.embedSWF(url, "swf", "100%", "400px", "9", null,
                                {autoplay: autoplay, loop: loopMode});
         });
     };
