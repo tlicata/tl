@@ -61,13 +61,7 @@
         hd (merge [:div#hd] primary)]
     hd))
 
-(defn footer []
-  [:div#ft
-   [:p "Functions in"]
-   [:ul
-    [:li (link-to "http://clojure.org/state" "Clojure") " and"]
-    [:li (link-to "http://www.crockford.com/javascript/"
-                  "Javascript")]]])
+(defn footer [] [:div#ft])
 
 (defn wrap-in-layout [title css js body]
   [:html
