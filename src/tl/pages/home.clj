@@ -124,8 +124,8 @@ returns false. See also 'contains?'"
 (defn youtubes [video query]
   {:js #{"/js/youtubes.js?1" swfobject}
    :title ["Hello Youtubes"]
-   :body [[:div#youtubes
-           [:div#swf (when video "Playing videos requires JavaScript and Flash.  Either you are missing one of those technologies or my site is broken.  Bummer either way.")]]
+   :body [(when video [:div#youtubes
+           [:div#swf (when video "Playing videos requires JavaScript and Flash.  Either you are missing one of those technologies or my site is broken.  Bummer either way.")]])
           [:div#youtubes-search
            [:form {:method "get"}
             [:input {:type "text" :name "query"}]
