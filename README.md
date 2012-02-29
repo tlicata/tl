@@ -80,4 +80,4 @@ Add heroku repo as git remote and push.
     git push heroku <your-branch>:master
 
 ## License
-Copyright &copy 2012 Timothy Licata
+Copyright &copy; 2012 Timothy Licata
