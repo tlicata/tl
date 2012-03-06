@@ -46,8 +46,7 @@
   [{:uri "/" :text "Home"}
    {:uri "/maps/" :text "Maps"}
    {:uri "/photos/" :text "Photos"}
-   {:uri "/youtubes/" :text "Youtubes"}
-   {:uri "/contact/" :text "Contact"}])
+   {:uri "/youtubes/" :text "Youtubes"}])
 
 (defn header-links []
   (vec
@@ -62,13 +61,7 @@
         hd (merge [:div#hd] primary)]
     hd))
 
-(defn footer []
-  [:div#ft
-   [:p "Functions in"]
-   [:ul
-    [:li (link-to "http://clojure.org/state" "Clojure") " and"]
-    [:li (link-to "http://www.crockford.com/javascript/"
-                  "Javascript")]]])
+(defn footer [] [:div#ft])
 
 (defn wrap-in-layout [title css js body]
   [:html
@@ -81,3 +74,11 @@
 
 (defn convert-to-html [body]
   (html (doctype :xhtml-strict) body))
+
+(defn pagify [obj]
+  (when-not (nil? obj)
+    (let [layout (wrap-in-layout (:title obj)
+                                 (:css obj)
+                                 (:js obj)
+                                 (:body obj))]
+      (assoc obj :body (convert-to-html layout)))))

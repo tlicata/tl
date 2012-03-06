@@ -1,7 +1,9 @@
 (ns tl.pages.ltcc
   (:use [hiccup.core :only [escape-html]]
         [hiccup.page-helpers :only [link-to]]
-        [ring.util.response :only [redirect]])
+        [noir.core :only [defpage]]
+        [ring.util.response :only [redirect]]
+        [tl.pages.global :only [pagify]])
   (:require [com.reasonr.scriptjure :as script]
             [clj-redis.client :as redis]
             [hiccup.form-helpers :as form]))
@@ -10,21 +12,25 @@
 (def db (redis/init (when db-url {:url db-url})))
 
 (defn add [key val]
-  (redis/set db key val))
+  (try (redis/set db key val)
+       (catch Exception e nil)))
 (defn delete [key]
-  (redis/del db key))
-(defn keys []
-  (redis/keys db))
+  (try (redis/del db key)
+       (catch Exception e nil)))
 (defn retrieve [key]
-  (redis/get db key))
+  (try (redis/get db key)
+       (catch Exception e "unreachable")))
+(defn get-all-keys []
+  (try (redis/keys db)
+       (catch Exception e ["database"])))
 
 (defn get-form-for-add []
-  (form/form-to [:post ""]
+  (form/form-to [:post "/admin/ltcc/"]
                 (form/text-field :foo)
                 (form/text-field :bar)
                 (form/submit-button "submit")))
 (defn get-form-for-delete [key]
-  (form/form-to [:delete ""]
+  (form/form-to [:delete "/admin/ltcc/"]
                 (form/hidden-field :foo key)
                 (form/submit-button "delete")))
 
@@ -34,20 +40,21 @@
         delete (get-form-for-delete key)]
     [:tr [:td safe] [:td value] [:td delete]]))
 
-(defn ltcc []
-  (let [keys (keys)
+(defpage "/ltcc/" []
+  (let [keys (get-all-keys)
         rows (map get-row-by-key keys)]
-    {:title ["Ltcc"]
-     :body [[:div (get-form-for-add)]
-            [:div#ltcc (vec (concat [:table] rows))]]
-     :js ["/js/bin/all.js"]}))
+    (pagify
+     {:title ["Ltcc"]
+      :body [[:div (get-form-for-add)]
+             [:div#ltcc (vec (concat [:table] rows))]]
+      :js ["/js/bin/all.min.js"]})))
 
-(defn ltcc-add [foo bar]
+(defpage [:post "/admin/ltcc/"] {:keys [foo bar]}
   (do
     (add foo bar)
     (redirect "/ltcc/")))
 
-(defn ltcc-remove [foo]
+(defpage [:delete "/admin/ltcc/"] {:keys [foo]}
   (do
     (delete [foo])
     (redirect "/ltcc/")))

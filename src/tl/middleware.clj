@@ -7,7 +7,10 @@
   (probably ends up giving a 404 error)."
   [handler]
   (fn [request]
-    (handler request)))
+    (let [session (:session request)
+          user (:user session)]
+      (when (= "admin" user)
+        (handler request)))))
 
 (defn wrap-layout
   "Adds a header and footer to the response in addition to supplying js,

@@ -1,9 +1,11 @@
 (ns tl.pages.home
   (:use [clojure.data.json :only [read-json]]
         [clojure.string :only [join]]
+        [clojure.pprint :only [pprint]]
+        [noir.core :only [defpage]]
         [hiccup.page-helpers :only [link-to]]
         [ring.util.codec :only [url-encode]]
-        [tl.pages.global :only [swfobject]])
+        [tl.pages.global :only [pagify swfobject]])
   (:require [com.reasonr.scriptjure :as script]))
 
 (def welcome-blurb [:p (join "  -  " ["Tim Licata"
@@ -11,31 +13,24 @@
                                       "( Golfer | Ping Ponger | Shuffler )"
                                       "( Lockport, NY | San Francisco, CA )"])])
 
-(defn home-page []
-  {:title ["Home"]
-   :body [welcome-blurb]})
+(defpage "/" []
+  (pagify {:title ["Home"]
+           :body [welcome-blurb]}))
 
-(defn contact-page []
-  {:title ["Contact"]
-   :body [[:div [:p "You can write to me at tim at this domain name."]]]})
+(defpage "/admin/" request
+  (let [headers (:headers request)
+        session (:session request)
+        counter (:counter session 0)]
+    (pagify {:title ["Admin"]
+             :body [[:div [:p (with-out-str (pprint session))]]
+                    [:div [:p (with-out-str (pprint headers))]]]
+             :session (assoc session :counter (inc counter))})))
 
-(defn admin-page []
-  {:title ["Admin"]
-   :body [[:div
-           [:p "You lie"]]]})
-
-(defn login-page []
-  {:title ["Login"]
-   :body [[:div
-           [:p "Do you want to make more money?"]
-           [:p "Sure, we all do"]]]})
-
-(defn cljs []
-  {:title ["ClojureScript"]
-   :body [[:div
-           [:p "Greetings"]
-           [:script (script/js (tl.greet))]]]
-   :js ["/js/bin/all.js"]})
+(defpage "/login/" []
+  (pagify {:title ["Login"]
+           :body [[:div
+                   [:p "Do you want to make more money?"]
+                   [:p "Sure, we all do"]]]}))
 
 (def pics-base "http://dl.dropbox.com/u/2163446/photos/")
 (def pics-ext ".jpg")
@@ -79,54 +74,22 @@ returns false. See also 'contains?'"
          [:li (if (nil? next) "next" (link-to next "next"))]
          [:li (link-to (last pics) "latest")]]])))
 
-(defn photos
-  ([]
-     (photos nil))
-  ([name]
-     (if (or (nil? name) (in? pics name))
-       (let [htmlify (fn [name]
-                       (when-not (nil? name)
-                         [:img {:src (str pics-base name pics-ext)}]))]
-             {:title ["Photos"]
-              :body [[:div#photos
-                      (photos-nav name)
-                      (htmlify name)]]}))))
+(defn photos [name]
+  (if (or (nil? name) (in? pics name))
+    (let [htmlify (fn [name]
+                    (when-not (nil? name)
+                      [:img {:src (str pics-base name pics-ext)}]))]
+      {:title ["Photos"]
+       :body [[:div#photos
+               (photos-nav name)
+               (htmlify name)]]})))
 
-(def videos [{:title "Ronald Jenkees - Stay Crunchy" :id "lg8LfoyDFUM"}
-             {:title "Ronald Jenkees - All of my Love" :id "j-ryKQx4DdQ"}
-             {:title "Ronald Jenkees - Laid Back Organ Jam (for my peeps)" :id "zuJW7H08HrQ"}
-             {:title "Tragically Hip - New Orleans is Sinking (w/ Ahead by a Century)" :id "AZwm_OKh6bw"}
-             {:title "Tragically Hip - Fully Completely" :id "pEGyKECUh80"}
-             {:title "Tragically Hip - 38 Years Old" :id "rsj9fXH2Psw"}
-             {:title "Ratatat - Seventeen Years" :id "z6GbC2F5RfU"}
-             {:title "Ratatat - Mi Viejo + Mirando" :id "oM3MdixTdfA"}
-             {:title "Kid Cudi ft. Ratatat - Pursuit of Happiness" :id "Sd-StlEkSvw"}
-             {:title "Handsome Jack - 5-1-08 Camera 1 (and only)" :id "4tc_GxVtcPE"}
-             {:title "Handsome Jack - last 1/2 of Love Machine" :id "5QFnWu0WRnY"}
-             {:title "Neil Young - Heart of Gold" :id "Eh44QPT1mPE"}
-             {:title "Neil Young & Pearl Jam" :id "PTTsyk-pyd8"}
-             {:title "Pearl Jam - Untitled / MFC" :id "Cg22Z6bUklY"}
-             {:title "Rush - Subdivisions" :id "DNoMCh6okuo"}
-             {:title "Rush - Tom Sawyer (featuring South Park)" :id "JFGVDWc_5Q8"}
-             {:title "Rush - Workin Man" :id "EYRYGr9vynw"}
-             {:title "Mike V - Skates Lockport" :id "xxBdPUokZHo"}
-             {:title "Cake - Short Skirt, Long Jacket" :id "cBYEVnQkMU8"}
-             {:title "Cake - The Distance" :id "qKax7euEM5Q"}
-             {:title "Sublime - Jailhouse" :id "1hVoo75XYqc"}
-             {:title "Mumford & Sons - The Cave" :id "YKe33jxDMkQ"}
-             {:title "John Frusciante - Tiny Dancer" :id "oU4-r50c1ag"}
-             {:title "John Frusciante - Emily" :id "WCmrKgjRb1c"}
-             {:title "John Frusciante - Central (The Empyrean)" :id "M9jsRZzjrgI"}])
+(defpage "/photos/" [] (fn [_] (pagify (photos nil))))
+(defpage "/photos/:name" {name :name} (fn [_] (pagify (photos name))))
 
 (def embed-url "http://www.youtube.com/v/")
 (def link-url "http://www.youtube.com/watch?v=")
 (def search-url "http://gdata.youtube.com/feeds/api/videos")
-
-(defn youtube-list []
-  (vec (conj (map (fn [v]
-                    [:li (link-to (:id v) (:title v))])
-                  videos)
-             :ul)))
 
 ;; Used to use appengine-magic to fetch a url within
 ;; the appengine restrictions.  Should replace with
@@ -161,9 +124,8 @@ returns false. See also 'contains?'"
 (defn youtubes [video query]
   {:js #{"/js/youtubes.js?1" swfobject}
    :title ["Hello Youtubes"]
-   :body [[:div#youtubes
-           [:div.left (youtube-list)]
-           [:div.right [:div#swf (when video "Playing videos requires JavaScript and Flash.  Either you are missing one of those technologies or my site is broken.  Bummer either way.")]]]
+   :body [(when video [:div#youtubes
+           [:div#swf (when video "Playing videos requires JavaScript and Flash.  Either you are missing one of those technologies or my site is broken.  Bummer either way.")]])
           [:div#youtubes-search
            [:form {:method "get"}
             [:input {:type "text" :name "query"}]
@@ -177,3 +139,8 @@ returns false. See also 'contains?'"
              (script/js (tl.youtubes.play (script/clj (str embed-url video))
                                           (script/clj 1)
                                           (script/clj 1)))])]})
+
+(defpage "/youtubes/" {query :query} (pagify (youtubes nil query)))
+(defpage "/youtubes/:video" {:keys [video query]}
+  (pagify (youtubes video query)))
+
