@@ -28,13 +28,13 @@ Redis
 
 Environment & Leiningen 1.7
 
-lein-cljsbuild is a dev-dependency that needs to be present on
-the dyno to compile the clojurescript.  By default dev-dependencies
-are not downloaded, so a an environment variable needs to be set
-to do that.
+lein-cljsbuild was causing an R10 error when trying to compile.
 
-    heroku config:add LEIN_DEV=y
-    heroku config:add LEIN_BUILD_TASK=compile
+    heroku[web.1]: Error R10 (Boot timeout) -> Web process failed to bind to $PORT within 60 seconds of launch
+
+To get around that, setup :aot compilation.
+
+    heroku config:add LEIN_BUILD_TASK="compile :all"
 
 In order for config vars to work, have to install labs plugin
 and enable user_env_compile.
