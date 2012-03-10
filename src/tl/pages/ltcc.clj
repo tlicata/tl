@@ -6,7 +6,7 @@
         [tl.pages.global :only [pagify]])
   (:require [com.reasonr.scriptjure :as script]
             [hiccup.form-helpers :as form]
-            [tl.db :as db]))
+            [tl.user :as user]))
 
 (defn get-form-for-add []
   (form/form-to [:post "/admin/ltcc/"]
@@ -20,12 +20,12 @@
 
 (defn get-row-by-key [key]
   (let [safe (escape-html key)
-        value (escape-html (db/get-stored-pass key))
+        value (escape-html (user/stored-pass key))
         delete (get-form-for-delete key)]
     [:tr [:td safe] [:td value] [:td delete]]))
 
 (defpage "/ltcc/" []
-  (let [keys (db/get-all-users)
+  (let [keys (user/all)
         rows (map get-row-by-key keys)]
     (pagify
      {:title ["Ltcc"]
@@ -35,10 +35,10 @@
 
 (defpage [:post "/admin/ltcc/"] {:keys [foo bar]}
   (do
-    (db/add-user foo bar)
+    (user/add foo bar)
     (redirect "/ltcc/")))
 
 (defpage [:delete "/admin/ltcc/"] {:keys [foo]}
   (do
-    (db/delete-user [foo])
+    (user/delete [foo])
     (redirect "/ltcc/")))
