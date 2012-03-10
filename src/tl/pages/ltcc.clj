@@ -20,12 +20,12 @@
 
 (defn get-row-by-key [key]
   (let [safe (escape-html key)
-        value (escape-html (db/retrieve key))
+        value (escape-html (db/get-stored-pass key))
         delete (get-form-for-delete key)]
     [:tr [:td safe] [:td value] [:td delete]]))
 
 (defpage "/ltcc/" []
-  (let [keys (db/get-all-keys)
+  (let [keys (db/get-all-users)
         rows (map get-row-by-key keys)]
     (pagify
      {:title ["Ltcc"]
@@ -35,10 +35,10 @@
 
 (defpage [:post "/admin/ltcc/"] {:keys [foo bar]}
   (do
-    (db/add foo bar)
+    (db/add-user foo bar)
     (redirect "/ltcc/")))
 
 (defpage [:delete "/admin/ltcc/"] {:keys [foo]}
   (do
-    (db/delete [foo])
+    (db/delete-user [foo])
     (redirect "/ltcc/")))
