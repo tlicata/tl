@@ -14,9 +14,9 @@
     (do
       ;; tranaction?
       (redis/sadd db "users" username)
-      (redis/set db (str username ":hash") (crypt/encrypt pass))))))
+      (redis/set db (str username ":hash") (crypt/encrypt pass)))))
 (defn delete-user [username]
-  (tryppp
+  (try
     (do
       (redis/srem db "users" username)
       (redis/del db [(str username ":hash")]))
