@@ -5,24 +5,8 @@
         [ring.util.response :only [redirect]]
         [tl.pages.global :only [pagify]])
   (:require [com.reasonr.scriptjure :as script]
-            [clj-redis.client :as redis]
-            [hiccup.form-helpers :as form]))
-
-(def db-url (System/getenv "REDISTOGO_URL"))
-(def db (redis/init (when db-url {:url db-url})))
-
-(defn add [key val]
-  (try (redis/set db key val)
-       (catch Exception e nil)))
-(defn delete [key]
-  (try (redis/del db key)
-       (catch Exception e nil)))
-(defn retrieve [key]
-  (try (redis/get db key)
-       (catch Exception e "unreachable")))
-(defn get-all-keys []
-  (try (redis/keys db)
-       (catch Exception e ["database"])))
+            [hiccup.form-helpers :as form]
+            [tl.db :as db]))
 
 (defn get-form-for-add []
   (form/form-to [:post "/admin/ltcc/"]
@@ -36,12 +20,12 @@
 
 (defn get-row-by-key [key]
   (let [safe (escape-html key)
-        value (escape-html (retrieve key))
+        value (escape-html (db/retrieve key))
         delete (get-form-for-delete key)]
     [:tr [:td safe] [:td value] [:td delete]]))
 
 (defpage "/ltcc/" []
-  (let [keys (get-all-keys)
+  (let [keys (db/get-all-keys)
         rows (map get-row-by-key keys)]
     (pagify
      {:title ["Ltcc"]
@@ -51,10 +35,10 @@
 
 (defpage [:post "/admin/ltcc/"] {:keys [foo bar]}
   (do
-    (add foo bar)
+    (db/add foo bar)
     (redirect "/ltcc/")))
 
 (defpage [:delete "/admin/ltcc/"] {:keys [foo]}
   (do
-    (delete [foo])
+    (db/delete [foo])
     (redirect "/ltcc/")))
