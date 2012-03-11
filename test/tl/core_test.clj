@@ -5,7 +5,6 @@
   (:use [ring.mock.request]))
 
 (def valid-routes ["/"
-                   "/contact/"
                    "/login/"
                    "/ltcc/"
                    "/maps/"
@@ -15,7 +14,8 @@
                    "/youtubes/"
                    "/youtubes/id"])
 
-(def invalid-routes ["/garbage"
+(def invalid-routes ["/contact/"
+                     "/garbage"
                      "/garbage/"
                      "/maps/garbage"
                      "/maps/garbage/"
