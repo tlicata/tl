@@ -40,5 +40,5 @@
 
 (defpage [:delete "/admin/ltcc/"] {:keys [foo]}
   (do
-    (user/delete [foo])
+    (user/delete foo)
     (redirect "/ltcc/")))
