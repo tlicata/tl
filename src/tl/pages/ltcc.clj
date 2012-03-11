@@ -20,9 +20,8 @@
 
 (defn get-row-by-key [key]
   (let [safe (escape-html key)
-        value (escape-html (user/stored-pass key))
         delete (get-form-for-delete key)]
-    [:tr [:td safe] [:td value] [:td delete]]))
+    [:tr [:td safe] [:td "value"] [:td delete]]))
 
 (defpage "/ltcc/" []
   (let [keys (user/all)
