@@ -1,16 +1,15 @@
 (ns tl.middleware
   (:require [clojure.zip :as zip]
-            [tl.pages.global :as global]))
+            [tl.pages.global :as global]
+            [tl.user :as user]))
 
 (defn wrap-admin
   "If the user is logged in, display the page.  Otherwise skip this route
   (probably ends up giving a 404 error)."
   [handler]
   (fn [request]
-    (let [session (:session request)
-          user (:user session)]
-      (when (= "admin" user)
-        (handler request)))))
+    (when (user/admin?)
+      (handler request))))
 
 (defn wrap-layout
   "Adds a header and footer to the response in addition to supplying js,
