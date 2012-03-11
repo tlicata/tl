@@ -29,3 +29,8 @@
         (session/put! :admin true)
         (session/put! :username username))
       (vali/set-error :username "Invalid username or password"))))
+
+(defn logout! []
+  (do
+    (session/remove! :admin)
+    (session/remove! :username)))

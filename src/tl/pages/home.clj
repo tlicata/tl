@@ -6,7 +6,10 @@
         [hiccup.page-helpers :only [link-to]]
         [ring.util.codec :only [url-encode]]
         [tl.pages.global :only [pagify swfobject]])
-  (:require [com.reasonr.scriptjure :as script]))
+  (:require [com.reasonr.scriptjure :as script]
+            [hiccup.form-helpers :as form]
+            [noir.response :as resp]
+            [tl.user :as user]))
 
 (def welcome-blurb [:p (join "  -  " ["Tim Licata"
                                       "Programmer"
@@ -18,19 +21,33 @@
            :body [welcome-blurb]}))
 
 (defpage "/admin/" request
-  (let [headers (:headers request)
-        session (:session request)
-        counter (:counter session 0)]
-    (pagify {:title ["Admin"]
-             :body [[:div [:p (with-out-str (pprint session))]]
-                    [:div [:p (with-out-str (pprint headers))]]]
-             :session (assoc session :counter (inc counter))})))
+  (pagify {:title ["Admin"]
+           :body [[:div [:p "Admin"]]
+                  [:div (link-to "/logout/" "log out")]]}))
+
+(defn login-form []
+  (form/form-to [:post "/login/"]
+                (form/text-field :username)
+                (form/password-field :password)
+                (form/submit-button "login")))
 
 (defpage "/login/" []
-  (pagify {:title ["Login"]
-           :body [[:div
-                   [:p "Do you want to make more money?"]
-                   [:p "Sure, we all do"]]]}))
+  (if (user/admin?)
+    (resp/redirect "/admin/")
+    (pagify {:title ["Login"]
+             :body [(login-form)]})))
+
+(defpage [:post "/login/"] {:as user}
+  (if (user/login! user)
+    (resp/redirect "/admin/")
+    (pagify {:title ["Login"]
+             :body [[:p "invalid login attempt"]
+                    (login-form)]})))
+
+(defpage "/logout/" []
+  (do
+    (user/logout!)
+    (resp/redirect "/login/")))
 
 (def pics-base "http://dl.dropbox.com/u/2163446/photos/")
 (def pics-ext ".jpg")
