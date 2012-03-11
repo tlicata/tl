@@ -23,8 +23,8 @@
     (catch Exception e nil)))
 (defn get-stored-pass [username]
   (try (redis/get db (str username ":hash"))
-       (catch Exception e "unreachable")))
+       (catch Exception e (throw e))))
 (defn get-all-users []
   (try (redis/smembers db "users")
-       (catch Exception e ["database"])))
+       (catch Exception e (throw e))))
 
