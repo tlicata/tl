@@ -3,27 +3,6 @@
             [tl.pages.global :as global]
             [tl.user :as user]))
 
-(defn wrap-layout
-  "Adds a header and footer to the response in addition to supplying js,
-  css, and content html."
-  [handler]
-  (fn [request]
-    (when-let [response (handler request)]
-      (if (vector? (:body response))
-        (let [body (global/wrap-in-layout (:title response)
-                                          (:css response)
-                                          (:js response)
-                                          (:body response))]
-          (assoc response :body body))
-        response))))
-
-(defn wrap-html
-  [handler]
-  (fn [request]
-    (when-let [response (handler request)]
-      (let [body (global/convert-to-html (:body response))]
-        (assoc response :body body)))))
-
 (defn- current-link
   [html uri]
   (let [zip (zip/vector-zip html)
