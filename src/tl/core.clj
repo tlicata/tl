@@ -2,9 +2,10 @@
   (:use [noir.core :only [defpage pre-route]])
   (:require [noir.server :as server]
             [noir.session :as session]
-            [tl.middleware :as mw]))
+            [tl.middleware :as mw]
+            [tl.user :as user]))
 
-(pre-route "/admin/*" {} (when-not (session/get :admin)
+(pre-route "/admin/*" {} (when-not (user/admin?)
                           {:status 401
                            :body "Not Authorized"}))
 
