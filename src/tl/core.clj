@@ -2,7 +2,6 @@
   (:use [noir.core :only [defpage pre-route]])
   (:require [noir.server :as server]
             [noir.session :as session]
-            [tl.middleware :as mw]
             [tl.user :as user]))
 
 (pre-route "/admin/*" {} (when-not (user/admin?)
