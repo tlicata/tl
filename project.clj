@@ -6,7 +6,8 @@
                  [org.clojure/data.json "0.1.1"]
                  [scriptjure "0.1.24"]]
   :dev-dependencies [[ring-mock "0.1.1"]]
-  :plugins [[lein-cljsbuild "0.1.2"]]
+  :plugins [[lein-cljsbuild "0.1.2"]
+            [lein-swank "1.4.3"]]
   :aot [tl.core]
   :cljsbuild
   {:builds [{:source-path "src-cljs",
