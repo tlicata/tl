@@ -7,18 +7,42 @@ A site written in Clojure.
 
 Ruby. Use, RVM to install and manage it.
 
+(Ubuntu)
+
     bash -s stable < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer)
     rvm install 1.8.7 ;docs say install (and possible "use") 1.8 before 1.9?
     rvm install 1.9.2
     rvm use 1.9.2
     rvm notes ;special instructions for screen users, etc.
 
-Heroku Client & Foreman
+(MacOS)
+
+it was pre-installed or obtained through macport when installing git.
+
+Heroku Toolbelt
+
+(Ubuntu)
 
     sudo gem install heroku
     sudo gem install foreman
 
+(MacOS)
+
+Download Heroku Toolbelt for Mac OS X from the heroku site. Run installer.
+
+Leiningen
+
+(MacOS)
+
+Install by hand (unless using homebrew)
+
+    wget --no-check-certificate https://raw.github.com/technomancy/leiningen/stable/bin/lein
+    chmod 755 ~/bin/lein
+    [put in on path]
+
 Redis
+
+(Ubuntu)
 
     wget http://redis.googlecode.com/files/redis-2.4.7.tar.gz
     tar -xzf redis-2.4.7.tar.gz
@@ -26,7 +50,11 @@ Redis
     make
     make install
 
-Environment & Leiningen 1.7
+(MacOS w/ macports)
+
+    sudo port install redis
+
+Heroku Environment
 
 lein-cljsbuild was causing a boot timeout error when trying to compile.
 
@@ -70,7 +98,13 @@ Get clojurescript compiling. In new terminal,
 
 For either method, redis must be started seperately.
 
+(Ubuntu)
+
     ./path/to/redis-2.4.7/src/redis-server
+
+(MacOS)
+
+    redis-server /opt/local/etc/redis.conf
 
 ## Deploy
 
