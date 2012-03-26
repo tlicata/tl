@@ -1,4 +1,4 @@
-var swfobject, tl;
+var tl;
 
 if (!tl) {
     tl = {};
@@ -25,13 +25,6 @@ tl.youtubes = (function () {
     var resultsDivId = "search-results";
     var searchDiv = null;
     var searchUrl = "http://gdata.youtube.com/feeds/api/videos";
-
-    var play = function (url, autoplay, loopMode) {
-        $(function () {
-            swfobject.embedSWF(url, "swf", "100%", "400px", "9", null,
-                               {autoplay: autoplay, loop: loopMode});
-        });
-    };
 
     var search = (function () {
 
@@ -139,7 +132,6 @@ tl.youtubes = (function () {
     });
 
     return {
-        play: play,
         search: search
     };
 }());

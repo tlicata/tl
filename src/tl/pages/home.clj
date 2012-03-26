@@ -5,7 +5,7 @@
         [noir.core :only [defpage]]
         [hiccup.page-helpers :only [link-to]]
         [ring.util.codec :only [url-encode]]
-        [tl.pages.global :only [pagify swfobject]])
+        [tl.pages.global :only [pagify]])
   (:require [com.reasonr.scriptjure :as script]
             [hiccup.form-helpers :as form]
             [noir.response :as resp]
@@ -104,7 +104,6 @@ returns false. See also 'contains?'"
 (defpage "/photos/" [] (fn [_] (pagify (photos nil))))
 (defpage "/photos/:name" {name :name} (fn [_] (pagify (photos name))))
 
-(def embed-url "http://www.youtube.com/v/")
 (def link-url "http://www.youtube.com/watch?v=")
 (def search-url "http://gdata.youtube.com/feeds/api/videos")
 
@@ -139,23 +138,25 @@ returns false. See also 'contains?'"
                     results)))))
 
 (defn youtubes [video query]
-  {:js #{"/js/youtubes.js?1" swfobject}
-   :title ["Hello Youtubes"]
-   :body [(when video [:div#youtubes
-           [:div#swf (when video "Playing videos requires JavaScript and Flash.  Either you are missing one of those technologies or my site is broken.  Bummer either way.")]])
-          [:div#youtubes-search
-           [:form {:method "get"}
-            [:input {:type "text" :name "query"}]
-            [:input {:type "submit" :value "Search YouTube"}]]
-           (when query
-             (youtube-search-render
-              (youtube-search-parse
-               (youtube-search-fetch query))))]
-          (when video
-            [:script
-             (script/js (tl.youtubes.play (script/clj (str embed-url video))
-                                          (script/clj 1)
-                                          (script/clj 1)))])]})
+  (let [url (str "http://youtube.com/embed/" video
+                 "?fs=1&autoplay=1&loop=1&playlist=" video)
+        video-html (when video [:div#youtubes
+                                [:iframe.youtube-player {:frameborder "0"
+                                                         :height "420px"
+                                                         :src url
+                                                         :type "text/html"
+                                                         :width "700px"}]])
+        search-html [:div#youtubes-search
+                     [:form {:method "get"}
+                      [:input {:type "text" :name "query"}]
+                      [:input {:type "submit" :value "Search YouTube"}]]
+                     (when query
+                       (youtube-search-render
+                        (youtube-search-parse
+                         (youtube-search-fetch query))))]]
+        {:js #{"/js/youtubes.js?2"}
+         :title ["Hello Youtubes"]
+         :body [video-html search-html]}))
 
 (defpage "/youtubes/" {query :query} (pagify (youtubes nil query)))
 (defpage "/youtubes/:video" {:keys [video query]}
