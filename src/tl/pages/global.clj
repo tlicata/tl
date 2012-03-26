@@ -6,7 +6,6 @@
 
 (def analytics "/js/analytics.js")
 (def jquery "/js/lib/jquery-1.7.1.js")
-(def swfobject "/js/lib/swfobject.js")
 (def yui-base "/css/lib/cssbase-min.css")
 (def yui-fonts "/css/lib/cssfonts-min.css")
 (def yui-reset "/css/lib/cssreset-min.css")
