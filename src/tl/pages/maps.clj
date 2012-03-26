@@ -1,7 +1,7 @@
 (ns tl.pages.maps
   (:use [hiccup.page-helpers :only [link-to]]
         [noir.core :only [defpage]]
-        [tl.pages.global :only [reduce-blurbs pagify swfobject]]))
+        [tl.pages.global :only [reduce-blurbs pagify]]))
 
 (def map-css "/css/maps.css")
 
