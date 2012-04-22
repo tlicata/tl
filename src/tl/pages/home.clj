@@ -148,7 +148,7 @@ returns false. See also 'contains?'"
                                                          :width "700px"}]])
         search-html [:div#youtubes-search
                      [:form {:method "get"}
-                      [:input {:type "text" :name "query"}]
+                      [:input {:type "text" :name "query" :autofocus "true"}]
                       [:input {:type "submit" :value "Search YouTube"}]]
                      (when query
                        (youtube-search-render
