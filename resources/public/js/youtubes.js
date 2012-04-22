@@ -124,10 +124,12 @@ tl.youtubes = (function () {
         });
 
         // The hash represents a search. If one exists,
-        // then load search results for it.
+        // then load search results for it. Also, use
+        // it to pre-populate the search box.
         if (window.location.hash) {
-            var noHash = window.location.hash.substr(1);
-            search(decode(noHash));
+            var hash = decode(window.location.hash.substr(1));
+            search(hash);
+            searchDiv.find(":text").val(hash).select();
         }
     });
 
