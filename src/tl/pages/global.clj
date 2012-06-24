@@ -2,7 +2,7 @@
   (:use [clojure.string :only [join]]
         [clojure.set :only [union]]
         [hiccup.core :only [html]]
-        [hiccup.page-helpers :only [doctype include-css include-js link-to]]))
+        [hiccup.page-helpers :only [doctype html5 include-css include-js link-to]]))
 
 (def analytics "/js/analytics.js")
 (def bootstrap-css "/css/lib/bootstrap.css")
@@ -63,13 +63,13 @@
 (defn footer [] [:div#ft])
 
 (defn wrap-in-layout [title css js body]
-  [:html
+  (html5
    (head title css js)
    [:body
     [:div
      (header)
      (vec (concat [:div#bd] (map blurb body)))
-     (footer)]]])
+     (footer)]]))
 
 (defn convert-to-html [body]
   (html (doctype :xhtml-strict) body))
