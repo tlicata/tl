@@ -6,13 +6,10 @@
 
 (def analytics "/js/analytics.js")
 (def jquery "/js/lib/jquery-1.7.1.js")
-(def yui-base "/css/lib/cssbase-min.css")
-(def yui-fonts "/css/lib/cssfonts-min.css")
-(def yui-reset "/css/lib/cssreset-min.css")
 (def main "/css/main.css?1")
 
 (defn css [& more]
-  (let [global [main yui-base yui-fonts yui-reset]]
+  (let [global [main]]
     (apply include-css (concat global more))))
 
 (defn js [& more]
