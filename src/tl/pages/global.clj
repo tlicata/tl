@@ -66,7 +66,7 @@
   [:html
    (head title css js)
    [:body
-    [:div#doc4
+    [:div
      (header)
      (vec (concat [:div#bd] (map blurb body)))
      (footer)]]])
