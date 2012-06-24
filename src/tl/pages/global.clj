@@ -63,16 +63,16 @@
 (defn footer [] [:div#ft])
 
 (defn wrap-in-layout [title css js body]
-  (html5
+  [:html
    (head title css js)
    [:body
     [:div
      (header)
      (vec (concat [:div#bd] (map blurb body)))
-     (footer)]]))
+     (footer)]]])
 
 (defn convert-to-html [body]
-  (html (doctype :xhtml-strict) body))
+  (html (html5 body)))
 
 (defn pagify [obj]
   (when-not (nil? obj)
