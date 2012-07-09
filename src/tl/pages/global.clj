@@ -69,13 +69,10 @@
     (header)
     (vec (concat [:div.container] (map blurb body)))]])
 
-(defn convert-to-html [body]
-  (html (html5 body)))
-
 (defn pagify [obj]
   (when-not (nil? obj)
     (let [layout (wrap-in-layout (:title obj)
                                  (:css obj)
                                  (:js obj)
                                  (:body obj))]
-      (assoc obj :body (convert-to-html layout)))))
+      (assoc obj :body (html (html5 layout))))))
