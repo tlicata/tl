@@ -49,14 +49,16 @@
 (defn header-links []
   (vec
    (concat
-    [:ul#nav-primary]
+    [:ul.nav.nav-pills]
     (map (fn [{uri :uri text :text}]
            [:li (link-to uri text)])
          (header-data)))))
 
 (defn header []
   (let [primary (header-links)
-        hd (merge [:div#hd] primary)]
+        hd [:div.navbar
+            [:div.navbar-inner
+             (merge [:div.container] primary)]]]
     hd))
 
 (defn wrap-in-layout [title css js body]
