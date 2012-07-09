@@ -15,7 +15,7 @@
     (apply include-css (concat global more))))
 
 (defn js [& more]
-  (let [global [bootstrap-js jquery]]
+  (let [global [jquery bootstrap-js]]
     (apply include-js (concat global more [analytics]))))
 
 (defn blurb [html]
