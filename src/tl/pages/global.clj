@@ -65,10 +65,9 @@
   [:html
    (head title css js)
    [:body
-    [:div
-     (header)
-     (vec (concat [:div#bd] (map blurb body)))
-     (footer)]]])
+    (header)
+    (vec (concat [:div#bd] (map blurb body)))
+    (footer)]])
 
 (defn convert-to-html [body]
   (html (html5 body)))
