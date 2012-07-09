@@ -56,9 +56,10 @@
 
 (defn header []
   (let [primary (header-links)
-        hd [:div.navbar
-            [:div.navbar-inner
-             (merge [:div.container] primary)]]]
+        hd [:div.container
+            [:div.navbar
+             [:div.navbar-inner
+              (merge [:div.container] primary)]]]]
     hd))
 
 (defn wrap-in-layout [title css js body]
@@ -66,7 +67,7 @@
    (head title css js)
    [:body
     (header)
-    (vec (concat [:div] (map blurb body)))]])
+    (vec (concat [:div.container] (map blurb body)))]])
 
 (defn convert-to-html [body]
   (html (html5 body)))
