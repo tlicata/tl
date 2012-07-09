@@ -59,15 +59,12 @@
         hd (merge [:div#hd] primary)]
     hd))
 
-(defn footer [] [:div#ft])
-
 (defn wrap-in-layout [title css js body]
   [:html
    (head title css js)
    [:body
     (header)
-    (vec (concat [:div#bd] (map blurb body)))
-    (footer)]])
+    (vec (concat [:div#bd] (map blurb body)))]])
 
 (defn convert-to-html [body]
   (html (html5 body)))
