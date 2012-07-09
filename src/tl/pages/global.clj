@@ -64,7 +64,7 @@
    (head title css js)
    [:body
     (header)
-    (vec (concat [:div#bd] (map blurb body)))]])
+    (vec (concat [:div] (map blurb body)))]])
 
 (defn convert-to-html [body]
   (html (html5 body)))
