@@ -55,19 +55,16 @@
          (header-data)))))
 
 (defn header []
-  (let [primary (header-links)
-        hd [:div.container
-            [:div.navbar
-             [:div.navbar-inner
-              (merge [:div.container] primary)]]]]
-    hd))
+  (let [primary (header-links)]
+    [:div.navbar
+     (merge [:div.navbar-inner] primary)]))
 
 (defn wrap-in-layout [title css js body]
   [:html
    (head title css js)
-   [:body
+   [:body.container
     (header)
-    (vec (concat [:div.container] (map blurb body)))]])
+    (vec (concat [:div] (map blurb body)))]])
 
 (defn pagify [obj]
   (when-not (nil? obj)
