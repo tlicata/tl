@@ -25,7 +25,7 @@
        (= nil html)
        (= :script (first html)))
     html
-    (conj [:div.row] html)))
+    [:div.container (conj [:div.row.well] html)]))
 
 (defn reduce-blurbs [& blurbs]
   (reduce #(merge-with union %1 %2) blurbs))
@@ -57,13 +57,14 @@
 
 (defn header []
   (let [primary (header-links)]
-    [:div.navbar.row
-     (merge [:div.navbar-inner] primary)]))
+    [:div.navbar
+     [:div.navbar-inner
+      (merge [:div.container] primary)]]))
 
 (defn wrap-in-layout [title css js body]
   [:html
    (head title css js)
-   [:body.container
+   [:body
     (cons (header) (map blurb body))]])
 
 (defn pagify [obj]
