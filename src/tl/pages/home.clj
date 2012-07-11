@@ -11,11 +11,10 @@
             [noir.response :as resp]
             [tl.user :as user]))
 
-(def welcome-blurb [:div.hero-unit
-                    [:p (join "  -  " ["Tim Licata"
-                                       "Programmer"
-                                       "( Golfer | Ping Ponger | Shuffler )"
-                                       "( Lockport, NY | San Francisco, CA )"])]])
+(def welcome-blurb [:p (join "  -  " ["Tim Licata"
+                                      "Programmer"
+                                      "( Golfer | Ping Ponger | Shuffler )"
+                                      "( Lockport, NY | San Francisco, CA )"])])
 
 (defpage "/" []
   (pagify {:title ["Home"]
