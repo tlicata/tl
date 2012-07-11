@@ -2,3 +2,11 @@
     height: 400px;
     width: 100%;
 }
+
+/* Bootstrap breaks Google Maps' styles */
+.map img {
+  max-width: none;
+}
+.map label {
+  width: auto; display:inline;
+}
