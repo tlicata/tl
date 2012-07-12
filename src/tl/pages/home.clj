@@ -11,7 +11,7 @@
             [noir.response :as resp]
             [tl.user :as user]))
 
-(def welcome-blurb [:p (join "  -  " ["Tim Licata"
+(def welcome-blurb [:span (join "  -  " ["Tim Licata"
                                       "Programmer"
                                       "( Golfer | Ping Ponger | Shuffler )"
                                       "( Lockport, NY | San Francisco, CA )"])])
