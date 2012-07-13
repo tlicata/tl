@@ -11,7 +11,7 @@
             [noir.response :as resp]
             [tl.user :as user]))
 
-(def welcome-blurb [:p (join "  -  " ["Tim Licata"
+(def welcome-blurb [:span (join "  -  " ["Tim Licata"
                                       "Programmer"
                                       "( Golfer | Ping Ponger | Shuffler )"
                                       "( Lockport, NY | San Francisco, CA )"])])
@@ -77,29 +77,32 @@ returns false. See also 'contains?'"
   (some #(= val %) coll))
 
 (defn photos-nav
-  ([]
-     (photos-nav nil))
-  ([current]
-     (let
-         [index (.indexOf pics current)
-          previous (when (> index 0) (get pics (- index 1)))
-          next (when (< index (- (count pics) 1)) (get pics (+ index 1)))]
-       [:div#photos-nav
-        [:ul
-         [:li (link-to (first pics) "first")]
-         [:li (if (nil? previous) "previous" (link-to previous "previous"))]
-         [:li (if (nil? next) "next" (link-to next "next"))]
-         [:li (link-to (last pics) "latest")]]])))
+  [current]
+  (let
+      [index (.indexOf pics current)
+       previous (when (> index 0) (get pics (- index 1)))
+       next (when (< index (- (count pics) 1)) (get pics (+ index 1)))]
+    [:ul.pager
+     (when-not (nil? previous) [:li (link-to previous "previous")])
+     (when-not (nil? next) [:li (link-to next "next")])]))
 
 (defn photos [name]
   (if (or (nil? name) (in? pics name))
     (let [htmlify (fn [name]
                     (when-not (nil? name)
-                      [:img {:src (str pics-base name pics-ext)}]))]
+                      [:img {:src (str pics-base name pics-ext)}]))
+          thumbnails (fn [] (merge [:ul.thumbnails]
+                                    (map (fn [img]
+                                           [:li.span2
+                                            [:a.thumbnail {:href img}
+                                             (htmlify img)]])
+                                         pics)))]
       {:title ["Photos"]
-       :body [[:div#photos
-               (photos-nav name)
-               (htmlify name)]]})))
+       :body [(if (nil? name)
+                (thumbnails)
+                [:div#photos
+                 (photos-nav name)
+                 (htmlify name)])]})))
 
 (defpage "/photos/" [] (fn [_] (pagify (photos nil))))
 (defpage "/photos/:name" {name :name} (fn [_] (pagify (photos name))))
@@ -147,9 +150,9 @@ returns false. See also 'contains?'"
                                                          :type "text/html"
                                                          :width "700px"}]])
         search-html [:div#youtubes-search
-                     [:form {:method "get"}
-                      [:input {:type "text" :name "query" :autofocus "true"}]
-                      [:input {:type "submit" :value "Search YouTube"}]]
+                     [:form.form-search {:method "get"}
+                      [:input.search-query {:type "text" :name "query" :autofocus "true"}]
+                      [:input.btn {:type "submit" :value "Search YouTube"}]]
                      (when query
                        (youtube-search-render
                         (youtube-search-parse

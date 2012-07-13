@@ -2,21 +2,21 @@
   (:use [clojure.string :only [join]]
         [clojure.set :only [union]]
         [hiccup.core :only [html]]
-        [hiccup.page-helpers :only [doctype include-css include-js link-to]]))
+        [hiccup.page-helpers :only [doctype html5 include-css include-js link-to]]))
 
 (def analytics "/js/analytics.js")
+(def bootstrap-css "/css/lib/bootstrap.css")
+(def bootstrap-css-responsive "/css/lib/bootstrap-responsive.css")
+(def bootstrap-js "/js/lib/bootstrap.js")
 (def jquery "/js/lib/jquery-1.7.1.js")
-(def yui-base "/css/lib/cssbase-min.css")
-(def yui-fonts "/css/lib/cssfonts-min.css")
-(def yui-reset "/css/lib/cssreset-min.css")
 (def main "/css/main.css?1")
 
 (defn css [& more]
-  (let [global [main yui-base yui-fonts yui-reset]]
+  (let [global [bootstrap-css main]]
     (apply include-css (concat global more))))
 
 (defn js [& more]
-  (let [global [jquery]]
+  (let [global [jquery bootstrap-js]]
     (apply include-js (concat global more [analytics]))))
 
 (defn blurb [html]
@@ -25,7 +25,7 @@
        (= nil html)
        (= :script (first html)))
     html
-    (conj [:div.blurb] html)))
+    [:div.container (conj [:div.row.well] html)]))
 
 (defn reduce-blurbs [& blurbs]
   (reduce #(merge-with union %1 %2) blurbs))
@@ -50,29 +50,22 @@
 (defn header-links []
   (vec
    (concat
-    [:ul#nav-primary]
+    [:ul.nav.nav-pills]
     (map (fn [{uri :uri text :text}]
            [:li (link-to uri text)])
          (header-data)))))
 
 (defn header []
-  (let [primary (header-links)
-        hd (merge [:div#hd] primary)]
-    hd))
-
-(defn footer [] [:div#ft])
+  (let [primary (header-links)]
+    [:div.navbar
+     [:div.navbar-inner
+      (merge [:div.container] primary)]]))
 
 (defn wrap-in-layout [title css js body]
   [:html
    (head title css js)
    [:body
-    [:div#doc4
-     (header)
-     (vec (concat [:div#bd] (map blurb body)))
-     (footer)]]])
-
-(defn convert-to-html [body]
-  (html (doctype :xhtml-strict) body))
+    (cons (header) (map blurb body))]])
 
 (defn pagify [obj]
   (when-not (nil? obj)
@@ -80,4 +73,4 @@
                                  (:css obj)
                                  (:js obj)
                                  (:body obj))]
-      (assoc obj :body (convert-to-html layout)))))
+      (assoc obj :body (html (html5 layout))))))

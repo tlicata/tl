@@ -1,64 +1,11 @@
-/* Global */
-html {
-    padding: 20px;
-}
-input {
-    padding: .2em;
+body {
+    background: url("/img/clean_textile.png");
 }
 
-/* Headers & Footers */
-#hd ul, #hd li, #ft ul, #ft li {
-    display: inline;
-}
-#hd ul, #hd li  {
-    margin-right: 1em;
-}
-#hd ul#nav-secondary a {
-    color: #5093E4;
-}
-#ft {
+#photos, #youtubes{
     text-align: center;
 }
-#ft p, #ft li {
-    display: inline;
-    margin-right: 5px;
-}
-#ft, .blurb {
-    margin-top: 1em;
-}
-.blurb {
-    background-color: #eee;
-    border-left: thick solid #5093E4;
-    overflow: hidden;
-    padding: 1em;
-}
-.current {
-    color: #999;
-}
 
-/* Ltcc */
-#ltcc td {
-    padding: .1em .4em .1em .4em;
-}
-
-/* Maps */
-#maps p {
-    margin: .5em 0 .5em 0;
-}
-
-/* Photos */
-#photos img {
-    display: block;
-    margin: auto;
-    margin-top: .5em;
-    max-width: 100%;
-}
-#photos-nav li {
-    display: inline;
-    margin-right: .5em;
-}
-
-/* Youtubes */
 #youtubes-search #search-results {
     margin-top: 1em;
 }
@@ -79,19 +26,4 @@ input {
     color: #333;
     position: absolute;
     top: 3em;
-}
-
-
-/* Fonts */
-#hd {
-    font-size: 138.5%;
-}
-.blurb {
-    font-size: 123.1%;
-}
-#ft {
-    font-size: 100%;
-}
-h1, h2, h3 {
-    color: #0856B3;
 }

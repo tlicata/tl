@@ -1,11 +1,12 @@
-/* Full Screen */
-#doc3 .map {
-    height: 100%;
+.row .map {
+    height: 400px;
     width: 100%;
 }
 
-/* In page */
-.blurb .map {
-    height: 400px;
-    width: 100%;
+/* Bootstrap breaks Google Maps' styles */
+.map img {
+  max-width: none;
+}
+.map label {
+  width: auto; display:inline;
 }
