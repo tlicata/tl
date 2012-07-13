@@ -1,3 +1,7 @@
 body {
     background: url("/img/cartographer.png");
 }
+
+#photos {
+    text-align: center;
+}
