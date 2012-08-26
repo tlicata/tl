@@ -6,8 +6,7 @@
         [hiccup.page-helpers :only [link-to]]
         [ring.util.codec :only [url-encode]]
         [tl.pages.global :only [pagify]])
-  (:require [com.reasonr.scriptjure :as script]
-            [hiccup.form-helpers :as form]
+  (:require [hiccup.form-helpers :as form]
             [noir.response :as resp]
             [tl.user :as user]))
 
