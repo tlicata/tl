@@ -3,10 +3,10 @@
         [clojure.string :only [join]]
         [clojure.pprint :only [pprint]]
         [noir.core :only [defpage]]
-        [hiccup.page-helpers :only [link-to]]
+        [hiccup.element :only [link-to]]
         [ring.util.codec :only [url-encode]]
         [tl.pages.global :only [pagify]])
-  (:require [hiccup.form-helpers :as form]
+  (:require [hiccup.form :as form]
             [noir.response :as resp]
             [tl.user :as user]))
 

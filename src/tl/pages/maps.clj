@@ -1,5 +1,5 @@
 (ns tl.pages.maps
-  (:use [hiccup.page-helpers :only [link-to]]
+  (:use [hiccup.element :only [link-to]]
         [noir.core :only [defpage]]
         [tl.pages.global :only [reduce-blurbs pagify]]))
 

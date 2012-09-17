@@ -2,7 +2,8 @@
   (:use [clojure.string :only [join]]
         [clojure.set :only [union]]
         [hiccup.core :only [html]]
-        [hiccup.page-helpers :only [doctype html5 include-css include-js link-to]]))
+        [hiccup.element :only [link-to]]
+        [hiccup.page :only [doctype html5 include-css include-js]]))
 
 (def analytics "/js/analytics.js")
 (def bootstrap-css "/css/lib/bootstrap.css")
