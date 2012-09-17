@@ -4,6 +4,7 @@
         [clojure.pprint :only [pprint]]
         [noir.core :only [defpage]]
         [hiccup.element :only [link-to]]
+        [hiccup.page :only [include-js]]
         [ring.util.codec :only [url-encode]]
         [tl.pages.global :only [pagify]])
   (:require [hiccup.form :as form]
@@ -164,3 +165,9 @@ returns false. See also 'contains?'"
 (defpage "/youtubes/:video" {:keys [video query]}
   (pagify (youtubes video query)))
 
+(defpage "/cljs/" []
+  (pagify {:title ["Cljs Trial"]
+           :body [[:div
+                   [:input#lname {:type "text" :placeholder "place holder"}]
+                   [:input#search-btn {:type "button" :value "Get Stats!"}]]
+                  [:script {:type "text/javascript" :src "/js/bin/all.js"}]]}))
