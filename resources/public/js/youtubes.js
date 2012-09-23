@@ -96,7 +96,9 @@ tl.youtubes = (function () {
                 dataType: "jsonp",
                 error: function () {
                     renderError();
-                    callback ? callback(false) : null;
+                    if (callback) {
+                        callback(false);
+                    }
                 },
                 success: function (json) {
                     var success = true;
@@ -107,7 +109,9 @@ tl.youtubes = (function () {
                     } catch (e) {
                         success = false;
                     }
-                    callback ? callback(success) : null;
+                    if (callback) {
+                        callback(success);
+                    }
                 },
                 timeout: 5000,
                 url: searchUrl
