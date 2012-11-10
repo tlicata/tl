@@ -58,7 +58,7 @@
 
 (defn header []
   (let [primary (header-links)]
-    [:div.navbar
+    [:div.navbar.navbar-fixed-top
      [:div.navbar-inner
       (merge [:div.container] primary)]]))
 
