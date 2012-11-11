@@ -47,7 +47,7 @@ tl.youtubes = (function () {
         };
 
         var html = function (videos, query) {
-            var outer = $("<div/>").attr("id", resultsDivId);
+            var outer = $("<div/>");
             if (videos.length) {
                 $.each(videos, function (idx, vid) {
                     outer.append($("<div/>").append(
@@ -76,17 +76,16 @@ tl.youtubes = (function () {
         };
 
         // Draw new search results.
-        var render = function (vids, query) {
+        var render = function (html) {
             remove();
-            searchDiv.append(html(vids, query));
+            var resultsDiv = $("<div/>").attr("id", resultsDivId);
+            searchDiv.append(resultsDiv.append(html));
         };
-
-        // If an problem occurs while searching.
+        var renderSuccess = function (vids, query) {
+            render(html(vids, query));
+        };
         var renderError = function () {
-            remove();
-            var p = document.createElement("p");
-            p.innerHTML = "Something went wrong";
-            searchDiv.append(p);
+            render($("<span/>").text("Something went wrong"));
         };
 
         // search
@@ -105,7 +104,7 @@ tl.youtubes = (function () {
                     try {
                         query = encode(query);
                         window.location.hash = query;
-                        render(clean(json), query);
+                        renderSuccess(clean(json), query);
                     } catch (e) {
                         success = false;
                     }
