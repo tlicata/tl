@@ -6,7 +6,7 @@
         [hiccup.page :only [doctype html5 include-css include-js]]))
 
 (def analytics "/js/analytics.js")
-(def bootstrap-css "/css/lib/bootstrap.css")
+(def bootstrap-css "/css/lib/themes/cyborg/bootstrap.min.css")
 (def bootstrap-css-responsive "/css/lib/bootstrap-responsive.css")
 (def bootstrap-js "/js/lib/bootstrap.js")
 (def jquery "/js/lib/jquery-1.7.1.js")
@@ -51,7 +51,7 @@
 (defn header-links []
   (vec
    (concat
-    [:ul.nav.nav-pills]
+    [:ul.nav]
     (map (fn [{uri :uri text :text}]
            [:li (link-to uri text)])
          (header-data)))))
