@@ -83,7 +83,7 @@ The better way is to get interactive dev going
 through emacs and nrepl.
 
 First, follow the installation instructions: https://github.com/kingtim/nrepl.el.
-Then, n Emacs, open core.clj,
+Then, in Emacs, open core.clj,
 
     M-x nrepl-jack-in
     C-c C-k
