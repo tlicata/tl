@@ -51,7 +51,7 @@
 (defn header-links []
   (vec
    (concat
-    [:ul.nav.nav-pills]
+    [:ul.nav]
     (map (fn [{uri :uri text :text}]
            [:li (link-to uri text)])
          (header-data)))))
