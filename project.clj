@@ -8,10 +8,14 @@
   :hooks [leiningen.cljsbuild]
   :min-lein-version "2.0.0"
   :profiles {:dev {:dependencies [[ring-mock "0.1.1"]]}}
-  :plugins [[lein-cljsbuild "0.2.7"]]
+  :plugins [[lein-cljsbuild "0.2.7"]
+            [lein-haml-sass "0.2.0"]]
   :aot [tl.core]
   :cljsbuild {:builds [{:source-path "cljs"
                         :compiler {:output-to "resources/public/js/bin/all.js"
                                    :optimizations :whitespace
-                                   :pretty-print true}}]})
+                                   :pretty-print true}}]}
+  :scss {:src "resources/scss"
+         :output-directory "resources/public/css/bin"
+         :output-extension "css"})
 
