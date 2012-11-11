@@ -80,15 +80,15 @@ restart for refreshing jvm changes.
     foreman start
 
 The better way is to get interactive dev going
-through emacs and Swank Clojure.
+through emacs and nrepl.
 
-First, follow the installation instructions: http://github.com/technomancy/swank-clojure.
-Then, in Emacs, open core.clj,
+First, follow the installation instructions: https://github.com/kingtim/nrepl.el.
+Then, n Emacs, open core.clj,
 
-    M-x clojure-jack-in
+    M-x nrepl-jack-in
     C-c C-k
 
-At Slime repl, start server
+In nrepl buffer, start server
 
     user> (tl.core/dev-main)
 
