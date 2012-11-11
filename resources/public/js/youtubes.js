@@ -76,7 +76,7 @@ tl.youtubes = (function () {
         };
 
         // Draw new search results.
-        var render = function (vids, query) {
+        var renderSuccess = function (vids, query) {
             remove();
             searchDiv.append(html(vids, query));
         };
@@ -105,7 +105,7 @@ tl.youtubes = (function () {
                     try {
                         query = encode(query);
                         window.location.hash = query;
-                        render(clean(json), query);
+                        renderSuccess(clean(json), query);
                     } catch (e) {
                         success = false;
                     }
