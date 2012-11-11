@@ -10,7 +10,7 @@
 (def bootstrap-css-responsive "/css/lib/bootstrap-responsive.css")
 (def bootstrap-js "/js/lib/bootstrap.js")
 (def jquery "/js/lib/jquery-1.7.1.js")
-(def main "/css/main.css?1")
+(def main "/css/main.css?2")
 
 (defn css [& more]
   (let [global [bootstrap-css main]]
