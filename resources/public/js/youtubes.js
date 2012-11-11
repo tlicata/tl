@@ -47,7 +47,7 @@ tl.youtubes = (function () {
         };
 
         var html = function (videos, query) {
-            var outer = $("<div/>").attr("id", resultsDivId);
+            var outer = $("<div/>");
             if (videos.length) {
                 $.each(videos, function (idx, vid) {
                     outer.append($("<div/>").append(
@@ -76,9 +76,13 @@ tl.youtubes = (function () {
         };
 
         // Draw new search results.
-        var renderSuccess = function (vids, query) {
+        var render = function (html) {
             remove();
-            searchDiv.append(html(vids, query));
+            var resultsDiv = $("<div/>").attr("id", resultsDivId);
+            searchDiv.append(resultsDiv.append(html));
+        };
+        var renderSuccess = function (vids, query) {
+            render(html(vids, query));
         };
 
         // If an problem occurs while searching.
