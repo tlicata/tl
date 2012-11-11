@@ -1,3 +1,6 @@
+$blue-highlight-color: #33B5E5;
+$dark-font-color: #282828;
+
 body {
     padding-top: 60px; /* sit below fixed header */
 }
@@ -8,14 +11,14 @@ form {
 input.search-query {
     border-radius: 0;
     -webkit-border-radius: 0;
-    color: #282828;
+    color: $dark-font-color;
     margin-right: 2px;
 }
 ul.pager li {
     margin-right: 5px;
     > a {
         background: none;
-        border: 2px solid #33B5E5;
+        border: 2px solid $blue-highlight-color;
     }
     > a:hover {
         background: none;
