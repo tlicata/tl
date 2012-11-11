@@ -84,13 +84,8 @@ tl.youtubes = (function () {
         var renderSuccess = function (vids, query) {
             render(html(vids, query));
         };
-
-        // If an problem occurs while searching.
         var renderError = function () {
-            remove();
-            var p = document.createElement("p");
-            p.innerHTML = "Something went wrong";
-            searchDiv.append(p);
+            render($("<span/>").text("Something went wrong"));
         };
 
         // search
