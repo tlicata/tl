@@ -11,6 +11,16 @@ input.search-query {
     color: #282828;
     margin-right: 2px;
 }
+ul.pager li {
+    margin-right: 5px;
+}
+ul.pager li > a {
+    background: none;
+    border: 2px solid #33B5E5;
+}
+ul.pager li > a:hover {
+    background: none;
+}
 
 #photos, #youtubes{
     text-align: center;
