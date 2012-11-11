@@ -131,14 +131,16 @@ returns false. See also 'contains?'"
          entries)))
 
 (defn youtube-search-render [results]
-  (if (empty? results)
-    [:p "Go fish."]
-    (vec (cons :div.search-results
-               (map (fn [entry]
-                      [:div.entry
-                       (link-to (:id entry) (:title entry))
-                       [:span.viewed (str (:viewed entry) " views")]])
-                    results)))))
+  (vec
+   (cons :div#youtubes-search
+         [[:div#search-results
+           (if (empty? results)
+             [:span "Go fish."]
+             (map (fn [entry]
+                    [:div.entry
+                     (link-to (:id entry) (:title entry))
+                     [:span.viewed (str (:viewed entry) " views")]])
+                  results))]])))
 
 (defn youtubes [video query]
   (let [url (str "http://youtube.com/embed/" video
