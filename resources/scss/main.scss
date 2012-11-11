@@ -13,13 +13,13 @@ input.search-query {
 }
 ul.pager li {
     margin-right: 5px;
-}
-ul.pager li > a {
-    background: none;
-    border: 2px solid #33B5E5;
-}
-ul.pager li > a:hover {
-    background: none;
+    > a {
+        background: none;
+        border: 2px solid #33B5E5;
+    }
+    > a:hover {
+        background: none;
+    }
 }
 
 #photos, #youtubes{
@@ -28,21 +28,22 @@ ul.pager li > a:hover {
 
 #youtubes-search #search-results {
     margin-top: 1em;
-}
-#youtubes-search #search-results div {
-    position: relative;
-}
-#youtubes-search #search-results img {
-    border: solid;
-    height: 5em;
-    margin: .5em 1em .5em 0;
-    width: 8em;
-}
-#youtubes-search #search-results a {
-    position: absolute;
-    top: 1.5em;
-}
-#youtubes-search #search-results .views {
-    position: absolute;
-    top: 3em;
+
+    a {
+        position: absolute;
+        top: 1.5em;
+    }
+    div {
+        position: relative;
+    }
+    img {
+        border: solid;
+        height: 5em;
+        margin: .5em 1em .5em 0;
+        width: 8em;
+    }
+    .views {
+        position: absolute;
+        top: 3em;
+    }
 }
