@@ -1,5 +1,5 @@
-(ns tl.pages.home-test
-  (:use [tl.pages.home])
+(ns tl.pages.youtubes-test
+  (:use [tl.pages.youtubes])
   (:use [clojure.test])
   (:require [clojure.zip :as zip]))
 
