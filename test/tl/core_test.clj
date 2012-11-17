@@ -5,8 +5,8 @@
   (:use [ring.mock.request]))
 
 (def valid-routes ["/"
+                   "/cljs/"
                    "/login/"
-                   "/ltcc/"
                    "/maps/"
                    "/maps/google"
                    "/photos/"

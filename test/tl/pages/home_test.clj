@@ -16,4 +16,4 @@
 
 (deftest test-youtubes
   (is (not (has-script-tag? (youtubes nil nil))))
-  (is (has-script-tag? (youtubes "id" "search term"))))
+  (is (not (has-script-tag? (youtubes "id" "search term")))))
