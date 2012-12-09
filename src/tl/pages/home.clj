@@ -10,14 +10,10 @@
             [noir.response :as resp]
             [tl.user :as user]))
 
-(def welcome-blurb [:span (join "  -  " ["Tim Licata"
-                                      "Programmer"
-                                      "( Golfer | Ping Ponger | Shuffler )"
-                                      "( Lockport, NY | San Francisco, CA )"])])
-
 (defpage "/" []
   (pagify {:title ["Home"]
-           :body [welcome-blurb]}))
+           :body [[:div#particles]]
+           :js #{"/js/lib/three.js" "/js/particles.js"}}))
 
 (defpage "/admin/" request
   (pagify {:title ["Admin"]
