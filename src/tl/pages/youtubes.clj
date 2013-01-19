@@ -1,6 +1,5 @@
 (ns tl.pages.youtubes
   (:use [clojure.data.json :only [read-json]]
-        [noir.core :only [defpage]]
         [hiccup.element :only [link-to]]
         [ring.util.codec :only [url-encode]]
         [tl.pages.global :only [pagify]]))
@@ -61,6 +60,5 @@
          :title ["Hello Youtubes"]
          :body [video-html search-html]}))
 
-(defpage "/youtubes/" {query :query} (pagify (youtubes nil query)))
-(defpage "/youtubes/:video" {:keys [video query]}
+(defn youtubes-page [video query]
   (pagify (youtubes video query)))

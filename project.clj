@@ -1,8 +1,8 @@
 (defproject tl "0.1.0-SNAPSHOT"
   :description "My personal site"
   :dependencies [[clj-redis "0.0.12"]
-                 [domina "1.0.0"]
-                 [noir "1.3.0-beta10"]
+                 [compojure "1.1.3"]
+                 [lib-noir "0.2.0"]
                  [org.clojure/clojure "1.4.0"]
                  [org.clojure/data.json "0.1.1"]]
   :hooks [leiningen.cljsbuild]

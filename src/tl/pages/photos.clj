@@ -1,6 +1,5 @@
 (ns tl.pages.photos
-  (:use [noir.core :only [defpage]]
-        [hiccup.element :only [link-to]]
+  (:use [hiccup.element :only [link-to]]
         [tl.pages.global :only [pagify]]))
 
 (defn in?
@@ -57,5 +56,8 @@ returns false. See also 'contains?'"
                  (photos-nav name)
                  (htmlify name)])]})))
 
-(defpage "/photos/" [] (fn [_] (pagify (photos nil))))
-(defpage "/photos/:name" {name :name} (fn [_] (pagify (photos name))))
+(defn photos-page
+  ([]
+     (pagify (photos nil)))
+  ([name]
+     (pagify (photos name))))

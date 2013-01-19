@@ -1,18 +1,44 @@
 (ns tl.core
-  (:use [noir.core :only [defpage pre-route]])
-  (:require [noir.server :as server]
-            [noir.session :as session]
-            [tl.user :as user]))
+  (:use [compojure.core :only [defroutes GET]]
+        [ring.middleware.file :only [wrap-file]]
+        [ring.middleware.file-info :only [wrap-file-info]]
+        [ring.middleware.params :only [wrap-params]]
+        [ring.middleware.session :only [wrap-session]]
+        [tl.pages.home :only [home cljs]]
+        [tl.pages.maps :only [maps-page]]
+        [tl.pages.photos :only [photos-page]]
+        [tl.pages.youtubes :only [youtubes-page]])
+  (:require [compojure.route :as route]
+            [ring.adapter.jetty :as jetty]))
 
-(pre-route "/admin/*" {} (when-not (user/admin?)
-                          {:status 401
-                           :body "Not Authorized"}))
+(defroutes tl-routes
+  (GET "/" [] (home))
+  (GET "/cljs/" []  (cljs))
+  (GET "/maps/" [] (maps-page))
+  (GET "/maps/:kind" [kind] (maps-page kind))
+  (GET "/photos/" [] (photos-page))
+  (GET "/photos/:id" [id] (photos-page id))
+  (GET "/youtubes/" [query] (youtubes-page nil query))
+  (GET "/youtubes/:video" [video query] (youtubes-page video query)))
 
-(server/load-views "src/tl/pages/")
+(defroutes error-routes
+  (route/not-found "Not Found"))
+
+(defroutes all-routes
+  tl-routes
+  error-routes)
+
+(def app
+     (-> #'all-routes
+         wrap-params
+         wrap-session
+         (wrap-file "resources/public")
+         wrap-file-info))
 
 (defn -main []
   (let [port (Integer/parseInt (System/getenv "PORT"))]
-    (server/start port)))
+    (jetty/run-jetty app {:port port})))
 
 (defn dev-main []
-  (server/start 8080))
+  (future
+    (jetty/run-jetty app {:port 5000})))
