@@ -1,5 +1,4 @@
 (ns tl.user
-  (:use [noir.core :only [defpage]])
   (:require [noir.session :as session]
             [noir.util.crypt :as crypt]
             [noir.validation :as vali]

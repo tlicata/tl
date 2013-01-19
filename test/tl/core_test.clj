@@ -1,12 +1,10 @@
 (ns tl.core-test
   (:use [tl.core] :reload-all)
   (:use [clojure.test])
-  (:use [noir.util.test])
   (:use [ring.mock.request]))
 
 (def valid-routes ["/"
                    "/cljs/"
-                   "/login/"
                    "/maps/"
                    "/maps/google"
                    "/photos/"
@@ -25,8 +23,12 @@
 (def admin-routes ["/admin/"
                    "/admin/ltcc/"])
 
+(defn has-status [resp stat]
+  (is (= stat (get resp :status)))
+  resp)
+
 (defn is-status [route status]
-  (-> (send-request route)
+  (-> (all-routes (request :get route))
       (has-status status)))
 
 (deftest test-routes
@@ -39,4 +41,4 @@
 
 (deftest test-auth
   (doseq [route admin-routes]
-    (is-status route 401)))
+    (is-status route 404)))
