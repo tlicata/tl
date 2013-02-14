@@ -54,22 +54,6 @@ Redis
 
     sudo port install redis
 
-Heroku Environment
-
-lein-cljsbuild was causing a boot timeout error when trying to compile.
-
-    heroku[web.1]: Error R10 (Boot timeout) -> Web process failed to bind to $PORT within 60 seconds of launch
-
-To get around that, setup :aot compilation.
-
-    heroku config:add LEIN_BUILD_TASK="compile :all"
-
-In order for config vars to work, have to install labs plugin
-and enable user_env_compile.
-
-    heroku plugins:install http://github.com/heroku/heroku-labs.git
-    heroku labs:enable user_env_compile -a <app-name>
-
 ### Starting Server
 
 Foreman will launch a local verion of the site
