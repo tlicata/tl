@@ -1,7 +1,6 @@
 (ns tl.pages.global
   (:use [clojure.string :only [join]]
         [clojure.set :only [union]]
-        [hiccup.core :only [html]]
         [hiccup.element :only [link-to]]
         [hiccup.page :only [doctype html5 include-css include-js]]))
 
@@ -72,4 +71,4 @@
                                  (:css obj)
                                  (:js obj)
                                  (:body obj))]
-      (assoc obj :body (html (html5 layout))))))
+      (assoc obj :body (html5 layout)))))
