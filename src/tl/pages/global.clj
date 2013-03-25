@@ -49,12 +49,10 @@
    {:uri "/youtubes/" :text "Youtubes"}])
 
 (defn header-links []
-  (vec
-   (concat
-    [:ul.nav]
-    (map (fn [{uri :uri text :text}]
-           [:li (link-to uri text)])
-         (header-data)))))
+  (let [links (map (fn [{uri :uri text :text}]
+                     [:li (link-to uri text)])
+                   (header-data))]
+    `[:ul.nav ~@links]))
 
 (defn header []
   (let [primary (header-links)]
