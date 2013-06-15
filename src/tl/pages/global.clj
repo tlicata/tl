@@ -16,20 +16,8 @@
   (let [global [jquery]]
     (apply include-js (concat global more [analytics]))))
 
-(defn blurb [html]
-  "Wrap in an blurb div. Unless it's a script tag"
-  (if (or
-       (= nil html)
-       (= :script (first html)))
-    html
-    [:div.container (conj [:div.row.well] html)]))
-
 (defn reduce-blurbs [& blurbs]
   (reduce #(merge-with union %1 %2) blurbs))
-
-(defn blurbify [{html :html}]
-  (let [blurbs (map blurb html)]
-    (apply conj [:div#bd] blurbs)))
 
 (defn head [title css-arg js-arg]
   (vec
@@ -50,17 +38,10 @@
                    (header-data))]
     `[:ul.nav ~@links]))
 
-(defn header []
-  (let [primary (header-links)]
-    [:div.navbar.navbar-fixed-top
-     [:div.navbar-inner
-      (merge [:div.container] primary)]]))
-
 (defn wrap-in-layout [title css js body]
   [:html
    (head title css js)
-   [:body
-    (cons (header) (map blurb body))]])
+   [:body (cons (header-links) body)]])
 
 (defn pagify [obj]
   (when-not (nil? obj)
