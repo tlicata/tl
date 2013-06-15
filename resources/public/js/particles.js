@@ -13,7 +13,7 @@ tl.particles = (function () {
 
     var init = function () {
         var container = $("#particles");
-        var height = 400;
+        var height = container.height();
         var width = container.width();
 
         var angle = 75;
