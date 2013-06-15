@@ -18,6 +18,15 @@ ul.pager li > a:hover {
     background: none;
 }
 
+.nav {
+    margin: 0;
+    padding: 0;
+}
+.nav li {
+    display: inline;
+    padding: 10px;
+}
+
 #photos, #youtubes{
     text-align: center;
 }
