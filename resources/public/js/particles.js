@@ -8,11 +8,10 @@ if (!tl) {
 
 tl.particles = (function () {
 
-    var camera, renderer, scene;
-    var group;
+    var container, camera, group, renderer, scene;
 
     var init = function () {
-        var container = $("#particles");
+        container = $("#particles");
         var height = container.height();
         var width = container.width();
 
@@ -71,7 +70,16 @@ tl.particles = (function () {
         init: function () {
             init();
             render();
-            setInterval(render, 50);
+            //setInterval(render, 50);
+            $(window).resize(function () {
+                var width = container.width();
+                var height = container.height();
+                camera.aspect = width / height;
+                //camera.fov = ( 360 / Math.PI ) * Math.atan( tanFOV * ( window.innerHeight / windowHeight ) );
+                camera.updateProjectionMatrix();
+                camera.lookAt( scene.position );
+                renderer.setSize(width, height);
+            }).mousemove(render);
         }
     };
 })();
