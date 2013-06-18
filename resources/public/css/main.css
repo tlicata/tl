@@ -20,10 +20,6 @@ form {
     z-index: -100;
 }
 
-#photos, #youtubes{
-    text-align: center;
-}
-
 #youtubes-search #search-results {
     margin-top: 1em;
 }
