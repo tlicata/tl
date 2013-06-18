@@ -26,22 +26,10 @@
     (vec (apply css css-arg))
     (vec (apply js js-arg)))))
 
-(defn header-data []
-  [{:uri "/" :text "Home"}
-   {:uri "/maps/" :text "Maps"}
-   {:uri "/photos/" :text "Photos"}
-   {:uri "/youtubes/" :text "Youtubes"}])
-
-(defn header-links []
-  (let [links (map (fn [{uri :uri text :text}]
-                     [:li (link-to uri text)])
-                   (header-data))]
-    `[:ul.nav ~@links]))
-
 (defn wrap-in-layout [title css js body]
   [:html
    (head title css js)
-   [:body (cons (header-links) body)]])
+   `[:body ~@body]])
 
 (defn pagify [obj]
   (when-not (nil? obj)
