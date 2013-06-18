@@ -6,7 +6,7 @@
 
 (def analytics "/js/analytics.js")
 (def jquery "/js/lib/jquery-1.7.1.js")
-(def main "/css/main.css?2")
+(def main "/css/main.css?3")
 
 (defn css [& more]
   (let [global [main]]

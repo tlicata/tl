@@ -11,7 +11,7 @@
 (defn home []
   (pagify {:title ["Home"]
            :body [[:div#particles]]
-           :js #{"/js/lib/three.js" "/js/particles.js"}}))
+           :js #{"/js/lib/three.js" "/js/particles.js?1"}}))
 
 (defn cljs []
   (pagify {:title ["Cljs Trial"]

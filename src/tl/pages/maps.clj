@@ -2,7 +2,7 @@
   (:use [hiccup.element :only [link-to]]
         [tl.pages.global :only [reduce-blurbs pagify]]))
 
-(def map-css "/css/maps.css")
+(def map-css "/css/maps.css?1")
 
 (def maps {:google {:css #{"/css/gmap.css" map-css}
                     :js #{"/js/gmap.js"
