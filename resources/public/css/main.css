@@ -1,29 +1,26 @@
-body {
-    padding-top: 60px; /* sit below fixed header */
-}
-
 form {
     margin: 0;
 }
-input.search-query {
-    border-radius: 0;
-    -webkit-border-radius: 0;
-    color: #282828;
-    margin-right: 2px;
-}
-ul.pager li {
-    margin-right: 5px;
-}
-ul.pager li > a {
-    background: none;
-    border: 2px solid #33B5E5;
-}
-ul.pager li > a:hover {
-    background: none;
+ul {
+    list-style-type: none;
 }
 
-#photos, #youtubes{
-    text-align: center;
+.nav {
+    margin: 0;
+    padding: 0;
+}
+.nav li {
+    display: inline;
+    padding: 10px;
+}
+
+#particles {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -100;
 }
 
 #youtubes-search #search-results {
