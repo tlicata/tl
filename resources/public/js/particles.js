@@ -60,14 +60,10 @@ tl.particles = (function () {
     };
 
     var render = function () {
-        //camera.position.x += ( mouseX - camera.position.x ) * 0.05;
-        //camera.position.y += ( - mouseY - camera.position.y ) * 0.05;
-        //camera.lookAt( scene.position );
 
         group.rotation.x += 0.01;
         group.rotation.y += 0.02;
 
-        //camera.position.z -= 5;
 
         renderer.render(scene, camera);
     };
