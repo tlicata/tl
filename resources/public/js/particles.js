@@ -8,12 +8,18 @@ if (!tl) {
 
 tl.particles = (function () {
 
-    var container, camera, group, renderer, scene;
+    var container, camera, height, group, renderer, scene, width;
+
+    var updateSize = function () {
+        if (container) {
+            height = container.height();
+            width = container.width();
+        }
+    };
 
     var init = function () {
         container = $("#particles");
-        var height = container.height();
-        var width = container.width();
+        updateSize();
 
         var angle = 75;
         var aspect =  width / height;
@@ -72,8 +78,7 @@ tl.particles = (function () {
             render();
             //setInterval(render, 50);
             $(window).resize(function () {
-                var width = container.width();
-                var height = container.height();
+                updateSize();
                 camera.aspect = width / height;
                 //camera.fov = ( 360 / Math.PI ) * Math.atan( tanFOV * ( window.innerHeight / windowHeight ) );
                 camera.updateProjectionMatrix();
