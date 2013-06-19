@@ -59,20 +59,35 @@ tl.particles = (function () {
         container.append(renderer.domElement);
     };
 
+    var mouseX = 0;
+    var mouseY = 0;
     var render = function () {
 
-        group.rotation.x += 0.01;
-        group.rotation.y += 0.02;
+        var halfWidth = width / 2;
+        var halfHeight = height / 2;
 
+        var speedX = (mouseX - halfWidth) / halfWidth;
+        var speedY = (mouseY - halfHeight) / halfHeight;
+
+        var time = new Date().getTime() / 1000;
+        var sin = Math.sin(time);
+
+        group.rotation.x += speedY / 15;
+        group.rotation.y += speedX / 15;
+        camera.position.z = 5 * sin;
 
         renderer.render(scene, camera);
+    };
+    var onMouseMove = function (event) {
+        mouseX = event.pageX;
+        mouseY = event.pageY;
     };
 
     return {
         init: function () {
             init();
             render();
-            //setInterval(render, 50);
+            setInterval(render, 50);
             $(window).resize(function () {
                 updateSize();
                 camera.aspect = width / height;
@@ -80,7 +95,7 @@ tl.particles = (function () {
                 camera.updateProjectionMatrix();
                 camera.lookAt( scene.position );
                 renderer.setSize(width, height);
-            }).mousemove(render);
+            }).mousemove(onMouseMove);
         }
     };
 })();
