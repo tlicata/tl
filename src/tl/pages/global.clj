@@ -20,11 +20,9 @@
   (reduce #(merge-with union %1 %2) blurbs))
 
 (defn head [title css-arg js-arg]
-  (vec
-   (concat
-    [:head [:title (join " - " (cons "Tim's Online World" title))]]
-    (vec (apply css css-arg))
-    (vec (apply js js-arg)))))
+  `[[:head [:title (join " - " (cons "Tim's Online World" title))]]
+    (css ~@css-arg)
+    (js ~@js-arg)])
 
 (defn header-data []
   [{:uri "/" :text "Home"}
