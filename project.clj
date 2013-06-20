@@ -7,7 +7,8 @@
                  [org.clojure/data.json "0.1.1"]]
   :hooks [leiningen.cljsbuild]
   :min-lein-version "2.0.0"
-  :profiles {:dev {:dependencies [[ring-mock "0.1.1"]]}}
+  :profiles {:dev {:dependencies [[ring-mock "0.1.1"]]}
+             :production {:offline true}}
   :plugins [[lein-cljsbuild "0.2.7"]]
   :aot [tl.core]
   :cljsbuild {:builds [{:source-path "cljs"
