@@ -61,20 +61,31 @@ tl.particles = (function () {
 
     var mouseX = 0;
     var mouseY = 0;
+    var oldMouseX = 0;
+    var oldMouseY = 0;
+    var oldSpeedX = 0;
+    var oldSpeedY = 0;
     var render = function () {
+
+        var time = new Date().getTime() / 5000;
+        var sin = Math.sin(time) / 5;
 
         var halfWidth = width / 2;
         var halfHeight = height / 2;
 
-        var speedX = (mouseX - halfWidth) / halfWidth;
-        var speedY = (mouseY - halfHeight) / halfHeight;
+        var dull = width;
+        var forceX = (mouseX - oldMouseX + sin) / dull;
+        var forceY = (mouseY - oldMouseY + sin) / dull;
+        var speedX = (oldSpeedX/1.05) + forceX;
+        var speedY = (oldSpeedY/1.05) + forceY;
 
-        var time = new Date().getTime() / 1000;
-        var sin = Math.sin(time);
+        group.rotation.x += speedY;
+        group.rotation.y += speedX;
 
-        group.rotation.x += speedY / 15;
-        group.rotation.y += speedX / 15;
-        camera.position.z = 5 * sin;
+        oldMouseX = mouseX;
+        oldMouseY = mouseY;
+        oldSpeedX = speedX;
+        oldSpeedY = speedY;
 
         renderer.render(scene, camera);
     };
