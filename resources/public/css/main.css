@@ -27,8 +27,8 @@ ul {
     min-height: 675px;
 }
 
-#youtubes-search #search-results {
-    margin-top: 1em;
+#youtubes, #youtubes-search {
+    margin: 10px 0 0 10px;
 }
 #youtubes-search #search-results div {
     position: relative;
