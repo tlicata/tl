@@ -43,7 +43,7 @@ tl.particles = (function () {
 
         for (var i = 0; i < 1000; i++) {
             var material = new THREE.ParticleCanvasMaterial({
-                color: Math.random() * 0x808008 + 0x808080,
+                color: Math.random() * 0xAAEE55,
                 program: program
             });
             var particle = new THREE.Particle(material);
