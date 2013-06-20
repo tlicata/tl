@@ -33,7 +33,7 @@ returns false. See also 'contains?'"
     (let [htmlify (fn [name]
                     (when-not (nil? name)
                       [:img {:src (str pics-base name pics-ext)}]))
-          all-photos (fn [] (merge [:ul]
+          all-photos (fn [] (merge [:ul#photos]
                                    (map (fn [img]
                                           [:li [:a {:href img}
                                                 (htmlify img)]])

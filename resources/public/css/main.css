@@ -23,6 +23,10 @@ ul {
     z-index: -100;
 }
 
+#photos img {
+    min-height: 675px;
+}
+
 #youtubes-search #search-results {
     margin-top: 1em;
 }
