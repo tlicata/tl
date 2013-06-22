@@ -70,9 +70,6 @@ tl.particles = (function () {
         var time = new Date().getTime() / 5000;
         var sin = Math.sin(time) / 5;
 
-        var halfWidth = width / 2;
-        var halfHeight = height / 2;
-
         var dull = width * 2;
         var forceX = (mouseX - oldMouseX + sin) / dull;
         var forceY = (mouseY - oldMouseY + sin) / dull;
