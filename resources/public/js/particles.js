@@ -73,7 +73,7 @@ tl.particles = (function () {
         var halfWidth = width / 2;
         var halfHeight = height / 2;
 
-        var dull = width;
+        var dull = width * 2;
         var forceX = (mouseX - oldMouseX + sin) / dull;
         var forceY = (mouseY - oldMouseY + sin) / dull;
         var speedX = (oldSpeedX/1.05) + forceX;
