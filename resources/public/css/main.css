@@ -14,6 +14,10 @@ ul {
     padding: 10px;
 }
 
+#maps {
+    margin-left: 10px;
+}
+
 #particles {
     position: absolute;
     left: 0;
