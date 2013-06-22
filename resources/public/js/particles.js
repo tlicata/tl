@@ -41,7 +41,7 @@ tl.particles = (function () {
         group = new THREE.Object3D();
         scene.add(group);
 
-        for (var i = 0; i < 1000; i++) {
+        for (var i = 0; i < 500; i++) {
             var material = new THREE.ParticleCanvasMaterial({
                 color: Math.random() * 0xAAEE55,
                 program: program
@@ -50,7 +50,7 @@ tl.particles = (function () {
             particle.position.x = Math.random() * 2000 - 1000;
             particle.position.y = Math.random() * 2000 - 1000;
             particle.position.z = Math.random() * 2000 - 1000;
-            particle.scale.x = particle.scale.y = Math.random() * 10 + 5;
+            particle.scale.x = particle.scale.y = Math.random() * 10 + 7;
             group.add(particle);
         }
 
