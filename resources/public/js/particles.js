@@ -90,6 +90,13 @@ tl.particles = (function () {
         mouseX = event.pageX;
         mouseY = event.pageY;
     };
+    var onSwipe = function (event, custom) {
+        var delta = custom && custom.delta && custom.delta[0];
+        if (delta && delta.lastX) {
+            mouseX = mouseX + delta.lastX;
+            mouseY = mouseY + delta.lastY;
+        }
+    };
 
     return {
         init: function () {
@@ -103,7 +110,7 @@ tl.particles = (function () {
                 camera.updateProjectionMatrix();
                 camera.lookAt( scene.position );
                 renderer.setSize(width, height);
-            }).mousemove(onMouseMove);
+            }).mousemove(onMouseMove).bind("swipemove", onSwipe);
         }
     };
 })();
