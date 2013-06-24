@@ -101,7 +101,6 @@ tl.particles = (function () {
     return {
         init: function () {
             init();
-            render();
             setInterval(render, 50);
             $(window).resize(function () {
                 updateSize();
