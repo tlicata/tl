@@ -97,19 +97,24 @@ tl.particles = (function () {
             mouseY = mouseY + delta.lastY;
         }
     };
+    var onResize = function () {
+        updateSize();
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        camera.lookAt(scene.position);
+        renderer.setSize(width, height);
+    };
 
     return {
         init: function () {
             init();
             setInterval(render, 50);
-            $(window).resize(function () {
-                updateSize();
-                camera.aspect = width / height;
-                //camera.fov = ( 360 / Math.PI ) * Math.atan( tanFOV * ( window.innerHeight / windowHeight ) );
-                camera.updateProjectionMatrix();
-                camera.lookAt( scene.position );
-                renderer.setSize(width, height);
-            }).mousemove(onMouseMove).bind("swipemove", onSwipe);
+            var $window = $(window).resize(onResize);
+            if ("ontouchstart" in document.documentElement) {
+                $window.on("swipemove", onSwipe);
+            } else {
+                $window.on("mousemove", onMouseMove);
+            }
         }
     };
 })();
