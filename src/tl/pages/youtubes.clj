@@ -56,7 +56,7 @@
                        (youtube-search-render
                         (youtube-search-parse
                          (youtube-search-fetch query))))]]
-        {:js #{"/js/youtubes.js?2"}
+        {:js #{"/js/youtubes.js?3"}
          :title ["Hello Youtubes"]
          :body [video-html search-html]}))
 
