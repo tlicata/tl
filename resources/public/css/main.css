@@ -32,6 +32,9 @@ ul {
 #youtubes, #youtubes-search {
     margin: 10px 0 0 10px;
 }
+#youtubes .youtube-player {
+    max-width: 100%;
+}
 #youtubes-search #search-results {
     margin-top: 10px;
 }

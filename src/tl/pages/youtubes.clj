@@ -44,10 +44,10 @@
                  "?fs=1&autoplay=1&loop=1&playlist=" video)
         video-html (when video [:div#youtubes
                                 [:iframe.youtube-player {:frameborder "0"
-                                                         :height "420px"
+                                                         :height "300px"
                                                          :src url
                                                          :type "text/html"
-                                                         :width "700px"}]])
+                                                         :width "500px"}]])
         search-html [:div#youtubes-search
                      [:form.form-search {:method "get"}
                       [:input.search-query {:type "text" :name "query" :autofocus "true"}]
