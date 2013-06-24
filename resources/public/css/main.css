@@ -3,15 +3,17 @@ form {
 }
 ul {
     list-style-type: none;
+    margin-left: 0;
+    padding-left: 0;
 }
 
-.nav {
-    margin: 0;
-    padding: 0;
-}
 .nav li {
     display: inline;
     padding: 10px;
+}
+
+#maps {
+    margin-left: 10px;
 }
 
 #particles {
@@ -24,11 +26,17 @@ ul {
 }
 
 #photos img {
-    min-height: 675px;
+    max-width: 100%;
 }
 
 #youtubes, #youtubes-search {
     margin: 10px 0 0 10px;
+}
+#youtubes .youtube-player {
+    max-width: 100%;
+}
+#youtubes-search #search-results {
+    margin-top: 10px;
 }
 #youtubes-search #search-results div {
     position: relative;
@@ -36,14 +44,6 @@ ul {
 #youtubes-search #search-results img {
     border: solid;
     height: 5em;
-    margin: .5em 1em .5em 0;
+    margin-right: 10px;
     width: 8em;
-}
-#youtubes-search #search-results a {
-    position: absolute;
-    top: 1.5em;
-}
-#youtubes-search #search-results .views {
-    position: absolute;
-    top: 3em;
 }

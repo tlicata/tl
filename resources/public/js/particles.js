@@ -41,7 +41,7 @@ tl.particles = (function () {
         group = new THREE.Object3D();
         scene.add(group);
 
-        for (var i = 0; i < 1000; i++) {
+        for (var i = 0; i < 500; i++) {
             var material = new THREE.ParticleCanvasMaterial({
                 color: Math.random() * 0xAAEE55,
                 program: program
@@ -50,7 +50,7 @@ tl.particles = (function () {
             particle.position.x = Math.random() * 2000 - 1000;
             particle.position.y = Math.random() * 2000 - 1000;
             particle.position.z = Math.random() * 2000 - 1000;
-            particle.scale.x = particle.scale.y = Math.random() * 10 + 5;
+            particle.scale.x = particle.scale.y = Math.random() * 10 + 7;
             group.add(particle);
         }
 
@@ -90,20 +90,31 @@ tl.particles = (function () {
         mouseX = event.pageX;
         mouseY = event.pageY;
     };
+    var onSwipe = function (event, custom) {
+        var delta = custom && custom.delta && custom.delta[0];
+        if (delta && delta.lastX) {
+            mouseX = mouseX + delta.lastX;
+            mouseY = mouseY + delta.lastY;
+        }
+    };
+    var onResize = function () {
+        updateSize();
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        camera.lookAt(scene.position);
+        renderer.setSize(width, height);
+    };
 
     return {
         init: function () {
             init();
-            render();
             setInterval(render, 50);
-            $(window).resize(function () {
-                updateSize();
-                camera.aspect = width / height;
-                //camera.fov = ( 360 / Math.PI ) * Math.atan( tanFOV * ( window.innerHeight / windowHeight ) );
-                camera.updateProjectionMatrix();
-                camera.lookAt( scene.position );
-                renderer.setSize(width, height);
-            }).mousemove(onMouseMove);
+            var $window = $(window).resize(onResize);
+            if ("ontouchstart" in document.documentElement) {
+                $window.on("swipemove", onSwipe);
+            } else {
+                $window.on("mousemove", onMouseMove);
+            }
         }
     };
 })();

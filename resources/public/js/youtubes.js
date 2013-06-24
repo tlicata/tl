@@ -47,18 +47,19 @@ tl.youtubes = (function () {
         };
 
         var html = function (videos, query) {
-            var outer = $("<div/>");
+            var outer = $("<table/>");
             if (videos.length) {
                 $.each(videos, function (idx, vid) {
-                    outer.append($("<div/>").append(
-                        $("<img/>")
-                            .attr("src", vid.thumb),
-                        $("<a/>")
-                            .attr("href", vid.id.concat("#", query))
-                            .html(vid.title),
-                        $("<span/>")
-                            .addClass("views")
-                            .html(tl.util.addCommas(vid.viewed).concat(" views"))
+                    var img = $("<img/>").attr("src", vid.thumb);
+                    var link = $("<a/>")
+                        .attr("href", vid.id.concat("#", query))
+                        .html(vid.title);
+                    var views = $("<div/>")
+                        .addClass("views")
+                        .html(tl.util.addCommas(vid.viewed).concat(" views"));
+                    outer.append($("<tr/>").append(
+                        $("<td/>").append(img),
+                        $("<td/>").append(link, views)
                     ));
                 });
             } else {

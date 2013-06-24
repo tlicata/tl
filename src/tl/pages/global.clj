@@ -6,7 +6,7 @@
 
 (def analytics "/js/analytics.js")
 (def jquery "/js/lib/jquery-1.7.1.js")
-(def main "/css/main.css?4")
+(def main "/css/main.css?5")
 
 (defn css [& more]
   (let [global [main]]
@@ -20,11 +20,12 @@
   (reduce #(merge-with union %1 %2) blurbs))
 
 (defn head [title css-arg js-arg]
-  (vec
-   (concat
-    [:head [:title (join " - " (cons "Tim's Online World" title))]]
-    (vec (apply css css-arg))
-    (vec (apply js js-arg)))))
+  `[:head
+    [:title ~(join " - " (cons "Tim's Online World" title))]
+    [:meta {:name "viewport"
+            :content "width=device-width, initial-scale=1.0, user-scalable=yes"}]
+    ~@(apply css css-arg)
+    ~@(apply js js-arg)])
 
 (defn header-data []
   [{:uri "/" :text "Home"}
