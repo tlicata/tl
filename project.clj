@@ -3,7 +3,7 @@
   :dependencies [[clj-redis "0.0.12"]
                  [compojure "1.1.3"]
                  [lib-noir "0.2.0"]
-                 [org.clojure/clojure "1.4.0"]
+                 [org.clojure/clojure "1.5.1"]
                  [org.clojure/data.json "0.1.1"]]
   :hooks [leiningen.cljsbuild]
   :min-lein-version "2.0.0"
