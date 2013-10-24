@@ -4,12 +4,13 @@
                  [compojure "1.1.3"]
                  [lib-noir "0.2.0"]
                  [org.clojure/clojure "1.5.1"]
+                 [org.clojure/clojurescript "0.0-1933"]
                  [org.clojure/data.json "0.1.1"]]
   :hooks [leiningen.cljsbuild]
   :min-lein-version "2.0.0"
   :profiles {:dev {:dependencies [[ring-mock "0.1.1"]]}
              :production {:offline true}}
-  :plugins [[lein-cljsbuild "0.2.7"]]
+  :plugins [[lein-cljsbuild "0.3.4"]]
   :aot [tl.core]
   :cljsbuild {:builds {:dev {:source-path "cljs"
                              :compiler {:output-to "resources/public/js/bin/all.js"
