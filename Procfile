@@ -1,1 +1,1 @@
-web: lein trampoline run -m tl.core
+web: lein run -m tl.core
