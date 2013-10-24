@@ -12,12 +12,14 @@
              :production {:offline true}}
   :plugins [[lein-cljsbuild "0.3.4"]]
   :aot [tl.core]
-  :cljsbuild {:builds {:dev {:source-path "cljs"
-                             :compiler {:output-to "resources/public/js/bin/all.js"
-                                        :optimizations :whitespace
-                                        :pretty-print true}}
-                       :prod {:source-path "cljs"
-                              :compiler {:output-to "resources/public/js/bin/all.min.js"
-                                         :optimizations :advanced
-                                         :pretty-print false}}}})
+  :cljsbuild {:builds [{:source-paths ["cljs"]
+                        :id "dev"
+                        :compiler {:output-to "resources/public/js/bin/all.js"
+                                   :optimizations :whitespace
+                                   :pretty-print true}}
+                       {:source-paths ["cljs"]
+                        :id "prod"
+                        :compiler {:output-to "resources/public/js/bin/all.min.js"
+                                   :optimizations :advanced
+                                   :pretty-print false}}]})
 
