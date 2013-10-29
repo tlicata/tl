@@ -80,6 +80,10 @@ Get clojurescript compiling. In new terminal,
 
     $ lein cljsbuild auto
 
+Or, use Austin for ClojureScript REPL,
+
+    user> (cemerick.austin.repls/exec :exec-cmds ["open" "-ga" "/Applications/Google Chrome.app"])
+
 For either method, redis must be started seperately.
 
 (Ubuntu)
