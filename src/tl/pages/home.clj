@@ -20,7 +20,4 @@
 
 (defn cljs []
   (pagify {:title ["Cljs Trial"]
-           :body [[:div
-                   [:input#lname {:type "text" :placeholder "place holder"}]
-                   [:input#search-btn {:type "button" :value "Get Stats!"}]]
-                  (include-clojurescript "/js/bin/all.js")]}))
+           :body [(include-clojurescript "/js/bin/all.js")]}))
