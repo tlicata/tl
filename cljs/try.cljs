@@ -54,7 +54,7 @@
   (sel table-dom :td))
 
 (defn view-to-data [view]
-  (map #(dommy/text %) (get-squares view)))
+  (map dommy/text (get-squares view)))
 
 (defn process-click [event]
   (let [elem (. event -target)]
