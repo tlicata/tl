@@ -1,4 +1,4 @@
-(ns tl.tictactoe
+(ns tl.tictactoe-async
   (:require
    [clojure.browser.event :as event]
    [dommy.core :as dommy])
