@@ -5,6 +5,7 @@
                  [lib-noir "0.2.0"]
                  [org.clojure/clojure "1.5.1"]
                  [org.clojure/clojurescript "0.0-1933"]
+                 [org.clojure/core.async "0.1.242.0-44b1e3-alpha"]
                  [org.clojure/data.json "0.2.3"]
                  [prismatic/dommy "0.1.1"]]
   :hooks [leiningen.cljsbuild]
