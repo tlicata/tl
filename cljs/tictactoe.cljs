@@ -1,6 +1,5 @@
 (ns tl.tictactoe
   (:require
-   [clojure.browser.event :as event]
    [dommy.core :as dommy])
   (:use-macros
    [dommy.macros :only [node sel sel1]]))

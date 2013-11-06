@@ -1,6 +1,5 @@
 (ns tl.tictactoe-async
   (:require
-   [clojure.browser.event :as event]
    [cljs.core.async :as async :refer [<! >! chan put!]]
    [dommy.core :as dommy])
   (:require-macros
