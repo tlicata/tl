@@ -10,7 +10,6 @@
 
 (def player (atom X))
 (def board-data (atom nil))
-(def board-view (atom nil))
 (def board-dom (atom nil))
 
 (defn create [] (repeat 9 EMPTY))
@@ -96,8 +95,7 @@
 
 (defn set-up []
   (swap! board-data create)
-  (swap! board-view #(data-to-view @board-data))
-  (swap! board-dom #(node @board-view))
+  (swap! board-dom #(node (data-to-view @board-data)))
   (doto @board-dom
     (listen)
     (stylize))
@@ -107,7 +105,6 @@
   (unlisten @board-dom)
   (dommy/remove! @board-dom)
   (swap! board-dom (constantly nil))
-  (swap! board-view (constantly nil))
   (swap! board-data (constantly nil)))
 
 (set-up)
