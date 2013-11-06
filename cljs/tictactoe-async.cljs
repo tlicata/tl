@@ -1,7 +1,10 @@
 (ns tl.tictactoe-async
   (:require
    [clojure.browser.event :as event]
+   [cljs.core.async :as async :refer [<! >! chan put!]]
    [dommy.core :as dommy])
+  (:require-macros
+   [cljs.core.async.macros :as m :refer [go]])
   (:use-macros
    [dommy.macros :only [node sel sel1]]))
 
@@ -9,10 +12,7 @@
 (def X "x")
 (def O "o")
 
-(def player (atom X))
-(def board-data (atom nil))
-(def board-view (atom nil))
-(def board-dom (atom nil))
+(def click-channel (chan))
 
 (defn create [] (repeat 9 EMPTY))
 
@@ -42,45 +42,31 @@
 (defn full? [data]
   (not (some #(= EMPTY %) data)))
 
-(defn render-row [line]
-  [:tr (map (fn [sq] [:td sq]) line)])
-
-(defn data-to-view [data]
-  [:table
-   [:tbody
-    (map render-row (rows data))]])
-
 (defn get-squares [table-dom]
   (sel table-dom :td))
+
+(defn render [dom data]
+  (let [squares (get-squares dom)
+        pairs (map vector squares data)]
+    (doseq [pair pairs]
+      (dommy/set-text! (first pair) (second pair)))))
+
+(defn create-dom [data]
+  [:table
+   [:tbody
+    (repeat 3 [:tr [:td] [:td] [:td]])]])
 
 (defn view-to-data [view]
   (map dommy/text (get-squares view)))
 
-(defn process-click [event]
+(defn send-to-click-channel [event]
   (let [elem (. event -target)]
-    (if (= EMPTY (dommy/text elem))
-      (do
-        (dommy/set-text! elem @player)
-        (swap! board-data #(view-to-data @board-dom))
-        (if (win? @board-data)
-          (do
-            (js/alert (str "winner " @player))
-            (tear-down)
-            (set-up))
-          (if (full? @board-data)
-            (do
-              (js/alert "everyone loses")
-              (tear-down)
-              (set-up))
-            (swap! player #(if (= @player X) O X))))))))
+    (when (= EMPTY (dommy/text elem))
+      (put! click-channel event))))
 
 (defn listen [table-dom]
   (doseq [square (get-squares table-dom)]
-    (dommy/listen! square :click process-click)))
-
-(defn unlisten [table-dom]
-  (doseq [square (get-squares table-dom)]
-    (dommy/unlisten! square :click process-click)))
+    (dommy/listen! square :click send-to-click-channel)))
 
 (defn stylize [table-dom]
   (let [squares (get-squares table-dom)]
@@ -95,20 +81,27 @@
                           :font-size "2em"
                           :padding "5px")))))
 
-(defn set-up []
-  (swap! board-data create)
-  (swap! board-view #(data-to-view @board-data))
-  (swap! board-dom #(node @board-view))
-  (doto @board-dom
-    (listen)
-    (stylize))
-  (dommy/append! (sel1 :body) @board-dom))
+(defn game-loop [first-player]
+  (let [empty-board (create)
+        dom (node (create-dom empty-board))]
+    (doto dom (listen) (stylize))
+    (dommy/append! (sel1 :body) dom)
+    (go
+     (loop [board empty-board player first-player]
+       (render dom board)
+       (let [event (<! click-channel)
+             elem (. event -target)]
+         (dommy/set-text! elem player)
+         (let [new-board (view-to-data dom)
+               next-player (if (= player X) O X)]
+           (if (win? new-board)
+             (do
+               (js/alert (str player " won"))
+               (recur (create) first-player))
+             (if (full? new-board)
+               (do
+                 (js/alert "everyone loses")
+                 (recur (create) first-player))
+               (recur new-board next-player)))))))))
 
-(defn tear-down []
-  (unlisten @board-dom)
-  (dommy/remove! @board-dom)
-  (swap! board-dom (constantly nil))
-  (swap! board-view (constantly nil))
-  (swap! board-data (constantly nil)))
-
-(set-up)
+(game-loop X)
