@@ -70,7 +70,7 @@
               (js/alert "everyone loses")
               (tear-down)
               (set-up))
-            (swap! player #(if (= @player X) O X))))))))
+            (swap! player #(if (= % X) O X))))))))
 
 (defn listen [table-dom]
   (doseq [square (get-squares table-dom)]
