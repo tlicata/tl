@@ -17,10 +17,7 @@
 (defn rows [data] (partition 3 data))
 
 (defn cols [data]
-  (let [first-col (take-nth 3 data)
-        second-col (take-nth 3 (drop 1 data))
-        third-col (take-nth 3 (drop 2 data))]
-    [first-col second-col third-col]))
+  (map #(take-nth 3 (drop % data)) (range 0 3)))
 
 (defn diags [data]
   [[(first data) (nth data 4) (nth data 8)]
