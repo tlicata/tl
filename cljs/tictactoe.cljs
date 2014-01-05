@@ -104,4 +104,4 @@
   (swap! board-dom (constantly nil))
   (swap! board-data (constantly nil)))
 
-(set-up)
+;; (set-up)
