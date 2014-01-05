@@ -3,3 +3,5 @@
 resources/public/js/bin/*
 target/*
 .lein-*
+.repl/
+out/
