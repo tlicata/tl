@@ -46,15 +46,15 @@ restart for refreshing jvm changes.
     foreman start
 
 The better way is to get interactive dev going
-through emacs and nrepl.
+through emacs and cider.
 
-First, follow the installation instructions: https://github.com/kingtim/nrepl.el.
+First, follow the installation instructions: https://github.com/clojure-emacs/cider.
 Then, in Emacs, open core.clj,
 
-    M-x nrepl-jack-in
+    M-x cider-jack-in
     C-c C-k
 
-In nrepl buffer, start server
+In cider buffer, start server
 
     user> (tl.core/dev-main)
 
