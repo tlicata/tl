@@ -20,11 +20,7 @@ Leiningen
 
 (MacOS)
 
-Install by hand (unless using homebrew)
-
-    wget --no-check-certificate https://raw.github.com/technomancy/leiningen/stable/bin/lein
-    chmod 755 ~/bin/lein
-    [put in on path]
+    brew install leiningen
 
 Redis
 
