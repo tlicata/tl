@@ -5,20 +5,6 @@ A site written in Clojure.
 
 ### Dependencies
 
-Ruby. Use, RVM to install and manage it.
-
-(Ubuntu)
-
-    bash -s stable < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer)
-    rvm install 1.8.7 ;docs say install (and possible "use") 1.8 before 1.9?
-    rvm install 1.9.2
-    rvm use 1.9.2
-    rvm notes ;special instructions for screen users, etc.
-
-(MacOS)
-
-it was pre-installed or obtained through macport when installing git.
-
 Heroku Toolbelt
 
 (Ubuntu)
