@@ -38,7 +38,7 @@ Redis
 
 ### Starting Server
 
-Foreman will launch a local verion of the site
+Foreman will launch a local version of the site
 from the command line. This is fine for html/js/css
 development, but has the drawback of needing to
 restart for refreshing jvm changes.
