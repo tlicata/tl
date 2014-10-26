@@ -32,9 +32,9 @@ Redis
     make
     make install
 
-(MacOS w/ macports)
+(MacOS)
 
-    sudo port install redis
+    brew install redis
 
 ### Starting Server
 
