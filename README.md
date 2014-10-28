@@ -14,7 +14,8 @@ Heroku Toolbelt
 
 (MacOS)
 
-Download Heroku Toolbelt for Mac OS X from the heroku site. Run installer.
+    brew install heroku-toolbelt
+    gem install forman
 
 Leiningen
 
