@@ -22,20 +22,6 @@ Leiningen
 
     brew install leiningen
 
-Redis
-
-(Ubuntu)
-
-    wget http://redis.googlecode.com/files/redis-2.4.7.tar.gz
-    tar -xzf redis-2.4.7.tar.gz
-    cd redis-2.4.7.tar.gz
-    make
-    make install
-
-(MacOS)
-
-    brew install redis
-
 ### Starting Server
 
 Foreman will launch a local version of the site
@@ -65,16 +51,6 @@ Get clojurescript compiling. In new terminal,
 Or, use Austin for ClojureScript REPL,
 
     user> (cemerick.austin.repls/exec :exec-cmds ["open" "-ga" "/Applications/Google Chrome.app"])
-
-For either method, redis must be started seperately.
-
-(Ubuntu)
-
-    ./path/to/redis-2.4.7/src/redis-server
-
-(MacOS)
-
-    redis-server /opt/local/etc/redis.conf
 
 ## Deploy
 

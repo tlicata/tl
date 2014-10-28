@@ -1,8 +1,6 @@
 (defproject tl "0.1.0-SNAPSHOT"
   :description "My personal site"
-  :dependencies [[clj-redis "0.0.12"]
-                 [compojure "1.2.1"]
-                 [lib-noir "0.9.4"]
+  :dependencies [[compojure "1.2.1"]
                  [org.clojure/clojure "1.6.0"]
                  [org.clojure/clojurescript "0.0-2371"]
                  [org.clojure/core.async "0.1.346.0-17112a-alpha"]
