@@ -144,7 +144,7 @@ tl.youtubes = (function () {
             events: {
                 onReady: function (event) {
                     alert("onReady");
-                }
+                },
                 onStateChange: function (event) {
                     alert("onStateChange: " + event.target.getPlayerState());
                     if (event.target.getPlayerState() == 0) {
