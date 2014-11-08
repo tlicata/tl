@@ -40,25 +40,22 @@
                   results))]])))
 
 (defn youtubes [video query]
-  (let [url (str "http://youtube.com/embed/" video
-                 "?fs=1&autoplay=1&loop=1&playlist=" video)
-        video-html (when video [:div#youtubes
-                                [:iframe.youtube-player {:frameborder "0"
-                                                         :height "300px"
-                                                         :src url
-                                                         :type "text/html"
-                                                         :width "500px"}]])
+  (let [url (str "http://www.youtube.com/embed/" video
+                 "?autoplay=1&enablejsapi=1")
+        video-html [:div#youtubes
+                    [:iframe#player {:frameborder "0"
+                                     :height "300px"
+                                     :src url
+                                     :type "text/html"
+                                     :width "500px"}]]
         search-html [:div#youtubes-search
                      [:form.form-search {:method "get"}
                       [:input.search-query {:type "text" :name "query" :autofocus "true"}]
-                      [:input.btn {:type "submit" :value "Search YouTube"}]]
-                     (when query
-                       (youtube-search-render
-                        (youtube-search-parse
-                         (youtube-search-fetch query))))]]
-        {:js #{"/js/youtubes.js?3"}
-         :title ["Hello Youtubes"]
-         :body [video-html search-html]}))
+                      [:input.btn {:type "submit" :value "Search YouTube"}]]]
+        iframe-api [:script {:src "https://www.youtube.com/iframe_api"}]]
+    {:js #{"/js/youtubes.js?4"}
+     :title ["Hello Youtubes"]
+     :body (if video [video-html search-html iframe-api] [search-html])}))
 
 (defn youtubes-page [video query]
   (pagify (youtubes video query)))

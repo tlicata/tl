@@ -137,6 +137,19 @@ tl.youtubes = (function () {
         }
     });
 
+    // YouTube IFrame API expects this function to be defined.
+    window.onYouTubeIframeAPIReady = function () {
+        player = new YT.Player("player", {
+            events: {
+                onStateChange: function (event) {
+                    if (event.target.getPlayerState() == 0) {
+                        event.target.playVideo();
+                    }
+                }
+            }
+        });
+    };
+
     return {
         search: search
     };
