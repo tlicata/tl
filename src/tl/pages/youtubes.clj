@@ -41,7 +41,7 @@
 
 (defn youtubes [video query]
   (let [url (str "http://www.youtube.com/embed/" video
-                 "?autoplay=1&enablejsapi=1")
+                 "?autoplay=1&enablejsapi=1&origin=http://timothylicata.com")
         video-html [:div#youtubes
                     [:iframe#player {:frameborder "0"
                                      :height "300px"
