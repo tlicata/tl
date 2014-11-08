@@ -139,8 +139,18 @@ tl.youtubes = (function () {
 
     // YouTube IFrame API expects this function to be defined.
     window.onYouTubeIframeAPIReady = function () {
-        alert("onYouTubeIframeAPIReady");
+        alert("onYouTubeIframeAPIReady. window.video=" + window.video);
         player = new YT.Player("player", {
+            height: "300",
+            width: "500",
+            videoId: window.video,
+            playerVars: {
+                autohide: 0,
+                autoplay: 1,
+                enablejsapi: 1,
+                fs: 1,
+                modestbranding: 1
+            },
             events: {
                 onReady: function (event) {
                     alert("onReady");
