@@ -53,7 +53,7 @@
                       [:input.search-query {:type "text" :name "query" :autofocus "true"}]
                       [:input.btn {:type "submit" :value "Search YouTube"}]]]
         iframe-api [:script {:src "https://www.youtube.com/iframe_api"}]]
-    {:js #{"/js/youtubes.js?4.1"}
+    {:js #{"/js/youtubes.js?4.2"}
      :title ["Hello Youtubes"]
      :body (if video [video-html search-html iframe-api] [search-html])}))
 
