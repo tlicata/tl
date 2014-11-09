@@ -7,9 +7,10 @@
 (def analytics "/js/analytics.js")
 (def jquery "/js/lib/jquery-1.7.1.js")
 (def main "/css/main.css?5")
+(def ubuntu-font "http://fonts.googleapis.com/css?family=Ubuntu")
 
 (defn css [& more]
-  (let [global [main]]
+  (let [global [main ubuntu-font]]
     (apply include-css (concat global more))))
 
 (defn js [& more]
