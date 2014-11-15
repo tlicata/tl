@@ -2,6 +2,16 @@
   (:use [tl.pages.global] :reload-all)
   (:use [clojure.test]))
 
+(deftest test-blurb
+  (is (= (blurb [:p "Hi Mom"])
+         [:div.container
+          [:div.row.well
+           [:p "Hi Mom"]]]))
+  (is (= (blurb nil)
+         nil))
+  (is (= (blurb [:script "skip"])
+         [:script "skip"])))
+
 (deftest test-reduce-blurbs
   (let [a {:html [[:p "a"]]
            :css ["a.css"]

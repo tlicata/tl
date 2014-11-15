@@ -28,20 +28,33 @@ returns false. See also 'contains?'"
            "bay-to-breakers"
            "sf-pacific-coast"])
 
+(defn photos-nav
+  [current]
+  (let
+      [index (.indexOf pics current)
+       previous (when (> index 0) (get pics (- index 1)))
+       next (when (< index (- (count pics) 1)) (get pics (+ index 1)))]
+    [:ul.pager
+     (when-not (nil? previous) [:li (link-to previous "previous")])
+     (when-not (nil? next) [:li (link-to next "next")])]))
+
 (defn photos [name]
   (if (or (nil? name) (in? pics name))
     (let [htmlify (fn [name]
                     (when-not (nil? name)
                       [:img {:src (str pics-base name pics-ext)}]))
-          all-photos (fn [] (merge [:ul#photos]
-                                   (map (fn [img]
-                                          [:li [:a {:href img}
-                                                (htmlify img)]])
-                                        pics)))]
+          thumbnails (fn [] (merge [:ul.thumbnails]
+                                    (map (fn [img]
+                                           [:li.span2
+                                            [:a.thumbnail {:href img}
+                                             (htmlify img)]])
+                                         pics)))]
       {:title ["Photos"]
        :body [(if (nil? name)
-                (all-photos)
-                (htmlify name))]})))
+                (thumbnails)
+                [:div#photos
+                 (photos-nav name)
+                 (htmlify name)])]})))
 
 (defn photos-page
   ([]

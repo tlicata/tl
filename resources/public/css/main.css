@@ -1,5 +1,6 @@
 body {
     font-family: 'Ubuntu', sans-serif;
+    padding-top: 60px; /* sit below fixed header */
 }
 form {
     margin: 0;
@@ -8,6 +9,22 @@ ul {
     list-style-type: none;
     margin-left: 0;
     padding-left: 0;
+}
+ul.pager li {
+    margin-right: 5px;
+}
+ul.pager li > a {
+    background: none;
+    border: 2px solid #33B5E5;
+}
+ul.pager li > a:hover {
+    background: none;
+}
+input.search-query {
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    color: #282828;
+    margin-right: 2px;
 }
 
 .nav li {
@@ -26,6 +43,9 @@ ul {
     bottom: 0;
     right: 0;
     z-index: -100;
+}
+#photos, #youtubes{
+    text-align: center;
 }
 
 #photos img {
