@@ -8,7 +8,7 @@
 (def bootstrap-css "/css/lib/themes/cyborg/bootstrap.min.css")
 (def bootstrap-css-responsive "/css/lib/bootstrap-responsive.css")
 (def bootstrap-js "/js/lib/bootstrap.js")
-(def jquery "/js/lib/jquery-1.7.1.js")
+(def jquery "/js/lib/jquery-1.11.1.js")
 (def main "/css/main.css?5")
 (def ubuntu-font "http://fonts.googleapis.com/css?family=Ubuntu")
 
