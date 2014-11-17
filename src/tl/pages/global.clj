@@ -5,8 +5,7 @@
         [hiccup.page :only [doctype html5 include-css include-js]]))
 
 (def analytics "/js/analytics.js")
-(def bootstrap-css "/css/lib/themes/cyborg/bootstrap.min.css")
-(def bootstrap-css-responsive "/css/lib/bootstrap-responsive.css")
+(def bootstrap-css "/css/lib/bootstrap.css")
 (def bootstrap-js "/js/lib/bootstrap.js")
 (def jquery "/js/lib/jquery-1.11.1.js")
 (def main "/css/main.css?5")
