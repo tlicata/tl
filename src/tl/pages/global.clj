@@ -51,13 +51,19 @@
   (let [links (map (fn [{uri :uri text :text}]
                      [:li (link-to uri text)])
                    (header-data))]
-    `[:ul.nav ~@links]))
+    `[:ul.nav.navbar-nav ~@links]))
 
 (defn header []
   (let [primary (header-links)]
-    [:div.navbar.navbar-fixed-top
-     [:div.navbar-inner
-      (merge [:div.container] primary)]]))
+    [:nav.navbar.navbar-default.navbar-fixed-top {:role "navigation"}
+     [:div.container
+      [:div.navbar-header
+       [:button.navbar-toggle.collapsed
+        {:data-target "#navbar" :data-toggle "collapse"}
+        [:span.sr-only "Toggle navigation"]
+        [:span.icon-bar] [:span.icon-bar] [:span.icon-bar]]
+       [:a.navbar-brand {:href "/"} "Tim's Online World"]]
+      [:div#navbar.navbar-collapse.collapse primary]]]))
 
 (defn wrap-in-layout [title css js body]
   [:html
