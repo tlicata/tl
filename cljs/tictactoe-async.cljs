@@ -7,7 +7,7 @@
   (:use-macros
    [dommy.macros :only [node sel sel1]]))
 
-(def EMPTY "_")
+(def EMPTY "")
 (def X "X")
 (def O "O")
 

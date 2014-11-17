@@ -4,7 +4,7 @@
   (:use-macros
    [dommy.macros :only [node sel sel1]]))
 
-(def EMPTY "_")
+(def EMPTY "")
 (def X "X")
 (def O "O")
 
@@ -41,7 +41,7 @@
   (sel table-dom :.square))
 
 (defn initialize-view [view]
-  (doall (map #(dommy/set-text! % "_") (get-squares view))))
+  (doall (map #(dommy/set-text! % "") (get-squares view))))
 
 (defn view-to-data [view]
   (map dommy/text (get-squares view)))
