@@ -5,15 +5,13 @@
         [hiccup.page :only [doctype html5 include-css include-js]]))
 
 (def analytics "/js/analytics.js")
-(def bootstrap-css "/css/lib/themes/cyborg/bootstrap.min.css")
-(def bootstrap-css-responsive "/css/lib/bootstrap-responsive.css")
+(def bootstrap-css "/css/lib/theme/cyborg/bootstrap.css")
 (def bootstrap-js "/js/lib/bootstrap.js")
-(def jquery "/js/lib/jquery-1.7.1.js")
+(def jquery "/js/lib/jquery-1.11.1.js")
 (def main "/css/main.css?5")
-(def ubuntu-font "http://fonts.googleapis.com/css?family=Ubuntu")
 
 (defn css [& more]
-  (let [global [bootstrap-css main ubuntu-font]]
+  (let [global [bootstrap-css main]]
     (apply include-css (concat global more))))
 
 (defn js [& more]
@@ -39,27 +37,31 @@
   `[:head
     [:title ~(join " - " (cons "Tim's Online World" title))]
     [:meta {:charset "UTF-8"}]
-    [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0, user-scalable=yes"}]
+    [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0, user-scalable=no"}]
     ~@(apply css css-arg)
     ~@(apply js js-arg)])
 
 (defn header-data []
-  [{:uri "/" :text "Home"}
-   {:uri "/maps/" :text "Maps"}
-   {:uri "/photos/" :text "Photos"}
+  [{:uri "/photos/" :text "Photos"}
    {:uri "/youtubes/" :text "Youtubes"}])
 
 (defn header-links []
   (let [links (map (fn [{uri :uri text :text}]
                      [:li (link-to uri text)])
                    (header-data))]
-    `[:ul.nav ~@links]))
+    `[:ul.nav.navbar-nav ~@links]))
 
 (defn header []
   (let [primary (header-links)]
-    [:div.navbar.navbar-fixed-top
-     [:div.navbar-inner
-      (merge [:div.container] primary)]]))
+    [:nav.navbar.navbar-default.navbar-fixed-top {:role "navigation"}
+     [:div.container
+      [:div.navbar-header
+       [:button.navbar-toggle.collapsed
+        {:data-target "#navbar" :data-toggle "collapse"}
+        [:span.sr-only "Toggle navigation"]
+        [:span.icon-bar] [:span.icon-bar] [:span.icon-bar]]
+       [:a.navbar-brand {:href "/"} "Tim's Online World"]]
+      [:div#navbar.navbar-collapse.collapse primary]]]))
 
 (defn wrap-in-layout [title css js body]
   [:html

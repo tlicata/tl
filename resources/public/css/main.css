@@ -1,9 +1,5 @@
 body {
-    font-family: 'Ubuntu', sans-serif;
     padding-top: 60px; /* sit below fixed header */
-}
-form {
-    margin: 0;
 }
 ul {
     list-style-type: none;
@@ -12,24 +8,6 @@ ul {
 }
 ul.pager li {
     margin-right: 5px;
-}
-ul.pager li > a {
-    background: none;
-    border: 2px solid #33B5E5;
-}
-ul.pager li > a:hover {
-    background: none;
-}
-input.search-query {
-    border-radius: 0;
-    -webkit-border-radius: 0;
-    color: #282828;
-    margin-right: 2px;
-}
-
-.nav li {
-    display: inline;
-    padding: 10px;
 }
 
 #maps {

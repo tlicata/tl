@@ -43,8 +43,10 @@
   (let [video-html [:div#youtubes [:div#player]]
         search-html [:div#youtubes-search
                      [:form.form-search {:method "get"}
-                      [:input.search-query {:type "text" :name "query" :autofocus "true"}]
-                      [:input.btn {:type "submit" :value "Search YouTube"}]]]
+                      [:div.input-group
+                       [:input.form-control {:type "text" :name "query" :autofocus "true"}]
+                       [:span.input-group-btn
+                        [:input.btn.btn-primary {:type "submit" :value "Search YouTube"}]]]]]
         iframe-api [:script {:src "https://www.youtube.com/iframe_api"}]
         video-id [:script (str "var video = \"" video "\";")]]
     {:js #{"/js/youtubes.js?5"}
