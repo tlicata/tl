@@ -13,11 +13,11 @@
 
 (defroutes tl-routes
   (GET "/" [] (home))
-  (GET "/cljs/" []  (cljs))
   (GET "/maps/" [] (maps-page))
   (GET "/maps/:kind" [kind] (maps-page kind))
   (GET "/photos/" [] (photos-page))
   (GET "/photos/:id" [id] (photos-page id))
+  (GET "/tictactoe/" []  (cljs))
   (GET "/youtubes/" [query] (youtubes-page nil query))
   (GET "/youtubes/:video" [video query] (youtubes-page video query)))
 
