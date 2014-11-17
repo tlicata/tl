@@ -4,7 +4,7 @@
         [ring.middleware.file-info :only [wrap-file-info]]
         [ring.middleware.params :only [wrap-params]]
         [ring.middleware.session :only [wrap-session]]
-        [tl.pages.home :only [home cljs]]
+        [tl.pages.home :only [home tictactoe]]
         [tl.pages.maps :only [maps-page]]
         [tl.pages.photos :only [photos-page]]
         [tl.pages.youtubes :only [youtubes-page]])
@@ -17,7 +17,7 @@
   (GET "/maps/:kind" [kind] (maps-page kind))
   (GET "/photos/" [] (photos-page))
   (GET "/photos/:id" [id] (photos-page id))
-  (GET "/tictactoe/" []  (cljs))
+  (GET "/tictactoe/" []  (tictactoe))
   (GET "/youtubes/" [query] (youtubes-page nil query))
   (GET "/youtubes/:video" [video query] (youtubes-page video query)))
 

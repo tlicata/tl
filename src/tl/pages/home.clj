@@ -13,7 +13,7 @@
            :body [[:div#particles]]
            :js #{"/js/lib/jgestures.js" "/js/lib/three.js" "/js/particles.js?2"}}))
 
-(defn cljs []
+(defn tictactoe []
   (let [square [:div.square.col-xs-4.col-sm-3.col-md-2]
         offset [:div.square.col-xs-4.col-sm-3.col-md-2.col-sm-offset-1.col-md-offset-3]]
     (pagify {:title ["Cljs Trial"]
