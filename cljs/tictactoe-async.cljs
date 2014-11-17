@@ -84,7 +84,7 @@
   (let [empty-board (create)
         dom (node (create-dom empty-board))]
     (doto dom (listen) (stylize))
-    (dommy/append! (sel1 :body) dom)
+    (dommy/append! (sel1 :#ttt) dom)
     (go
      (loop [board empty-board player first-player]
        (render dom board)

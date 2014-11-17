@@ -96,7 +96,7 @@
   (doto @board-dom
     (listen)
     (stylize))
-  (dommy/append! (sel1 :body) @board-dom))
+  (dommy/append! (sel1 :#ttt) @board-dom))
 
 (defn tear-down []
   (unlisten @board-dom)

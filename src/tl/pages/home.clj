@@ -13,11 +13,8 @@
            :body [[:div#particles]]
            :js #{"/js/lib/jgestures.js" "/js/lib/three.js" "/js/particles.js?2"}}))
 
-(defn- include-clojurescript [path]
-  (list
-   (javascript-tag "var CLOSURE_NO_DEPS = true;")
-   (include-js path)))
-
 (defn cljs []
   (pagify {:title ["Cljs Trial"]
-           :body [(include-clojurescript "/js/bin/all.js")]}))
+           :body [[:div#ttt ""] ; tags need content to be bootstrapped
+                  (javascript-tag "var CLOSURE_NO_DEPS = true;")
+                  (include-js "/js/bin/all.js")]}))
