@@ -37,16 +37,11 @@
 (defn full? [data]
   (not (some #(= EMPTY %) data)))
 
-(defn render-row [line]
-  [:tr (map (fn [sq] [:td sq]) line)])
-
-(defn data-to-view [data]
-  [:table
-   [:tbody
-    (map render-row (rows data))]])
-
 (defn get-squares [table-dom]
-  (sel table-dom :td))
+  (sel table-dom :.square))
+
+(defn initialize-view [view]
+  (doall (map #(dommy/set-text! % "_") (get-squares view))))
 
 (defn view-to-data [view]
   (map dommy/text (get-squares view)))
@@ -77,30 +72,15 @@
   (doseq [square (get-squares table-dom)]
     (dommy/unlisten! square :click process-click)))
 
-(defn stylize [table-dom]
-  (let [squares (get-squares table-dom)]
-    (do
-      (dommy/set-style! table-dom
-                        :border "solid 3px black"
-                        :border-collapse "collapse")
-      (doseq [td squares]
-        (dommy/set-style! td
-                          :border "solid 3px black"
-                          :cursor "pointer"
-                          :font-size "2em"
-                          :padding "5px")))))
-
 (defn set-up []
   (swap! board-data create)
-  (swap! board-dom #(node (data-to-view @board-data)))
+  (swap! board-dom #(sel1 :#ttt))
   (doto @board-dom
-    (listen)
-    (stylize))
-  (dommy/append! (sel1 :#ttt) @board-dom))
+    (initialize-view)
+    (listen)))
 
 (defn tear-down []
   (unlisten @board-dom)
-  (dommy/remove! @board-dom)
   (swap! board-dom (constantly nil))
   (swap! board-data (constantly nil)))
 

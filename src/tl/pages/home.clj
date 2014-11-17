@@ -14,7 +14,11 @@
            :js #{"/js/lib/jgestures.js" "/js/lib/three.js" "/js/particles.js?2"}}))
 
 (defn cljs []
-  (pagify {:title ["Cljs Trial"]
-           :body [[:div#ttt ""] ; tags need content to be bootstrapped
-                  (javascript-tag "var CLOSURE_NO_DEPS = true;")
-                  (include-js "/js/bin/all.js")]}))
+  (let [square [:div.square.col-md-4]]
+    (pagify {:title ["Cljs Trial"]
+             :body [[:div#ttt
+                     [:div.row square square square]
+                     [:div.row square square square]
+                     [:div.row square square square]]
+                    (javascript-tag "var CLOSURE_NO_DEPS = true;")
+                    (include-js "/js/bin/all.js")]})))

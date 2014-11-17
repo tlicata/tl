@@ -42,7 +42,7 @@
   (not (some #(= EMPTY %) data)))
 
 (defn get-squares [table-dom]
-  (sel table-dom :td))
+  (sel table-dom :.square))
 
 (defn render [dom data]
   (let [squares (get-squares dom)
@@ -51,9 +51,7 @@
       (dommy/set-text! (first pair) (second pair)))))
 
 (defn create-dom []
-  [:table
-   [:tbody
-    (repeat 3 [:tr [:td] [:td] [:td]])]])
+  (sel1 :#ttt))
 
 (defn view-to-data [view]
   (map dommy/text (get-squares view)))
@@ -67,24 +65,10 @@
   (doseq [square (get-squares table-dom)]
     (dommy/listen! square :click send-to-click-channel)))
 
-(defn stylize [table-dom]
-  (let [squares (get-squares table-dom)]
-    (do
-      (dommy/set-style! table-dom
-                        :border "solid 3px black"
-                        :border-collapse "collapse")
-      (doseq [td squares]
-        (dommy/set-style! td
-                          :border "solid 3px black"
-                          :cursor "pointer"
-                          :font-size "2em"
-                          :padding "5px")))))
-
 (defn game-loop [first-player]
   (let [empty-board (create)
-        dom (node (create-dom))]
-    (doto dom (listen) (stylize))
-    (dommy/append! (sel1 :#ttt) dom)
+        dom (create-dom)]
+    (listen dom)
     (go
      (loop [board empty-board player first-player]
        (render dom board)
