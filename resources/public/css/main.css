@@ -34,6 +34,18 @@ ul.pager li {
     min-height: 200px;
 }
 
+#ttt {
+    text-align: center;
+}
+#ttt .square {
+    border: 2px solid gray;
+    font-family: sans-serif;
+    font-size: 100px;
+    font-weight: bold;
+    height: 125px;
+    line-height: 125px;
+}
+
 #youtubes #player {
     max-width: 100%;
 }
