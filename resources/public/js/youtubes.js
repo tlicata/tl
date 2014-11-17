@@ -58,7 +58,7 @@ tl.youtubes = (function () {
                         .addClass("text-muted")
                         .html(tl.util.addCommas(vid.viewed).concat(" views"));
                     outer.append($("<tr/>").append(
-                        $("<td/>").append(img),
+                        $("<td/>").append(img).css("width", "130px"),
                         $("<td/>").append(link, views).css("vertical-align", "middle")
                     ));
                 });
