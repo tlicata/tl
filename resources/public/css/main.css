@@ -31,13 +31,10 @@ ul.pager li {
     min-height: 200px;
 }
 
-#youtubes, #youtubes-search {
-    margin: 10px 0 0 10px;
-}
 #youtubes #player {
     max-width: 100%;
 }
-#youtubes-search #search-results {
+#search-results {
     margin-top: 10px;
 }
 #youtubes-search #search-results div {

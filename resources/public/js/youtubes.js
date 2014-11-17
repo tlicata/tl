@@ -79,8 +79,10 @@ tl.youtubes = (function () {
         // Draw new search results.
         var render = function (html) {
             remove();
-            var resultsDiv = $("<div/>").attr("id", resultsDivId);
-            searchDiv.append(resultsDiv.append(html));
+            var resultsDiv = $("<div/>")
+                .attr("id", resultsDivId)
+                .addClass("col-md-12");
+            searchDiv.after(resultsDiv.append(html));
         };
         var renderSuccess = function (vids, query) {
             render(html(vids, query));
