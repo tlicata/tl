@@ -42,9 +42,7 @@
     ~@(apply js js-arg)])
 
 (defn header-data []
-  [{:uri "/" :text "Home"}
-   {:uri "/maps/" :text "Maps"}
-   {:uri "/photos/" :text "Photos"}
+  [{:uri "/photos/" :text "Photos"}
    {:uri "/youtubes/" :text "Youtubes"}])
 
 (defn header-links []
