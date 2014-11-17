@@ -50,7 +50,7 @@
     (doseq [pair pairs]
       (dommy/set-text! (first pair) (second pair)))))
 
-(defn create-dom [data]
+(defn create-dom []
   [:table
    [:tbody
     (repeat 3 [:tr [:td] [:td] [:td]])]])
@@ -82,7 +82,7 @@
 
 (defn game-loop [first-player]
   (let [empty-board (create)
-        dom (node (create-dom empty-board))]
+        dom (node (create-dom))]
     (doto dom (listen) (stylize))
     (dommy/append! (sel1 :#ttt) dom)
     (go
