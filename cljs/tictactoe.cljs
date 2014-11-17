@@ -5,8 +5,8 @@
    [dommy.macros :only [node sel sel1]]))
 
 (def EMPTY "_")
-(def X "x")
-(def O "o")
+(def X "X")
+(def O "O")
 
 (def player (atom X))
 (def board-data (atom nil))
