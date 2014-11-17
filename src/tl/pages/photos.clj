@@ -49,11 +49,12 @@ returns false. See also 'contains?'"
                                      (htmlify img)]])
                                  pics))]
       {:title ["Photos"]
-       :body [(if (nil? name)
-                (thumbnails)
-                [:div#photos
-                 (photos-nav name)
-                 (htmlify name)])]})))
+       :body [[:div#photos
+               (if (nil? name)
+                 (thumbnails)
+                 [:div
+                  (photos-nav name)
+                  (htmlify name)])]]})))
 
 (defn photos-page
   ([]
