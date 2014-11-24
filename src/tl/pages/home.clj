@@ -4,6 +4,7 @@
         [clojure.pprint :only [pprint]]
         [hiccup.element :only [link-to javascript-tag]]
         [hiccup.page :only [include-js]]
+        [markdown.core :only [md-to-html-string]]
         [ring.util.response :only [redirect]]
         [tl.pages.global :only [pagify]])
   (:require [hiccup.form :as form]))
@@ -21,5 +22,7 @@
                      [:div.row offset square square]
                      [:div.row offset square square]
                      [:div.row offset square square]]
+                    [:div#ttt-explain
+                     (md-to-html-string (slurp "resources/markdown/tictactoe.md"))]
                     (javascript-tag "var CLOSURE_NO_DEPS = true;")
                     (include-js "/js/bin/all.js")]})))
