@@ -12,6 +12,9 @@ ul.pager {
 ul.pager li {
     margin-right: 12px;
 }
+pre {
+    padding: 0;
+}
 
 #maps {
     margin-left: 10px;
