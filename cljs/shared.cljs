@@ -1,4 +1,6 @@
 (ns tl.tictactoe-shared
+  (:require
+   [dommy.core :as dommy])
   (:use-macros
    [dommy.macros :only [sel]]))
 
@@ -33,3 +35,6 @@
 
 (defn get-squares [table-dom]
   (sel table-dom :.square))
+
+(defn view-to-data [view]
+  (map dommy/text (get-squares view)))

@@ -12,15 +12,12 @@
 (defn initialize-view [view]
   (doall (map #(dommy/set-text! % "") (ttt/get-squares view))))
 
-(defn view-to-data [view]
-  (map dommy/text (ttt/get-squares view)))
-
 (defn process-click [event]
   (let [elem (. event -target)]
     (if (= ttt/EMPTY (dommy/text elem))
       (do
         (dommy/set-text! elem @player)
-        (swap! board-data #(view-to-data @board-dom))
+        (swap! board-data #(ttt/view-to-data @board-dom))
         (if (ttt/win? @board-data)
           (do
             (js/alert (str "winner " @player))

@@ -19,9 +19,6 @@
 (defn create-dom []
   (sel1 :#ttt))
 
-(defn view-to-data [view]
-  (map dommy/text (ttt/get-squares view)))
-
 (defn send-to-click-channel [event]
   (let [elem (. event -target)]
     (when (= ttt/EMPTY (dommy/text elem))
@@ -41,7 +38,7 @@
        (let [event (<! click-channel)
              elem (. event -target)]
          (dommy/set-text! elem player)
-         (let [new-board (view-to-data dom)
+         (let [new-board (ttt/view-to-data dom)
                next-player (if (= player ttt/X) ttt/O ttt/X)]
            (if (ttt/win? new-board)
              (do
