@@ -15,6 +15,10 @@ ul.pager li {
 pre {
     padding: 0;
 }
+pre code {
+    white-space: pre;
+    overflow-wrap: normal;
+}
 
 #maps {
     margin-left: 10px;
