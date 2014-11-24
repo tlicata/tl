@@ -10,7 +10,7 @@
 (def highlight-css "/css/lib/highlight/solarized_dark.css")
 (def highlight-js "/js/lib/highlight.pack.js")
 (def jquery "/js/lib/jquery-1.11.1.js")
-(def main "/css/main.css?5")
+(def main "/css/main.css?6")
 
 (defn css [& more]
   (let [global [bootstrap-css highlight-css main]]
