@@ -7,15 +7,17 @@
 (def analytics "/js/analytics.js")
 (def bootstrap-css "/css/lib/theme/cyborg/bootstrap.css")
 (def bootstrap-js "/js/lib/bootstrap.js")
+(def highlight-css "/css/lib/highlight/solarized_dark.css")
+(def highlight-js "/js/lib/highlight.pack.js")
 (def jquery "/js/lib/jquery-1.11.1.js")
-(def main "/css/main.css?5")
+(def main "/css/main.css?6")
 
 (defn css [& more]
-  (let [global [bootstrap-css main]]
+  (let [global [bootstrap-css highlight-css main]]
     (apply include-css (concat global more))))
 
 (defn js [& more]
-  (let [global [jquery bootstrap-js]]
+  (let [global [jquery bootstrap-js highlight-js]]
     (apply include-js (concat global more [analytics]))))
 
 (defn blurb [html]
@@ -43,6 +45,7 @@
 
 (defn header-data []
   [{:uri "/photos/" :text "Photos"}
+   {:uri "/tictactoe/" :text "TicTacToe"}
    {:uri "/youtubes/" :text "Youtubes"}])
 
 (defn header-links []
