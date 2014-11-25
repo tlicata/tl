@@ -10,8 +10,8 @@ One possible programming workflow is to use Emacs for all your text
 editing needs then switch to a Terminal for your terminal-related
 needs. This is good and all, but sometimes when I'm in terminal I miss
 having all my Emacs niceties (e.g., keyboard navigation, copy & paste
-commands, window movement). Luckily, Emacs provides several way to run
-shells right inside Emacs.
+commands, window movement). Luckily, there are several ways to run
+shells right inside of Emacs.
 
 Eshell, Shell, Term (& Ansi-term)
 ---------------------------------
