@@ -11,7 +11,7 @@ editing needs then switch to a Terminal for your terminal-related
 needs. This is good and all, but sometimes when I'm in terminal I miss
 having all my Emacs niceties (e.g., keyboard navigation, copy & paste
 commands, window movement). Luckily, Emacs provides several way to run
-shells right from inside Emacs.
+shells right inside Emacs.
 
 Eshell, Shell, Term (& Ansi-term)
 ---------------------------------
@@ -47,7 +47,7 @@ with normal Emacs commands (<kbd>C-p</kbd> to move up a line,
 <kbd>M-v</kbd> to move up a page, <kbd>C-r</kbd> to search backwards,
 <kbd>M-r</kbd> to search through previous commands).
 
-There are a couple issues, however. `clear` doesn't work. Grr. Any
+There are a couple of issues, however. `clear` doesn't work. Grr. Any
 bash aliases you have also won't be present. Grr. You need a special
 eshell alias file for that. You may get strange characters appearing
 in your output from time to time. It also interacts poorly with any
@@ -77,5 +77,5 @@ shell inside of it. `clear` works! The kicker is that many of your
 Emacs keybindings don't work anymore. <kbd>C-p</kbd> cycles through
 your previously run commands (as it would in your normal Terminal)
 instead of moving up a line (as it would in normal Emacs). You can
-switch into "emacs mode" with <kbd>C-x C-j</kbd> and back into
+switch into "emacs mode" with <kbd>C-c C-j</kbd> and back into
 "terminal mode" with <kbd>C-c C-k</kbd>.
