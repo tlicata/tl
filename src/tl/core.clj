@@ -4,9 +4,10 @@
         [ring.middleware.file-info :only [wrap-file-info]]
         [ring.middleware.params :only [wrap-params]]
         [ring.middleware.session :only [wrap-session]]
-        [tl.pages.home :only [home tictactoe]]
+        [tl.pages.home :only [home]]
         [tl.pages.maps :only [maps-page]]
         [tl.pages.photos :only [photos-page]]
+        [tl.pages.tictactoe :only [tictactoe-page]]
         [tl.pages.youtubes :only [youtubes-page]])
   (:require [compojure.route :as route]
             [ring.adapter.jetty :as jetty]))
@@ -17,7 +18,7 @@
   (GET "/maps/:kind" [kind] (maps-page kind))
   (GET "/photos/" [] (photos-page))
   (GET "/photos/:id" [id] (photos-page id))
-  (GET "/tictactoe/" []  (tictactoe))
+  (GET "/tictactoe/" []  (tictactoe-page))
   (GET "/youtubes/" [query] (youtubes-page nil query))
   (GET "/youtubes/:video" [video query] (youtubes-page video query)))
 
