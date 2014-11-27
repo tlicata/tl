@@ -69,7 +69,7 @@
        [:a.navbar-brand {:href "/"} "Tim's Online World"]]
       [:div#navbar.navbar-collapse.collapse primary]]]))
 
-(defn wrap-in-layout [title css js body]
+(defn wrap-in-layout [{:keys [title css js body]}]
   [:html
    (head title css js)
    [:body
@@ -77,7 +77,4 @@
 
 (defn pagify [obj]
   (when-not (nil? obj)
-    (html5 (wrap-in-layout (:title obj)
-                           (:css obj)
-                           (:js obj)
-                           (:body obj)))))
+    (html5 (wrap-in-layout obj))))
