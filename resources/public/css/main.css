@@ -6,7 +6,7 @@ h1 {
     font-size: 2em;
 }
 h2 {
-    color: #9933cc;
+    color: #77b300;
     font-size: 1.2em;
 }
 ul.pager {
@@ -23,7 +23,7 @@ pre code {
     overflow-wrap: normal;
 }
 .navbar-nav li.current a, .navbar-nav li.current a:hover {
-    color: #9933cc;
+    color: #77b300;
 }
 
 #maps {
