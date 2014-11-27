@@ -42,15 +42,22 @@ pre code {
 }
 
 #ttt {
-    text-align: center;
+    margin: 0 auto;
+    overflow: hidden;
+    width: 334px;
 }
 #ttt .square {
-    border: 2px solid gray;
+    float: left;
     font-family: sans-serif;
     font-size: 100px;
     font-weight: bold;
-    height: 125px;
-    line-height: 125px;
+    height: 110px;
+    line-height: 110px;
+    text-align: center;
+    width: 110px;
+}
+#ttt, #ttt .square {
+    border: 2px solid gray;
 }
 
 #youtubes #player {

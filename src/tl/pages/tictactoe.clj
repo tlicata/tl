@@ -5,13 +5,12 @@
         [tl.pages.global :only [pagify]]))
 
 (defn tictactoe-page []
-  (let [square [:div.square.col-xs-4.col-sm-3.col-md-2]
-        offset [:div.square.col-xs-4.col-sm-3.col-md-2.col-sm-offset-1.col-md-offset-3]]
+  (let [square [:div.square]]
     (pagify {:title ["Cljs Trial"]
              :body [[:div#ttt
-                     [:div.row offset square square]
-                     [:div.row offset square square]
-                     [:div.row offset square square]]
+                     square square square
+                     square square square
+                     square square square]
                     [:div#ttt-explain
                      (md-to-html-string (slurp "resources/markdown/tictactoe.md"))]
                     (javascript-tag "var CLOSURE_NO_DEPS = true;")
