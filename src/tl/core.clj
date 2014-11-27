@@ -6,6 +6,7 @@
         [ring.middleware.session :only [wrap-session]]
         [tl.pages.home :only [home]]
         [tl.pages.maps :only [maps-page]]
+        [tl.pages.notes :only [notes-page]]
         [tl.pages.photos :only [photos-page]]
         [tl.pages.tictactoe :only [tictactoe-page]]
         [tl.pages.youtubes :only [youtubes-page]])
@@ -16,6 +17,7 @@
   (GET "/" [] (home))
   (GET "/maps/" [] (maps-page))
   (GET "/maps/:kind" [kind] (maps-page kind))
+  (GET "/notes/" [] (notes-page))
   (GET "/photos/" [] (photos-page))
   (GET "/photos/:id" [id] (photos-page id))
   (GET "/tictactoe/" []  (tictactoe-page))

@@ -1,10 +1,13 @@
 body {
     padding-top: 60px; /* sit below fixed header */
 }
-ul {
-    list-style-type: none;
-    margin-left: 0;
-    padding-left: 0;
+h1 {
+    color: #2a9fd6;
+    font-size: 2em;
+}
+h2 {
+    color: #77b300;
+    font-size: 1.2em;
 }
 ul.pager {
     margin: 0 0 19px 0;

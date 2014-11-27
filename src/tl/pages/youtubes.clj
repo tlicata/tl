@@ -41,7 +41,7 @@
 
 (defn youtubes [video query]
   (let [video-html [:div#youtubes [:div#player]]
-        search-html [:div#youtubes-search.col-md-5
+        search-html [:div#youtubes-search
                      [:form.form-search {:method "get"}
                       [:div.input-group
                        [:input.form-control {:type "text" :name "query" :autofocus "true"}]
