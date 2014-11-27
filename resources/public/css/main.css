@@ -6,7 +6,7 @@ h1 {
     font-size: 2em;
 }
 h2 {
-    color: #77b300;
+    color: #9933cc;
     font-size: 1.2em;
 }
 ul.pager {
@@ -21,6 +21,9 @@ pre {
 pre code {
     white-space: pre;
     overflow-wrap: normal;
+}
+.navbar-nav li.current a, .navbar-nav li.current a:hover {
+    color: #9933cc;
 }
 
 #maps {

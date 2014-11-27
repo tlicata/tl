@@ -12,6 +12,8 @@
 (def jquery "/js/lib/jquery-1.11.1.js")
 (def main "/css/main.css?6")
 
+(def ^:dynamic *request* {})
+
 (defn css [& more]
   (let [global [bootstrap-css highlight-css main]]
     (apply include-css (concat global more))))
@@ -53,7 +55,9 @@
 
 (defn header-links []
   (let [links (map (fn [{uri :uri text :text}]
-                     [:li (link-to uri text)])
+                     (if (= uri (:uri *request*))
+                       [:li.current (link-to uri text)]
+                       [:li (link-to uri text)]))
                    (header-data))]
     `[:ul.nav.navbar-nav ~@links]))
 

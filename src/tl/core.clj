@@ -4,6 +4,7 @@
         [ring.middleware.file-info :only [wrap-file-info]]
         [ring.middleware.params :only [wrap-params]]
         [ring.middleware.session :only [wrap-session]]
+        [tl.middleware :only [wrap-current-link]]
         [tl.pages.home :only [home]]
         [tl.pages.maps :only [maps-page]]
         [tl.pages.notes :only [notes-page]]
@@ -36,7 +37,8 @@
          wrap-params
          wrap-session
          (wrap-file "resources/public")
-         wrap-file-info))
+         wrap-file-info
+         wrap-current-link))
 
 (defn -main []
   (let [port (Integer/parseInt (System/getenv "PORT"))]
