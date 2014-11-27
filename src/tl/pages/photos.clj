@@ -44,7 +44,7 @@ returns false. See also 'contains?'"
                     (when-not (nil? name)
                       [:img {:src (str pics-base name pics-ext)}]))
           thumbnails (fn [] (map (fn [img]
-                                   [:div.col-md-3.col-sm-12
+                                   [:div.col-md-6.col-sm-12
                                     [:a.thumbnail {:href img}
                                      (htmlify img)]])
                                  pics))]

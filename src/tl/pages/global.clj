@@ -26,7 +26,9 @@
        (empty? (rest html))
        (= :script (first html)))
     html
-    [:div.container (conj [:div.row.well] html)]))
+    [:div.container
+     [:div.row
+      (conj [:div.col-md-8.col-md-offset-2.well] html)]]))
 
 (defn reduce-blurbs [& blurbs]
   (reduce #(merge-with union %1 %2) blurbs))
