@@ -5,14 +5,11 @@
         [tl.pages.global :only [pagify]]))
 
 (defn tictactoe-page []
-  (let [square [:div.square]]
-    (pagify {:title ["Cljs Trial"]
-             :body [[:div#ttt
-                     square square square
-                     square square square
-                     square square square]
-                    [:div#ttt-explain
-                     (md-to-html-string (slurp "resources/markdown/tictactoe.md"))]
-                    (javascript-tag "var CLOSURE_NO_DEPS = true;")
-                    (javascript-tag "hljs.initHighlightingOnLoad();")
-                    (include-js "/js/bin/all.js")]})))
+  (pagify {:title ["Cljs Trial"]
+           :body [[:div#ttt
+                   (repeat 9 [:div.square])]
+                  [:div#ttt-explain
+                   (md-to-html-string (slurp "resources/markdown/tictactoe.md"))]
+                  (javascript-tag "var CLOSURE_NO_DEPS = true;")
+                  (javascript-tag "hljs.initHighlightingOnLoad();")
+                  (include-js "/js/bin/all.js")]}))
