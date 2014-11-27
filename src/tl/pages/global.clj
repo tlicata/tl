@@ -77,8 +77,7 @@
 
 (defn pagify [obj]
   (when-not (nil? obj)
-    (let [layout (wrap-in-layout (:title obj)
-                                 (:css obj)
-                                 (:js obj)
-                                 (:body obj))]
-      (assoc obj :body (html5 layout)))))
+    (html5 (wrap-in-layout (:title obj)
+                           (:css obj)
+                           (:js obj)
+                           (:body obj)))))
