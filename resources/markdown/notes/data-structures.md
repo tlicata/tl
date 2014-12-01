@@ -122,6 +122,101 @@ __Implement a Linked List__
 4. Overide the `to_s` method to nicely print the list.
 5. Bonus: Write a function `remove` to remove a node from the list.
 
+### Solutions ###
+
+1. Ruby is an Object-Oriented language, so creating a class for a Node
+   seems like a reasonable idea.
+
+```ruby
+class Node
+  attr_accessor :val, :next
+  def initialize(value)
+    @val = value
+  end
+end
+```
+
+2. In order for a method `add_to_tail` to append a value to the end,
+   it needs to locate the end, then add a new Node, linking it to the
+   previous tail.
+
+```ruby
+  def add_to_tail(value)
+    if @next == nil
+      @next = Node.new(value)
+    else
+      @next.add_to_tail(value)
+    end
+  end
+```
+
+3. In order to calculate the length of the list, we can use a
+   recursive call. We're starting to see some of the shortcomings of
+   our design decisions :)
+
+```ruby
+  def length
+    if @next == nil
+      @val ? 1 : 0
+    else
+      1 + @next.length
+    end
+  end
+```
+
+4. We can also use a recursive call to nicely print out the list.
+
+```ruby
+  def to_s
+    if @next == nil
+      @val.to_s
+    else
+      "#{@val} #{@next}"
+    end
+  end
+```
+
+5. I chose a limited representation by only have Nodes be linked to
+   other Nodes. So the `remove` method should return the new head of
+   the list in case the old head was the Node removed. Perhaps this
+   indicates I should have used a more robust setup, such as a
+   LinkedList class that encapsulates the Nodes, but I liked this for
+   simplicity and illustrative purposes.
+
+```ruby
+  def remove(value)
+    if @val == value
+      if @next
+        return @next
+      else
+        return Node.new(nil)
+      end
+    elsif @next and @next.val == value
+      @next = @next.next
+    else
+      @next.remove(value)
+    end
+    return self
+  end
+```
+
+You can test our all the code we just wrote like so:
+
+```ruby
+list = Node.new(7)
+list.add_to_tail(14)
+list.add_to_tail(21)
+
+puts "list.length is #{list.length}"
+puts "list is (#{list})"
+
+list = list.remove(21)
+list = list.remove(14)
+
+puts "list.length is #{list.length}"
+puts "list is (#{list})"
+```
+
 Tree
 ----
 
