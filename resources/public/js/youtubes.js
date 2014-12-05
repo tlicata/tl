@@ -122,10 +122,14 @@ tl.youtubes = (function () {
     }());
 
     $(document).ready(function () {
-        // Bind event handlers to the search form.
+
+        // Grab DOM elements
         searchDiv = $("#youtubes-search");
+        queryInput = searchDiv.find('[name="query"]');
+
+        // Bind event handlers to the search form.
         searchDiv.find("form").submit(function () {
-            search(searchDiv.find(":text").val());
+            search(queryInput.val());
             return false;
         });
 
@@ -135,7 +139,7 @@ tl.youtubes = (function () {
         if (window.location.hash) {
             var hash = decode(window.location.hash.substr(1));
             search(hash);
-            searchDiv.find(":text").val(hash).select();
+            queryInput.val(hash).select();
         }
     });
 
