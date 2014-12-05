@@ -44,7 +44,7 @@
         search-html [:div#youtubes-search
                      [:form.form-search {:method "get"}
                       [:div.input-group
-                       [:input.form-control {:type "text" :name "query" :autofocus "true"}]
+                       [:input.form-control {:type "search" :name "query" :autofocus true :autosave true}]
                        [:span.input-group-btn
                         [:input.btn.btn-primary {:type "submit" :value "Search YouTube"}]]]]]
         iframe-api [:script {:src "https://www.youtube.com/iframe_api"}]
