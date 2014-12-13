@@ -20,11 +20,11 @@ So I looked for a Unix utility to do the merge for me. I ran across
 which looked like it had potential:
 
 > With sdiff, you can merge two files interactively based on a
-> side-by-side -y format comparison
-> [see Side by Side](http://www.gnu.org/software/diffutils/manual/html_node/Side-by-Side.html#Side-by-Side). Use
-> `--output=file (-o file)` to specify where to put the merged text. See
-> [Invoking sdiff](http://www.gnu.org/software/diffutils/manual/html_node/Invoking-sdiff.html#Invoking-sdiff),
-> for more details on the options to sdiff.
+side-by-side -y format comparison
+[see Side by Side](http://www.gnu.org/software/diffutils/manual/html_node/Side-by-Side.html#Side-by-Side). Use
+--output=file (-o file) to specify where to put the merged text. See
+[Invoking sdiff](http://www.gnu.org/software/diffutils/manual/html_node/Invoking-sdiff.html#Invoking-sdiff),
+for more details on the options to sdiff.
 
 So I ran the command
 
@@ -37,7 +37,7 @@ urge to give up because I had seen a more interesting path a few pages
 earlier. The `sdiff` page had also mentioned,
 
 > Another way to merge files interactively is to use the Emacs Lisp
-> package `emerge`.
+package emerge.
 
 Well, you don't need to tell me twice when it comes to Emacs-based
 solutions. I head to the
