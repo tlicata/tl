@@ -68,7 +68,7 @@ I read the
 section and learn about the key commands available. I press:
 
 - <kbd>n</kbd> to go to the _next_ difference (or, first, in this
-case)
+  case)
 - <kbd>a</kbd> to choose the left version
 - <kbd>b</kbd> to chose the right version
 - <kbd>p</kbd> to go to the _previous_ diff, and
