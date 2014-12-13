@@ -33,8 +33,8 @@ sdiff --output version3.js version1.js version2.js
 ```
 
 but couldn't quite make sense of the interface after that. I had the
-urge to give up because I had seen an more interesting path a few
-pages earlier. The `sdiff` page had also mentioned,
+urge to give up because I had seen a more interesting path a few pages
+earlier. The `sdiff` page had also mentioned,
 
 > Another way to merge files interactively is to use the Emacs Lisp
 > package `emerge`.
@@ -56,7 +56,7 @@ decide to run the Emacs command
 M-x emerge-files
 ```
 
-(I could have run `M-x emerge-buffers` too, I suppose.)
+(I could have used `M-x emerge-buffers` too, I suppose.)
 
 I'm prompted for two files I'd like to merge. I am shown the files
 side-by-side, with a merge buffer underneath. Initially, the merge
