@@ -14,8 +14,10 @@
 (defn all-notes []
   (drop 1 (file-seq (clojure.java.io/file "resources/markdown/notes/"))))
 
-(defn notes-page []
+(defn notes-page-slow []
   (pagify
    (highlight
     {:title ["Notes"]
      :body (mapv markdown (all-notes))})))
+
+(def notes-page (memoize notes-page-slow))
