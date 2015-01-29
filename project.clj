@@ -13,17 +13,15 @@
   :min-lein-version "2.1.2"
   :profiles {:dev {:dependencies [[ring-mock "0.1.1"]]
                    :plugins [[com.cemerick/austin "0.1.1"]]}
-             :production {:offline? true}}
+             :prod {:offline? true}}
   :plugins [[lein-cljsbuild "1.0.3"]]
   :aot [tl.core]
-  :cljsbuild {:builds [{:source-paths ["cljs"]
-                        :id "dev"
-                        :compiler {:output-to "resources/public/js/bin/all.js"
-                                   :optimizations :whitespace
-                                   :pretty-print true}}
-                       {:source-paths ["cljs"]
-                        :id "prod"
-                        :compiler {:output-to "resources/public/js/bin/all.min.js"
-                                   :optimizations :advanced
-                                   :pretty-print false}}]})
+  :cljsbuild {:builds {:dev {:source-paths ["cljs"]
+                             :compiler {:output-to "resources/public/js/bin/all.js"
+                                        :optimizations :whitespace
+                                        :pretty-print true}}
+                       :prod {:source-paths ["cljs"]
+                              :compiler {:output-to "resources/public/js/bin/all.js"
+                                         :optimizations :advanced
+                                         :pretty-print false}}}})
 

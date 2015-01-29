@@ -1,1 +1,1 @@
-web: lein run -m tl.core
+web: lein with-profile prod run -m tl.core
