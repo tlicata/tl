@@ -47,7 +47,8 @@ In cider buffer, start server
 
 Get clojurescript compiling. In new terminal,
 
-    $ lein cljsbuild auto
+    $ lein cljsbuild auto     # prod profile w/ advanced optimizations
+    $ lein cljsbuild auto dev # dev profile w/ pretty print
 
 Or, use Austin for ClojureScript REPL,
 
