@@ -4,7 +4,7 @@
         [markdown.core :only [md-to-html-string]]
         [tl.pages.global :only [pagify]]))
 
-(defn tictactoe-page []
+(defn tictactoe-page-slow []
   (pagify {:title ["Cljs Trial"]
            :body [[:div#ttt
                    (repeat 9 [:div.square])]
@@ -13,3 +13,5 @@
                   (javascript-tag "var CLOSURE_NO_DEPS = true;")
                   (javascript-tag "hljs.initHighlightingOnLoad();")
                   (include-js "/js/bin/all.js")]}))
+
+(def tictactoe-page (memoize tictactoe-page-slow))
