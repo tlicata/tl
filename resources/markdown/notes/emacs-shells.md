@@ -60,7 +60,7 @@ paging in Emacs.
 (setenv "PAGER" "cat")
 ```
 
-One neat feature is if I run a `grep` command from eshell is pops me
+One neat feature is if I run a `grep` command from eshell it pops me
 into an Emacs-y results window. Try it and enjoy.
 
 Eshell is also crazy because it's a shell that also acts like a lisp
