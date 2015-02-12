@@ -67,7 +67,7 @@ Eshell is also crazy because it's a shell that also acts like a lisp
 REPL. I haven't totally figured out the benefit(s) of that, but I
 assume there's power there.
 
-http://www.howardism.org/Technical/Emacs/eshell-fun.html
+[http://www.howardism.org/Technical/Emacs/eshell-fun.html](http://www.howardism.org/Technical/Emacs/eshell-fun.html)
 
 Real Shells In Emacs
 --------------------
