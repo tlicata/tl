@@ -1,1 +1,1 @@
-web: lein with-profile prod run -m tl.core
+web: java $JVM_OPTS -jar target/tl-standalone.jar

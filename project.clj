@@ -13,9 +13,11 @@
   :min-lein-version "2.1.2"
   :profiles {:dev {:dependencies [[ring-mock "0.1.1"]]
                    :plugins [[com.cemerick/austin "0.1.1"]]}
-             :prod {:offline? true}}
+             :prod {:offline? true}
+             :uberjar {:main tl.core, :aot :all}}
   :plugins [[lein-cljsbuild "1.0.3"]]
   :aot [tl.core]
+  :uberjar-name "tl-standalone.jar"
   :cljsbuild {:builds {:dev {:source-paths ["cljs"]
                              :compiler {:output-to "resources/public/js/bin/all.js"
                                         :optimizations :whitespace
