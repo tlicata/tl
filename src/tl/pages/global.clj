@@ -9,6 +9,7 @@
 (def bootstrap-js "/js/lib/bootstrap.js")
 (def highlight-css "/css/lib/highlight/solarized_dark.css")
 (def highlight-js "/js/lib/highlight.pack.js")
+(def init-highlight-js "/js/highlight.js")
 (def jquery "/js/lib/jquery-1.11.1.js")
 (def main "/css/main.css?6")
 
