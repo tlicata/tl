@@ -158,7 +158,7 @@ tl.youtubes = (function () {
             },
             events: {
                 onStateChange: function (event) {
-                    if (event.target.getPlayerState() == 0) {
+                    if (event.target.getPlayerState() === 0) {
                         event.target.playVideo();
                     }
                 }
