@@ -125,7 +125,7 @@ tl.youtubes = (function () {
 
         // Grab DOM elements
         searchDiv = $("#youtubes-search");
-        queryInput = searchDiv.find('[name="query"]');
+        var queryInput = searchDiv.find('[name="query"]');
 
         // Bind event handlers to the search form.
         searchDiv.find("form").submit(function () {
