@@ -30,7 +30,7 @@ from the command line. This is fine for html/js/css
 development, but has the drawback of needing to
 restart for refreshing jvm changes.
 
-    foreman start
+    lein uberjar && foreman start
 
 The better way is to get interactive dev going
 through emacs and cider.
