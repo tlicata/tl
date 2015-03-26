@@ -78,7 +78,6 @@ tl.youtubes = (function () {
 
         // Draw new search results.
         var render = function (html) {
-            remove();
             var resultsDiv = $("<div/>")
                 .attr("id", resultsDivId)
                 .addClass("col-md-12");
@@ -93,31 +92,32 @@ tl.youtubes = (function () {
 
         // search
         return function (query, callback) {
-            $.ajax({
-                data: {alt: "json", q: query},
-                dataType: "jsonp",
-                error: function () {
-                    renderError();
-                    if (callback) {
-                        callback(false);
-                    }
-                },
-                success: function (json) {
-                    var success = true;
-                    try {
-                        query = encode(query);
-                        window.location.hash = query;
-                        renderSuccess(clean(json), query);
-                    } catch (e) {
-                        success = false;
-                    }
-                    if (callback) {
-                        callback(success);
-                    }
-                },
-                timeout: 5000,
-                url: searchUrl
-            });
+            remove();
+            if (query) {
+                $.ajax({
+                    data: {alt: "json", q: query},
+                    dataType: "jsonp",
+                    error: function () {
+                        renderError();
+                        if (callback) {
+                            callback(false);
+                        }
+                    },
+                    success: function (json) {
+                        var success = true;
+                        try {
+                            renderSuccess(clean(json), query);
+                        } catch (e) {
+                            success = false;
+                        }
+                        if (callback) {
+                            callback(success);
+                        }
+                    },
+                    timeout: 5000,
+                    url: searchUrl
+                });
+            }
         };
     }());
 
@@ -129,18 +129,36 @@ tl.youtubes = (function () {
 
         // Bind event handlers to the search form.
         searchDiv.find("form").submit(function () {
-            search(queryInput.val());
+            var query = encode(queryInput.val());
+            // If browser supports "hashchange" will rely on that to
+            // trigger the search, otherwise search manually.
+            if ("onhashchange" in window) {
+                window.location.hash = query;
+            } else {
+                search(query);
+            }
             return false;
         });
 
         // The hash represents a search. If one exists,
         // then load search results for it. Also, use
         // it to pre-populate the search box.
+        var getHash = function () {
+            return decode(window.location.hash.substr(1));
+        };
         if (window.location.hash) {
-            var hash = decode(window.location.hash.substr(1));
+            var hash = getHash();
             search(hash);
             queryInput.val(hash).select();
         }
+
+        // If browser supports it, listen for the hash change event
+        // and update the search results.
+        window.addEventListener("hashchange", function () {
+            var hash = getHash();
+            queryInput.val(decode(hash));
+            search(hash);
+        });
     });
 
     // YouTube IFrame API expects this function to be defined.
