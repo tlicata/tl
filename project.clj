@@ -3,7 +3,7 @@
   :dependencies [[com.taoensso/carmine "2.9.2"]
                  [compojure "1.2.1"]
                  [hiccup "1.0.5"]
-                 [markdown-clj "0.9.58"]
+                 [markdown-clj "0.9.58" :exclusions [org.clojure/clojure]]
                  [org.clojure/clojure "1.6.0"]
                  [org.clojure/clojurescript "0.0-2371"]
                  [org.clojure/core.async "0.1.346.0-17112a-alpha"]
