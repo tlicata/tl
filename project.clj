@@ -1,6 +1,7 @@
 (defproject tl "0.1.0-SNAPSHOT"
   :description "My personal site"
-  :dependencies [[compojure "1.2.1"]
+  :dependencies [[com.taoensso/carmine "2.9.2"]
+                 [compojure "1.2.1"]
                  [hiccup "1.0.5"]
                  [markdown-clj "0.9.58"]
                  [org.clojure/clojure "1.6.0"]
