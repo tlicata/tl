@@ -7,8 +7,14 @@
 
 (defmacro wcar* [& body] `(car/wcar server-conn ~@body))
 
+(defn get-today []
+  (let [sdf (java.text.SimpleDateFormat. "yyyyMMdd")
+        today (.getTime (. java.util.Calendar getInstance))]
+    (.format sdf today)))
+
 (defn youtube-played [video-id]
-  (let [key (str "youtube:" video-id)]
-    (if (= 1 (wcar* (car/exists key)))
-      (wcar* (car/hincrby key "count" 1))
-      (wcar* (car/hmset key "count" 1)))))
+  (let [key (str "youtube:" video-id)
+        today (get-today)]
+    (wcar* (car/hincrby key "count" 1)
+           (car/hsetnx key "first-seen" today)
+           (car/hset key "last-seen" today))))
