@@ -7,6 +7,8 @@
 
 (defmacro wcar* [& body] `(car/wcar server-conn ~@body))
 
-(wcar* (car/ping)
-       (car/set "foo" "bar")
-       (car/get "foo"))
+(defn youtube-played [video-id]
+  (let [key (str "youtube:" video-id)]
+    (if (= 1 (wcar* (car/exists key)))
+      (wcar* (car/hincrby key "count" 1))
+      (wcar* (car/hmset key "count" 1)))))

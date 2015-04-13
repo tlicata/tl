@@ -178,6 +178,7 @@ tl.youtubes = (function () {
                 onStateChange: function (event) {
                     if (event.target.getPlayerState() === 0) {
                         event.target.playVideo();
+                        $.get(window.location.pathname + "/watch");
                     }
                 }
             }
