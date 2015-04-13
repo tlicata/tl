@@ -53,8 +53,8 @@
                         [:input.btn.btn-primary {:type "submit" :value "Search YouTube"}]]]]]
         iframe-api [:script {:src "https://www.youtube.com/iframe_api"}]
         video-id [:script (str "var video = \"" video "\";")]]
-    {:js #{"/js/youtubes.js?5"}
     (incr-video-count video)
+    {:js #{"/js/youtubes.js?6"}
      :title ["Hello Youtubes"]
      :body (if video
              [video-html search-html iframe-api video-id]
