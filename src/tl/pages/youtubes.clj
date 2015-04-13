@@ -2,6 +2,7 @@
   (:use [clojure.data.json :only [read-json]]
         [hiccup.element :only [link-to]]
         [ring.util.codec :only [url-encode]]
+        [tl.db :as db]
         [tl.pages.global :only [pagify]]))
 
 (def link-url "http://www.youtube.com/watch?v=")
@@ -39,6 +40,9 @@
                      [:span.viewed (str (:viewed entry) " views")]])
                   results))]])))
 
+(defn incr-video-count [video]
+  (when video (db/youtube-played video)))
+
 (defn youtubes [video query]
   (let [video-html [:div#youtubes [:div#player]]
         search-html [:div#youtubes-search
@@ -49,7 +53,8 @@
                         [:input.btn.btn-primary {:type "submit" :value "Search YouTube"}]]]]]
         iframe-api [:script {:src "https://www.youtube.com/iframe_api"}]
         video-id [:script (str "var video = \"" video "\";")]]
-    {:js #{"/js/youtubes.js?5"}
+    (incr-video-count video)
+    {:js #{"/js/youtubes.js?6"}
      :title ["Hello Youtubes"]
      :body (if video
              [video-html search-html iframe-api video-id]
@@ -57,3 +62,7 @@
 
 (defn youtubes-page [video query]
   (pagify (youtubes video query)))
+
+(defn youtubes-watch [video]
+  (incr-video-count video)
+  {:body "OK"})
