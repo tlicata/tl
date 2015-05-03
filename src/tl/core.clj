@@ -10,7 +10,7 @@
         [tl.pages.notes :only [notes-page]]
         [tl.pages.photos :only [photos-page]]
         [tl.pages.tictactoe :only [tictactoe-page]]
-        [tl.pages.youtubes :only [youtubes-page youtubes-watch]])
+        [tl.pages.youtubes :only [youtubes-list youtubes-page youtubes-watch]])
   (:require [compojure.route :as route]
             [ring.adapter.jetty :as jetty])
   (:gen-class))
@@ -24,6 +24,7 @@
   (GET "/photos/:id" [id] (photos-page id))
   (GET "/tictactoe/" []  (tictactoe-page))
   (GET "/youtubes/" [query] (youtubes-page nil query))
+  (GET "/youtubes/list" [] (youtubes-list))
   (GET "/youtubes/:video" [video query] (youtubes-page video query))
   (GET "/youtubes/:video/watch" [video] (youtubes-watch video)))
 

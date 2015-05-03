@@ -63,6 +63,16 @@
 (defn youtubes-page [video query]
   (pagify (youtubes video query)))
 
+(defn youtubes-list []
+  (let [videos (reverse (sort-by #(get % "last-seen") (db/youtube-get-all)))
+        paras (mapv (fn [vid]
+                      (let [id (get vid "video-id")]
+                        [:p (link-to id id) " : " (get vid "count")]))
+                    videos)]
+    (pagify
+     {:title "List all played Youtubes"
+      :body paras})))
+
 (defn youtubes-watch [video]
   (incr-video-count video)
   {:body "OK"})
