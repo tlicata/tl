@@ -5,8 +5,9 @@
 (deftest test-blurb
   (is (= (blurb [:p "Hi Mom"])
          [:div.container
-          [:div.row.well
-           [:p "Hi Mom"]]]))
+          [:div.row
+           [:div.col-md-8.col-md-offset-2.well
+            [:p "Hi Mom"]]]]))
   (is (= (blurb nil)
          nil))
   (is (= (blurb [:script "skip"])

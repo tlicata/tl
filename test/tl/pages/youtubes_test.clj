@@ -15,5 +15,5 @@
           (recur (zip/next loc)))))))
 
 (deftest test-youtubes
-  (is (not (has-script-tag? (youtubes nil nil))))
-  (is (not (has-script-tag? (youtubes "id" "search term")))))
+  (is (not (has-script-tag? (youtubes-page nil nil))))
+  (is (not (has-script-tag? (youtubes-page "id" "search term")))))
