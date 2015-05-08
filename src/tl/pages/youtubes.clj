@@ -35,7 +35,7 @@
                         [:p (link-to id id) " : " (get vid "count")]))
                     videos)]
     (pagify
-     {:title "List all played Youtubes"
+     {:title ["List all played Youtubes"]
       :body paras})))
 
 (defn youtubes-watch [video]
