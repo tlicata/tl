@@ -5,41 +5,6 @@
         [tl.db :as db]
         [tl.pages.global :only [pagify]]))
 
-(def link-url "http://www.youtube.com/watch?v=")
-(def search-url "http://gdata.youtube.com/feeds/api/videos")
-
-;; Used to use appengine-magic to fetch a url within
-;; the appengine restrictions.  Should replace with
-;; another library like clj-http.
-(defn youtube-search-fetch [query]
-  (let [url (str search-url "?q=" (url-encode query) "&alt=json")]
-    {:reponse nil}))
-
-(defn youtube-search-parse [response]
-  (let [bytes (:content response)
-        chars (if bytes (String. bytes) "{}")
-        tree (try (read-json chars) (catch Exception _ {}))
-        entries (:entry (:feed tree))]
-    (map (fn [entry]
-           {:author (:$t (:name (first (:author entry))))
-            :content (:$t (:content entry))
-            :id (re-find #"[^/]*$" (:$t (:id entry)))
-            :title (:$t (:title entry))
-            :viewed (:viewCount (:yt$statistics entry))})
-         entries)))
-
-(defn youtube-search-render [results]
-  (vec
-   (cons :div#youtubes-search
-         [[:div#search-results
-           (if (empty? results)
-             [:span "Go fish."]
-             (map (fn [entry]
-                    [:div.entry
-                     (link-to (:id entry) (:title entry))
-                     [:span.viewed (str (:viewed entry) " views")]])
-                  results))]])))
-
 (defn incr-video-count [video]
   (when video (db/youtube-played video)))
 
