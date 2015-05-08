@@ -24,24 +24,22 @@ tl.youtubes = (function () {
     var encode = encodeURIComponent;
     var resultsDivId = "search-results";
     var searchDiv = null;
-    var searchUrl = "http://gdata.youtube.com/feeds/api/videos";
+    var searchUrl = "https://www.googleapis.com/youtube/v3/search";
 
     var search = (function () {
 
         var clean = function (json) {
-            var entry = json && json.feed && json.feed.entry;
+            var items = json && json.items;
             var videos = [];
-            var idx = null;
-            for (idx in entry) {
-                if (entry.hasOwnProperty(idx)) {
-                    var vid = entry[idx];
-                    videos.push({
-                        id: vid.id && vid.id.$t && vid.id.$t.substr(-11),
-                        thumb: vid.media$group.media$thumbnail[1].url,
-                        title: vid.title && vid.title.$t,
-                        viewed: vid.yt$statistics && vid.yt$statistics.viewCount
-                    });
-                }
+            for (var i = 0; i < items.length; i++) {
+                var vid = items[i];
+                var snip = vid && vid.snippet;
+                var thumb = snip.thumbnails && snip.thumbnails.default;
+                videos.push({
+                    id: vid.id && vid.id.videoId,
+                    thumb:  thumb && thumb.url,
+                    title: snip && snip.title
+                });
             }
             return videos;
         };
@@ -95,7 +93,13 @@ tl.youtubes = (function () {
             remove();
             if (query) {
                 $.ajax({
-                    data: {alt: "json", q: query},
+                    data: {
+                        q: query,
+                        key: "AIzaSyBDSymHCx1ESegvp09VMSFT6e9vdPUtkrc",
+                        maxResults: 50,
+                        part: "snippet",
+                        type: "video"
+                    },
                     dataType: "jsonp",
                     error: function () {
                         renderError();
