@@ -12,7 +12,8 @@
         [tl.pages.tictactoe :only [tictactoe-page]]
         [tl.pages.youtubes :only [youtubes-list youtubes-page youtubes-watch]])
   (:require [compojure.route :as route]
-            [ring.adapter.jetty :as jetty])
+            [ring.adapter.jetty :as jetty]
+            [tl.jobs :as jobs])
   (:gen-class))
 
 (defroutes tl-routes
