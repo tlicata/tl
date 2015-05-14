@@ -15,4 +15,4 @@
     (future-cancel @worker)
     (reset! worker nil)))
 
-(start-worker)
+;; (start-worker)
