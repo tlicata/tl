@@ -48,6 +48,4 @@
   (let [port (Integer/parseInt (or (System/getenv "PORT") "5000"))]
     (jetty/run-jetty app {:port port})))
 
-(defn dev-main []
-  (future
-    (jetty/run-jetty app {:port 5000})))
+(defn dev-main [] (future (-main)))
