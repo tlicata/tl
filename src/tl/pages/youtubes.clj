@@ -1,6 +1,7 @@
 (ns tl.pages.youtubes
   (:require [clojure.data.json :refer [read-json]]
             [clojure.string :as string]
+            [hiccup.core :refer [html]]
             [hiccup.element :refer [link-to]]
             [clj-http.client :as client]
             [ring.util.codec :refer [url-encode]]
@@ -41,6 +42,8 @@
   (pagify
    {:title ["List all played Youtubes"]
     :body [(youtubes-list-table)]}))
+(defn youtubes-list-html []
+  (html (youtubes-list-table)))
 
 (defn youtubes-watch [video]
   (incr-video-count video)

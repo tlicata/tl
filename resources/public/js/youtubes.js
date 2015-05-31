@@ -88,7 +88,12 @@ tl.youtubes = (function () {
         // search
         return function (query, callback) {
             remove();
-            if (query) {
+
+            if (query === "list") {
+                $.get("/youtubes/list.html", function (html) {
+                    render(html);
+                });
+            } else if (query) {
                 $.ajax({
                     data: {
                         q: query,
