@@ -4,6 +4,7 @@
         [ring.middleware.file-info :only [wrap-file-info]]
         [ring.middleware.params :only [wrap-params]]
         [ring.middleware.session :only [wrap-session]]
+        [tl.jobs :only [jobs-page]]
         [tl.middleware :only [wrap-current-link]]
         [tl.pages.home :only [home]]
         [tl.pages.maps :only [maps-page]]
@@ -18,6 +19,7 @@
 
 (defroutes tl-routes
   (GET "/" [] (home))
+  (GET "/jobs/" [] (jobs-page))
   (GET "/maps/" [] (maps-page))
   (GET "/maps/:kind" [kind] (maps-page kind))
   (GET "/notes/" [] (notes-page))

@@ -6,7 +6,7 @@
 (defn start-worker []
   (reset! worker (future
                    (while true
-                     (Thread/sleep 3600000)
+                     (Thread/sleep 300000)
                      (println "running jobs")
                      (youtubes-update-titles)))))
 
@@ -15,4 +15,11 @@
     (future-cancel @worker)
     (reset! worker nil)))
 
-;; (start-worker)
+(defn jobs-page []
+  (if (future? @worker)
+    (do
+      (stop-worker)
+      {:body "Stopped"})
+    (do
+      (start-worker)
+      {:body "Started"})))
