@@ -8,7 +8,7 @@ clashes with a
 First-Class Functions
 ---------------------
 
-![High Class](img/high-society.jpg)
+![High Class](http://timothylicata.com/img/high-society.jpg)
 
 > In the Kingdom of Javaland, where King Java rules with a
 silicon fist, people aren't allowed to think the way you
@@ -66,7 +66,7 @@ result();             // prints "i am inner"
 Lexical Scope
 -------------
 
-![Lexical Scope](img/lexical-scope.png)
+![Lexical Scope](http://timothylicata.com/img/lexical-scope.png)
 
 Scope determines what variables are visiable / available
 where.
@@ -97,7 +97,7 @@ languages, even ones that don't explicitly contain let
 or lambda, such as Perl or JavaScript.
 >- <cite>[Let Over Lambda](http://www.amazon.com/Let-Over-Lambda-Doug-Hoyte/dp/1435712757) - Doug Hoyte</cite>
 
-![Patrick asks a question about closures](img/closure.jpg)
+![Patrick asks a question about closures](http://timothylicata.com/img/closure.jpg)
 
 Patrick is pretty close to being correct. Actually, by some
 definitions, he may be correct. A function within a function
