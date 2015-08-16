@@ -1,5 +1,6 @@
 # tl
-A site written in Clojure.
+
+Tim's Online World
 
 ## Local Development
 
@@ -25,23 +26,14 @@ Leiningen
 
 ### Starting Server
 
-Foreman will launch a local version of the site
-from the command line. This is fine for html/js/css
-development, but has the drawback of needing to
-restart for refreshing jvm changes.
-
     lein uberjar && foreman start
 
-The better way is to get interactive dev going
-through emacs and cider.
-
-First, follow the installation instructions: https://github.com/clojure-emacs/cider.
-Then, in Emacs, open core.clj,
+Or, through emacs and [cider](https://github.com/clojure-emacs/cider).
 
     M-x cider-jack-in
     C-c C-k
 
-In cider buffer, start server
+In cider buffer,
 
     user> (tl.core/dev-main)
 
@@ -49,10 +41,6 @@ Get clojurescript compiling. In new terminal,
 
     $ lein cljsbuild auto     # prod profile w/ advanced optimizations
     $ lein cljsbuild auto dev # dev profile w/ pretty print
-
-Or, use Austin for ClojureScript REPL,
-
-    user> (cemerick.austin.repls/exec :exec-cmds ["open" "-ga" "/Applications/Google Chrome.app"])
 
 ## Deploy
 
@@ -62,4 +50,4 @@ Add heroku repo as git remote and push.
     git push heroku <your-branch>:master
 
 ## License
-Copyright &copy; 2012 Timothy Licata
+Copyright &copy; 2015 Timothy Licata
