@@ -61,8 +61,8 @@
     (when-not (empty? lacking-info)
       (let [ids (string/join "," (map #(get % "video-id") lacking-info))
             query {:query-params {:part "snippet" :id ids :key youtube-key}}]
+        (println (str "Calling YouTube for info on " ids))
         (try
-          (println (str "Calling YouTube for info on " ids))
           (map (fn [itm]
                  [(:id itm) (get-in itm [:snippet :title])])
                (:items (read-json (:body (client/get youtube-api query)))))
