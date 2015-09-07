@@ -48,13 +48,20 @@ tl.youtubes = (function () {
             var outer = $("<table/>").addClass("table table-striped");
             if (videos.length) {
                 $.each(videos, function (idx, vid) {
-                    var img = $("<img/>").attr("src", vid.thumb);
+                    var left = null;
+                    if (vid.thumb) {
+                        left = $("<img/>").attr("src", vid.thumb);
+                    } else if (vid.count) {
+                        left = $("<span/>").text(vid.count);
+                    } else {
+                        left = $("<span/>").text(idx + 1);
+                    }
                     var link = $("<a/>")
                         .attr("href", vid.id.concat("#", query))
                         .html(vid.title);
                     outer.append($("<tr/>").append(
-                        $("<td/>").append(img).css("width", "130px"),
-                        $("<td/>").append(link).css("vertical-align", "middle")
+                        $("<td/>").append(left),
+                        $("<td/>").append(link)
                     ));
                 });
             } else {
