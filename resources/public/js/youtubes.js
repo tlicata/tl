@@ -96,9 +96,10 @@ tl.youtubes = (function () {
         return function (query, callback) {
             remove();
 
-            if (query === "list") {
-                $.get("/youtubes/list.html", function (html) {
-                    render(html);
+            if (query.charAt(0) === ":") {
+                var id = window.encodeURIComponent(query.slice(1));
+                $.get("/youtubes/list/" + id, function (json) {
+                    render(html(json, query));
                 });
             } else if (query) {
                 $.ajax({

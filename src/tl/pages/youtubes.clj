@@ -32,18 +32,17 @@
   (pagify (youtubes video query)))
 
 
-(defn youtubes-list-table []
-  (let [videos (reverse (sort-by #(get % "last-seen") (db/youtube-get-all)))
-        rows (mapv #(let [id (get % "video-id")]
-                      [:tr [:td (link-to {:class "btn"} id (get % "title" id))] [:td (get % "count")]])
-                   videos)]
-    `[:table {:class "table table-striped"} [:tr [:th "Title"] [:th "Views"]] ~@rows]))
-(defn youtubes-list []
-  (pagify
-   {:title ["List all played Youtubes"]
-    :body [(youtubes-list-table)]}))
-(defn youtubes-list-html []
-  (html (youtubes-list-table)))
+(defn youtubes-playlist [videos]
+  [{:id "1" :title "who"}])
+(defn youtubes-history [videos]
+  (let [by-date (reverse (sort-by #(get % "last-seen") videos))]
+    (map #(let [id (get % "video-id")]
+            {:id id :title (get % "title" id) :count (get % "count")})
+         by-date)))
+(defn youtubes-list [id]
+  {:body (if (= id "list")
+           (youtubes-history (db/youtube-get-all))
+           (youtubes-playlist (db/youtube-get-list id)))})
 
 (defn youtubes-watch [video]
   (incr-video-count video)

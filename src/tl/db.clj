@@ -30,6 +30,9 @@
                 (conj video "video-id" (string/replace key youtube-key "")))
               videos keys))))
 
+(defn youtube-get-list [id]
+  [])
+
 (defn youtube-update-title [ids-and-titles]
   (wcar* (mapv (fn [[id title]]
                  (car/hset (str youtube-key id) "title" title))

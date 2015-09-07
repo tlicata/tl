@@ -10,7 +10,8 @@
                  [org.clojure/core.async "0.1.346.0-17112a-alpha"]
                  [org.clojure/data.json "0.2.5"]
                  [prismatic/dommy "0.1.1"]
-                 [ring "1.3.1"]]
+                 [ring "1.3.1"]
+                 [ring/ring-json "0.4.0"]]
   :hooks [leiningen.cljsbuild]
   :min-lein-version "2.1.2"
   :profiles {:dev {:dependencies [[ring-mock "0.1.1"]]
