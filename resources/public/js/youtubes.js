@@ -58,7 +58,7 @@ tl.youtubes = (function () {
                     }
                     var link = $("<a/>")
                         .attr("href", vid.id.concat("#", query))
-                        .html(vid.title);
+                        .html(vid.title).addClass("btn");
                     outer.append($("<tr/>").append(
                         $("<td/>").append(left),
                         $("<td/>").append(link)
