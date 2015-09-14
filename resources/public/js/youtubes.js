@@ -65,7 +65,7 @@ tl.youtubes = (function () {
                     ));
                 });
             } else {
-                outer.html($("<p/>").text("No results found"));
+                outer.html($("<tr/>").append($("<td/>").text("No results found")));
             }
             return outer;
         };
