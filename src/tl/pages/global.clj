@@ -31,7 +31,7 @@
     html
     [:div.container
      [:div.row
-      (conj [:div.col-md-8.col-md-offset-2.well] html)]]))
+      (conj [:div.col-md-8.col-md-offset-2] html)]]))
 
 (defn reduce-blurbs [& blurbs]
   (reduce #(merge-with union %1 %2) blurbs))
