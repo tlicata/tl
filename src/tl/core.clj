@@ -28,7 +28,7 @@
   (GET "/photos/:id" [id] (photos-page id))
   (GET "/tictactoe/" []  (tictactoe-page))
   (GET "/youtubes/" [query] (youtubes-page nil query))
-  (GET "/youtubes/list/:id" [id] (youtubes-list id))
+  (GET "/youtubes/list" [cmd] (youtubes-list cmd))
   (GET "/youtubes/:video" [video query] (youtubes-page video query))
   (GET "/youtubes/:video/watch" [video] (youtubes-watch video)))
 

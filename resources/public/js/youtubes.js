@@ -97,8 +97,7 @@ tl.youtubes = (function () {
             remove();
 
             if (query.charAt(0) === ":") {
-                var id = window.encodeURIComponent(query.slice(1));
-                $.get("/youtubes/list/" + id, function (json) {
+                $.get("/youtubes/list", {cmd: query.slice(1)}, function (json) {
                     render(html(json, query));
                 });
             } else if (query) {

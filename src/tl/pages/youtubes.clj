@@ -33,16 +33,19 @@
 
 
 (defn youtubes-playlist [videos]
-  [{:id "1" :title "who"}])
-(defn youtubes-history [videos]
-  (let [by-date (reverse (sort-by #(get % "last-seen") videos))]
-    (map #(let [id (get % "video-id")]
-            {:id id :title (get % "title" id) :count (get % "count")})
-         by-date)))
-(defn youtubes-list [id]
-  {:body (if (= id "list")
-           (youtubes-history (db/youtube-get-all))
-           (youtubes-playlist (db/youtube-get-list id)))})
+  (map #(let [id (get % "video-id")]
+          {:id id :title (get % "title" id) :count (get % "count")})
+       videos))
+(defn youtubes-list [cmd]
+  (let [[group action param] (let [elems (string/split cmd #" ")]
+                               (concat (when (= (count elems) 1) ["list" "show"]) elems))]
+    {:body
+     (if (= group "list")
+       (condp = action
+         "show" (youtubes-playlist
+                 (if (= param "history")
+                   (reverse (sort-by #(get % "last-seen") (db/youtube-get-all)))
+                   (db/youtube-list-get param)))))}))
 
 (defn youtubes-watch [video]
   (incr-video-count video)

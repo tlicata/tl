@@ -13,6 +13,9 @@
         today (.getTime (. java.util.Calendar getInstance))]
     (.format sdf today)))
 
+
+;; youtube history
+
 (def youtube-key "youtube:")
 
 (defn youtube-played [video-id]
@@ -30,10 +33,15 @@
                 (conj video "video-id" (string/replace key youtube-key "")))
               videos keys))))
 
-(defn youtube-get-list [id]
-  [])
-
 (defn youtube-update-title [ids-and-titles]
   (wcar* (mapv (fn [[id title]]
                  (car/hset (str youtube-key id) "title" title))
                ids-and-titles)))
+
+;; playlists
+
+(defn youtube-list-add [name video])
+(defn youtube-list-create [name])
+(defn youtube-list-get [name]
+  [{"video-id" "some_id"  "title" "awesome pants"}
+   {"video-id" "other_id" "title" "awesome sauce"}])
