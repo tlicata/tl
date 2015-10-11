@@ -97,7 +97,7 @@ tl.youtubes = (function () {
         };
 
         // search
-        return function (query, callback) {
+        return function (query) {
             remove();
 
             if (isCommand(query)) {
@@ -114,22 +114,9 @@ tl.youtubes = (function () {
                         type: "video"
                     },
                     dataType: "jsonp",
-                    error: function () {
-                        renderError();
-                        if (callback) {
-                            callback(false);
-                        }
-                    },
+                    error: renderError,
                     success: function (json) {
-                        var success = true;
-                        try {
-                            renderSuccess(clean(json), query);
-                        } catch (e) {
-                            success = false;
-                        }
-                        if (callback) {
-                            callback(success);
-                        }
+                        renderSuccess(clean(json), query);
                     },
                     timeout: 5000,
                     url: searchUrl
