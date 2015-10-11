@@ -98,31 +98,39 @@ tl.youtubes = (function () {
             render($("<span/>").text("Something went wrong"));
         };
 
+        // Take appropriate action based on search input.
+        var handleCommand = function (query) {
+            $.get("/youtubes/list", {cmd: query.slice(1)}, function (json) {
+                render(html(json, query));
+            });
+        };
+        var handleSearch = function (query) {
+            $.ajax({
+                data: {
+                    q: query,
+                    key: "AIzaSyBDSymHCx1ESegvp09VMSFT6e9vdPUtkrc",
+                    maxResults: 50,
+                    part: "snippet",
+                    type: "video"
+                },
+                dataType: "jsonp",
+                error: renderError,
+                success: function (json) {
+                    renderSuccess(clean(json), query);
+                },
+                timeout: 5000,
+                url: searchUrl
+            });
+        };
+
         // search
         return function (query) {
             remove();
 
             if (isCommand(query)) {
-                $.get("/youtubes/list", {cmd: query.slice(1)}, function (json) {
-                    render(html(json, query));
-                });
+                handleCommand(query);
             } else if (query) {
-                $.ajax({
-                    data: {
-                        q: query,
-                        key: "AIzaSyBDSymHCx1ESegvp09VMSFT6e9vdPUtkrc",
-                        maxResults: 50,
-                        part: "snippet",
-                        type: "video"
-                    },
-                    dataType: "jsonp",
-                    error: renderError,
-                    success: function (json) {
-                        renderSuccess(clean(json), query);
-                    },
-                    timeout: 5000,
-                    url: searchUrl
-                });
+                handleSearch(query);
             }
         };
     }());
