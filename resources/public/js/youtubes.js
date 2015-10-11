@@ -26,6 +26,10 @@ tl.youtubes = (function () {
     var searchDiv = null;
     var searchUrl = "https://www.googleapis.com/youtube/v3/search";
 
+    var isCommand = function (query) {
+        return query.charAt(0) === ":";
+    };
+
     var search = (function () {
 
         var clean = function (json) {
@@ -96,7 +100,7 @@ tl.youtubes = (function () {
         return function (query, callback) {
             remove();
 
-            if (query.charAt(0) === ":") {
+            if (isCommand(query)) {
                 $.get("/youtubes/list", {cmd: query.slice(1)}, function (json) {
                     render(html(json, query));
                 });
