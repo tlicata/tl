@@ -35,15 +35,17 @@ tl.youtubes = (function () {
         var clean = function (json) {
             var items = json && json.items;
             var videos = [];
-            for (var i = 0; i < items.length; i++) {
-                var vid = items[i];
-                var snip = vid && vid.snippet;
-                var thumb = snip.thumbnails && snip.thumbnails.default;
-                videos.push({
-                    id: vid.id && vid.id.videoId,
-                    thumb:  thumb && thumb.url,
-                    title: snip && snip.title
-                });
+            if (items) {
+                for (var i = 0; i < items.length; i++) {
+                    var vid = items[i];
+                    var snip = vid && vid.snippet;
+                    var thumb = snip.thumbnails && snip.thumbnails.default;
+                    videos.push({
+                        id: vid.id && vid.id.videoId,
+                        thumb:  thumb && thumb.url,
+                        title: snip && snip.title
+                    });
+                }
             }
             return videos;
         };
