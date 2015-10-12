@@ -26,11 +26,29 @@ tl.youtubes = (function () {
     var searchDiv = null;
     var searchUrl = "https://www.googleapis.com/youtube/v3/search";
 
+    var sliceCommand = function (query) {
+        return query.slice(1);  // commands start with ":"
+    };
     var isCommand = function (query) {
         return query.charAt(0) === ":";
     };
+    var isLocalCommand = function (query) {
+        return sliceCommand(query) === "buttons";
+    };
 
     var search = (function () {
+
+        var history = (function () {
+            var last = null;
+            return {
+                push: function (previous) {
+                    last = previous;
+                },
+                last: function () {
+                    return last;
+                }
+            };
+        })();
 
         var clean = function (json) {
             var items = json && json.items;
@@ -98,11 +116,22 @@ tl.youtubes = (function () {
             render($("<span/>").text("Something went wrong"));
         };
 
+        var showButtons = function () {
+            console.log("show buttons");
+        };
+
         // Take appropriate action based on search input.
         var handleCommand = function (query) {
-            $.get("/youtubes/list", {cmd: query.slice(1)}, function (json) {
-                render(html(json, query));
-            });
+            var cmd = sliceCommand(query);
+            if (cmd === "buttons") {
+                showButtons();
+                return false; // don't add to history
+            } else {
+                $.get("/youtubes/list", {cmd: cmd}, function (json) {
+                    render(html(json, query));
+                });
+                return true; // add to history
+            }
         };
         var handleSearch = function (query) {
             $.ajax({
@@ -121,17 +150,21 @@ tl.youtubes = (function () {
                 timeout: 5000,
                 url: searchUrl
             });
+            return true; // add to history
         };
 
         // search
         return function (query) {
-            remove();
-
-            if (isCommand(query)) {
-                handleCommand(query);
-            } else if (query) {
-                handleSearch(query);
+            var addToHistory = true;
+            if (query) {
+                var handler = isCommand(query) ? handleCommand : handleSearch;
+                addToHistory = handler(query);
             }
+            if (addToHistory) {
+                history.push(query);
+                remove();
+            }
+            return history.last();
         };
     }());
 
@@ -143,13 +176,14 @@ tl.youtubes = (function () {
 
         // Bind event handlers to the search form.
         searchDiv.find("form").submit(function () {
-            var query = encode(queryInput.val());
+            var query = queryInput.val();
             // If browser supports "hashchange" will rely on that to
-            // trigger the search, otherwise search manually.
-            if ("onhashchange" in window) {
-                window.location.hash = query;
+            // trigger the search, otherwise search manually, unless
+            // it's a command b/c we don't want commands in the url.
+            if ("onhashchange" in window && !isLocalCommand(query)) {
+                window.location.hash = encode(query);
             } else {
-                search(query);
+                queryInput.val(search(query));
             }
             return false;
         });
@@ -157,22 +191,17 @@ tl.youtubes = (function () {
         // The hash represents a search. If one exists,
         // then load search results for it. Also, use
         // it to pre-populate the search box.
-        var getHash = function () {
-            return decode(window.location.hash.substr(1));
+        var updateFromHash = function () {
+            var hash = decode(window.location.hash.substr(1));
+            return queryInput.val(search(hash));
         };
         if (window.location.hash) {
-            var hash = getHash();
-            search(hash);
-            queryInput.val(hash).select();
+            updateFromHash().select();
         }
 
         // If browser supports it, listen for the hash change event
         // and update the search results.
-        window.addEventListener("hashchange", function () {
-            var hash = getHash();
-            queryInput.val(decode(hash));
-            search(hash);
-        });
+        window.addEventListener("hashchange", updateFromHash);
     });
 
     // YouTube IFrame API expects this function to be defined.
