@@ -82,16 +82,51 @@ tl.youtubes = (function () {
                     }
                     var link = $("<a/>")
                         .attr("href", vid.id.concat("#", query))
-                        .html(vid.title).addClass("btn");
+                        .html(vid.title).addClass("btn vid-link");
                     outer.append($("<tr/>").append(
                         $("<td/>").append(left),
-                        $("<td/>").append(link)
+                        $("<td/>").append(link),
+                        $("<td/>").addClass("plusMinus")
                     ));
                 });
             } else {
                 outer.html($("<tr/>").append($("<td/>").text("No results found")));
             }
             return outer;
+        };
+
+        var showButtons = function (list) {
+            var isPlus = list === "history";
+            $(".plusMinus").each(function (idx, row) {
+                var btn = $("<a/>")
+                    .addClass("btn")
+                    .text(isPlus ? "+" : "-")
+                    .on("click", function (e) {
+                        var td = $(row).parent();
+                        var link = td.find(".vid-link").attr("href");
+                        var id = link.substring(0, link.indexOf("#"));
+                        if (id) {
+                            var btn = $(e.target);
+                            var cmd = isPlus ? "add" : "remove";
+                            btn.html("...");
+                            $.ajax({
+                                url: "/youtubes/list",
+                                data: {cmd: ["list", cmd, "sharib", id].join(" ")},
+                                success: function (data) {
+                                    if (isPlus) {
+                                        btn.html("X");
+                                    } else {
+                                        td.remove();
+                                    }
+                                },
+                                error: function (err) {
+                                    btn.html(isPlus ? "+" : "-");
+                                }
+                            });
+                        }
+                    });
+                $(row).html(btn);
+            });
         };
 
         // Delete html of current search results.
@@ -116,15 +151,11 @@ tl.youtubes = (function () {
             render($("<span/>").text("Something went wrong"));
         };
 
-        var showButtons = function () {
-            console.log("show buttons");
-        };
-
         // Take appropriate action based on search input.
-        var handleCommand = function (query) {
+        var handleCommand = function (query, previous) {
             var cmd = sliceCommand(query);
             if (cmd === "buttons") {
-                showButtons();
+                showButtons(sliceCommand(previous));
                 return false; // don't add to history
             } else {
                 $.get("/youtubes/list", {cmd: cmd}, function (json) {
@@ -158,7 +189,7 @@ tl.youtubes = (function () {
             var addToHistory = true;
             if (query) {
                 var handler = isCommand(query) ? handleCommand : handleSearch;
-                addToHistory = handler(query);
+                addToHistory = handler(query, history.last());
             }
             if (addToHistory) {
                 history.push(query);

@@ -7,6 +7,7 @@
                    {:pool {} :spec {:host "localhost" :port 6379}}))
 
 (defmacro wcar* [& body] `(car/wcar server-conn ~@body))
+(defmacro wcarv* [& body] `(car/wcar server-conn :as-pipeline ~@body))
 
 (defn get-today []
   (let [sdf (java.text.SimpleDateFormat. "yyyyMMdd")
@@ -24,14 +25,15 @@
     (wcar* (car/hincrby key "count" 1)
            (car/hsetnx key "first-seen" today)
            (car/hset key "last-seen" today))))
-
-(defn youtube-get-all []
-  (let [keys (wcar* (car/keys (str youtube-key "*")))
-        videos (wcar* (mapv car/hgetall keys))]
+(defn youtube-get-keys [keys]
+  (let [videos (wcarv* (mapv car/hgetall keys))]
     (map (partial apply hash-map)
          (map (fn [video key]
                 (conj video "video-id" (string/replace key youtube-key "")))
               videos keys))))
+(defn youtube-get-all []
+  (let [keys (wcar* (car/keys (str youtube-key "*")))]
+    (youtube-get-keys keys)))
 
 (defn youtube-update-title [ids-and-titles]
   (wcar* (mapv (fn [[id title]]
@@ -40,8 +42,13 @@
 
 ;; playlists
 
-(defn youtube-list-add [name video])
-(defn youtube-list-create [name])
+(def playlist-key "playlist:")
+
+(defn youtube-list-add [name video]
+  (wcar* (car/lpush (str playlist-key name) video)))
+(defn youtube-list-remove [name video]
+  (wcar* (car/lrem (str playlist-key name) 0 video)))
 (defn youtube-list-get [name]
-  [{"video-id" "some_id"  "title" "awesome pants"}
-   {"video-id" "other_id" "title" "awesome sauce"}])
+  (let [ids (wcar* (car/lrange (str playlist-key name) 0 -1))
+        keys (map (partial str youtube-key) ids)]
+    (youtube-get-keys keys)))

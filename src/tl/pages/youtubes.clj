@@ -36,16 +36,25 @@
   (map #(let [id (get % "video-id")]
           {:id id :title (get % "title" id) :count (get % "count")})
        videos))
+(defn youtubes-playlist-add [list-name video-id]
+  (db/youtube-list-add list-name video-id)
+  {:body "OK"})
+(defn youtubes-playlist-remove [list-name video-id]
+  (db/youtube-list-remove list-name video-id)
+  {:body "OK"})
 (defn youtubes-list [cmd]
-  (let [[group action param] (let [elems (string/split cmd #" ")]
-                               (concat (when (= (count elems) 1) ["list" "show"]) elems))]
+  (let [[group action & params] (let [elems (string/split cmd #" ")]
+                                  (concat (when (= (count elems) 1) ["list" "show"]) elems))]
     {:body
      (if (= group "list")
        (condp = action
          "show" (youtubes-playlist
-                 (if (= param "history")
-                   (reverse (sort-by #(get % "last-seen") (db/youtube-get-all)))
-                   (db/youtube-list-get param)))))}))
+                 (let [list-name (first params)]
+                   (if (= list-name "history")
+                     (reverse (sort-by #(get % "last-seen") (db/youtube-get-all)))
+                     (db/youtube-list-get list-name))))
+         "add" (apply youtubes-playlist-add params)
+         "remove" (apply youtubes-playlist-remove params)))}))
 
 (defn youtubes-watch [video]
   (incr-video-count video)
