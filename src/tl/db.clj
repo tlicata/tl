@@ -1,5 +1,6 @@
 (ns tl.db
-  (:require [clojure.string :as string]
+  (:require [clojure.data.json :as json]
+            [clojure.string :as string]
             [taoensso.carmine :as car :refer (wcar)]))
 
 (def server-conn (if-let [redis-cloud (System/getenv "REDISCLOUD_URL")]
@@ -44,11 +45,26 @@
 
 (def playlist-key "playlist:")
 
-(defn youtube-list-add [name video]
-  (wcar* (car/lpush (str playlist-key name) video)))
-(defn youtube-list-remove [name video]
-  (wcar* (car/lrem (str playlist-key name) 0 video)))
 (defn youtube-list-get [name]
-  (let [ids (wcar* (car/lrange (str playlist-key name) 0 -1))
+  (when-let [data (wcar* (car/get (str playlist-key name)))]
+    (json/read-str data)))
+(defn youtube-list-show [name]
+  (let [ids (youtube-list-get name)
         keys (map (partial str youtube-key) ids)]
     (youtube-get-keys keys)))
+(defn youtube-list-set [name videos]
+  (wcar* (car/set (str playlist-key name) (json/write-str videos))))
+(defn youtube-list-add [name video]
+  (youtube-list-set name (conj (youtube-list-get name) video)))
+(defn youtube-list-remove
+  ([name video]
+   (youtube-list-remove name video 1))
+  ([name video count]
+   (youtube-list-remove name video count []))
+  ([name video count replace]
+   (let [parts (split-with (partial not= video) (youtube-list-get name))
+         rest (second parts)
+         swap (if (= replace :swap) (reverse (take count rest)) replace)]
+     (youtube-list-set name (concat (first parts) swap (drop count rest))))))
+(defn youtube-list-demote [name video]
+  (youtube-list-remove name video 2 :swap))

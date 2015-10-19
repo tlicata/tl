@@ -98,13 +98,16 @@ tl.youtubes = (function () {
         var showButtons = function (list) {
             var isPlus = list === "history";
             $(".plusMinus").each(function (idx, row) {
+                var tr = $(row).parent();
+                var getVideoId = function () {
+                    var link = tr.find(".vid-link").attr("href");
+                    return link.substring(0, link.indexOf("#"));
+                };
                 var btn = $("<a/>")
                     .addClass("btn")
                     .text(isPlus ? "+" : "-")
                     .on("click", function (e) {
-                        var td = $(row).parent();
-                        var link = td.find(".vid-link").attr("href");
-                        var id = link.substring(0, link.indexOf("#"));
+                        var id = getVideoId();
                         if (id) {
                             var btn = $(e.target);
                             var cmd = isPlus ? "add" : "remove";
@@ -116,7 +119,7 @@ tl.youtubes = (function () {
                                     if (isPlus) {
                                         btn.html("X");
                                     } else {
-                                        td.remove();
+                                        tr.remove();
                                     }
                                 },
                                 error: function (err) {
@@ -125,7 +128,23 @@ tl.youtubes = (function () {
                             });
                         }
                     });
-                $(row).html(btn);
+                var demote = isPlus ? null : $("<a/>")
+                    .addClass("btn")
+                    .text("↓")
+                    .on("click", function (e) {
+                        $.ajax({
+                            url: "/youtubes/list",
+                            data: {cmd: ["list", "demote", "sharib", getVideoId()].join(" ")},
+                            success: function (data) {
+                                var next = tr.next();
+                                if (next.length !== 0) {
+                                    tr.before(next);
+                                }
+                            }
+                        });
+                    });
+
+                $(row).empty().append(demote, btn);
             });
         };
 

@@ -42,6 +42,9 @@
 (defn youtubes-playlist-remove [list-name video-id]
   (db/youtube-list-remove list-name video-id)
   {:body "OK"})
+(defn youtubes-playlist-demote [list-name video-id]
+  (db/youtube-list-demote list-name video-id)
+  {:body "OK"})
 (defn youtubes-list [cmd]
   (let [[group action & params] (let [elems (string/split cmd #" ")]
                                   (concat (when (= (count elems) 1) ["list" "show"]) elems))]
@@ -52,9 +55,10 @@
                  (let [list-name (first params)]
                    (if (= list-name "history")
                      (reverse (sort-by #(get % "last-seen") (db/youtube-get-all)))
-                     (db/youtube-list-get list-name))))
+                     (db/youtube-list-show list-name))))
          "add" (apply youtubes-playlist-add params)
-         "remove" (apply youtubes-playlist-remove params)))}))
+         "remove" (apply youtubes-playlist-remove params)
+         "demote" (apply youtubes-playlist-demote params)))}))
 
 (defn youtubes-watch [video]
   (incr-video-count video)
