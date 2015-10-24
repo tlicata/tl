@@ -36,6 +36,32 @@ tl.youtubes = (function () {
         return sliceCommand(query) === "buttons";
     };
 
+    var playlist = (function () {
+        var list = null;
+        var ingest = function (json) {
+            list = json.map(function (vid) {
+                return vid.id;
+            });
+        };
+        var next = function (current) {
+            if (list) {
+                var index = list.indexOf(current);
+                if (index !== -1) {
+                    index = index + 1;
+                    if (index >= list.length) {
+                        index = 0
+                    }
+                    return list[index];
+                }
+            }
+        };
+
+        return {
+            ingest: ingest,
+            next: next
+        };
+    })();
+
     var search = (function () {
 
         var history = (function () {
@@ -178,6 +204,7 @@ tl.youtubes = (function () {
                 return false; // don't add to history
             } else {
                 $.get("/youtubes/list", {cmd: cmd}, function (json) {
+                    playlist.ingest(json);
                     render(html(json, query));
                 });
                 return true; // add to history
@@ -270,8 +297,16 @@ tl.youtubes = (function () {
             events: {
                 onStateChange: function (event) {
                     if (event.target.getPlayerState() === 0) {
-                        event.target.playVideo();
-                        $.get(window.location.pathname + "/watch");
+                        var l = window.location;
+                        var vidId = l.pathname.match(/.*\/(\w+)$/)[1];
+                        var nextId = vidId ? playlist.next(vidId) : null;
+                        if (nextId) {
+                            // Go to next song in the list.
+                            window.location.pathname = l.pathname.replace(vidId, nextId);
+                        } else {
+                            event.target.playVideo();
+                            $.get(window.location.pathname + "/watch");
+                        }
                     }
                 }
             }
