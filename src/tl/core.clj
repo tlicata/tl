@@ -2,6 +2,7 @@
   (:use [compojure.core :only [defroutes GET]]
         [ring.middleware.file :only [wrap-file]]
         [ring.middleware.file-info :only [wrap-file-info]]
+        [ring.middleware.json :only [wrap-json-response]]
         [ring.middleware.params :only [wrap-params]]
         [ring.middleware.session :only [wrap-session]]
         [tl.jobs :only [jobs-page]]
@@ -11,7 +12,7 @@
         [tl.pages.notes :only [notes-page]]
         [tl.pages.photos :only [photos-page]]
         [tl.pages.tictactoe :only [tictactoe-page]]
-        [tl.pages.youtubes :only [youtubes-list youtubes-list-html youtubes-page youtubes-watch]])
+        [tl.pages.youtubes :only [youtubes-list youtubes-page youtubes-watch]])
   (:require [compojure.route :as route]
             [ring.adapter.jetty :as jetty]
             [tl.jobs :as jobs])
@@ -27,8 +28,7 @@
   (GET "/photos/:id" [id] (photos-page id))
   (GET "/tictactoe/" []  (tictactoe-page))
   (GET "/youtubes/" [query] (youtubes-page nil query))
-  (GET "/youtubes/list" [] (youtubes-list))
-  (GET "/youtubes/list.html" [] (youtubes-list-html))
+  (GET "/youtubes/list" [cmd] (youtubes-list cmd))
   (GET "/youtubes/:video" [video query] (youtubes-page video query))
   (GET "/youtubes/:video/watch" [video] (youtubes-watch video)))
 
@@ -45,6 +45,7 @@
          wrap-session
          (wrap-file "resources/public")
          wrap-file-info
+         wrap-json-response
          wrap-current-link))
 
 (defn -main []

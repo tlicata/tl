@@ -26,20 +26,70 @@ tl.youtubes = (function () {
     var searchDiv = null;
     var searchUrl = "https://www.googleapis.com/youtube/v3/search";
 
+    var sliceCommand = function (query) {
+        return query.slice(1);  // commands start with ":"
+    };
+    var isCommand = function (query) {
+        return query.charAt(0) === ":";
+    };
+    var isLocalCommand = function (query) {
+        return sliceCommand(query) === "buttons";
+    };
+
+    var playlist = (function () {
+        var list = null;
+        var ingest = function (json) {
+            list = json.map(function (vid) {
+                return vid.id;
+            });
+        };
+        var next = function (current) {
+            if (list) {
+                var index = list.indexOf(current);
+                if (index !== -1) {
+                    index = index + 1;
+                    if (index >= list.length) {
+                        index = 0
+                    }
+                    return list[index];
+                }
+            }
+        };
+
+        return {
+            ingest: ingest,
+            next: next
+        };
+    })();
+
     var search = (function () {
+
+        var history = (function () {
+            var last = null;
+            return {
+                push: function (previous) {
+                    last = previous;
+                },
+                last: function () {
+                    return last;
+                }
+            };
+        })();
 
         var clean = function (json) {
             var items = json && json.items;
             var videos = [];
-            for (var i = 0; i < items.length; i++) {
-                var vid = items[i];
-                var snip = vid && vid.snippet;
-                var thumb = snip.thumbnails && snip.thumbnails.default;
-                videos.push({
-                    id: vid.id && vid.id.videoId,
-                    thumb:  thumb && thumb.url,
-                    title: snip && snip.title
-                });
+            if (items) {
+                for (var i = 0; i < items.length; i++) {
+                    var vid = items[i];
+                    var snip = vid && vid.snippet;
+                    var thumb = snip.thumbnails && snip.thumbnails.default;
+                    videos.push({
+                        id: vid.id && vid.id.videoId,
+                        thumb:  thumb && thumb.url,
+                        title: snip && snip.title
+                    });
+                }
             }
             return videos;
         };
@@ -48,19 +98,80 @@ tl.youtubes = (function () {
             var outer = $("<table/>").addClass("table table-striped");
             if (videos.length) {
                 $.each(videos, function (idx, vid) {
-                    var img = $("<img/>").attr("src", vid.thumb);
+                    var left = null;
+                    if (vid.thumb) {
+                        left = $("<img/>").attr("src", vid.thumb);
+                    } else if (vid.count) {
+                        left = $("<span/>").text(vid.count);
+                    } else {
+                        left = $("<span/>").text(idx + 1);
+                    }
                     var link = $("<a/>")
                         .attr("href", vid.id.concat("#", query))
-                        .html(vid.title);
+                        .html(vid.title).addClass("btn vid-link");
                     outer.append($("<tr/>").append(
-                        $("<td/>").append(img).css("width", "130px"),
-                        $("<td/>").append(link).css("vertical-align", "middle")
+                        $("<td/>").append(left),
+                        $("<td/>").append(link),
+                        $("<td/>").addClass("plusMinus")
                     ));
                 });
             } else {
-                outer.html($("<p/>").text("No results found"));
+                outer.html($("<tr/>").append($("<td/>").text("No results found")));
             }
             return outer;
+        };
+
+        var showButtons = function (list) {
+            var isPlus = list === "history";
+            $(".plusMinus").each(function (idx, row) {
+                var tr = $(row).parent();
+                var getVideoId = function () {
+                    var link = tr.find(".vid-link").attr("href");
+                    return link.substring(0, link.indexOf("#"));
+                };
+                var btn = $("<a/>")
+                    .addClass("btn")
+                    .text(isPlus ? "+" : "-")
+                    .on("click", function (e) {
+                        var id = getVideoId();
+                        if (id) {
+                            var btn = $(e.target);
+                            var cmd = isPlus ? "add" : "remove";
+                            btn.html("...");
+                            $.ajax({
+                                url: "/youtubes/list",
+                                data: {cmd: ["list", cmd, "sharib", id].join(" ")},
+                                success: function (data) {
+                                    if (isPlus) {
+                                        btn.html("X");
+                                    } else {
+                                        tr.remove();
+                                    }
+                                },
+                                error: function (err) {
+                                    btn.html(isPlus ? "+" : "-");
+                                }
+                            });
+                        }
+                    });
+                var demote = isPlus ? null : $("<a/>")
+                    .addClass("btn")
+                    .text("↓")
+                    .on("click", function (e) {
+                        $.ajax({
+                            url: "/youtubes/list",
+                            data: {cmd: ["list", "demote", "sharib", getVideoId()].join(" ")},
+                            success: function (data) {
+                                var next = tr.next();
+                                if (next.length !== 0) {
+                                    tr.before(next);
+                                }
+                            }
+                        });
+                    });
+
+                $(row).empty().append(demote, btn);
+            });
         };
 
         // Delete html of current search results.
@@ -85,45 +196,52 @@ tl.youtubes = (function () {
             render($("<span/>").text("Something went wrong"));
         };
 
-        // search
-        return function (query, callback) {
-            remove();
-
-            if (query === "list") {
-                $.get("/youtubes/list.html", function (html) {
-                    render(html);
+        // Take appropriate action based on search input.
+        var handleCommand = function (query, previous) {
+            var cmd = sliceCommand(query);
+            if (cmd === "buttons") {
+                showButtons(sliceCommand(previous));
+                return false; // don't add to history
+            } else {
+                $.get("/youtubes/list", {cmd: cmd}, function (json) {
+                    playlist.ingest(json);
+                    render(html(json, query));
                 });
-            } else if (query) {
-                $.ajax({
-                    data: {
-                        q: query,
-                        key: "AIzaSyBDSymHCx1ESegvp09VMSFT6e9vdPUtkrc",
-                        maxResults: 50,
-                        part: "snippet",
-                        type: "video"
-                    },
-                    dataType: "jsonp",
-                    error: function () {
-                        renderError();
-                        if (callback) {
-                            callback(false);
-                        }
-                    },
-                    success: function (json) {
-                        var success = true;
-                        try {
-                            renderSuccess(clean(json), query);
-                        } catch (e) {
-                            success = false;
-                        }
-                        if (callback) {
-                            callback(success);
-                        }
-                    },
-                    timeout: 5000,
-                    url: searchUrl
-                });
+                return true; // add to history
             }
+        };
+        var handleSearch = function (query) {
+            $.ajax({
+                data: {
+                    q: query,
+                    key: "AIzaSyBDSymHCx1ESegvp09VMSFT6e9vdPUtkrc",
+                    maxResults: 50,
+                    part: "snippet",
+                    type: "video"
+                },
+                dataType: "jsonp",
+                error: renderError,
+                success: function (json) {
+                    renderSuccess(clean(json), query);
+                },
+                timeout: 5000,
+                url: searchUrl
+            });
+            return true; // add to history
+        };
+
+        // search
+        return function (query) {
+            var addToHistory = true;
+            if (query) {
+                var handler = isCommand(query) ? handleCommand : handleSearch;
+                addToHistory = handler(query, history.last());
+            }
+            if (addToHistory) {
+                history.push(query);
+                remove();
+            }
+            return history.last();
         };
     }());
 
@@ -135,13 +253,14 @@ tl.youtubes = (function () {
 
         // Bind event handlers to the search form.
         searchDiv.find("form").submit(function () {
-            var query = encode(queryInput.val());
+            var query = queryInput.val();
             // If browser supports "hashchange" will rely on that to
-            // trigger the search, otherwise search manually.
-            if ("onhashchange" in window) {
-                window.location.hash = query;
+            // trigger the search, otherwise search manually, unless
+            // it's a command b/c we don't want commands in the url.
+            if ("onhashchange" in window && !isLocalCommand(query)) {
+                window.location.hash = encode(query);
             } else {
-                search(query);
+                queryInput.val(search(query));
             }
             return false;
         });
@@ -149,22 +268,17 @@ tl.youtubes = (function () {
         // The hash represents a search. If one exists,
         // then load search results for it. Also, use
         // it to pre-populate the search box.
-        var getHash = function () {
-            return decode(window.location.hash.substr(1));
+        var updateFromHash = function () {
+            var hash = decode(window.location.hash.substr(1));
+            return queryInput.val(search(hash));
         };
         if (window.location.hash) {
-            var hash = getHash();
-            search(hash);
-            queryInput.val(hash).select();
+            updateFromHash().select();
         }
 
         // If browser supports it, listen for the hash change event
         // and update the search results.
-        window.addEventListener("hashchange", function () {
-            var hash = getHash();
-            queryInput.val(decode(hash));
-            search(hash);
-        });
+        window.addEventListener("hashchange", updateFromHash);
     });
 
     // YouTube IFrame API expects this function to be defined.
@@ -183,8 +297,16 @@ tl.youtubes = (function () {
             events: {
                 onStateChange: function (event) {
                     if (event.target.getPlayerState() === 0) {
-                        event.target.playVideo();
-                        $.get(window.location.pathname + "/watch");
+                        var l = window.location;
+                        var vidId = l.pathname.match(/.*\/(\w+)$/)[1];
+                        var nextId = vidId ? playlist.next(vidId) : null;
+                        if (nextId) {
+                            // Go to next song in the list.
+                            window.location.pathname = l.pathname.replace(vidId, nextId);
+                        } else {
+                            event.target.playVideo();
+                            $.get(window.location.pathname + "/watch");
+                        }
                     }
                 }
             }

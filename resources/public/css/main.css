@@ -90,3 +90,9 @@ pre code {
     margin-right: 10px;
     width: 8em;
 }
+#youtubes-search + #search-results td {
+    vertical-align: middle;
+}
+#youtubes-search + #search-results img {
+    width: 130px;
+}

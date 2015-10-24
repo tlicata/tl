@@ -16,7 +16,7 @@ Heroku Toolbelt
 (MacOS)
 
     brew install heroku-toolbelt
-    gem install forman
+    gem install foreman
 
 Leiningen
 

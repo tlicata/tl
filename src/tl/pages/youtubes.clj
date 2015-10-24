@@ -32,18 +32,33 @@
   (pagify (youtubes video query)))
 
 
-(defn youtubes-list-table []
-  (let [videos (reverse (sort-by #(get % "last-seen") (db/youtube-get-all)))
-        rows (mapv #(let [id (get % "video-id")]
-                      [:tr [:td (link-to {:class "btn"} id (get % "title" id))] [:td (get % "count")]])
-                   videos)]
-    `[:table {:class "table table-striped"} [:tr [:th "Title"] [:th "Views"]] ~@rows]))
-(defn youtubes-list []
-  (pagify
-   {:title ["List all played Youtubes"]
-    :body [(youtubes-list-table)]}))
-(defn youtubes-list-html []
-  (html (youtubes-list-table)))
+(defn youtubes-playlist [videos]
+  (map #(let [id (get % "video-id")]
+          {:id id :title (get % "title" id) :count (get % "count")})
+       videos))
+(defn youtubes-playlist-add [list-name video-id]
+  (db/youtube-list-add list-name video-id)
+  {:body "OK"})
+(defn youtubes-playlist-remove [list-name video-id]
+  (db/youtube-list-remove list-name video-id)
+  {:body "OK"})
+(defn youtubes-playlist-demote [list-name video-id]
+  (db/youtube-list-demote list-name video-id)
+  {:body "OK"})
+(defn youtubes-list [cmd]
+  (let [[group action & params] (let [elems (string/split cmd #" ")]
+                                  (concat (when (= (count elems) 1) ["list" "show"]) elems))]
+    {:body
+     (if (= group "list")
+       (condp = action
+         "show" (youtubes-playlist
+                 (let [list-name (first params)]
+                   (if (= list-name "history")
+                     (reverse (sort-by #(get % "last-seen") (db/youtube-get-all)))
+                     (db/youtube-list-show list-name))))
+         "add" (apply youtubes-playlist-add params)
+         "remove" (apply youtubes-playlist-remove params)
+         "demote" (apply youtubes-playlist-demote params)))}))
 
 (defn youtubes-watch [video]
   (incr-video-count video)
