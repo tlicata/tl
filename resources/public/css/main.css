@@ -96,3 +96,7 @@ pre code {
 #youtubes-search + #search-results img {
     width: 130px;
 }
+#youtubes-search + #search-results a.current {
+    color: white;
+    cursor: default;
+}

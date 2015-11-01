@@ -36,6 +36,12 @@ tl.youtubes = (function () {
         return sliceCommand(query) === "buttons";
     };
 
+    var getIdFromUrl = function () {
+        var path = window.location.pathname;
+        var capture = path.match(/.*\/(\w+)$/);
+        return capture && capture[1];
+    };
+
     var playlist = (function () {
         var list = null;
         var ingest = function (json) {
@@ -97,6 +103,7 @@ tl.youtubes = (function () {
         var html = function (videos, query) {
             var outer = $("<table/>").addClass("table table-striped");
             if (videos.length) {
+                var currentId = getIdFromUrl();
                 $.each(videos, function (idx, vid) {
                     var left = null;
                     if (vid.thumb) {
@@ -109,6 +116,9 @@ tl.youtubes = (function () {
                     var link = $("<a/>")
                         .attr("href", vid.id.concat("#", query))
                         .html(vid.title).addClass("btn vid-link");
+                    if (vid.id === currentId) {
+                        link.addClass("current");
+                    }
                     outer.append($("<tr/>").append(
                         $("<td/>").append(left),
                         $("<td/>").append(link),
