@@ -8,7 +8,6 @@
         [tl.jobs :only [jobs-page]]
         [tl.middleware :only [wrap-current-link]]
         [tl.pages.home :only [home]]
-        [tl.pages.maps :only [maps-page]]
         [tl.pages.notes :only [notes-page]]
         [tl.pages.photos :only [photos-page]]
         [tl.pages.tictactoe :only [tictactoe-page]]
@@ -21,8 +20,6 @@
 (defroutes tl-routes
   (GET "/" [] (home))
   (GET "/jobs/" [] (jobs-page))
-  (GET "/maps/" [] (maps-page))
-  (GET "/maps/:kind" [kind] (maps-page kind))
   (GET "/notes/" [] (notes-page))
   (GET "/photos/" [] (photos-page))
   (GET "/photos/:id" [id] (photos-page id))

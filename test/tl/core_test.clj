@@ -4,8 +4,6 @@
   (:use [ring.mock.request]))
 
 (def valid-routes ["/"
-                   "/maps/"
-                   "/maps/google"
                    "/photos/"
                    "/photos/end-of-era"
                    "/youtubes/"
@@ -14,8 +12,6 @@
 (def invalid-routes ["/contact/"
                      "/garbage"
                      "/garbage/"
-                     "/maps/garbage"
-                     "/maps/garbage/"
                      "/maps/polymaps"
                      "/photos/garbage"])
 
