@@ -6,7 +6,7 @@
   (is (= (blurb [:p "Hi Mom"])
          [:div.container
           [:div.row
-           [:div.col-md-8.col-md-offset-2.well
+           [:div.col-md-8.col-md-offset-2
             [:p "Hi Mom"]]]]))
   (is (= (blurb nil)
          nil))
