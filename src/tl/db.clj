@@ -7,8 +7,9 @@
                    {:pool {} :spec {:uri redis-cloud}}
                    {:pool {} :spec {:host "localhost" :port 6379}}))
 
-(defmacro wcar* [& body] `(car/wcar server-conn ~@body))
-(defmacro wcarv* [& body] `(car/wcar server-conn :as-pipeline ~@body))
+(defmacro safely [form] `(try ~form (catch Exception _# nil)))
+(defmacro wcar* [& body] `(safely (car/wcar server-conn ~@body)))
+(defmacro wcarv* [& body] `(safely (car/wcar server-conn :as-pipeline ~@body)))
 
 (defn get-today []
   (let [sdf (java.text.SimpleDateFormat. "yyyyMMdd")
