@@ -54,7 +54,7 @@
          "show" (youtubes-playlist
                  (let [list-name (first params)]
                    (if (= list-name "history")
-                     (reverse (sort-by #(get % "last-seen") (db/youtube-get-all)))
+                     (reverse (sort-by #(get % "first-seen") (db/youtube-get-all)))
                      (db/youtube-list-show list-name))))
          "add" (apply youtubes-playlist-add params)
          "remove" (apply youtubes-playlist-remove params)
