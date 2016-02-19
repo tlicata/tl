@@ -38,7 +38,7 @@ tl.youtubes = (function () {
 
     var getIdFromUrl = function () {
         var path = window.location.pathname;
-        var capture = path.match(/.*\/(\w+)$/);
+        var capture = path.match(/.*\/([A-Za-z0-9_-]+)$/);
         return capture && capture[1];
     };
 
@@ -308,7 +308,7 @@ tl.youtubes = (function () {
                 onStateChange: function (event) {
                     if (event.target.getPlayerState() === 0) {
                         var l = window.location;
-                        var vidId = l.pathname.match(/.*\/([A-Za-z0-9_-]+)$/)[1];
+                        var vidId = getIdFromUrl();
                         var nextId = vidId ? playlist.next(vidId) : null;
                         if (nextId) {
                             // Go to next song in the list.
