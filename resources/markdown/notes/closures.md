@@ -28,10 +28,6 @@ Booleans, or Numbers).  This includes the ability to store
 functions in variables, pass them as arguments to other
 functions, and use them as return values from functions.
 
-Are there languages where functions are **not** first-class
-citizens? Yes, Java (see above) is one example. Functions can
-only be methods of Objects, and cannot exist on their own.
-
 #### Examples of First-Class Functions
 ```javascript
 // Store a function in a variable. You could store any
