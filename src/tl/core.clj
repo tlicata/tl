@@ -21,6 +21,7 @@
   (GET "/" [] (home))
   (GET "/jobs/" [] (jobs-page))
   (GET "/notes/" [] (notes-page))
+  (GET "/notes/:title" [title] (notes-page title))
   (GET "/photos/" [] (photos-page))
   (GET "/photos/:id" [id] (photos-page id))
   (GET "/tictactoe/" []  (tictactoe-page))
