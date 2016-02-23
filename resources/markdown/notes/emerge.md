@@ -7,13 +7,12 @@ time, storing my code in a Git repository along the way. During the
 presentation, I coded from scratch so they could follow along, and I
 stored the results in completely new Git repository.
 
-The resulting code ended up being a bit different than in my trial
-run. After class, I ended up in the situation where each repository
-had some code I wanted to appear in the final version.  The problem
-was that the Git repositories did not share a common commit/ancestor
-(since I created the second one from scratch as part of the
-demonstration). As far as I know, Git does not support merging files
-that are not part of the same repo.
+The resulting code ended up being a bit different than my trial
+run. After class, each repository had some code I wanted to appear in
+the final version. However, the Git repositories did not share a
+common commit/ancestor (since I created the second one from
+scratch). As far as I know, Git does not support merging files that
+are not part of the same repository.
 
 So I looked for a Unix utility to do the merge for me. I ran across
 [sdiff](http://www.gnu.org/software/diffutils/manual/html_node/Interactive-Merging.html#Interactive-Merging)
