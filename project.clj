@@ -19,14 +19,14 @@
              :prod {:offline? true}
              :uberjar {:main tl.core, :aot :all}}
   :plugins [[lein-cljsbuild "1.0.3"]]
+  :source-paths ["src/clj"]
   :aot [tl.core]
   :uberjar-name "tl-standalone.jar"
-  :cljsbuild {:builds {:dev {:source-paths ["cljs"]
+  :cljsbuild {:builds {:dev {:source-paths ["src/cljs"]
                              :compiler {:output-to "resources/public/js/bin/all.js"
                                         :optimizations :whitespace
                                         :pretty-print true}}
-                       :prod {:source-paths ["cljs"]
+                       :prod {:source-paths ["src/cljs"]
                               :compiler {:output-to "resources/public/js/bin/all.js"
                                          :optimizations :advanced
                                          :pretty-print false}}}})
-
