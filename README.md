@@ -6,23 +6,8 @@ Tim's Online World
 
 ### Dependencies
 
-Heroku Toolbelt
-
-(Ubuntu)
-
-    sudo gem install heroku
-    sudo gem install foreman
-
-(MacOS)
-
-    brew install heroku-toolbelt
-    gem install foreman
-
-Leiningen
-
-(MacOS)
-
-    brew install leiningen
+- Leiningen
+- Foreman
 
 ### Starting Server
 
