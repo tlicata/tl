@@ -32,9 +32,14 @@ tl.youtubes = (function () {
     var isCommand = function (query) {
         return query.charAt(0) === ":";
     };
+    var isLocalCommand = function (query) {
+        var cmd = isCommand(query) ? sliceCommand(query) : query;
+        return cmd === "buttons" || cmd === "current";
+    };
     var showInHistory = function (query) {
         var cmd = sliceCommand(query);
-        return cmd !== "buttons" && cmd.indexOf("swap") !== 0;
+        var isSwap = cmd.indexOf("swap") === 0;
+        return !isSwap && !isLocalCommand(query);
     };
 
     var getIdFromUrl = function () {
@@ -214,6 +219,11 @@ tl.youtubes = (function () {
             if (cmd === "buttons") {
                 showButtons(sliceCommand(previous));
                 return false; // don't add to history
+            } else if (cmd === "current") {
+                var current = document.querySelector(".current");
+                if (current && current.scrollIntoView) {
+                    current.scrollIntoView();
+                }
             } else if ("swap" === parts[0]) {
                 var currentVid = getIdFromUrl();
                 if (currentVid && parts.length === 2) {
