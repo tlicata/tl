@@ -41,6 +41,8 @@
   (wcar* (mapv (fn [[id title]]
                  (car/hset (str youtube-key id) "title" title))
                ids-and-titles)))
+(defn youtube-update-id [old new]
+  (wcar* (car/rename (str youtube-key old) (str youtube-key new))))
 
 ;; playlists
 

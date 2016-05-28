@@ -1,5 +1,5 @@
 (ns tl.core
-  (:use [compojure.core :only [defroutes GET]]
+  (:use [compojure.core :only [defroutes GET POST]]
         [ring.middleware.file :only [wrap-file]]
         [ring.middleware.file-info :only [wrap-file-info]]
         [ring.middleware.json :only [wrap-json-response]]
@@ -11,7 +11,7 @@
         [tl.pages.notes :only [notes-page]]
         [tl.pages.photos :only [photos-page]]
         [tl.pages.tictactoe :only [tictactoe-page]]
-        [tl.pages.youtubes :only [youtubes-list youtubes-page youtubes-watch]])
+        [tl.pages.youtubes :only [youtubes-list youtubes-page youtubes-video youtubes-watch]])
   (:require [compojure.route :as route]
             [ring.adapter.jetty :as jetty]
             [tl.jobs :as jobs])
@@ -27,6 +27,7 @@
   (GET "/tictactoe/" []  (tictactoe-page))
   (GET "/youtubes/" [query] (youtubes-page nil query))
   (GET "/youtubes/list" [cmd] (youtubes-list cmd))
+  (POST "/youtubes/video" [cmd] (youtubes-video cmd))
   (GET "/youtubes/:video" [video query] (youtubes-page video query))
   (GET "/youtubes/:video/watch" [video] (youtubes-watch video)))
 

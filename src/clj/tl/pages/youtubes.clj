@@ -22,7 +22,7 @@
         iframe-api [:script {:src "https://www.youtube.com/iframe_api"}]
         video-id [:script (str "var video = \"" video "\";")]]
     (incr-video-count video)
-    {:js #{"/js/youtubes.js?6"}
+    {:js #{"/js/youtubes.js?7"}
      :title ["Hello Youtubes"]
      :body (if video
              [video-html search-html iframe-api video-id]
@@ -59,6 +59,12 @@
          "add" (apply youtubes-playlist-add params)
          "remove" (apply youtubes-playlist-remove params)
          "demote" (apply youtubes-playlist-demote params)))}))
+
+(defn youtubes-video [cmd]
+  (let [[action & params] (string/split cmd #" ")]
+    (when (= action "swap")
+      (apply db/youtube-update-id params)
+      {:body "OK"})))
 
 (defn youtubes-watch [video]
   (incr-video-count video)

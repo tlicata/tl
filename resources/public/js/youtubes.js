@@ -32,8 +32,9 @@ tl.youtubes = (function () {
     var isCommand = function (query) {
         return query.charAt(0) === ":";
     };
-    var isLocalCommand = function (query) {
-        return sliceCommand(query) === "buttons";
+    var showInHistory = function (query) {
+        var cmd = sliceCommand(query);
+        return cmd !== "buttons" && cmd.indexOf("swap") !== 0;
     };
 
     var getIdFromUrl = function () {
@@ -209,9 +210,17 @@ tl.youtubes = (function () {
         // Take appropriate action based on search input.
         var handleCommand = function (query, previous) {
             var cmd = sliceCommand(query);
+            var parts = cmd.split(" ");
             if (cmd === "buttons") {
                 showButtons(sliceCommand(previous));
                 return false; // don't add to history
+            } else if ("swap" === parts[0]) {
+                var currentVid = getIdFromUrl();
+                if (currentVid && parts.length === 2) {
+                  parts.splice(1, 0, currentVid);
+                  $.post("/youtubes/video", {cmd: parts.join(" ")});
+                }
+                return false; //don't add to history
             } else {
                 $.get("/youtubes/list", {cmd: cmd}, function (json) {
                     playlist.ingest(json);
@@ -267,7 +276,7 @@ tl.youtubes = (function () {
             // If browser supports "hashchange" will rely on that to
             // trigger the search, otherwise search manually, unless
             // it's a command b/c we don't want commands in the url.
-            if ("onhashchange" in window && !isLocalCommand(query)) {
+            if ("onhashchange" in window && showInHistory(query)) {
                 window.location.hash = encode(query);
             } else {
                 queryInput.val(search(query));
