@@ -221,8 +221,9 @@ tl.youtubes = (function () {
                 return false; // don't add to history
             } else if (cmd === "current") {
                 var current = document.querySelector(".current");
-                if (current && current.scrollIntoView) {
-                    current.scrollIntoView();
+                if (current && current.getBoundingClientRect) {
+                    var top = current.getBoundingClientRect().top + window.pageYOffset;
+                    window.scrollTo(0, top - (window.innerHeight / 2));
                 }
             } else if ("swap" === parts[0]) {
                 var currentVid = getIdFromUrl();
