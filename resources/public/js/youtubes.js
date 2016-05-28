@@ -284,9 +284,7 @@ tl.youtubes = (function () {
             return false;
         });
 
-        // The hash represents a search. If one exists,
-        // then load search results for it. Also, use
-        // it to pre-populate the search box.
+        // Use hash to load search results and set search box.
         var updateFromHash = function () {
             var hash = decode(window.location.hash.substr(1));
             return queryInput.val(search(hash));
