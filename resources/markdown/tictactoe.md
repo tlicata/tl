@@ -18,9 +18,9 @@ Results
 -------
 
 Well, the
-[pure ClojureScript version](https://github.com/tlicata/tl/blob/master/cljs/tictactoe.cljs)
+[pure ClojureScript version](https://github.com/tlicata/tl/blob/master/src/cljs/tictactoe.cljs)
 and the
-[core.async version](https://github.com/tlicata/tl/blob/master/cljs/tictactoe-async.cljs)
+[core.async version](https://github.com/tlicata/tl/blob/master/src/cljs/tictactoe-async.cljs)
 weighed in at about the same number of lines of code.  Maybe it's
 because I come from JavaScript background, but I found the non-async
 version easier to read. It models the code I've written for normal
