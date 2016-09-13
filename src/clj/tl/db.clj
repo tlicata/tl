@@ -43,6 +43,8 @@
                ids-and-titles)))
 (defn youtube-update-id [old new]
   (wcar* (car/rename (str youtube-key old) (str youtube-key new))))
+(defn youtube-delete [id]
+  (wcar* (car/del (str youtube-key id))))
 
 ;; playlists
 
