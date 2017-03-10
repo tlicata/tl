@@ -61,10 +61,19 @@ tl.youtubes = (function () {
                 return list[(index + 1) % list.length];
             }
         };
+        var tryToGoToNext = function () {
+            var l = window.location;
+            var vidId = getIdFromUrl();
+            var nextId = vidId ? next(vidId) : null;
+            if (nextId) {
+                window.location.pathname = l.pathname.replace(vidId, nextId);
+            }
+            return !!nextId;
+        };
 
         return {
             ingest: ingest,
-            next: next
+            tryToGoToNext: tryToGoToNext
         };
     })();
 
@@ -319,13 +328,7 @@ tl.youtubes = (function () {
             events: {
                 onStateChange: function (event) {
                     if (event.target.getPlayerState() === 0) {
-                        var l = window.location;
-                        var vidId = getIdFromUrl();
-                        var nextId = vidId ? playlist.next(vidId) : null;
-                        if (nextId) {
-                            // Go to next song in the list.
-                            window.location.pathname = l.pathname.replace(vidId, nextId);
-                        } else {
+                        if (!playlist.tryToGoToNext()) {
                             event.target.playVideo();
                             $.get(window.location.pathname + "/watch");
                         }
