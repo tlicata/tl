@@ -313,6 +313,18 @@ tl.youtubes = (function () {
         // If browser supports it, listen for the hash change event
         // and update the search results.
         window.addEventListener("hashchange", updateFromHash);
+
+        // Global key mappings.
+        $(window).on("keydown", function (event) {
+            if (event.ctrlKey || event.metaKey) {
+                switch (String.fromCharCode(event.which).toLowerCase()) {
+                case "s":
+                    event.preventDefault();
+                    queryInput.focus().select();
+                    break;
+                }
+            }
+        });
     });
 
     // YouTube IFrame API expects this function to be defined.
