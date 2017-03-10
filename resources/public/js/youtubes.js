@@ -223,7 +223,7 @@ tl.youtubes = (function () {
                 showButtons(sliceCommand(previous));
                 return false; // don't add to history
             } else if (cmd === "current") {
-                var current = document.querySelector(".current");
+                var current = document.querySelector(".current").focus();
                 if (current && current.getBoundingClientRect) {
                     var top = current.getBoundingClientRect().top + window.pageYOffset;
                     window.scrollTo(0, top - (window.innerHeight / 2));
