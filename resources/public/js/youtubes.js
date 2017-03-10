@@ -257,6 +257,7 @@ tl.youtubes = (function () {
                 dataType: "jsonp",
                 error: renderError,
                 success: function (json) {
+                    playlist.ingest(clean(json));
                     renderSuccess(clean(json), query);
                 },
                 timeout: 5000,
