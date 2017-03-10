@@ -56,15 +56,9 @@ tl.youtubes = (function () {
             });
         };
         var next = function (current) {
-            if (list) {
-                var index = list.indexOf(current);
-                if (index !== -1) {
-                    index = index + 1;
-                    if (index >= list.length) {
-                        index = 0
-                    }
-                    return list[index];
-                }
+            var index = list ? list.indexOf(current) : -1;
+            if (index !== -1) {
+                return list[(index + 1) % list.length];
             }
         };
 
