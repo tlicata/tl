@@ -229,7 +229,7 @@ tl.youtubes = (function () {
             } else {
                 $.get("/youtubes/list", {cmd: cmd}, function (json) {
                     playlist.ingest(json);
-                    render(html(json, query));
+                    renderSuccess(json, query);
                 });
                 return true; // add to history
             }
