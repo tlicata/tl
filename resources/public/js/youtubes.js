@@ -34,7 +34,7 @@ tl.youtubes = (function () {
     };
     var isLocalCommand = function (query) {
         var cmd = isCommand(query) ? sliceCommand(query) : query;
-        return cmd === "buttons" || cmd === "current";
+        return cmd === "buttons" || cmd === "current" || cmd === "next";
     };
     var showInHistory = function (query) {
         var cmd = sliceCommand(query);
@@ -228,6 +228,8 @@ tl.youtubes = (function () {
                     var top = current.getBoundingClientRect().top + window.pageYOffset;
                     window.scrollTo(0, top - (window.innerHeight / 2));
                 }
+            } else if (cmd === "next") {
+                playlist.tryToGoToNext();
             } else if ("swap" === parts[0]) {
                 var currentVid = getIdFromUrl();
                 if (currentVid && parts.length === 2) {
