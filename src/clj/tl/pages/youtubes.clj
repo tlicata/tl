@@ -46,19 +46,26 @@
   (db/youtube-list-demote list-name video-id)
   {:body "OK"})
 (defn youtubes-list [cmd]
-  (let [[group action & params] (let [elems (string/split cmd #" ")]
-                                  (concat (when (= (count elems) 1) ["list" "show"]) elems))]
+  (let [[action & params] (let [elems (string/split cmd #" ")]
+                            (concat (when (= (count elems) 1) ["show"]) elems))
+        ordering (fn [vids] (->> vids (sort-by #(get % "first-seen")) reverse))]
     {:body
-     (if (= group "list")
-       (condp = action
-         "show" (youtubes-playlist
-                 (let [list-name (first params)]
-                   (if (= list-name "history")
-                     (reverse (sort-by #(get % "first-seen") (db/youtube-get-all)))
-                     (db/youtube-list-show list-name))))
-         "add" (apply youtubes-playlist-add params)
-         "remove" (apply youtubes-playlist-remove params)
-         "demote" (apply youtubes-playlist-demote params)))}))
+     (condp = action
+       "show" (youtubes-playlist
+               (let [list-name (first params)]
+                 (if (= list-name "history")
+                   (ordering (db/youtube-get-all))
+                   (db/youtube-list-show list-name))))
+       "filter" (youtubes-playlist
+                 (->> (db/youtube-get-all)
+                      (filter #(when-let [title (get % "title")]
+                                 (.contains (string/lower-case title)
+                                            (string/lower-case (string/join " " params)))))
+                      ordering))
+       "add" (apply youtubes-playlist-add params)
+       "remove" (apply youtubes-playlist-remove params)
+       "demote" (apply youtubes-playlist-demote params))}))
+
 
 (defn youtubes-video [cmd]
   (let [[action & params] (string/split cmd #" ")]
