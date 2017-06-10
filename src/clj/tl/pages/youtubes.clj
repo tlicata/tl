@@ -47,21 +47,21 @@
   {:body "OK"})
 (defn youtubes-list [cmd]
   (let [[action & params] (let [elems (string/split cmd #" ")]
-                            (concat (when (= (count elems) 1) ["show"]) elems))]
+                            (concat (when (= (count elems) 1) ["show"]) elems))
+        ordering (fn [vids] (->> vids (sort-by #(get % "first-seen")) reverse))]
     {:body
      (condp = action
        "show" (youtubes-playlist
                (let [list-name (first params)]
                  (if (= list-name "history")
-                   (reverse (sort-by #(get % "first-seen") (db/youtube-get-all)))
+                   (ordering (db/youtube-get-all))
                    (db/youtube-list-show list-name))))
        "filter" (youtubes-playlist
                  (->> (db/youtube-get-all)
                       (filter #(when-let [title (get % "title")]
                                  (.contains (string/lower-case title)
                                             (string/lower-case (string/join " " params)))))
-                      (sort-by #(get % "first-seen"))
-                      reverse))
+                      ordering))
        "add" (apply youtubes-playlist-add params)
        "remove" (apply youtubes-playlist-remove params)
        "demote" (apply youtubes-playlist-demote params))}))
