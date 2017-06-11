@@ -1,8 +1,6 @@
 (ns tl.tictactoe-shared
   (:require
-   [dommy.core :as dommy])
-  (:use-macros
-   [dommy.macros :only [sel]]))
+   [dommy.core :as dommy :refer-macros [sel]]))
 
 (def EMPTY "")
 (def X "X")

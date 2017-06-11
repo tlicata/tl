@@ -1,12 +1,10 @@
 (ns tl.tictactoe-async
   (:require
    [cljs.core.async :as async :refer [<! >! chan put!]]
-   [dommy.core :as dommy]
+   [dommy.core :as dommy :refer-macros [sel sel1]]
    [tl.tictactoe-shared :as ttt])
   (:require-macros
-   [cljs.core.async.macros :as m :refer [go]])
-  (:use-macros
-   [dommy.macros :only [node sel sel1]]))
+   [cljs.core.async.macros :as m :refer [go]]))
 
 (def click-channel (chan))
 

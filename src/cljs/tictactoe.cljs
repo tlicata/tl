@@ -1,9 +1,7 @@
 (ns tl.tictactoe
   (:require
-   [dommy.core :as dommy]
-   [tl.tictactoe-shared :as ttt])
-  (:use-macros
-   [dommy.macros :only [node sel sel1]]))
+   [dommy.core :as dommy :refer-macros [sel sel1]]
+   [tl.tictactoe-shared :as ttt]))
 
 (def player (atom ttt/X))
 (def board-data (atom nil))
