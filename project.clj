@@ -14,8 +14,7 @@
                  [ring/ring-json "0.4.0"]]
   :hooks [leiningen.cljsbuild]
   :min-lein-version "2.1.2"
-  :profiles {:dev {:dependencies [[ring-mock "0.1.1"]]
-                   :plugins [[com.cemerick/austin "0.1.1"]]}
+  :profiles {:dev {:dependencies [[ring-mock "0.1.1"]]}
              :prod {:offline? true}
              :uberjar {:main tl.core, :aot :all}}
   :plugins [[lein-cljsbuild "1.0.3"]]
