@@ -159,7 +159,7 @@ tl.youtubes = (function () {
                             btn.html("...");
                             $.ajax({
                                 url: "/youtubes/list",
-                                data: {cmd: ["list", cmd, "sharib", id].join(" ")},
+                                data: {cmd: [cmd, "sharib", id].join(" ")},
                                 success: function (data) {
                                     isPlus ? btn.html("X") : tr.remove();
                                 },
