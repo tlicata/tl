@@ -161,11 +161,7 @@ tl.youtubes = (function () {
                                 url: "/youtubes/list",
                                 data: {cmd: ["list", cmd, "sharib", id].join(" ")},
                                 success: function (data) {
-                                    if (isPlus) {
-                                        btn.html("X");
-                                    } else {
-                                        tr.remove();
-                                    }
+                                    isPlus ? btn.html("X") : tr.remove();
                                 },
                                 error: function (err) {
                                     btn.html(isPlus ? "+" : "-");
