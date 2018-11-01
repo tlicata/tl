@@ -175,7 +175,7 @@ tl.youtubes = (function () {
                     .on("click", function (e) {
                         $.ajax({
                             url: "/youtubes/list",
-                            data: {cmd: ["list", "demote", "sharib", getVideoId()].join(" ")},
+                            data: {cmd: ["demote", "sharib", getVideoId()].join(" ")},
                             success: function (data) {
                                 var next = tr.next();
                                 if (next.length !== 0) {
