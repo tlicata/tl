@@ -131,7 +131,7 @@ tl.youtubes = (function () {
                     outer.append($("<tr/>").append(
                         $("<td/>").append(left),
                         $("<td/>").append(link),
-                        $("<td/>").addClass("plusMinus")
+                        $("<td/>").addClass("buttons")
                     ));
                 });
             } else {
@@ -142,7 +142,7 @@ tl.youtubes = (function () {
 
         var showButtons = function (list) {
             var isPlus = list === "history";
-            $(".plusMinus").each(function (idx, row) {
+            $(".buttons").each(function (idx, row) {
                 var tr = $(row).parent();
                 var getVideoId = function () {
                     var link = tr.find(".vid-link").attr("href");
