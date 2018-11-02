@@ -129,12 +129,12 @@ tl.youtubes = (function () {
                         link.addClass("current");
                     }
                     outer.append($("<tr/>").append(
-                        $("<td/>").append(left),
+                        $("<td/>").append(left).on("click", function () {
+                            showButtonsFor($(this).parent(), query, true);
+                        }),
                         $("<td/>").append(link),
                         $("<td/>").addClass("buttons")
-                    ).on("click", function () {
-                        showButtonsFor($(this), query, true);
-                    }));
+                    ));
                 });
             } else {
                 outer.html($("<tr/>").append($("<td/>").text("No results found")));
