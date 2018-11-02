@@ -96,3 +96,6 @@ pre code {
     color: white;
     cursor: default;
 }
+#youtubes-search + #search-results .buttons {
+    white-space: nowrap;
+}
