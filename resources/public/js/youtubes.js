@@ -132,7 +132,9 @@ tl.youtubes = (function () {
                         $("<td/>").append(left),
                         $("<td/>").append(link),
                         $("<td/>").addClass("buttons")
-                    ));
+                    ).on("click", function () {
+                        showButtonsFor($(this), query, true);
+                    }));
                 });
             } else {
                 outer.html($("<tr/>").append($("<td/>").text("No results found")));
@@ -140,52 +142,59 @@ tl.youtubes = (function () {
             return outer;
         };
 
-        var showButtons = function (list) {
-            var isPlus = list === "history";
-            $(".buttons").each(function (idx, row) {
-                var tr = $(row).parent();
-                var getVideoId = function () {
-                    var link = tr.find(".vid-link").attr("href");
-                    return link.substring(0, link.indexOf("#"));
-                };
-                var btn = $("<a/>")
-                    .addClass("btn")
-                    .text(isPlus ? "+" : "-")
-                    .on("click", function (e) {
-                        var id = getVideoId();
-                        if (id) {
-                            var btn = $(e.target);
-                            var cmd = isPlus ? "add" : "remove";
-                            btn.html("...");
-                            $.ajax({
-                                url: "/youtubes/list",
-                                data: {cmd: [cmd, "sharib", id].join(" ")},
-                                success: function (data) {
-                                    isPlus ? btn.html("X") : tr.remove();
-                                },
-                                error: function (err) {
-                                    btn.html(isPlus ? "+" : "-");
-                                }
-                            });
-                        }
-                    });
-                var demote = isPlus ? null : $("<a/>")
-                    .addClass("btn")
-                    .text("↓")
-                    .on("click", function (e) {
+        var showButtonsFor = function (tr, query, onlyDirect) {
+            var isPlus = sliceCommand(query) === "history";
+            var getVideoId = function () {
+                var link = tr.find(".vid-link").attr("href");
+                return link.substring(0, link.indexOf("#"));
+            };
+            var btn = onlyDirect ? null : $("<a/>")
+                .addClass("btn")
+                .text(isPlus ? "+" : "-")
+                .on("click", function (e) {
+                    var id = getVideoId();
+                    if (id) {
+                        var btn = $(e.target);
+                        var cmd = isPlus ? "add" : "remove";
+                        btn.html("...");
                         $.ajax({
                             url: "/youtubes/list",
-                            data: {cmd: ["demote", "sharib", getVideoId()].join(" ")},
+                            data: {cmd: [cmd, "sharib", id].join(" ")},
                             success: function (data) {
-                                var next = tr.next();
-                                if (next.length !== 0) {
-                                    tr.before(next);
-                                }
+                                isPlus ? btn.html("X") : tr.remove();
+                            },
+                            error: function (err) {
+                                btn.html(isPlus ? "+" : "-");
                             }
                         });
+                    }
+                });
+            var demote = (isPlus || onlyDirect) ? null : $("<a/>")
+                .addClass("btn")
+                .text("↓")
+                .on("click", function (e) {
+                    $.ajax({
+                        url: "/youtubes/list",
+                        data: {cmd: ["demote", "sharib", getVideoId()].join(" ")},
+                        success: function (data) {
+                            var next = tr.next();
+                            if (next.length !== 0) {
+                                tr.before(next);
+                            }
+                        }
                     });
+                });
+            var direct = !onlyDirect ? null : $("<a/>")
+                .addClass("btn")
+                .text("->")
+                .attr("href", getVideoId());
 
-                $(row).empty().append(demote, btn);
+            tr.find(".buttons").empty().append(demote, btn, direct);
+        };
+
+        var showButtons = function (query) {
+            $(".buttons").each(function (idx, row) {
+                showButtonsFor($(row).parent(), query, false);
             });
         };
 
@@ -216,7 +225,7 @@ tl.youtubes = (function () {
             var cmd = sliceCommand(query);
             var parts = cmd.split(" ");
             if (cmd === "buttons") {
-                showButtons(sliceCommand(previous));
+                showButtons(previous);
                 return false; // don't add to history
             } else if (cmd === "current") {
                 var current = document.querySelector(".current").focus();
