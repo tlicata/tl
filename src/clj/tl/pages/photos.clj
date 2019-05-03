@@ -8,7 +8,7 @@
 returns false. See also 'contains?'"
   (some #(= val %) coll))
 
-(def pics-base "http://photos.licata.io/")
+(def pics-base "http://photos.timothylicata.com/")
 (def pics-ext ".jpg")
 (def pics ["janelle-view"
            "whiteboard-daze-left"
