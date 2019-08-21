@@ -50,7 +50,6 @@
 
 (defn header-data []
   [{:uri "/notes/" :text "Notes"}
-   {:uri "/tictactoe/" :text "TicTacToe"}
    {:uri "/youtubes/" :text "Youtubes"}])
 
 (defn header-links []

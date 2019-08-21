@@ -61,3 +61,5 @@ github, but this is a pseudo-code version.
            (recur (create) first-player))
            (recur new-board next-player)))))
 ```
+
+[Play the core.async version here](/tictactoe/).
