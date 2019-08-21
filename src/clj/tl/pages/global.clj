@@ -49,7 +49,8 @@
     ~@(apply js js-arg)])
 
 (defn header-data []
-  [{:uri "/tictactoe/" :text "TicTacToe"}
+  [{:uri "/notes/" :text "Notes"}
+   {:uri "/tictactoe/" :text "TicTacToe"}
    {:uri "/youtubes/" :text "Youtubes"}])
 
 (defn header-links []

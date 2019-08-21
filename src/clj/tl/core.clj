@@ -8,6 +8,7 @@
         [tl.jobs :only [jobs-page]]
         [tl.middleware :only [wrap-current-link]]
         [tl.pages.home :only [home]]
+        [tl.pages.notes :only [notes-page]]
         [tl.pages.tictactoe :only [tictactoe-page]]
         [tl.pages.youtubes :only [youtubes-list youtubes-page youtubes-video youtubes-watch]])
   (:require [compojure.route :as route]
@@ -18,6 +19,8 @@
 (defroutes tl-routes
   (GET "/" [] (home))
   (GET "/jobs/" [] (jobs-page))
+  (GET "/notes/" [] (notes-page))
+  (GET "/notes/:title" [title] (notes-page title))
   (GET "/tictactoe/" []  (tictactoe-page))
   (GET "/youtubes/" [query] (youtubes-page nil query))
   (GET "/youtubes/list" [cmd] (youtubes-list cmd))
