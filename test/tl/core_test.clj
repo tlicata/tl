@@ -4,8 +4,6 @@
   (:use [ring.mock.request]))
 
 (def valid-routes ["/"
-                   "/photos/"
-                   "/photos/end-of-era"
                    "/youtubes/"
                    "/youtubes/id"])
 
@@ -13,7 +11,8 @@
                      "/garbage"
                      "/garbage/"
                      "/maps/polymaps"
-                     "/photos/garbage"])
+                     "/photos/"
+                     "/photos/end-of-era"])
 
 (def admin-routes ["/admin/"
                    "/admin/ltcc/"])
