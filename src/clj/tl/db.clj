@@ -43,6 +43,9 @@
                ids-and-titles)))
 (defn youtube-update-id [old new]
   (wcar* (car/rename (str youtube-key old) (str youtube-key new))))
+(defn youtube-update-skip [video-id skip]
+  (let [key (str youtube-key video-id)]
+    (wcar* (car/hset key "skip" skip))))
 (defn youtube-delete [id]
   (wcar* (car/del (str youtube-key id))))
 

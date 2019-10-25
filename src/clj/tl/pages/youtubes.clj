@@ -34,7 +34,10 @@
 
 (defn youtubes-playlist [videos]
   (map #(let [id (get % "video-id")]
-          {:id id :title (get % "title" id) :count (get % "count")})
+          {:id id
+           :title (get % "title" id)
+           :count (get % "count")
+           :skip (get % "skip")})
        videos))
 (defn youtubes-playlist-add [list-name video-id]
   (db/youtube-list-add list-name video-id)
@@ -66,6 +69,10 @@
        "remove" (apply youtubes-playlist-remove params)
        "demote" (apply youtubes-playlist-demote params))}))
 
+
+(defn youtubes-skip [video query]
+  (db/youtube-update-skip video query)
+  {:body "OK"})
 
 (defn youtubes-video [cmd]
   (let [[action & params] (string/split cmd #" ")]

@@ -10,7 +10,11 @@
         [tl.pages.home :only [home]]
         [tl.pages.notes :only [notes-page]]
         [tl.pages.tictactoe :only [tictactoe-page]]
-        [tl.pages.youtubes :only [youtubes-list youtubes-page youtubes-video youtubes-watch]])
+        [tl.pages.youtubes :only [youtubes-list
+                                  youtubes-page
+                                  youtubes-skip
+                                  youtubes-video
+                                  youtubes-watch]])
   (:require [compojure.route :as route]
             [ring.adapter.jetty :as jetty]
             [tl.jobs :as jobs])
@@ -26,7 +30,8 @@
   (GET "/youtubes/list" [cmd] (youtubes-list cmd))
   (POST "/youtubes/video" [cmd] (youtubes-video cmd))
   (GET "/youtubes/:video" [video query] (youtubes-page video query))
-  (GET "/youtubes/:video/watch" [video] (youtubes-watch video)))
+  (GET "/youtubes/:video/watch" [video] (youtubes-watch video))
+  (POST "/youtubes/:video/skip" [video skip] (youtubes-skip video skip)))
 
 (defroutes error-routes
   (route/not-found "Not Found"))

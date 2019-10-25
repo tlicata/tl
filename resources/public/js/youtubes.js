@@ -51,7 +51,9 @@ tl.youtubes = (function () {
     var playlist = (function () {
         var list = null;
         var ingest = function (json) {
-            list = json.map(function (vid) {
+            list = json.filter(function (vid) {
+                return vid.skip != "true";
+            }).map(function (vid) {
                 return vid.id;
             });
         };
@@ -128,12 +130,19 @@ tl.youtubes = (function () {
                     if (vid.id === currentId) {
                         link.addClass("current");
                     }
+                    var skipped = vid.skip == "true";
+                    var skipToggle = $("<input type='checkbox'/>")
+                        .prop("checked", !skipped)
+                        .on("click", function () {
+                            $.post(vid.id + "/skip", {skip: !skipped});
+                            skipped = !skipped;
+                        });
                     outer.append($("<tr/>").append(
                         $("<td/>").append(left).on("click", function () {
                             showButtonsFor($(this).parent(), query, true);
                         }),
                         $("<td/>").append(link),
-                        $("<td/>").addClass("buttons")
+                        $("<td/>").addClass("buttons").append(skipToggle)
                     ));
                 });
             } else {
