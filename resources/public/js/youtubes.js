@@ -68,25 +68,24 @@ tl.youtubes = (function () {
                 return list[Math.floor(Math.random() * list.length)];
             }
         };
+        var tryToGoTo = function (nextId) {
+            if (nextId) {
+                var currentId = getIdFromUrl();
+                if (currentId) {
+                    window.location.pathname = window.location.pathname.replace(currentId, nextId);
+                } else {
+                    window.location.pathname = window.location.pathname + nextId;
+                }
+            }
+        };
         var tryToGoToNext = function () {
-            var l = window.location;
             var vidId = getIdFromUrl();
             var nextId = vidId ? next(vidId) : null;
-            if (nextId) {
-                window.location.pathname = l.pathname.replace(vidId, nextId);
-            }
+            tryToGoTo(nextId);
             return !!nextId;
         };
         var tryToGoToRandom = function () {
-            var vidId = getIdFromUrl();
-            var randomId = random();
-            if (randomId) {
-                if (vidId) {
-                    window.location.pathname = window.location.pathname.replace(vidId, randomId);
-                } else {
-                    window.location.pathname = window.location.pathname + randomId;
-                }
-            }
+            tryToGoTo(random());
         };
 
         return {
