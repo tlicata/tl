@@ -90,6 +90,7 @@ tl.youtubes = (function () {
 
         return {
             ingest: ingest,
+            tryToGoTo: tryToGoTo,
             tryToGoToNext: tryToGoToNext,
             tryToGoToRandom: tryToGoToRandom
         };
@@ -264,9 +265,14 @@ tl.youtubes = (function () {
                 playlist.tryToGoToRandom();
             } else if ("swap" === parts[0]) {
                 var currentVid = getIdFromUrl();
+                var newerVid = parts[1];
                 if (currentVid && parts.length === 2) {
                   parts.splice(1, 0, currentVid);
-                  $.post("/youtubes/video", {cmd: parts.join(" ")});
+                  $.post("/youtubes/video", {cmd: parts.join(" ")}, function () {
+                    setTimeout(function () {
+                      playlist.tryToGoTo(newerVid);
+                    }, 1000);
+                  });
                 }
                 return false; //don't add to history
             } else {
