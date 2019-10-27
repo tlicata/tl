@@ -34,7 +34,7 @@ tl.youtubes = (function () {
     };
     var isLocalCommand = function (query) {
         var cmd = isCommand(query) ? sliceCommand(query) : query;
-        return cmd === "buttons" || cmd === "current" || cmd === "next";
+        return cmd === "buttons" || cmd === "current" || cmd === "next" || cmd === "random";
     };
     var showInHistory = function (query) {
         var cmd = sliceCommand(query);
@@ -63,6 +63,11 @@ tl.youtubes = (function () {
                 return list[(index + 1) % list.length];
             }
         };
+        var random = function () {
+            if (list) {
+                return list[Math.floor(Math.random() * list.length)];
+            }
+        };
         var tryToGoToNext = function () {
             var l = window.location;
             var vidId = getIdFromUrl();
@@ -72,10 +77,22 @@ tl.youtubes = (function () {
             }
             return !!nextId;
         };
+        var tryToGoToRandom = function () {
+            var vidId = getIdFromUrl();
+            var randomId = random();
+            if (randomId) {
+                if (vidId) {
+                    window.location.pathname = window.location.pathname.replace(vidId, randomId);
+                } else {
+                    window.location.pathname = window.location.pathname + randomId;
+                }
+            }
+        };
 
         return {
             ingest: ingest,
-            tryToGoToNext: tryToGoToNext
+            tryToGoToNext: tryToGoToNext,
+            tryToGoToRandom: tryToGoToRandom
         };
     })();
 
@@ -244,6 +261,8 @@ tl.youtubes = (function () {
                 }
             } else if (cmd === "next") {
                 playlist.tryToGoToNext();
+            } else if (cmd === "random") {
+                playlist.tryToGoToRandom();
             } else if ("swap" === parts[0]) {
                 var currentVid = getIdFromUrl();
                 if (currentVid && parts.length === 2) {
