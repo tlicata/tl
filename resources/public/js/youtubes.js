@@ -150,6 +150,7 @@ tl.youtubes = (function () {
                     var skipped = vid.skip == "true";
                     var skipToggle = $("<input type='checkbox'/>")
                         .prop("checked", !skipped)
+                        .prop("tabindex", -1)
                         .on("click", function () {
                             $.post(vid.id + "/skip", {skip: !skipped});
                             skipped = !skipped;
