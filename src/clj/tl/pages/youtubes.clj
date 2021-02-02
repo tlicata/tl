@@ -18,7 +18,7 @@
                       [:div.input-group
                        [:input.form-control {:type "search" :name "query" :autofocus true :autosave true}]
                        [:span.input-group-btn
-                        [:input.btn.btn-primary {:type "submit" :value "Search YouTube"}]]]]]
+                        [:input.btn.btn-primary {:type "submit" :value "Try"}]]]]]
         iframe-api [:script {:src "https://www.youtube.com/iframe_api"}]
         video-id [:script (str "var video = \"" video "\";")]]
     (incr-video-count video)

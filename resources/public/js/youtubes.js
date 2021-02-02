@@ -24,7 +24,6 @@ tl.youtubes = (function () {
     var encode = encodeURIComponent;
     var resultsDivId = "search-results";
     var searchDiv = null;
-    var searchUrl = "https://www.googleapis.com/youtube/v3/search";
 
     var sliceCommand = function (query) {
         return query.slice(1);  // commands start with ":"
@@ -36,10 +35,13 @@ tl.youtubes = (function () {
         var cmd = isCommand(query) ? sliceCommand(query) : query;
         return cmd === "current" || cmd === "next" || cmd === "random";
     };
+    var isSearch = function (query) {
+        return !isCommand(query);
+    };
     var showInHistory = function (query) {
         var cmd = sliceCommand(query);
         var isSwap = cmd.indexOf("swap") === 0;
-        return !isSwap && !isLocalCommand(query);
+        return !isSwap && !isSearch(query) && !isLocalCommand(query);
     };
 
     var getIdFromUrl = function () {
@@ -109,24 +111,6 @@ tl.youtubes = (function () {
                 }
             };
         })();
-
-        var clean = function (json) {
-            var items = json && json.items;
-            var videos = [];
-            if (items) {
-                for (var i = 0; i < items.length; i++) {
-                    var vid = items[i];
-                    var snip = vid && vid.snippet;
-                    var thumb = snip.thumbnails && snip.thumbnails.default;
-                    videos.push({
-                        id: vid.id && vid.id.videoId,
-                        thumb:  thumb && thumb.url,
-                        title: snip && snip.title
-                    });
-                }
-            }
-            return videos;
-        };
 
         var html = function (videos, query) {
             var outer = $("<table/>").addClass("table table-striped");
@@ -235,24 +219,9 @@ tl.youtubes = (function () {
             }
         };
         var handleSearch = function (query) {
-            $.ajax({
-                data: {
-                    q: query,
-                    key: "AIzaSyBDSymHCx1ESegvp09VMSFT6e9vdPUtkrc",
-                    maxResults: 50,
-                    part: "snippet",
-                    type: "video"
-                },
-                dataType: "jsonp",
-                error: renderError,
-                success: function (json) {
-                    playlist.ingest(clean(json));
-                    renderSuccess(clean(json), query);
-                },
-                timeout: 5000,
-                url: searchUrl
-            });
-            return true; // add to history
+            remove();
+            renderError(); // no more searching...
+            return false; // don't add to history
         };
 
         // search
