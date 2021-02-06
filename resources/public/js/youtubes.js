@@ -34,7 +34,7 @@ tl.youtubes = (function () {
     };
     var isLocalCommand = function (query) {
         var cmd = isCommand(query) ? sliceCommand(query) : query;
-        return cmd === "buttons" || cmd === "current" || cmd === "next" || cmd === "random";
+        return cmd === "current" || cmd === "next" || cmd === "random";
     };
     var showInHistory = function (query) {
         var cmd = sliceCommand(query);
@@ -157,7 +157,7 @@ tl.youtubes = (function () {
                         });
                     outer.append($("<tr/>").append(
                         $("<td/>").append(left).on("click", function () {
-                            showButtonsFor($(this).parent(), query, true);
+                            showDirectButton($(this).parent());
                         }),
                         $("<td/>").append(link),
                         $("<td/>").addClass("buttons").append(skipToggle)
@@ -169,60 +169,13 @@ tl.youtubes = (function () {
             return outer;
         };
 
-        var showButtonsFor = function (tr, query, onlyDirect) {
-            var isPlus = sliceCommand(query) === "history";
+        var showDirectButton = function (tr) {
             var getVideoId = function () {
                 var link = tr.find(".vid-link").attr("href");
                 return link.substring(0, link.indexOf("#"));
             };
-            var btn = onlyDirect ? null : $("<a/>")
-                .addClass("btn")
-                .text(isPlus ? "+" : "-")
-                .on("click", function (e) {
-                    var id = getVideoId();
-                    if (id) {
-                        var btn = $(e.target);
-                        var cmd = isPlus ? "add" : "remove";
-                        btn.html("...");
-                        $.ajax({
-                            url: "/youtubes/list",
-                            data: {cmd: [cmd, "sharib", id].join(" ")},
-                            success: function (data) {
-                                isPlus ? btn.html("X") : tr.remove();
-                            },
-                            error: function (err) {
-                                btn.html(isPlus ? "+" : "-");
-                            }
-                        });
-                    }
-                });
-            var demote = (isPlus || onlyDirect) ? null : $("<a/>")
-                .addClass("btn")
-                .text("↓")
-                .on("click", function (e) {
-                    $.ajax({
-                        url: "/youtubes/list",
-                        data: {cmd: ["demote", "sharib", getVideoId()].join(" ")},
-                        success: function (data) {
-                            var next = tr.next();
-                            if (next.length !== 0) {
-                                tr.before(next);
-                            }
-                        }
-                    });
-                });
-            var direct = !onlyDirect ? null : $("<a/>")
-                .addClass("btn")
-                .text("->")
-                .attr("href", getVideoId());
-
-            tr.find(".buttons").empty().append(demote, btn, direct);
-        };
-
-        var showButtons = function (query) {
-            $(".buttons").each(function (idx, row) {
-                showButtonsFor($(row).parent(), query, false);
-            });
+            var btn = $("<a/>").addClass("btn").text("->").attr("href", getVideoId());
+            tr.find(".buttons").empty().append(btn);
         };
 
         // Delete html of current search results.
@@ -248,13 +201,10 @@ tl.youtubes = (function () {
         };
 
         // Take appropriate action based on search input.
-        var handleCommand = function (query, previous) {
+        var handleCommand = function (query) {
             var cmd = sliceCommand(query);
             var parts = cmd.split(" ");
-            if (cmd === "buttons") {
-                showButtons(previous);
-                return false; // don't add to history
-            } else if (cmd === "current") {
+            if (cmd === "current") {
                 var current = document.querySelector(".current").focus();
                 if (current && current.getBoundingClientRect) {
                     var top = current.getBoundingClientRect().top + window.pageYOffset;
