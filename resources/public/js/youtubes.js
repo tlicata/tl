@@ -181,7 +181,7 @@ tl.youtubes = (function () {
             render(html(vids, query));
         };
         var renderError = function () {
-            render($("<span/>").text("Something went wrong"));
+            render(html([], ""));
         };
 
         // Take appropriate action based on search input.
