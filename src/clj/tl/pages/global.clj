@@ -49,8 +49,9 @@
     ~@(apply js js-arg)])
 
 (defn header-data []
-  [{:uri "/notes/" :text "Notes"}
-   {:uri "/youtubes/" :text "Youtubes"}])
+  [;; {:uri "/notes/" :text "Notes"}
+   ;; {:uri "/youtubes/" :text "Youtubes"}
+   ])
 
 (defn header-links []
   (let [links (map (fn [{uri :uri text :text}]
