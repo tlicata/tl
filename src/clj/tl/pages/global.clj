@@ -4,7 +4,6 @@
         [hiccup.element :only [link-to]]
         [hiccup.page :only [doctype html5 include-css include-js]]))
 
-(def analytics "/js/analytics.js")
 (def bootstrap-css "/css/lib/theme/cyborg/bootstrap.css")
 (def bootstrap-js "/js/lib/bootstrap.js")
 (def highlight-css "/css/lib/highlight/solarized_dark.css")
@@ -21,7 +20,7 @@
 
 (defn js [& more]
   (let [global [jquery bootstrap-js highlight-js]]
-    (apply include-js (concat global more [analytics]))))
+    (apply include-js (concat global more))))
 
 (defn blurb [html]
   "Wrap in an blurb div. Unless it's a script tag"
