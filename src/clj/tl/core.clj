@@ -5,6 +5,7 @@
         [ring.middleware.json :only [wrap-json-response]]
         [ring.middleware.params :only [wrap-params]]
         [ring.middleware.session :only [wrap-session]]
+        [ring.middleware.ssl :only [wrap-hsts wrap-forwarded-scheme wrap-ssl-redirect]]
         [tl.jobs :only [jobs-page]]
         [tl.middleware :only [wrap-current-link]]
         [tl.pages.home :only [home]]
@@ -40,9 +41,15 @@
   tl-routes
   error-routes)
 
+(defn get-port []
+  (Integer/parseInt (or (System/getenv "PORT") "5000")))
+
 (def app
      (-> #'all-routes
          wrap-params
+         wrap-hsts
+         wrap-ssl-redirect
+         wrap-forwarded-scheme
          wrap-session
          (wrap-file "resources/public")
          wrap-file-info
@@ -50,7 +57,6 @@
          wrap-current-link))
 
 (defn -main []
-  (let [port (Integer/parseInt (or (System/getenv "PORT") "5000"))]
-    (jetty/run-jetty app {:port port})))
+  (jetty/run-jetty app {:port (get-port)}))
 
 (defn dev-main [] (future (-main)))

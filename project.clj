@@ -11,7 +11,8 @@
                  [org.clojure/data.json "0.2.6"]
                  [prismatic/dommy "1.1.0"]
                  [ring "1.6.0"]
-                 [ring/ring-json "0.4.0"]]
+                 [ring/ring-json "0.4.0"]
+                 [ring/ring-ssl "0.3.0"]]
   :hooks [leiningen.cljsbuild]
   :min-lein-version "2.1.2"
   :profiles {:dev {:dependencies [[ring/ring-mock "0.3.0"]]}
